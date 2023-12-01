@@ -1,0 +1,14 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.fontSize": 14,
+    "workbench.iconTheme": "material-icon-theme",
+    "php.validate.enable": true,
+    "php.validate.executablePath": "C:/xampp/php/php.exe",
+
+    "prettier.tabWidth": 4,
+    "prettier.trailingComma": "es5",
+    "prettier.printWidth": 90,
+    "better-comments.highlightPlainText": true
+}

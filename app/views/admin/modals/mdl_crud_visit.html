@@ -1,0 +1,97 @@
+<div class="modal fade" id="mdl_crud_visit" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">VISITAS</h1>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <input name="id" class="form-control" hidden />
+                    <!-- hidden es para ocultar -->
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Tipo de visita </label>
+                        <select name="id_type" id="" class="form-select">
+                            <option value="1">Levantamiento técnico</option>
+                            <option value="2">
+                                Primera supervisión y entrega de materiales
+                            </option>
+                            <option value="3">Mantenimiento</option>
+                            <option value="4">Encendido del sistema</option>
+                            <option value="5">Cierre de proyecto</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Proyecto </label>
+                        <select
+                            name="project"
+                            id=""
+                            class="form-select"
+                            aria-describedby="project"
+                            placeholder="Proyecto"
+                        >
+                            <option value="" selected disabled>
+                                Seleccione el Proyecto
+                            </option>
+                            <?php foreach($datos['nombre_proyectos'] as $key =>
+                            $data) : ?>
+                            <option value=""><?php echo "{$data->id}" ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Razón de visita </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="description"
+                            aria-describedby="description"
+                            placeholder="Razón de visita"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Nombre de visitante</label>
+                        <select
+                            name="id_user"
+                            id=""
+                            class="form-select"
+                            aria-describedby="id_user"
+                            placeholder="Nombre de visitante"
+                        >
+                            <option value="" selected disabled>
+                                Seleccione el visitante
+                            </option>
+                            <?php foreach($datos['nombres_visitantes'] as $key =>
+                            $data) : ?>
+                            <option value="">
+                                <?php echo "{$data->name} {$data->surnames}" ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Fecha y hora de visita </label>
+                        <input
+                            type="datetime-local"
+                            class="form-control"
+                            name="star_date"
+                            aria-describedby="start_date"
+                            placeholder="Fecha y hora de visita"
+                        />
+                    </div>
+
+                    <div class="botones text-center">
+                        <button type="submit" class="btn btn-primary" name="add">
+                            Agregar visita
+                        </button>
+                        <button type="submit" class="btn btn-primary" name="update">
+                            Actualizar visita
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

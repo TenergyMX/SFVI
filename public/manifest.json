@@ -1,0 +1,19 @@
+{
+    "version": "0.1",
+    "version_name": "0.1 beta",
+    "name": "Smart Meter",
+    "short_name": "Smart Meter",
+    "description": "Smart Meter of tenergy.com.mx",
+    "start_url": "/",
+    "display": "standalone",
+    "scope": "/",
+    "orientation": "any",
+    "background_color": "#ffffff",
+    "theme_color": "#ADC53B",
+    "status_bar": "default",
+    "dir": "auto",
+    "lang": "es",
+    "homepageurl": "https://sgm-tenergy.com/",
+    "author": "L. Ulices",
+    "categories": ["iot"]
+}

@@ -1,0 +1,70 @@
+<!-- Path to manifest.json -->
+<link rel="manifest" href="<?php echo RUTA_URL; ?>manifest.json" />
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="application-name" content="Smart Meter" />
+<!-- Chrome for Android theme color -->
+<meta name="theme-color" content="#ADC53B" />
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Smart Meter" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<link
+    rel="apple-touch-icon"
+    href="<?php echo RUTA_URL; ?>img/icons/maskable/icon-120x120.png"
+    sizes="120x120"
+/>
+<link
+    rel="apple-touch-icon"
+    href="<?php echo RUTA_URL; ?>img/icons/maskable/icon-180x180.png"
+    sizes="180x180"
+/>
+<link
+    rel="apple-touch-icon"
+    href="<?php echo RUTA_URL; ?>img/icons/maskable/icon-256x256.png"
+    sizes="256x256"
+/>
+<link
+    rel="apple-touch-icon"
+    href="<?php echo RUTA_URL; ?>img/icons/maskable/icon-512x512.png"
+    sizes="512x512"
+/>
+<link
+    rel="apple-touch-icon"
+    href="<?php echo RUTA_URL; ?>img/icons/maskable/icon-1024x1024.png"
+    sizes="1024x1024"
+/>
+<!-- Tile for Win8 -->
+<meta name="msapplication-TileColor" content="#ffffff" />
+<meta
+    name="msapplication-TileImage"
+    content="<?php echo RUTA_URL; ?>img/icons/regular/icon-512x512.png"
+/>
+<link
+    rel="icon"
+    sizes="512x512"
+    href="<?php echo RUTA_URL; ?>img/icons/regular/icon-512x512.png"
+/>
+<!-- <script type="text/javascript">
+    // Initialize the service worker
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+            .register("/serviceworker.js", {
+                scope: "/",
+            })
+            .then(
+                function (registration) {
+                    // Registration was successful
+                    console.log(
+                        "PWA: ServiceWorker registration successful with scope: ",
+                        registration.scope
+                    );
+                },
+                function (err) {
+                    // registration failed :(
+                    console.log("PWA: ServiceWorker registration failed: ", err);
+                }
+            );
+    }
+</script> -->
+<!-- end PWA -->

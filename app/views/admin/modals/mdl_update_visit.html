@@ -1,0 +1,82 @@
+<div class="modal fade" id="mdl_update_visit" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">INFORMACION VISITAS</h1>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <input name="id" class="form-control" />
+                    <!-- hidden es para ocultar -->
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Ubicación </label>
+                        <input type="text" id="ubi" name="" hidden />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Tipo de visita </label>
+                        <input type="text" id="tipo" class="form-control" name="tipo"
+                        aria-describedby="tipo"
+                        <!-- //para que no se pueda editar -->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Razón de visita </label>
+                        <input
+                            type="text"
+                            id="razon"
+                            class="form-control"
+                            name="razon"
+                            aria-describedby="razon"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Proyecto </label>
+                        <input
+                            type="text"
+                            id="proyect"
+                            class="form-control"
+                            name="proyect"
+                            aria-describedby="proyect"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Visitante </label>
+                        <input
+                            type="text"
+                            id="visit"
+                            class="form-control"
+                            name="visit"
+                            aria-describedby="visit"
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Nota </label>
+                        <input
+                            type="text"
+                            id="nota"
+                            class="form-control"
+                            name="nota"
+                            aria-describedby="nota"
+                        />
+                    </div>
+
+                    <div class="botones text-center">
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            name="info-update"
+                            readonly
+                        >
+                            Modificar visita
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

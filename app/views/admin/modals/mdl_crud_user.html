@@ -1,0 +1,98 @@
+<div class="modal fade" id="mdl_crud_user" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">USUARIO</h1>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <input name="id" class="form-control" hidden />
+                    <!-- hidden es para ocultar -->
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Rol </label>
+                        <select name="role" id="" class="form-select" required>
+                            <option value="2">Administrador</option>
+                            <option value="3">Seguimiento</option>
+                            <option value="4">Técnico</option>
+                            <option value="5">Vendedor</option>
+                            <option value="6">Cliente</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select
+                            name="name-clients"
+                            class="form-select"
+                            style="display: none"
+                        ></select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Nombre </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            aria-describedby="name"
+                            placeholder="Nombre"
+                            required
+                        />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Apellidos </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="surnames"
+                            aria-describedby="surnames"
+                            placeholder="Apellidos"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Correo Electrónico </label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            aria-describedby="email"
+                            placeholder="Correo Electrónico (Opcional)"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Contraseña </label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            aria-describedby="password"
+                            placeholder="Contraseña"
+                            required
+                            minlength="8"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label"> Confirmar Contraseña </label>
+                        <input
+                            type="password"
+                            class="form-control"
+                            name="confirmation"
+                            aria-describedby="confirmation"
+                            placeholder="Confirmar Contraseña"
+                            required
+                            minlength="8"
+                        />
+                    </div>
+
+                    <div class="botones text-center">
+                        <button type="submit" class="btn btn-primary" name="add">
+                            Agregar usuario
+                        </button>
+                        <button type="submit" class="btn btn-primary" name="update">
+                            Actualizar usuario
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
