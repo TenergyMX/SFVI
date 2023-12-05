@@ -6,75 +6,92 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post">
-                    <input name="id" class="form-control" />
-                    <!-- hidden es para ocultar -->
-
+                    <input name="id" class="form-control" hidden />
                     <div class="mb-3">
-                        <label for="" class="form-label">Ubicación: </label>
-                        <input type="text" id="ubi" name="" hidden />
+                        <div class="container-map">
+                            <div class="map"></div>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label">Tipo de visita: </label>
-                        <input type="text" id="tipo" class="form-label" name="tipo"
-                        style="outline: none; border: none" readonly
-                        <!-- //para que no se pueda editar -->
+                    <div class="row gy-0 gx-2">
+                        <div class="col-12 col-sm">
+                            <input
+                                type="text"
+                                name="lat"
+                                placeholder="lat"
+                                class="form-control"
+                                hidden
+                            />
+                        </div>
+                        <div class="col-12 col-sm">
+                            <input
+                                type="text"
+                                name="lng"
+                                placeholder="lng"
+                                class="form-control"
+                                hidden
+                            />
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Razón de visita: </label>
-                        <input
-                            type=""
-                            id="razon"
-                            name="razon"
-                            style="outline: none; border: none"
-                            readonly
-                        />
+                    <div class="mb-3 row">
+                        <label for="" class="col-form-label col-sm">
+                            Tipo de visita:
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                name="type"
+                                class="form-control-plaintext"
+                                readonly
+                            />
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Proyecto: </label>
-                        <input
-                            type="text"
-                            id="proyect"
-                            class="form-label"
-                            name="proyect"
-                            style="outline: none; border: none"
-                            readonly
-                        />
+                    <div class="mb-3 row">
+                        <label for="" class="col-form-label col-sm">
+                            Razón de visita:
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                name="razon"
+                                class="form-control-plaintext"
+                                readonly
+                            />
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Visitante: </label>
-                        <input
-                            type="text"
-                            id="visit"
-                            name="visit"
-                            readonly
-                            style="outline: none; border: none"
-                        />
+                    <div class="mb-3 row">
+                        <label for="" class="col-form-label col-sm"> Proyecto: </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                name="proyect"
+                                class="form-control-plaintext"
+                                readonly
+                            />
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Nota: </label>
-                        <input
-                            type="text"
-                            id="nota"
-                            name="nota"
-                            readonly
-                            style="outline: none; border: none"
-                        />
+                    <div class="mb-3 row">
+                        <label for="" class="col-form-label col-sm"> Visitante: </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                name="visit"
+                                class="form-control-plaintext"
+                                readonly
+                            />
+                        </div>
                     </div>
-
+                    <div class="mb-3 row">
+                        <label for="" class="col-form-label col-sm"> Nota: </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                name="nota"
+                                class="form-control-plaintext"
+                                readonly
+                            />
+                        </div>
+                    </div>
                     <div class="botones text-center">
-                        <!-- <button
-                            type="submit"
-                            class="btn btn-primary"
-                            name="info-update"
-                            readonly
-                        >
-                            Modificar visita
-                        </button> -->
                         <button type="button" class="btn btn-primary" name="add">
                             Finalizar visita
                         </button>
