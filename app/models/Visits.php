@@ -52,11 +52,27 @@
 		}
 
 		function getVisits() {
-			$this->db->query("SELECT * FROM visit u");
-			return $this->db->registros();
+			try {
+				$this->db->query("SELECT v.*,
+					CONCAT(u.name, ' ', u.surnames) AS str_fullname,
+					tvisit.description as str_type_of_visit,
+					p.lat,
+					p.lon
+					FROM visit v
+					LEFT JOIN project p
+					ON v.id_project = p.id
+					LEFT JOIN users u
+					ON v.id_user = u.id
+					LEFT JOIN type_of_visit tvisit
+					ON v.id_type = tvisit.id
+				");
+				return $this->db->registros();
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}	
 		}
-
-
+		
 		function getVisitantes() {
 			$this->db->query("SELECT * FROM users u WHERE u.role = 4;");
 			return $this->db->registros();

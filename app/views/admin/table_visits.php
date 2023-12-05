@@ -28,7 +28,7 @@
                                             </button>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table w-100" id="table_visits">
+                                            <table class="table table-center w-100" id="table_visits">
                                                 <thead>
                                                     <tr>
                                                         <th>1</th>
@@ -37,8 +37,6 @@
                                                         <th>4</th>
                                                         <th>5</th>
                                                         <th>6</th>
-                                                        
-                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -50,6 +48,7 @@
                         </div>
                         <!-- END CONTENIDO -->
                     </div>
+                    <div class="container"></div>
                 </main>
                 <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
             </div>
@@ -59,7 +58,9 @@
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_visit.html'); ?>  
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
-            ftable_visits();
+            $( document ).ready(function() {
+                ftable_visits();
+            });
         </script>
     </body>
 </html>

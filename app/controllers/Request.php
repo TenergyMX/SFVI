@@ -92,7 +92,7 @@
 			$this->response['data'] = $this->modeloVisit->getVisits();
 			foreach ($this->response['data'] as &$value) {
 				$btn = '<button class="btn btn-success me-1" name="info" data-option="show_info"><i class="fa-light fa-circle-info"></i></button>';
-				$btn .= '<button class="btn btn-primary" name="update" data-option="update_info"><i class="fa-light fa-pen"></i></button>';// el punto es para concatenar string o caracteres en php */
+				$btn .= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
 				$value->btn_action = $btn;
 			}
 
