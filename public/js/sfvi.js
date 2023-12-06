@@ -235,6 +235,16 @@ function ftable_visits() {
         },
     });
 
+    var opcionesMapa = {
+        center: {
+            lat: parseFloat(20.50947009600965),
+            lng: parseFloat(-100.51961774497228),
+        },
+        zoom: 13,
+    };
+
+    var obj_map = createMap_id("#mdl_info_visit .map", opcionesMapa);
+
     // Configurar el modal
     $("body").on("click", "[data-option]", function () {
         let option = $(this).attr("data-option"); // [create / add , update, delete]
@@ -260,19 +270,27 @@ function ftable_visits() {
                 var data = tbl_visits.row(fila).data();
 
                 $("#mdl_info_visit form [name='id']").val(data["id"]);
+                $("#mdl_info_visit form [name='lat']").val(parseFloat(data["lat"]));
+                $("#mdl_info_visit form [name='lng']").val(parseFloat(data["lon"]));
                 $("#mdl_info_visit form [name='type']").val(data["str_type_of_visit"]);
                 $("#mdl_info_visit form [name='project']").val(data["id_project"]);
                 $("#mdl_info_visit form [name='visit']").val(data["str_fullname"]);
                 $("#mdl_info_visit form [name='razon']").val(data["description"]);
-                var opcionesMapa = {
-                    center: {
-                        lat: parseFloat(data["lat"]),
-                        lng: parseFloat(data["lon"]),
-                    },
-                    zoom: 13,
-                };
-                deleteMap_id("#mdl_info_visit .map");
-                createMap_id("#mdl_info_visit .map", opcionesMapa);
+
+                // Mapa
+                opcionesMapa.center.lat = parseFloat(data["lat"]);
+                opcionesMapa.center.lng = parseFloat(data["lon"]);
+                if (data["lat"] != null) {
+                    update_map_location(
+                        obj_map,
+                        parseFloat(data["lat"]),
+                        parseFloat(data["lon"])
+                    );
+                    obj_map.marcador.setVisible(true);
+                } else {
+                    obj_map.marcador.setVisible(false);
+                }
+                // mostrar le modal
                 $("#mdl_info_visit").modal("show");
                 break;
             default:
@@ -410,6 +428,13 @@ function createMap_id(id_map, opcionesMapa) {
         title: "Ubicación",
         draggable: true,
     });
+    var $formulario = $(id_map).closest("form");
+    var $input_lat = $formulario.find('input[name="lat"]');
+    var $input_lng = $formulario.find('input[name="lng"]');
+
+    $input_lat.val(opcionesMapa.center.lat);
+    $input_lng.val(opcionesMapa.center.lng);
+
     const locationButton = document.createElement("button");
     locationButton.setAttribute("type", "button");
     locationButton.setAttribute("name", "btn-location");
@@ -425,13 +450,47 @@ function createMap_id(id_map, opcionesMapa) {
                 );
                 marcador.setPosition(nuevaPosicion);
                 mapa.setCenter(nuevaPosicion);
+                // actualizar los inputs
+                $input_lat.val(position.coords.latitude);
+                $input_lng.val(position.coords.longitude);
             },
             function () {
                 console.error("Error al obtener la ubicación.");
             }
         );
     });
-    return mapa;
+
+    // Evento que se dispara al mover el marcador
+    google.maps.event.addListener(marcador, "dragend", function () {
+        var nuevaPosicion = marcador.getPosition();
+        $input_lat.val(nuevaPosicion.lat());
+        $input_lng.val(nuevaPosicion.lng());
+    });
+
+    return { mapa: mapa, marcador: marcador };
 }
 
 function deleteMap_id(id_map) {}
+
+function update_map_location(_obj_map, _lat, _lng, _zoom = 13) {
+    var nuevaPosicion = new google.maps.LatLng(_lat, _lng);
+    _obj_map.marcador.setPosition(nuevaPosicion);
+    _obj_map.mapa.setCenter(nuevaPosicion);
+    _obj_map.mapa.setZoom(_zoom);
+    _obj_map.mapa.panTo(nuevaPosicion);
+}
+
+function address_on_the_map(_obj_map, _address = "Queretaro") {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: _address }, function (results, status) {
+        if (status === "OK" && results.length > 0) {
+            var ubicacion = results[0].geometry.location;
+            // Centrar el mapa en las coordenadas obtenidas
+            _obj_map.marcador.setPosition(ubicacion);
+            _obj_map.mapa.setCenter(ubicacion);
+            _obj_map.mapa.panTo(ubicacion);
+        } else {
+            console.error("Error al geocodificar el lugar:", status);
+        }
+    });
+}
