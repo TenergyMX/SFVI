@@ -21,10 +21,21 @@
                                             <button
                                                 type="button"
                                                 class="btn btn-primary"
+                                                title="Agregar Visita"
                                                 data-option="create"
                                             >
+                                                <i class="fa-regular fa-plus me-1"></i>
                                                 Agregar Visita
                                                 
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-info"
+                                                title="Actualizar tabla"
+                                                data-option="refresh_table"
+                                            >
+                                                <i class="fa-regular fa-arrows-rotate me-1"></i>
+                                                Refrescar tabla
                                             </button>
                                         </div>
                                         <div class="table-responsive">

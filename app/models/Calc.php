@@ -26,7 +26,7 @@
 
             foreach ($datos_project as $key => $value) {
                 foreach ($datos_hsp as $key_2 => $value_2) {
-                    if (strpos(strtoupper($value->address), $key_2) !== false) {
+                    if (strpos(strtoupper($value->state), $key_2) !== false) {
                         $hps_promedio = $value_2->promedio;
                         break;
                     }

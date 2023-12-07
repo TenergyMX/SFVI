@@ -10,7 +10,6 @@
 
 		function index() {
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
-		/* 	$this->vista("Admin/table_visits", $this->datos); */
 			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();
 			$this->vista("Admin/table_visits", $this->datos); 
 		}

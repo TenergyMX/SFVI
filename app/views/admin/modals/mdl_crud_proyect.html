@@ -1,17 +1,22 @@
 <div class="modal fade" id="mdl_crud_proyect" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">PROYECTO</h1>
+                <h5 class="modal-title">PROYECTO</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
             </div>
             <div class="modal-body">
                 <form action="" method="post">
                     <input name="id" class="form-control" hidden />
-                    <!-- hidden es para ocultar -->
-                    <div style="display: inline-block; margin: 8px">
-                        <div class="mb-3">
+                    <div class="row gx-3 gy-2">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Tipo de venta </label>
-                            <select name="folio" id="" class="form-select" required>
+                            <select name="" id="" class="form-select" required>
                                 <option value="" selected disabled>
                                     Seleccione el tipo de venta
                                 </option>
@@ -20,7 +25,7 @@
                                 <option value="4">Indutrial</option>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Tipo de proyecto </label>
                             <select name="tipo" id="" class="form-select" required>
                                 <option value="" selected disabled>
@@ -31,11 +36,10 @@
                                 <option value="4">Indutrial</option>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Cliente </label>
                             <select
                                 name="id_client"
-                                id=""
                                 class="form-select"
                                 placeholder="Nombre de visitante"
                                 required
@@ -45,145 +49,163 @@
                                 </option>
                                 <?php foreach($datos['nombre_clientes'] as $key =>
                                 $data) : ?>
-                                <option value="">
+                                <option value="<?php echo $data->id; ?>">
                                     <?php echo "{$data->name} {$data->surnames}" ?>
                                 </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Cotización </label>
                             <input
                                 type="text"
-                                class="form-control"
                                 name="quotation"
+                                class="form-control"
                                 aria-describedby="quotation"
                                 placeholder="Cotización"
                                 required
                             />
                         </div>
-
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label">
                                 No. de cotización de proyecto
                             </label>
                             <input
+                                name="quotation_num"
                                 type="number"
                                 class="form-control"
-                                name="quotation_num"
                                 aria-describedby="quotation_num"
                                 placeholder="No. de cotización de proyecto (Opcional)"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Id de FIDE </label>
                             <input
+                                name="id_fide"
                                 type="number"
                                 class="form-control"
-                                name="id_fide"
                                 aria-describedby="id_fide"
                                 placeholder="Id de FIDE (Opcional)"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> TB de proyecto </label>
                             <input
-                                type="number"
+                                type="text"
+                                name="folio"
                                 class="form-control"
-                                name="tb_project"
-                                aria-describedby="tb_project"
+                                aria-describedby="folio"
                                 placeholder="TB de proyecto (Opcional)"
                                 required
                             />
                         </div>
-                    </div>
-                    <div style="display: inline-block; margin: 25px">
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Carga (KW) </label>
                             <input
                                 type="text"
-                                class="form-control"
                                 name="charge"
+                                class="form-control"
                                 aria-describedby="charge"
                                 placeholder="Carga (KW)"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Calle </label>
                             <input
                                 type="text"
-                                class="form-control"
                                 name="street"
+                                class="form-control"
                                 aria-describedby="street"
                                 placeholder="Calle"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Colonia </label>
                             <input
                                 type="text"
+                                name="colony"
                                 class="form-control"
-                                name="cologne"
-                                aria-describedby="cologne"
+                                aria-describedby="colony"
                                 placeholder="Colonia"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Municipio </label>
                             <input
                                 type="text"
-                                class="form-control"
                                 name="municipality"
+                                class="form-control"
                                 aria-describedby="municipality"
                                 placeholder="Municipio"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label"> Estado </label>
                             <select name="state" id="" class="form-select" required>
-                                <option value="" selected disabled>
+                                <option value="" data-state="" selected disabled>
                                     Seleccione el estado
                                 </option>
-                                <?php foreach($datos['nombre_estado'] as $key =>
-                                $data) : ?>
-                                <option value=""><?php echo "{$data->estado}" ?></option>
+                                <?php foreach($datos['nombre_estados'] as $key =>$data) :
+                                ?>
+                                <option
+                                    value="<?php echo $data->estado; ?>"
+                                    data-state="<?php echo $data->estado; ?>"
+                                >
+                                    <?php echo $data->estado; ?>
+                                </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-                        <div class="mb-3">
+                        <div class="col-md-6 col-xl-4">
                             <label for="" class="form-label">
                                 Fecha estimada de inicio
                             </label>
                             <input
                                 type="date"
-                                class="form-control"
                                 name="start_date"
+                                class="form-control"
                                 aria-describedby="start_date"
                                 placeholder="Fecha inico de proyecto"
                                 required
                             />
                         </div>
-                        <div class="mb-3">
+                        <div class="col-md col-xl-8">
                             <label for="" class="form-label">
                                 Ubicación del proyecto
                             </label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="start_date"
-                                aria-describedby="start_date"
-                                required
-                            />
+                            <div class="row gx-2">
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lat"
+                                        class="form-control"
+                                        placeholder="Latitud"
+                                        hidden
+                                    />
+                                </div>
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lng"
+                                        class="form-control"
+                                        placeholder="Longitud"
+                                        hidden
+                                    />
+                                </div>
+                            </div>
+                            <div class="container-map">
+                                <div class="map"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="botones text-center">
+                    <div class="row"></div>
+                    <div class="botones text-center mt-3">
                         <button type="submit" class="btn btn-primary" name="add">
                             Agregar Proyecto
                         </button>
