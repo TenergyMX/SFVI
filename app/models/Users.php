@@ -12,12 +12,12 @@
 
 		function login($datos = []) {
 			try {
-				$this->db->query("SELECT * FROM user s WHERE s.email = :email");
+				$this->db->query("SELECT * FROM users s WHERE s.email = :email");
 				$this->db->bind(':email', $datos["email"]);
 				// Ejecucion de la consulta
 				$resultado = $this->db->registro();
 				if ($resultado) {
-					if ($resultado->password == $datos['password']) {
+					if (password_verify($datos['password'], $resultado->password)) {					
 						$resultado = (object) ["success" => true, "data" => $resultado];
 					} else {
 						$resultado = (object) ["success" => false, "error" => 'Incorrect password'];

@@ -26,7 +26,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="m-sm-3">
-                                        <form>
+                                        <form action="" method="post">
                                             <div class="mb-3">
                                                 <label class="form-label">Email</label>
                                                 <input
@@ -47,14 +47,14 @@
                                                     value=""
                                                 />
                                                 <small>
-                                                    <a href="/pages-reset-password">
+                                                    <a href="<?php echo RUTA_URL.'User/resetPassword/'?>">
 														Forgot password?
 													</a>
                                                 </small>
                                             </div>
                                             <div>
                                                 <div
-                                                    class="form-check align-items-center"
+                                                    class="form-check align-items-center d-none"
                                                 >
                                                     <input
                                                         id="customControlInline"
@@ -73,9 +73,9 @@
                                                 </div>
                                             </div>
                                             <div class="d-grid gap-2 mt-3">
-                                                <a class="btn btn-lg btn-primary" href="/"
-                                                    >Sign in</a
-                                                >
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    Iniciar sesión
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -91,7 +91,13 @@
             </div>
         </main>  
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-        <script></script>
+        <script>
+            $( document ).ready(function() {
+                <?php if (isset($datos['alert'])) : ?>
+                Swal.fire("Oops", "<?php echo $datos['alert']; ?>", "error");
+                <?php endif; ?>
+            });
+        </script>
     </body>
 </html>
 

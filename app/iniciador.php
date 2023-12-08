@@ -1,5 +1,6 @@
 <?php
 	require_once("config/configurar.php");
+	require_once("helpers/redirect.php");
 	// require_once("helpers/url_helper.php");
 	// require_once("helpers/bootstrap_alerts.php");
 

@@ -27,7 +27,8 @@
 			$datos['role'] = isset($_POST['role']) ? $_POST['role'] : '';
 			$datos['name'] = isset($_POST['name']) ? $_POST['name'] : '';
 			$datos['surnames'] = isset($_POST['surnames']) ? $_POST['surnames'] : ''; 
-			$datos['password'] = isset($_POST['password']) ? $_POST['password'] : '';
+			$datos['password'] = isset($_POST['password']) ? $_POST['password'] : '1234';
+			$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
 
 			$response = $this->modeloUser->addUser($datos);
 			$this->response['success'] = $response->success;
