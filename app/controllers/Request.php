@@ -4,6 +4,7 @@
 		private $datos = [];
 		private $response;
 		private $modeloProject;
+		private $modeloFile;
 
 		// Constructor
 		function __construct() {
@@ -12,6 +13,7 @@
 			$this->modeloClient = $this->modelo('Clients');
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->modeloProject = $this->modelo('Projects');
+			$this->modeloFile = $this->modelo('Files');
 			$this->response = array('success' => false);
 		}
 
@@ -125,11 +127,11 @@
 
 		function addProyect(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['folio']  = isset($_POST['tb_project']) ? $_POST['tb_project'] : 0;
+			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : 0;
 			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
 			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
-			$datos['quotation']  = isset($_POST['quotation']) ? $_POST['quotation'] : '';
+			$datos['quotation']  = '';
 			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : '';
 			$datos['id_fide']  = isset($_POST['id_fide']) ? $_POST['id_fide'] : '';
 			$datos['charge']  = isset($_POST['charge']) ? $_POST['charge'] : '';
@@ -140,6 +142,15 @@
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
 			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
 			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
+			# Guardar archivo en el servidor
+			$targetDirectory = trim($datos['folio']);
+			$targetDirectory = strtoupper($targetDirectory);
+			$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+			$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
+			if ($r_file->success) {
+				$datos['quotation'] = $r_file->targetFile;
+			}
+
 			# Ejecutar
 			$response = $this->modeloProject->addProyect($datos);
 			$this->response['success'] = $response->success;

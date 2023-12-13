@@ -59,7 +59,7 @@
 			}
 		}
 
-		function getProyect($datos = []) {
+		function getProject($datos = []) {
 			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
 			$this->db->bind(':id', $datos["id"]);
 			return $this->db->registro();
