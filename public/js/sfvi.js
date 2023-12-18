@@ -220,11 +220,11 @@ function ftable_visits() {
             dataSrc: "data",
         },
         columns: [
-            { title: "Tipo de visita", data: "id_type" },
-            { title: "Nombre visitante", data: "id_user" },
+            { title: "Tipo de visita", data: "str_type_of_visit" },
+            { title: "Nombre visitante", data: "str_fullname" },
             { title: "Hora y fecha", data: "start_date" },
             { title: "Estatus", data: "id_status" },
-            { title: "Proyecto", data: "id_project" },
+            { title: "Proyecto", data: null },
             { title: "Acción", data: "btn_action" },
         ],
         createdRow: function (row, data, dataIndex) {
@@ -234,6 +234,16 @@ function ftable_visits() {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
         },
     });
+
+    var opcionesMapa = {
+        center: {
+            lat: parseFloat(20.50947009600965),
+            lng: parseFloat(-100.51961774497228),
+        },
+        zoom: 13,
+    };
+
+    var obj_map = createMap_id("#mdl_info_visit .map", opcionesMapa);
 
     // Configurar el modal
     $("body").on("click", "[data-option]", function () {
@@ -254,15 +264,61 @@ function ftable_visits() {
                 break;
             case "show_info":
                 $("#mdl_info_visit .modal-header .modal-title").html(
-                    "INFORMACIÓN VISITA"
+                    "INFORMACIÓN DE LA VISITA"
                 );
-                $("#mdl_info_visit .modal-body form [name='add']").show();
-                /* $("#mdl_info_visit .modal-body form [name='info-update']").hide(); */
-
                 var fila = $(this).closest("tr");
                 var data = tbl_visits.row(fila).data();
+
                 $("#mdl_info_visit form [name='id']").val(data["id"]);
-                /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
+                $("#mdl_info_visit form [name='lat']").val(parseFloat(data["lat"]));
+                $("#mdl_info_visit form [name='lng']").val(parseFloat(data["lon"]));
+                $("#mdl_info_visit form [name='type']").val(data["str_type_of_visit"]);
+                $("#mdl_info_visit form [name='project']").val(data["id_project"]);
+                $("#mdl_info_visit form [name='visit']").val(data["str_fullname"]);
+                $("#mdl_info_visit form [name='razon']").val(data["description"]);
+
+                // Mapa
+                opcionesMapa.center.lat = parseFloat(data["lat"]);
+                opcionesMapa.center.lng = parseFloat(data["lon"]);
+                if (data["lat"] != null) {
+                    update_map_location(
+                        obj_map,
+                        parseFloat(data["lat"]),
+                        parseFloat(data["lon"])
+                    );
+                    obj_map.marcador.setVisible(true);
+                } else {
+                    obj_map.marcador.setVisible(false);
+                }
+                // mostrar le modal
+                $("#mdl_info_visit").modal("show");
+                break;
+            default:
+                alert("Opcion no valida (tabla visistas)");
+        }
+        // end option
+    });
+    //modal informacion visita
+    /*    $("body").on("click", "[btn_action]", function () {
+        let option = $(this).attr("btn_action");
+        switch (option) {
+            case "create":
+            case "add":
+                $("#mdl_info_visit .modal-header .modal-title").html("NOTA VISITA");
+                $("#mdl_info_visit .modal-body form [name='add']").show();
+                $("#mdl_info_visit .modal-body form [name='update']").hide();
+                $("#mdl_info_visit").modal("show");
+                break;
+            case "update":
+                $("#mdl_info_visit .modal-header .modal-title").html("ACTUALIZAR VISITA");
+                $("#mdl_info_visit .modal-body form [name='add']").hide();
+                $("#mdl_info_visit .modal-body form [name='update']").show();
+                $("#mdl_info_visit").modal("show");
+                break;
+            case "show_info":
+                var fila = $(this).closest("tr");
+                var id = $(this).closest("tr").data("id");
+                $("#mdl_info_visit form [name='tipo']").val("id_type");
                 $("#mdl_info_visit form [name='tipo']").val(fila.find("td:eq(0)").text());
                 $("#mdl_info_visit form [name = 'razon']").val(
                     fila.find("td:eq(6)").text()
@@ -273,46 +329,18 @@ function ftable_visits() {
                 $("#mdl_info_visit form [name = 'visit']").val(
                     fila.find("td:eq(1)").text()
                 );
+                Swal.fire(
+                    "ELIMINADO!",
+                    "El dato ha sido eliminado correctamente",
+                    "success"
+                );
 
-                $("#mdl_info_visit").modal("show");
                 break;
-            case "add":
-                $("#mdl_info_visit .modal-header .modal-title").html("FINALIZAR VISITA");
-                $("#mdl_info_visit .modal-body form [name='add']").show();
-
-                $("#mdl_info_visit").modal("show");
-                break;
-            case "update_info":
-                $("#mdl_update_visit .modal-header .modal-title").html(
-                    "ACTUALIZAR VISITA"
-                );
-                /* $("#mdl_update_visit .modal-body form [name='add']").hide(); */
-                $("#mdl_update_visit .modal-body form [name='info-update']").show();
-                var fila = $(this).closest("tr");
-                var data = tbl_visits.row(fila).data();
-                $("#mdl_update_visit form [name='id']").val(data["id"]);
-                $("#mdl_update_visit form [name='tipo']").val("id_type");
-                $("#mdl_update_visit form [name='tipo']").val(
-                    fila.find("td:eq(0)").text()
-                );
-                $("#mdl_update_visit form [name = 'razon']").val(
-                    fila.find("td:eq(6)").text()
-                );
-                $("#mdl_update_visit form [name='proyect']").val(
-                    fila.find("td:eq(4)").text()
-                );
-                $("#mdl_update_visit form [name = 'visit']").val(
-                    fila.find("td:eq(1)").text()
-                );
-
-                $("#mdl_update_visit").modal("show");
-                break;
-
             default:
                 alert("Opcion no valida");
         }
         // end option
-    });
+    }); */
 
     // Create and update visit
 
@@ -558,32 +586,3 @@ function ftable_proyects() {
     // End
 }
 /* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
-function fprojects_stages() {
-    // Configurar el modal
-    $("body").on("click", "[data-option]", function () {
-        let option = $(this).attr("data-option"); // [create / add , update, delete]
-        switch (option) {
-            case "create":
-            case "info_stages":
-                $("#mdl_info_stages .modal-header .modal-title").html(
-                    "INFORMACIÓN DEL PROYECTO"
-                );
-                $("#mdl_info_stages .modal-body form [name='add']").show();
-                $("#mdl_info_stages .modal-body form [name='update']").hide();
-                $("#mdl_info_stages").modal("show");
-
-                var fila = $(this).closest("tr");
-                /*  var data = tbl_proyects.row(fila).data(); */
-                $("#mdl_info_stages form [name='id']").val(data["id"]);
-                $("#mdl_info_stages form [name='folio']").val(data["folio"]);
-                $("#mdl_info_stages form [name='tb_project']").val(data["tb_project"]);
-                $("#mdl_info_stages form [name = 'id_client']").val(data["id_client"]);
-                $("#mdl_info_stages").modal("show");
-                break;
-            default:
-                alert("Opcion no valida");
-        }
-    });
-
-    // End
-}
