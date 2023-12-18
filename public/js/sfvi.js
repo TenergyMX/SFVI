@@ -1,4 +1,13 @@
-// TODO: Moodulo usuarios
+// TODO ------------------------- [ Variables Globales ] -------------------------
+const opcionesMapa = {
+    center: {
+        lat: parseFloat(20.50947009600965),
+        lng: parseFloat(-100.51961774497228),
+    },
+    zoom: 13,
+};
+
+// TODO ------------------------- [ USUARIOS ] -------------------------
 function ftable_users() {
     var tbl_users = new DataTable("#table_users", {
         ajax: {
@@ -134,7 +143,7 @@ function ftable_users() {
     // End
 }
 
-/* -------------------------------------CLIENTES------------------------------- */
+// TODO ------------------------- [ CLIENTES ] -------------------------
 function ftable_clients() {
     var tbl_clients = new DataTable("#table_clients", {
         ajax: {
@@ -193,7 +202,7 @@ function ftable_clients() {
                 $("#mdl_crud_client form [type='submit']").prop("disabled", true);
             },
             success: function (response) {
-                // tbl_clients.ajax.reload();
+                tbl_clients.ajax.reload();
                 $("#mdl_crud_client").modal("hide");
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
@@ -212,7 +221,7 @@ function ftable_clients() {
     });
     // End
 }
-/* -------------------------------------VISITAS------------------------------- */
+// TODO ------------------------- [ VISITAS ] -------------------------
 function ftable_visits() {
     var tbl_visits = new DataTable("#table_visits", {
         ajax: {
@@ -224,7 +233,7 @@ function ftable_visits() {
             { title: "Nombre visitante", data: "str_fullname" },
             { title: "Hora y fecha", data: "start_date" },
             { title: "Estatus", data: "id_status" },
-            { title: "Proyecto", data: null },
+            { title: "Proyecto", data: "project_folio" },
             { title: "Acción", data: "btn_action" },
         ],
         createdRow: function (row, data, dataIndex) {
@@ -234,14 +243,6 @@ function ftable_visits() {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
         },
     });
-
-    var opcionesMapa = {
-        center: {
-            lat: parseFloat(20.50947009600965),
-            lng: parseFloat(-100.51961774497228),
-        },
-        zoom: 13,
-    };
 
     var obj_map = createMap_id("#mdl_info_visit .map", opcionesMapa);
 
@@ -278,8 +279,6 @@ function ftable_visits() {
                 $("#mdl_info_visit form [name='razon']").val(data["description"]);
 
                 // Mapa
-                opcionesMapa.center.lat = parseFloat(data["lat"]);
-                opcionesMapa.center.lng = parseFloat(data["lon"]);
                 if (data["lat"] != null) {
                     update_map_location(
                         obj_map,
@@ -292,6 +291,9 @@ function ftable_visits() {
                 }
                 // mostrar le modal
                 $("#mdl_info_visit").modal("show");
+                break;
+            case "refresh_table":
+                tbl_visits.ajax.reload();
                 break;
             default:
                 alert("Opcion no valida (tabla visistas)");
@@ -335,6 +337,7 @@ function ftable_visits() {
                     "success"
                 );
 
+<<<<<<< HEAD
                 break;
             default:
                 alert("Opcion no valida");
@@ -344,6 +347,8 @@ function ftable_visits() {
 
     // Create and update visit
 
+=======
+>>>>>>> origin/project_module
     $("#mdl_update_visit form").on("submit", function (e) {
         e.preventDefault();
         var datos = $(this).serialize();
@@ -375,14 +380,15 @@ function ftable_visits() {
     });
     // End
 }
-/* --------------------------------------PROYECTOS--------------------------------------------- */
-function ftable_proyects() {
+// TODO ------------------------- [ PROYECTOS ] -------------------------
+function ftable_projects() {
     var tbl_proyects = new DataTable("#table_proyects", {
         ajax: {
             url: RUTA_URL + "Request/getProjects/",
             dataSrc: "data",
         },
         columns: [
+<<<<<<< HEAD
             { title: "Id", data: "id" },
             /*{
                 title: "Proyecto",
@@ -420,11 +426,21 @@ function ftable_proyects() {
             }, */
             { title: "Visitas", data: "btn_action_visit" },
             { title: "Editar", data: "btn_action_update" },
+=======
+            { title: "Proyecto", data: "folio" },
+            { title: "Cliente", data: "customer_fullName" },
+            { title: "Avance", data: null },
+            { title: "Documentación", data: "btn_action_docs" },
+            { title: "Visitas", data: "btn_action_visit" },
+            { title: "Acción", data: "btn_action" },
+>>>>>>> origin/project_module
         ],
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
         },
     });
+
+    var obj_map = createMap_id("#mdl_crud_proyect .map", opcionesMapa);
 
     // Configurar el modal
     $("body").on("click", "[data-option]", function () {
@@ -432,21 +448,62 @@ function ftable_proyects() {
         switch (option) {
             case "create":
             case "add":
+                $("#mdl_crud_proyect form")[0].reset();
+                $("#mdl_crud_proyect form :input").removeClass("is-invalid is-valid");
                 $("#mdl_crud_proyect .modal-header .modal-title").html(
                     "AGREGAR PROYECTO"
                 );
                 $("#mdl_crud_proyect .modal-body form [name='add']").show();
                 $("#mdl_crud_proyect .modal-body form [name='update']").hide();
+                $("#mdl_crud_proyect .col-existing-file").addClass("d-none");
+                $("#mdl_crud_proyect #pills-address small.address").html("");
                 $("#mdl_crud_proyect").modal("show");
                 break;
             case "update":
+                $("#mdl_crud_proyect #pills-address small.address").html("");
+                $("#mdl_crud_proyect form :input").removeClass("is-invalid is-valid");
                 $("#mdl_crud_proyect .modal-header .modal-title").html(
                     "ACTUALIZAR PROYECTO"
                 );
                 $("#mdl_crud_proyect .modal-body form [name='add']").hide();
                 $("#mdl_crud_proyect .modal-body form [name='update']").show();
+                // Asignar valores
+                var fila = $(this).closest("tr");
+                var data = tbl_proyects.row(fila).data();
+                var formulario = $("#mdl_crud_proyect .modal-body form");
+                $.each(data, function (index, value) {
+                    formulario.find(`[name="${index}"]`).val(value);
+                    console.log(index, value);
+                });
+                formulario
+                    .find("[name='start_date']")
+                    .val(data["start_date"].split(" ")[0]);
+                formulario
+                    .find("[name='existing_file']")
+                    .attr(
+                        "onclick",
+                        `open_window('${RUTA_URL}File/getProjectFile/${data["id"]}/quotation.pdf')`
+                    );
+
+                if (data["quotations"] !== "") {
+                    $(".col-existing-file").removeClass("d-none");
+                } else {
+                    $(".col-existing-file").addClass("d-none");
+                }
+
+                // Actualizar las cordenas
+                if (data["lat"] != null) {
+                    update_map_location(
+                        obj_map,
+                        parseFloat(data["lat"]),
+                        parseFloat(data["lon"])
+                    );
+                    obj_map.marcador.setVisible(true);
+                }
+                // Mostrar modal
                 $("#mdl_crud_proyect").modal("show");
                 break;
+<<<<<<< HEAD
             case "update_project":
                 $("#mdl_update_proyect .modal-header .modal-title").html(
                     "ACTUALIZAR PROYECTO"
@@ -506,6 +563,17 @@ function ftable_proyects() {
                 $("#mdl_info_stages").modal("show");
 
                 break; */
+=======
+            case "add_visit":
+                var fila = $(this).closest("tr");
+                var data = tbl_proyects.row(fila).data();
+                $("#mdl_crud_visit form [name='project']").val(data["id"]);
+                $("#mdl_crud_visit").modal("show");
+                break;
+            case "refresh_table":
+                tbl_proyects.ajax.reload();
+                break;
+>>>>>>> origin/project_module
             default:
                 alert("Opcion no valida");
         }
@@ -515,29 +583,50 @@ function ftable_proyects() {
     // Create and update proyect
     $("#mdl_crud_proyect form").on("submit", function (e) {
         e.preventDefault();
+        $("#mdl_crud_proyect form :input").removeClass("is-invalid is-valid");
+
+        // Validar que los inputs que tenga contenido
+        $("#mdl_crud_proyect form :input").each(function () {
+            var isEmpty =
+                $(this).val() === "" ||
+                $(this).val() === null ||
+                $(this).val() === undefined;
+            $(this).toggleClass("is-invalid", isEmpty).toggleClass("is-valid", !isEmpty);
+        });
+
+        $("#mdl_crud_proyect button").removeClass("is-invalid is-valid");
+
+        if ($("#mdl_crud_proyect form .is-invalid").length > 0) {
+            Swal.fire("Oops", "Te hace falta rellenar campos", "warning");
+            return;
+        }
+
         var option = $('button[type="submit"]:focus', this).attr("name");
-        var datos = $(this).serialize();
+        // var datos = $(this).serialize();
+        var datos = new FormData($("#mdl_crud_proyect form")[0]);
         var url =
-            RUTA_URL + "Request/" + (option == "add" ? "addProyect" : "updateProyect");
+            RUTA_URL + "Request/" + (option == "add" ? "addProyect" : "updateProject");
         $.ajax({
             type: "POST",
             url: url,
             data: datos,
+            contentType: false,
+            processData: false,
             beforeSend: function () {
                 $("#mdl_crud_proyect form [type='submit']").prop("disabled", true);
             },
             success: function (response) {
-                // tbl_clients.ajax.reload();
-                $("#mdl_crud_proyect").modal("hide");
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
+                    tbl_proyects.ajax.reload();
+                    $("#mdl_crud_proyect").modal("hide");
                 } else {
                     Swal.fire("Oops", "fallo algo", "error");
                 }
             },
             error: function (jqXHR, textStatus, errorThrow) {
-                console.log("hubo un error: " + errorThrow);
-                Swal.fire("Error del servidor", errorThrow, "error");
+                console.error(errorThrow);
+                Swal.fire("Oops", "Error del servidor", "error");
             },
             complete: function () {
                 $("#mdl_crud_proyect form [type='submit']").prop("disabled", false);
@@ -545,6 +634,7 @@ function ftable_proyects() {
         });
     });
 
+<<<<<<< HEAD
     $("#mdl_update_proyect form").on("submit", function (e) {
         e.preventDefault();
         var datos = $(this).serialize();
@@ -586,3 +676,135 @@ function ftable_proyects() {
     // End
 }
 /* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
+=======
+    // cargar la ubicacion en el mapa
+    $("#mdl_crud_proyect form [name='state']").on("change", function () {
+        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
+        var option = $(this).find("option:selected");
+        var estado = option.attr("data-state");
+        var formulario = $("#mdl_crud_proyect .modal-body form");
+        var street = formulario.find("[name='street']").val();
+        var colony = formulario.find("[name='colony']").val();
+        var municipality = formulario.find("[name='municipality']").val();
+        var address = `${street}, col. ${colony}, municipio ${municipality}, ${estado}`;
+        $("#pills-address small.address").html(address);
+        address_on_the_map(obj_map, address);
+    });
+
+    // End
+}
+// TODO ------------------------- [ Eventos Globales ] -------------------------
+
+$("#mdl_crud_visit form").on("submit", function (e) {
+    e.preventDefault();
+    var datos = $(this).serialize();
+    var option = $('button[type="submit"]:focus', this).attr("name");
+    var url = RUTA_URL + "Request/" + (option == "add" ? "addVisit" : "updateVisit");
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: datos,
+        beforeSend: function () {},
+        success: function (response) {
+            if (response.success) {
+                Swal.fire("Good job!", "Accion exitosa", "success");
+                $("#mdl_crud_visit").modal("hide");
+            } else {
+                Swal.fire("Oops", "fallo algo", "error");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrow) {
+            console.error(errorThrow);
+            Swal.fire("Oops", "Error del servidor", "error");
+        },
+        complete: function () {},
+    });
+});
+
+// TODO ------------------------- [ Funciones Globales ] -------------------------
+function createMap_id(id_map, opcionesMapa) {
+    var mapa = new google.maps.Map(document.querySelector(id_map), opcionesMapa);
+    var marcador = new google.maps.Marker({
+        position: opcionesMapa.center,
+        map: mapa,
+        title: "Ubicación",
+        draggable: true,
+    });
+    var $formulario = $(id_map).closest("form");
+    var $input_lat = $formulario.find('input[name="lat"]');
+    var $input_lng = $formulario.find('input[name="lng"]');
+
+    $input_lat.val(opcionesMapa.center.lat);
+    $input_lng.val(opcionesMapa.center.lng);
+
+    const locationButton = document.createElement("button");
+    locationButton.setAttribute("type", "button");
+    locationButton.setAttribute("name", "btn-location");
+    locationButton.textContent = "Ubicarme";
+    locationButton.classList.add("btn", "btn-danger", "mt-3");
+    mapa.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+    locationButton.addEventListener("click", function () {
+        navigator.geolocation.getCurrentPosition(
+            function (position) {
+                var nuevaPosicion = new google.maps.LatLng(
+                    position.coords.latitude,
+                    position.coords.longitude
+                );
+                marcador.setPosition(nuevaPosicion);
+                mapa.setCenter(nuevaPosicion);
+                // actualizar los inputs
+                $input_lat.val(position.coords.latitude);
+                $input_lng.val(position.coords.longitude);
+            },
+            function () {
+                console.error("Error al obtener la ubicación.");
+            }
+        );
+    });
+
+    // Evento que se dispara al mover el marcador
+    google.maps.event.addListener(marcador, "dragend", function () {
+        var nuevaPosicion = marcador.getPosition();
+        $input_lat.val(nuevaPosicion.lat());
+        $input_lng.val(nuevaPosicion.lng());
+    });
+
+    return { mapa: mapa, marcador: marcador };
+}
+
+function deleteMap_id(id_map) {}
+
+function update_map_location(_obj_map, _lat, _lng, _zoom = 13) {
+    var nuevaPosicion = new google.maps.LatLng(_lat, _lng);
+    _obj_map.marcador.setPosition(nuevaPosicion);
+    _obj_map.mapa.setCenter(nuevaPosicion);
+    _obj_map.mapa.setZoom(_zoom);
+    _obj_map.mapa.panTo(nuevaPosicion);
+}
+
+function address_on_the_map(_obj_map, _address = "Queretaro") {
+    let $formulario = $(".map").closest("form");
+    let $input_lat = $formulario.find('input[name="lat"]');
+    let $input_lng = $formulario.find('input[name="lng"]');
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ address: _address }, function (results, status) {
+        if (status === "OK" && results.length > 0) {
+            var ubicacion = results[0].geometry.location;
+            // asignar a los inputs
+            $input_lat.val(ubicacion.lat());
+            $input_lng.val(ubicacion.lng());
+            // Centrar el mapa en las coordenadas obtenidas
+            _obj_map.marcador.setPosition(ubicacion);
+            _obj_map.mapa.setCenter(ubicacion);
+            _obj_map.mapa.panTo(ubicacion);
+        } else {
+            console.error("Error al geocodificar el lugar:", status);
+        }
+    });
+}
+
+function open_window($url = "") {
+    var ventana = window.open($url, "_blank");
+}
+>>>>>>> origin/project_module

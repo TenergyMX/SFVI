@@ -1,12 +1,18 @@
 <?php
 	class Project extends Controlador {
 		private $modeloProject;
+<<<<<<< HEAD
+=======
+		private $modeloClient;
+		private $modeloVisit;
+>>>>>>> origin/project_module
 		private $datos = [];
 
 		// Constructor
 		function __construct() {
 			$this->modeloProject = $this->modelo('Projects');
 			session_start();
+<<<<<<< HEAD
 
 		}
 
@@ -50,6 +56,19 @@
 			} else {
 				echo 'Proyecto no disponible';
 			}
+=======
+			$this->modeloProject = $this->modelo('Projects');
+			$this->modeloClient = $this->modelo('Clients');
+			$this->modeloVisit = $this->modelo('Visits');
+		}
+
+		function index() {
+			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();
+			$this->datos['nombre_clientes'] = $this->modeloClient->getClients();
+			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
+			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
+			$this->vista("Admin/table_projects", $this->datos);
+>>>>>>> origin/project_module
 		}
 	}
 ?>

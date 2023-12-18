@@ -8,6 +8,7 @@
 	// Rutas
 	define('RUTA_APP', dirname(dirname(__FILE__)));
 	define('RUTA_PUBLIC', $_SERVER['DOCUMENT_ROOT'] . '/SFVI/public/');
+	define('RUTA_DOCS', $_SERVER['DOCUMENT_ROOT'] . '/SFVI/docs/');
 	define('RUTA_URL','http://localhost/SFVI/');
 	
 	// Nombre de la aplicacion

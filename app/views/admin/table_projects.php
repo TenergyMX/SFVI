@@ -28,8 +28,10 @@
                                                 class="btn btn-primary"
                                                 data-option="create"
                                             >
+                                                <i class="fa-regular fa-plus me-1"></i>
                                                 Agregar Proyecto
                                             </button>
+<<<<<<< HEAD
                                             
                                         </div>
                                         <div>
@@ -42,16 +44,31 @@
                                         </div>
                                         <div id="proyectosContainer">
                                             <!-- Aquí se cargarán los proyectos -->
+=======
+                                            <button
+                                                type="button"
+                                                class="btn btn-info"
+                                                title="Refrescar tabla"
+                                                data-option="refresh_table"
+                                            >
+                                                <i class="fa-regular fa-arrows-rotate me-1"></i>
+                                                Refrescar tabla
+                                            </button>
+>>>>>>> origin/project_module
                                         </div>
                                         <div class="table-responsive">
                                             <table
-                                                class="table w-100"
+                                                class="table w-100 table-center"
                                                 id="table_proyects"
                                             >
                                                 <thead>
                                                     <tr>
+<<<<<<< HEAD
                                                         <th>Id</th>
                                                         <th>Proyecto</th>
+=======
+                                                        <th>proyecto</th>
+>>>>>>> origin/project_module
                                                         <th>Cliente</th>
                                                         <th>Avance</th>
                                                         <th>Documentación</th>
@@ -65,25 +82,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl d-none">
-                                <div class="card">
-                                    <div class="card-body"></div>
-                                </div>
-                            </div>
+                            <div class="col-xl d-none"></div>
                         </div>
                         <!-- END CONTENIDO -->
                     </div>
+                    <div class="container-fluid"></div>
                 </main>
                 <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
             </div>
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
+<<<<<<< HEAD
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
+=======
+>>>>>>> origin/project_module
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
-            ftable_proyects();
+            $( document ).ready(function() {
+                ftable_projects();
+            });
         </script>
     </body>
 </html>

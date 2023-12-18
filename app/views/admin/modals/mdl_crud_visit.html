@@ -32,12 +32,18 @@
                             aria-describedby="project"
                             placeholder="Proyecto"
                         >
-                            <option value="" selected disabled>
+                            <option value="" data-folio="" selected disabled>
                                 Seleccione el Proyecto
                             </option>
                             <?php foreach($datos['nombre_proyectos'] as $key =>
                             $data) : ?>
+<<<<<<< HEAD
                             <option value=""><?php echo "{$data->tb_project}" ?></option>
+=======
+                            <option value="<?php echo $data->id; ?>">
+                                <?php echo $data->folio; ?>
+                            </option>
+>>>>>>> origin/project_module
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -67,7 +73,7 @@
                             </option>
                             <?php foreach($datos['nombres_visitantes'] as $key =>
                             $data) : ?>
-                            <option value="">
+                            <option value="<?php echo $data->id; ?>">
                                 <?php echo "{$data->name} {$data->surnames}" ?>
                             </option>
                             <?php endforeach; ?>
@@ -79,7 +85,7 @@
                         <input
                             type="datetime-local"
                             class="form-control"
-                            name="star_date"
+                            name="start_date"
                             aria-describedby="start_date"
                             placeholder="Fecha y hora de visita"
                         />
@@ -89,7 +95,12 @@
                         <button type="submit" class="btn btn-primary" name="add">
                             Agregar visita
                         </button>
-                        <button type="submit" class="btn btn-primary" name="update">
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            name="update"
+                            style="display: none"
+                        >
                             Actualizar visita
                         </button>
                     </div>

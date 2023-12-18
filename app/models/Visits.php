@@ -7,9 +7,23 @@
 		function addVisit($datos = []) {
 			try {
 				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("INSERT INTO visit(/* id_type, */ id_user, description, start_date) VALUES(/* :id_type, */ :id_user, :description, :start_date)");				
-				/* $this->db->bind(':id_type', $datos["visit"]); */
+				$this->db->query("INSERT INTO visit(
+						id_project,
+						id_user,
+						id_type,
+						description,
+						start_date
+					) VALUES(
+						:id_project,
+						:id_user,
+						:id_type,
+						:description,
+						:start_date
+					);
+				");				
+				$this->db->bind(':id_project', $datos["id_project"]);
 				$this->db->bind(':id_user', $datos["id_user"]);
+				$this->db->bind(':id_type', $datos["id_type"]);
 				$this->db->bind(':description', $datos["description"]);
 				$this->db->bind(':start_date', $datos["start_date"]);
 				if ($this->db->execute()) {
@@ -55,7 +69,8 @@
 			try {
 				$this->db->query("SELECT v.*,
 					CONCAT(u.name, ' ', u.surnames) AS str_fullname,
-					tvisit.description as str_type_of_visit,
+					tvisit.description AS str_type_of_visit,
+					p.folio AS project_folio,
 					p.lat,
 					p.lon
 					FROM visit v
@@ -74,7 +89,7 @@
 		}
 		
 		function getVisitantes() {
-			$this->db->query("SELECT * FROM users u WHERE u.role = 4;");
+			$this->db->query("SELECT * FROM users u WHERE u.role != 6");
 			return $this->db->registros();
 		}
 
