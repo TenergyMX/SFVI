@@ -26,7 +26,7 @@
 
 
 		function stages($id=0) {
-			$this->datos['proyecto'] = $this->modeloProject->getProyect($id);
+			$this->datos['proyecto'] = $this->modeloProject->getProject($id);
 			$this->vista("Admin/project_stages", $this->datos);
 		}
 
