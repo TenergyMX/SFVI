@@ -11,6 +11,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label"> Tipo de visita </label>
                         <select name="id_type" id="" class="form-select">
+                            <option value="" selected disabled>
+                                Seleccione el Tipo de visita
+                            </option>
                             <option value="1">Levantamiento técnico</option>
                             <option value="2">
                                 Primera supervisión y entrega de materiales
@@ -34,7 +37,7 @@
                             </option>
                             <?php foreach($datos['nombre_proyectos'] as $key =>
                             $data) : ?>
-                            <option value=""><?php echo "{$data->id}" ?></option>
+                            <option value=""><?php echo "{$data->tb_project}" ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

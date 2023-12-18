@@ -313,49 +313,6 @@ function ftable_visits() {
         }
         // end option
     });
-    //modal informacion visita
-    /*    $("body").on("click", "[btn_action]", function () {
-        let option = $(this).attr("btn_action");
-        switch (option) {
-            case "create":
-            case "add":
-                $("#mdl_info_visit .modal-header .modal-title").html("NOTA VISITA");
-                $("#mdl_info_visit .modal-body form [name='add']").show();
-                $("#mdl_info_visit .modal-body form [name='update']").hide();
-                $("#mdl_info_visit").modal("show");
-                break;
-            case "update":
-                $("#mdl_info_visit .modal-header .modal-title").html("ACTUALIZAR VISITA");
-                $("#mdl_info_visit .modal-body form [name='add']").hide();
-                $("#mdl_info_visit .modal-body form [name='update']").show();
-                $("#mdl_info_visit").modal("show");
-                break;
-            case "show_info":
-                var fila = $(this).closest("tr");
-                var id = $(this).closest("tr").data("id");
-                $("#mdl_info_visit form [name='tipo']").val("id_type");
-                $("#mdl_info_visit form [name='tipo']").val(fila.find("td:eq(0)").text());
-                $("#mdl_info_visit form [name = 'razon']").val(
-                    fila.find("td:eq(6)").text()
-                );
-                $("#mdl_info_visit form [name='proyect']").val(
-                    fila.find("td:eq(4)").text()
-                );
-                $("#mdl_info_visit form [name = 'visit']").val(
-                    fila.find("td:eq(1)").text()
-                );
-                Swal.fire(
-                    "ELIMINADO!",
-                    "El dato ha sido eliminado correctamente",
-                    "success"
-                );
-
-                break;
-            default:
-                alert("Opcion no valida");
-        }
-        // end option
-    }); */
 
     // Create and update visit
 
@@ -398,12 +355,43 @@ function ftable_proyects() {
             dataSrc: "data",
         },
         columns: [
-            /* { title: "Id", data: "id" }, */
+            { title: "Id", data: "id" },
+            /*{
+                title: "Proyecto",
+                data: "tb_project",
+                render: function (data, type, row) {
+                    return (
+                        '<a href="' +
+                        RUTA_URL +
+                        "project_Stages/" +
+                        data +
+                        '">' +
+                        data +
+                        "</a>"
+    
+                    );
+                },
+            },*/
+            { title: "Proyecto", data: "btn_folio" },
             { title: "Cliente", data: "id_client" },
-            /* { title: "Avance", data: "percentage" },
-            { title: "Documentación", data: "charge" }, */
-            /* { title: "Visitas", data: "btn_action" },
-            { title: "Acción", data: "btn_action" }, */
+            { title: "Avance", data: "percentage" },
+            { title: "Documentación", data: "btn_docs" },
+            /*  {
+                title: "Documentación",
+                data: "id_client",
+                render: function (data, type, row) {
+                    return (
+                        '<a href="' +
+                        RUTA_URL +
+                        "Document/" +
+                        data +
+                        '"><button class="btn btn-success"><i class="fa-solid fa-folder"></i></button>' +
+                        "</a>"
+                    );
+                },
+            }, */
+            { title: "Visitas", data: "btn_action_visit" },
+            { title: "Editar", data: "btn_action_update" },
         ],
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
@@ -417,7 +405,7 @@ function ftable_proyects() {
             case "create":
             case "add":
                 $("#mdl_crud_proyect .modal-header .modal-title").html(
-                    "AGREGAR Proyecto"
+                    "AGREGAR PROYECTO"
                 );
                 $("#mdl_crud_proyect .modal-body form [name='add']").show();
                 $("#mdl_crud_proyect .modal-body form [name='update']").hide();
@@ -425,12 +413,71 @@ function ftable_proyects() {
                 break;
             case "update":
                 $("#mdl_crud_proyect .modal-header .modal-title").html(
-                    "ACTUALIZAR Proyecto"
+                    "ACTUALIZAR PROYECTO"
                 );
                 $("#mdl_crud_proyect .modal-body form [name='add']").hide();
                 $("#mdl_crud_proyect .modal-body form [name='update']").show();
                 $("#mdl_crud_proyect").modal("show");
                 break;
+            case "update_project":
+                $("#mdl_update_proyect .modal-header .modal-title").html(
+                    "ACTUALIZAR PROYECTO"
+                );
+                $("#mdl_update_proyect .modal-body form [name='add']").hide();
+                $("#mdl_update_proyect .modal-body form [name='update']").show();
+                var fila = $(this).closest("tr");
+                var data = tbl_proyects.row(fila).data();
+                $("#mdl_update_proyect form [name='id']").val(data["id"]);
+                $("#mdl_update_proyect form [name='tb_project']").val(
+                    fila.find("td:eq(1)").text()
+                );
+                $("#mdl_update_proyect form [name='id_client']").val(
+                    fila.find("td:eq(2)").text()
+                );
+                $("#mdl_update_proyect form [name = 'folio']").val(data["folio"]);
+                $("#mdl_update_proyect form [name='quotation']").val(data["quotations"]);
+                $("#mdl_update_proyect form [name = 'quotation_num']").val(
+                    data["quotations_num"]
+                );
+                $("#mdl_update_proyect form [name = 'id_fide']").val(data["id_fide"]);
+                $("#mdl_update_proyect form [name='tb_project']").val(data["tb_project"]);
+                $("#mdl_update_proyect form [name='charge']").val(data["charge"]);
+                $("#mdl_update_proyect form [name = 'street']").val(data["street"]);
+                $("#mdl_update_proyect form [name='cologne']").val(data["cologne"]);
+                $("#mdl_update_proyect form [name = 'municipality']").val(
+                    data["municipality"]
+                );
+                $("#mdl_update_proyect form [name = 'address']").val(data["address"]);
+                $("#mdl_update_proyect form [name='start_date']").val(data["start_date"]);
+                $("#mdl_update_proyect").modal("show");
+                break;
+            case "show_visits":
+                $("#mdl_crud_visit .modal-header .modal-title").html("AGREGAR VISITA");
+                $("#mdl_crud_visit .modal-body form [name='add']").show();
+                $("#mdl_crud_visit .modal-body form [name='update']").hide();
+                $("#mdl_crud_visit").modal("show");
+                break;
+            /*  case "info_stages":
+                $("#mdl_info_stages .modal-header .modal-title").html(
+                    "INFORMACIÓN DEL PROYECTO"
+                );
+                $("#mdl_info_stages .modal-body form [name='add']").show();
+                $("#mdl_info_stages .modal-body form [name='update']").hide();
+                $("#mdl_info_stages").modal("show");
+
+                var fila = $(this).closest("tr");
+                var data = tbl_proyects.row(fila).data();
+                $("#mdl_info_stages form [name='id']").val(data["id"]);
+                /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
+            /*  $("#mdl_info_stages form [name='folio']").val(
+                    fila.find("td:eq(1)").text()
+                );
+                $("#mdl_info_stages form [name = 'id_client']").val(
+                    fila.find("td:eq(2)").text()
+                );
+                $("#mdl_info_stages").modal("show");
+
+                break; */
             default:
                 alert("Opcion no valida");
         }
@@ -469,6 +516,74 @@ function ftable_proyects() {
             },
         });
     });
+
+    $("#mdl_update_proyect form").on("submit", function (e) {
+        e.preventDefault();
+        var datos = $(this).serialize();
+        var url = RUTA_URL + "Request/updateProyect/";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: datos,
+            beforeSend: function () {
+                $("#mdl_update_proyect form [type='submit']").prop("disabled", true);
+            },
+            success: function (response) {
+                $("#mdl_update_proyect").modal("hide");
+                if (response.success) {
+                    Swal.fire("Good job!", "Accion exitosa", "success");
+                } else {
+                    Swal.fire("Oops", "fallo algo", "error");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrow) {
+                console.log("hubo un error: ", errorThrow);
+                Swal.fire("Error del servidor", ":(", "error");
+            },
+            complete: function () {
+                $("#mdl_update_proyect form [type='submit']").prop("disabled", false);
+            },
+        });
+    });
+
+    function marcarCheckbox(checkboxId) {
+        // Obtener el checkbox por su ID
+        var checkbox = document.getElementById(checkboxId);
+
+        // Marcar el checkbox si está desmarcado, y viceversa
+        checkbox.checked = !checkbox.checked;
+    }
+
     // End
 }
 /* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
+function fprojects_stages() {
+    // Configurar el modal
+    $("body").on("click", "[data-option]", function () {
+        let option = $(this).attr("data-option"); // [create / add , update, delete]
+        switch (option) {
+            case "create":
+            case "info_stages":
+                $("#mdl_info_stages .modal-header .modal-title").html(
+                    "INFORMACIÓN DEL PROYECTO"
+                );
+                $("#mdl_info_stages .modal-body form [name='add']").show();
+                $("#mdl_info_stages .modal-body form [name='update']").hide();
+                $("#mdl_info_stages").modal("show");
+
+                var fila = $(this).closest("tr");
+                /*  var data = tbl_proyects.row(fila).data(); */
+                $("#mdl_info_stages form [name='id']").val(data["id"]);
+                $("#mdl_info_stages form [name='folio']").val(data["folio"]);
+                $("#mdl_info_stages form [name='tb_project']").val(data["tb_project"]);
+                $("#mdl_info_stages form [name = 'id_client']").val(data["id_client"]);
+                $("#mdl_info_stages").modal("show");
+                break;
+            default:
+                alert("Opcion no valida");
+        }
+    });
+
+    // End
+}

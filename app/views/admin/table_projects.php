@@ -30,6 +30,18 @@
                                             >
                                                 Agregar Proyecto
                                             </button>
+                                            
+                                        </div>
+                                        <div>
+                                                <label for="tipoProyecto">Seleccione Tipo de Proyecto:</label>
+                                            <select id="tipoProyecto">
+                                            <option value="1">Doméstico</option>
+                                            <option value="3">Comercial</option>
+                                            <option value="4">Industrial</option>
+                                            </select>
+                                        </div>
+                                        <div id="proyectosContainer">
+                                            <!-- Aquí se cargarán los proyectos -->
                                         </div>
                                         <div class="table-responsive">
                                             <table
@@ -39,11 +51,12 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Id</th>
+                                                        <th>Proyecto</th>
                                                         <th>Cliente</th>
                                                         <th>Avance</th>
                                                         <th>Documentación</th>
                                                         <th>Visitas</th>
-                                                        <th>Acción</th>
+                                                        <th>Editar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -64,7 +77,10 @@
                 <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
             </div>
         </div>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
             ftable_proyects();
