@@ -59,11 +59,7 @@
 			}
 		}
 
-<<<<<<< HEAD
-		function getProyect($id) {
-=======
 		function getProject($datos = []) {
->>>>>>> origin/project_module
 			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
@@ -79,7 +75,6 @@
 			return $this->db->registros();
 		}
 
-<<<<<<< HEAD
 		function getStages() {
 			$this->db->query("SELECT * FROM project p;");
 			return $this->db->registros();
@@ -88,7 +83,9 @@
 		function getClientes() {
 			$this->db->query("SELECT * FROM clients c;");
 			return $this->db->registros();
-=======
+
+		}
+
 		function updateProject($datos = []) {
 			try {				
 				$resultado = (object) ["success" => false, "error" => ''];
@@ -122,7 +119,6 @@
 				$resultado = (object) ["success" => false, "error" => $e];
 				return $resultado;
 			}
->>>>>>> origin/project_module
 		}
 
 		# Obtener la hora sol pico de cada estado
@@ -130,17 +126,16 @@
 			$this->db->query("SELECT * FROM hsp;");
 			return $this->db->registros();
 		}
-<<<<<<< HEAD
 
 		function getVisitantes() {
 			$this->db->query("SELECT * FROM users u WHERE u.role = 4;");
 			return $this->db->registros();
 		}
 
-		function getProyectos() {
+		/* function getProyectos() {
 			$this->db->query("SELECT * FROM project p;");
 			return $this->db->registros();
-		}
+		} */
 
 		/* function getDocumentos($id){
 			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
@@ -204,7 +199,7 @@
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
 		}
-/* --------------------------ETAPAS CONTADO---------------------- */
+     /* --------------------------ETAPAS CONTADO---------------------- */
 		function getContadoEtapa1($id=0){
 			$this->db->query("SELECT * FROM p_contado_stage1 WHERE id_project=:id;");
 			$this->db->bind(':id', $id);
@@ -249,7 +244,5 @@
 		function updateUser($datos = []) {}
 
 		function deleteUser($datos = []) {} */
-=======
->>>>>>> origin/project_module
 	}
 ?>

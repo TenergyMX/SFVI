@@ -31,7 +31,6 @@
                                                 <i class="fa-regular fa-plus me-1"></i>
                                                 Agregar Proyecto
                                             </button>
-<<<<<<< HEAD
                                             
                                         </div>
                                         <div>
@@ -44,7 +43,6 @@
                                         </div>
                                         <div id="proyectosContainer">
                                             <!-- Aquí se cargarán los proyectos -->
-=======
                                             <button
                                                 type="button"
                                                 class="btn btn-info"
@@ -54,7 +52,6 @@
                                                 <i class="fa-regular fa-arrows-rotate me-1"></i>
                                                 Refrescar tabla
                                             </button>
->>>>>>> origin/project_module
                                         </div>
                                         <div class="table-responsive">
                                             <table
@@ -63,12 +60,8 @@
                                             >
                                                 <thead>
                                                     <tr>
-<<<<<<< HEAD
                                                         <th>Id</th>
                                                         <th>Proyecto</th>
-=======
-                                                        <th>proyecto</th>
->>>>>>> origin/project_module
                                                         <th>Cliente</th>
                                                         <th>Avance</th>
                                                         <th>Documentación</th>
@@ -93,10 +86,7 @@
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
-<<<<<<< HEAD
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
-=======
->>>>>>> origin/project_module
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>

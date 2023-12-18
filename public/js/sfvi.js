@@ -300,55 +300,7 @@ function ftable_visits() {
         }
         // end option
     });
-    //modal informacion visita
-    /*    $("body").on("click", "[btn_action]", function () {
-        let option = $(this).attr("btn_action");
-        switch (option) {
-            case "create":
-            case "add":
-                $("#mdl_info_visit .modal-header .modal-title").html("NOTA VISITA");
-                $("#mdl_info_visit .modal-body form [name='add']").show();
-                $("#mdl_info_visit .modal-body form [name='update']").hide();
-                $("#mdl_info_visit").modal("show");
-                break;
-            case "update":
-                $("#mdl_info_visit .modal-header .modal-title").html("ACTUALIZAR VISITA");
-                $("#mdl_info_visit .modal-body form [name='add']").hide();
-                $("#mdl_info_visit .modal-body form [name='update']").show();
-                $("#mdl_info_visit").modal("show");
-                break;
-            case "show_info":
-                var fila = $(this).closest("tr");
-                var id = $(this).closest("tr").data("id");
-                $("#mdl_info_visit form [name='tipo']").val("id_type");
-                $("#mdl_info_visit form [name='tipo']").val(fila.find("td:eq(0)").text());
-                $("#mdl_info_visit form [name = 'razon']").val(
-                    fila.find("td:eq(6)").text()
-                );
-                $("#mdl_info_visit form [name='proyect']").val(
-                    fila.find("td:eq(4)").text()
-                );
-                $("#mdl_info_visit form [name = 'visit']").val(
-                    fila.find("td:eq(1)").text()
-                );
-                Swal.fire(
-                    "ELIMINADO!",
-                    "El dato ha sido eliminado correctamente",
-                    "success"
-                );
 
-<<<<<<< HEAD
-                break;
-            default:
-                alert("Opcion no valida");
-        }
-        // end option
-    }); */
-
-    // Create and update visit
-
-=======
->>>>>>> origin/project_module
     $("#mdl_update_visit form").on("submit", function (e) {
         e.preventDefault();
         var datos = $(this).serialize();
@@ -388,7 +340,6 @@ function ftable_projects() {
             dataSrc: "data",
         },
         columns: [
-<<<<<<< HEAD
             { title: "Id", data: "id" },
             /*{
                 title: "Proyecto",
@@ -426,14 +377,6 @@ function ftable_projects() {
             }, */
             { title: "Visitas", data: "btn_action_visit" },
             { title: "Editar", data: "btn_action_update" },
-=======
-            { title: "Proyecto", data: "folio" },
-            { title: "Cliente", data: "customer_fullName" },
-            { title: "Avance", data: null },
-            { title: "Documentación", data: "btn_action_docs" },
-            { title: "Visitas", data: "btn_action_visit" },
-            { title: "Acción", data: "btn_action" },
->>>>>>> origin/project_module
         ],
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
@@ -503,7 +446,6 @@ function ftable_projects() {
                 // Mostrar modal
                 $("#mdl_crud_proyect").modal("show");
                 break;
-<<<<<<< HEAD
             case "update_project":
                 $("#mdl_update_proyect .modal-header .modal-title").html(
                     "ACTUALIZAR PROYECTO"
@@ -563,7 +505,6 @@ function ftable_projects() {
                 $("#mdl_info_stages").modal("show");
 
                 break; */
-=======
             case "add_visit":
                 var fila = $(this).closest("tr");
                 var data = tbl_proyects.row(fila).data();
@@ -573,7 +514,6 @@ function ftable_projects() {
             case "refresh_table":
                 tbl_proyects.ajax.reload();
                 break;
->>>>>>> origin/project_module
             default:
                 alert("Opcion no valida");
         }
@@ -634,7 +574,6 @@ function ftable_projects() {
         });
     });
 
-<<<<<<< HEAD
     $("#mdl_update_proyect form").on("submit", function (e) {
         e.preventDefault();
         var datos = $(this).serialize();
@@ -676,23 +615,22 @@ function ftable_projects() {
     // End
 }
 /* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
-=======
-    // cargar la ubicacion en el mapa
-    $("#mdl_crud_proyect form [name='state']").on("change", function () {
-        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
-        var option = $(this).find("option:selected");
-        var estado = option.attr("data-state");
-        var formulario = $("#mdl_crud_proyect .modal-body form");
-        var street = formulario.find("[name='street']").val();
-        var colony = formulario.find("[name='colony']").val();
-        var municipality = formulario.find("[name='municipality']").val();
-        var address = `${street}, col. ${colony}, municipio ${municipality}, ${estado}`;
-        $("#pills-address small.address").html(address);
-        address_on_the_map(obj_map, address);
-    });
+// cargar la ubicacion en el mapa
+$("#mdl_crud_proyect form [name='state']").on("change", function () {
+    // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
+    var option = $(this).find("option:selected");
+    var estado = option.attr("data-state");
+    var formulario = $("#mdl_crud_proyect .modal-body form");
+    var street = formulario.find("[name='street']").val();
+    var colony = formulario.find("[name='colony']").val();
+    var municipality = formulario.find("[name='municipality']").val();
+    var address = `${street}, col. ${colony}, municipio ${municipality}, ${estado}`;
+    $("#pills-address small.address").html(address);
+    address_on_the_map(obj_map, address);
+});
 
-    // End
-}
+// End
+
 // TODO ------------------------- [ Eventos Globales ] -------------------------
 
 $("#mdl_crud_visit form").on("submit", function (e) {
@@ -807,4 +745,3 @@ function address_on_the_map(_obj_map, _address = "Queretaro") {
 function open_window($url = "") {
     var ventana = window.open($url, "_blank");
 }
->>>>>>> origin/project_module
