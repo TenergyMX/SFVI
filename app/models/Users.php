@@ -59,17 +59,57 @@
 			return $this->db->registro();
 		}
 
+		function getUser_email($email = 'ejemplo@gmail.com') {
+			$this->db->query("SELECT * FROM users u WHERE u.email = :email");
+			$this->db->bind(':email', $email);
+			return $this->db->registro();
+		}
+
 		function getUsers() {
 			$this->db->query("SELECT u.*, r.description str_role FROM users u LEFT JOIN role r on u.role = r.id;");
 			return $this->db->registros();
 		}
 
-		function getClients() {}
-
-		function getClientsAll() {}
 
 		function updateUser($datos = []) {}
 
 		function deleteUser($datos = []) {}
+
+		function updatePassword($datos = []) {
+			$resultado = (object) ["success" => true];
+			try {
+				$this->db->query("UPDATE users SET
+					password = :password,
+					token = NULL
+					WHERE id = :id
+				");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':password', $datos["password"]);
+				if (!$this->db->execute()) {
+					$resultado->success = false;
+					$resultado->error = "Oops, ocurrio un error";
+				}
+			} catch (Exception $e) {
+				$resultado->success = false;
+				$resultado->error = $e;
+			}
+			return $resultado;
+		}
+		
+		function addtokenUser_email($email = 0) {
+			$resultado = (object) ["success" => true];
+			try {
+				$this->db->query("UPDATE users SET token = SHA2(CONCAT(UUID(), NOW()), 256) WHERE email = :email");
+				$this->db->bind(':email', $email);
+				// Ejecucion de la consulta
+				if ($this->db->execute()) {
+					$resultado->success = false;
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
 	}
 ?>

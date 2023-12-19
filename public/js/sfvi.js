@@ -488,6 +488,37 @@ $("#mdl_crud_visit form").on("submit", function (e) {
     });
 });
 
+$("form[name='reset-password']").on("submit", function (e) {
+    e.preventDefault();
+    var datos = $(this).serialize();
+    var btn_submit = $("form[name='reset-password'] [type='submit']");
+    $.ajax({
+        type: "POST",
+        url: RUTA_URL + "Request/request_password_change/",
+        data: datos,
+        beforeSend: function () {
+            btn_submit.prop("disabled", true);
+            btn_submit.html(
+                '<i class="fa-regular fa-loader fa-spin me-2"></i> Procesando'
+            );
+        },
+        success: function (response) {
+            btn_submit.prop("disabled", false);
+            btn_submit.html("Reset Password");
+            if (response.success) {
+                Swal.fire("Good job!", "Accion exitosa", "success");
+            } else {
+                Swal.fire("Oops", "fallo algo", "error");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrow) {
+            console.error(errorThrow);
+            Swal.fire("Oops", "Error del servidor", "error");
+        },
+        complete: function () {},
+    });
+});
+
 // TODO ------------------------- [ Funciones Globales ] -------------------------
 function createMap_id(id_map, opcionesMapa) {
     var mapa = new google.maps.Map(document.querySelector(id_map), opcionesMapa);

@@ -14,6 +14,7 @@
 		}
 
 		function index() {
+			isUserLoggedIn();
 			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();
 			$this->datos['nombre_clientes'] = $this->modeloClient->getClients();
 			$this->datos['nombre_estados'] = $this->modeloProject->getStates();

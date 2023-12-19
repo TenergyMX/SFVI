@@ -1,2 +1,4 @@
 app/config/configurar.php
 app/db
+docs/
+app/vendor/
