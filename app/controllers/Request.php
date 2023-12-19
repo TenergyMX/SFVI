@@ -24,6 +24,36 @@
 			exit;
 		}
 
+		function request_password_change() {
+			$datos['email'] = isset($_POST['email']) ? $_POST['email'] : 'test@gmail.com';
+
+			$this->modeloUser->addtokenUser_email( $datos['email'] );
+			$user = $this->modeloUser->getUser_email( $datos['email'] );
+			$datos['{link_to_change_password}'] = RUTA_URL."User/resetPassword/{$user->email}/{$user->token}";
+			// *Creamos el correo
+			try {
+				$correo = new Correo();
+				$correo->subject("Recuperar cuenta");
+				$correo->addAddress( $datos['email'] );
+				$correo->html_template("reset-password", $datos);
+				$r = $correo->enviar();
+				if ($r->success) {
+					$this->response['success'] = true;
+					$this->response['msg'] = "Correo enviado para el cambio de contraseña";
+				} else {
+					$this->response['error'] = "Oops.. hubo un error al tratar de enviar el correo";
+				}
+			} catch (Exception $e) {
+				$this->response['msg'] = "catch";
+				$this->response['error'] = $e;
+				$this->response['error'] = "Oops.. Error al procesar el correo";
+			}			
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
 		function addUser() {
 			$datos['email'] = isset($_POST['email']) ? $_POST['email'] : '';
 			$datos['role'] = isset($_POST['role']) ? $_POST['role'] : '';

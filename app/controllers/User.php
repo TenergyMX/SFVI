@@ -53,11 +53,44 @@
 			$this->vista("authentication/login", $datos);
 		}
 
-		function resetPassword($id = 0) {
-			# vista 1: enviar correo
-			# vista 2: confirmar token
-			$datos = [];
-			$this->vista("authentication/reset-password", $datos);
+		function resetPassword($id = '', $token = '') {
+			$datos = [ "alert-script" => "", "email" => $id, "token" => $token ];
+
+			// ? Vista para enviar token al correo del usuario
+			if (empty($id)) {
+				$this->vista("authentication/reset-password", $datos);
+				exit;
+			}
+
+			$user = $this->modeloUser->getUser_email($datos["email"]);
+
+			if (!$user) {
+				$datos["alert-script"] = "Usuario no encontrado";
+				echo $datos["alert-script"];
+				exit;
+			}
+
+			$datos["id"] = $user->id;
+			if (!hash_equals($user->token , $datos["token"])) {
+				$datos["alert-script"] = "Error: el token no coincide";
+				echo $datos["alert-script"];
+				exit;
+			}
+
+			if ($_POST) {
+				$datos['password'] = trim($_POST['password']);
+				$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
+				$resultado = $this->modeloUser->updatePassword($datos);
+				if ($resultado) {
+					header('Location: ' . RUTA_URL . 'User/login/');
+					exit;
+				} else {
+					$datos["alert-script"] = "Ocurrió un error inesperado";
+				}
+			}
+			// ? Vista No. 2: token valido
+			$this->vista("authentication/new-password", $datos);
+			exit;
 		}
 
 		function logout() {

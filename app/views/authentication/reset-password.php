@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <title>Dashboard</title>
+        <title>Reset password</title>
     </head>
 
     <body
@@ -21,14 +21,13 @@
                             <div class="text-center mt-4">
                                 <h1 class="h2">Reset password</h1>
                                 <p class="lead">
-                                    Enter your email to reset your password.
+                                    Ingresa tu correo electrónico para restablecer tu contraseña
                                 </p>
                             </div>
-
                             <div class="card">
                                 <div class="card-body">
                                     <div class="m-sm-3">
-                                        <form>
+                                        <form  name="reset-password">
                                             <div class="mb-3">
                                                 <label class="form-label">Email</label>
                                                 <input
@@ -39,17 +38,19 @@
                                                 />
                                             </div>
                                             <div class="d-grid gap-2 mt-3">
-                                                <a class="btn btn-lg btn-primary" href="/"
-                                                    >Reset password</a
-                                                >
+                                                <button type="submit" class="btn btn-lg btn-primary">
+                                                    Reset password
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="text-center mb-3">
-                                Don't have an account?
-                                <a href="/pages-sign-up">Sign up</a>
+                                ¿Tienes cuenta?
+                                <a href="<?= RUTA_URL.'User/login/' ?>">
+                                    Ir al login
+                                </a>
                             </div>
                         </div>
                     </div>
