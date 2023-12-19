@@ -59,9 +59,9 @@
 			}
 		}
 
-		function getProyect($datos = []) {
+		function getProject($id) {
 			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
-			$this->db->bind(':id', $datos["id"]);
+			$this->db->bind(':id', $id);
 			return $this->db->registro();
 		}
 		
@@ -73,6 +73,17 @@
 				ON p.id_client = c.id;
 			");
 			return $this->db->registros();
+		}
+
+		function getStages() {
+			$this->db->query("SELECT * FROM project p;");
+			return $this->db->registros();
+		}
+
+		function getClientes() {
+			$this->db->query("SELECT * FROM clients c;");
+			return $this->db->registros();
+
 		}
 
 		function updateProject($datos = []) {
@@ -115,5 +126,123 @@
 			$this->db->query("SELECT * FROM hsp;");
 			return $this->db->registros();
 		}
+
+		function getVisitantes() {
+			$this->db->query("SELECT * FROM users u WHERE u.role = 4;");
+			return $this->db->registros();
+		}
+
+		/* function getProyectos() {
+			$this->db->query("SELECT * FROM project p;");
+			return $this->db->registros();
+		} */
+
+		/* function getDocumentos($id){
+			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
+			$this->db->bind(':id', $id);
+			return $this->db->registro(); 
+		} */
+
+		/* function getFechaInicio($id){ 
+			$this->db->query("SELECT start_date FROM project p WHERE p.id = :id;");
+			$this->db->bind(':id', $id);
+
+			return $this->db->registros();
+		} */
+
+
+		/* -----------------------ETAPAS FIDE------------------------ */
+		function getFideEtapa1($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage1 WHERE id_project7=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa2($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage2 WHERE id_project8=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa3($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage3 WHERE id_project9=:id");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa4($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage4 WHERE id_project10=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa5($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage5 WHERE id_project11=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa6($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage6 WHERE id_project12=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa7($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage7 WHERE id_project13=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getFideEtapa8($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage8 WHERE id_project14=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+     /* --------------------------ETAPAS CONTADO---------------------- */
+		function getContadoEtapa1($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage1 WHERE id_project=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getContadoEtapa2($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage2 WHERE id_project=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getContadoEtapa3($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage3 WHERE id_project3=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getContadoEtapa4($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage4 WHERE id_project4=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getContadoEtapa5($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage5 WHERE id_project5=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getContadoEtapa6($id=0){
+			$this->db->query("SELECT * FROM p_contado_stage6 WHERE id_project6=:id;");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+
+/* 		function getClients() {}
+
+		function getClientsAll() {}
+
+		function updateUser($datos = []) {}
+
+		function deleteUser($datos = []) {} */
 	}
 ?>

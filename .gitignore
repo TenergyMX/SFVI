@@ -1,4 +1,8 @@
 app/config/configurar.php
 app/db
+<<<<<<< HEAD
 docs/
 app/vendor/
+=======
+docs/
+>>>>>>> origin

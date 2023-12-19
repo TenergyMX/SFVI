@@ -18,7 +18,10 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">Carta vacia</div>
-                                    <div class="card-body"></div>
+                                    <div class="card-body">
+                                        <!-- ?php require_once(RUTA_APP.'/views/admin/inc/stage_contado.html'); ?>
+                                        ?php require_once(RUTA_APP.'/views/admin/inc/stage_fide.html'); ?>  -->
+                                    </div>
                                 </div>
                             </div>
                         </div>

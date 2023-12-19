@@ -4,6 +4,7 @@
 		private $datos = [];
 		private $response;
 		private $modeloProject;
+		private $modeloFile;
 
 		// Constructor
 		function __construct() {
@@ -12,6 +13,7 @@
 			$this->modeloClient = $this->modelo('Clients');
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->modeloProject = $this->modelo('Projects');
+			$this->modeloFile = $this->modelo('Files');
 			$this->response = array('success' => false);
 		}
 
@@ -156,11 +158,11 @@
 
 		function addProyect(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['folio']  = isset($_POST['tb_project']) ? $_POST['tb_project'] : 0;
+			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : 0;
 			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
 			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
-			$datos['quotation']  = isset($_POST['quotation']) ? $_POST['quotation'] : '';
+			$datos['quotation']  = '';
 			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : '';
 			$datos['id_fide']  = isset($_POST['id_fide']) ? $_POST['id_fide'] : '';
 			$datos['charge']  = isset($_POST['charge']) ? $_POST['charge'] : '';
@@ -171,6 +173,15 @@
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
 			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
 			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
+			# Guardar archivo en el servidor
+			$targetDirectory = trim($datos['folio']);
+			$targetDirectory = strtoupper($targetDirectory);
+			$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+			$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
+			if ($r_file->success) {
+				$datos['quotation'] = $r_file->targetFile;
+			}
+
 			# Ejecutar
 			$response = $this->modeloProject->addProyect($datos);
 			$this->response['success'] = $response->success;
@@ -184,6 +195,18 @@
 		function getProjects() {
 			$this->response['data'] = $this->modeloProject->getProjects();
 			foreach ($this->response['data'] as &$value) {
+				$btn_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_dcs"><i class="fa-light fa-circle-info"></i></button>';
+				$btn_visit = '<button class="btn btn-success me-1" name="visit" data-option="show_visits"><i class="fa-light fa-circle-info"></i></button>';
+				$btn = '<button class="btn btn-success me-1" name="info" data-option="add"><i class="fa-light fa-circle-info"></i></button>';
+				$btn_update= '<button class="btn btn-primary" name="update" data-option="update_project"><i class="fa-light fa-pen"></i></button>';
+				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
+				$value->btn_action_docs = $btn_docs; 
+				$value->btn_action_visit = $btn_visit; 
+				$value->btn_action = $btn; 
+				$value->btn_action_update = $btn_update;
+				$value->btn_action_stages = $btn_stages;
+				$value->btn_folio = "<a href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->folio}</a>";
+				$value->btn_docs = "<a href=\"".RUTA_URL."Project/documents/{$value->id}/\">{$value->folio}</a>";
 				$value->btn_action_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_docs"><i class="fa-regular fa-folder-open"></i></button>';
 				$value->btn_action_visit = '<button class="btn btn-success me-1" name="add_visit" data-option="add_visit"><i class="fa-solid fa-user-plus"></i></button>';
 				$value->btn_action = '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-solid fa-pen"></i></button>';
@@ -194,14 +217,30 @@
 			exit;
 		}
 
-		function updateProject() {
+			function getStages() {
+			$this->response['data'] = $this->modeloProject->getStages();
+			foreach ($this->response['data'] as &$value) {
+				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
+				$value->btn_action_stages = $btn_stages;
+
+			}
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function updateProyect(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : '';
+			$datos['tb_project']  = isset($_POST['tb_project']) ? $_POST['tb_project'] : '';
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
 			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : 0;
 			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
 			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
 			$datos['quotation']  = isset($_POST['quotation']) ? $_POST['quotation'] : '';
-			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : '';
+			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : 0;
 			$datos['id_fide']  = isset($_POST['id_fide']) ? $_POST['id_fide'] : '';
 			$datos['charge']  = isset($_POST['charge']) ? $_POST['charge'] : '';
 			$datos['street']  = isset($_POST['street']) ? $_POST['street'] : '';
@@ -209,6 +248,10 @@
 			$datos['municipality']  = isset($_POST['municipality']) ? $_POST['municipality'] : '';
 			$datos['state']  = isset($_POST['state']) ? $_POST['state'] : '';
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+			$datos['ubication']  = isset($_POST['ubication']) ? $_POST['ubication'] : '';
+			
+
+			$response = $this->modeloProject->updateProyect($datos);
 			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
 			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
 			# Ejecutar
@@ -220,6 +263,12 @@
 			echo json_encode($this->response);
 			exit;			
 		}
+
+
+/* 		-------------------------------------ETAPAS PROYECTOS------------------------------------- */
+	
+		
+ 
 		
 	} # fin de las vistas
 ?>
