@@ -28,6 +28,7 @@
                                         <?php endif; ?>
                                     </div>
                                 </div>
+                                
                                <!--  <div class="col-6">
                                     <h5 class="h1">FIDE</h5>
                                 </div> -->

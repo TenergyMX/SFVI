@@ -28,9 +28,36 @@
 			}
 		}
 
-		function getClient($datos = []) {
+		function updateClient($datos = []) {
+			try {				
+				$resultado = (object) ["success" => false, "error" => ''];
+				$this->db->query("UPDATE clients SET type_of_client = :type,  name = :name, surnames = :surnames, state = :state, municipality = :municipality, email = :email, phone = :phone, rfc = :rfc WHERE id = :id");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':type', $datos["type_of_client"]);
+				$this->db->bind(':name', $datos["name"]);
+				$this->db->bind(':surnames', $datos["surnames"]);
+				$this->db->bind(':state', $datos["state"]);
+				$this->db->bind(':municipality', $datos["municipality"]);
+				$this->db->bind(':email', $datos["email"]);
+				$this->db->bind(':phone', $datos["phone"]);
+				$this->db->bind(':rfc', $datos["rfc"]);
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error = 'No se pudo realizar las modificaciones en la tabla (visit)';
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e->getMessage()];
+				return $resultado;
+			}
+		}
+
+		
+
+		function getClient($id) {
 			$this->db->query("SELECT * FROM clients s WHERE s.id = :id");
-			$this->db->bind(':id', $datos["id"]);
+			$this->db->bind(':id', $id);
 			return $this->db->registro();
 		}
 

@@ -41,12 +41,16 @@
 		function updateVisit($datos = []) {
 			try {				
 				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE visit SET description = :description WHERE id = :id");
+				$this->db->query("UPDATE visit SET id_user = :id_user, id_client = :id_client, id_type = :id_type, description = :description, start_date = :start_date, end_date = :end_date WHERE id = :id");
 				$this->db->bind(':id', $datos["id"]);
-				// $this->db->bind(':id_type', $datos["id_type"]);
+				// $this->db->bind(':id_project ', $datos["id_project "]);
+				$this->db->bind(':id_user', $datos["id_user"]);
+				$this->db->bind(':id_client', $datos["id_client"]);
+				$this->db->bind(':id_type', $datos["id_type"]);
+				// $this->db->bind(':id_status ', $datos["id_status "]);
 				$this->db->bind(':description', $datos["description"]);
-				// $this->db->bind(':id_project', $datos["id_project"]);
-				// $this->db->bind(':id_user', $datos["id_user"]);
+				$this->db->bind(':start_date', $datos["start_date"]);
+				$this->db->bind(':end_date', $datos["end_date"]);
 				if ($this->db->execute()) {
 					$resultado->success = true;
 				} else {
@@ -98,7 +102,24 @@
 			return $this->db->registros();
 		}
 
+		function updateStatusVisit($datos = []) {
+			try {				
+				$resultado = (object) ["success" => false, "error" => ''];
+				$this->db->query("UPDATE visit SET id_status = :id_status WHERE id = :id");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':id_status ', $datos["Finalizada "]);
 
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error = 'No se pudo realizar las modificaciones en la tabla (visit)';
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
 
 
 	}

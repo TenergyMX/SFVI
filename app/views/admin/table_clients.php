@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <title>Usuarios</title>
+        <title>CLIENTES</title>
     </head>
 
     <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
@@ -22,8 +22,8 @@
                                                 type="button"
                                                 class="btn btn-primary"
                                                 data-option="create"
-                                            >
-                                                Agregar Cliente
+                                            ><i class="fa-solid fa-user-plus"></i>
+                                                
                                             </button>
                                         </div>
                                         <div class="table-responsive">
@@ -35,6 +35,7 @@
                                                         <th>Apellidos</th>
                                                         <th>Estado</th>
                                                         <th>Telefono</th>
+                                                        <th>Editar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>

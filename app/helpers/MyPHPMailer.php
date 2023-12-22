@@ -40,8 +40,8 @@ class Correo {
             $this->mail->Body = $plantilla;
 
             // Adjuntar imagen
-            $imagen_path = 'img/logo.png';
-            $this->mail->AddEmbeddedImage($imagen_path, 'logo', 'imagen.png', 'base64', 'image/png');
+            // $imagen_path = 'img/logo.png';
+            // $this->mail->AddEmbeddedImage($imagen_path, 'logo', 'imagen.png', 'base64', 'image/png');
 
             $this->mail->send();
             echo 'Message has been sent - Enviado correctamente';

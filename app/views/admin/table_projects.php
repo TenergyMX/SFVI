@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <title>Proyectos</title>
+        <title>PROYECTOS</title>
     </head>
 
     <body
@@ -60,10 +60,10 @@
                                             >
                                                 <thead>
                                                     <tr>
-                                                        <th>Id</th>
+                                                        <th>ID</th>
                                                         <th>Proyecto</th>
                                                         <th>Cliente</th>
-                                                        <th>Avance</th>
+                                                        <th>Avance(%)</th>
                                                         <th>Documentación</th>
                                                         <th>Visitas</th>
                                                         <th>Editar</th>

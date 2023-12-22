@@ -21,172 +21,140 @@
                         <div class="row">
                             <div class="col-12">
                                 <h2 class="text-center mt-8" style="padding-top: -50%;">DOCUMENTACIÓN GENERAL</h2>
-                                <div class="card">
-                                    <div class="card-body">
-                                        
-                                       <!--  <div class="mb-3">
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                data-option="create"
-                                            >
-                                                Agregar Proyecto
-                                            </button>
-                                        </div> -->
-                                        <div id="table_documents_filter" class="dataTables_filter">
-                                               <label>Buscar:
-                                               <input type="search" class placeholder aria-controls="table_documents">
-                                               </label>
-                                        </div>
-                                        <div class="accordion" id="accordionPanelsStayOpenExample">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                                        <span>Información del cliente</span>
-                                                    </button>
-                                                  
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                                                    <div class="accordion-body">
+                                <div class="container d-flex justify-content-center align-items-center">
+                                        <div class="card" style="max-width: 800px; /* border: 2px solid #D4E6F1 ; */">
+                                            <div class="card-body">
+                                          
+                                                <div class="table-responsive"></div>
+                                                    <div id="table_documents_filter" class="dataTables_filter d-flex justify-content-end">
+                                                        <label>Buscar:
+                                                        <input type="search" class placeholder aria-controls="table_documents">
+                                                        </label>
+                                                    </div>
+                                                    <p>
+                                                    <div class="row">
+                                                        <div class="col-12 col-lg-6 mb-2">
                                                             <div class="mb-3">
-                                                                <label for="" class="form-label"> Selecciona el documento </label>
-                                                                <input
-                                                                    type="file"
-                                                                    id="select"
-                                                                    name="select"
-                                                                />
+                                                                <label for="" class="form-label fs-4"> Proyecto: </label>
+                                                                    <select
+                                                                        name="project"
+                                                                        id=""
+                                                                        class="form-select"
+                                                                        aria-describedby="project"
+                                                                        placeholder="Proyecto"
+                                                                        style="width: 361px;"
+                                                                    >
+                                                                        <option value="" data-folio="" selected disabled>
+                                                                            <span class="fs-4" >Seleccione el Proyecto</span>
+                                                                        </option>
+                                                                        <?php foreach($datos['nombre_proyectos'] as $key =>
+                                                                        $data) : ?>
+                                                                        <option value="<?php echo $data->id; ?>">
+                                                                            <?php echo $data->folio; ?>
+                                                                        </option>
+                                                                        <?php endforeach; ?>style="height: 30px; font-size: 12px;"
+                                                                    </select>
                                                             </div>
-                                                            <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                            
+                                                        </div>
                                                     </div>
-                                                    <h3 class="text-center" style="background-color: rgb(96, 221, 152)">
-                                                        CLIENTE
-                                                    </h3>
-                                                    <div class="accordion-body">
-                                                            <div class="mb-3">
-                                                                <label for="" class="form-label"> Selecciona el documento </label>
-                                                                <input
-                                                                    type="file"
-                                                                    id="select"
-                                                                    name="select"
-                                                                />
+                                                    <div class="container d-flex justify-content-center align-items-center">
+                                        <div class="card" style="background-color: transparent;">
+                                            <div class="row">
+                                                <style>
+                                                    .custom-btn {
+                                                        width: 200px;
+                                                        height: 160px;
+                                                    }
+                                                </style>
+
+                                                        <div class="row">
+                                                            <div class="col-8 col-lg-4 mb-3">
+                                                                <div class="mb-3">
+                                                                    <button 
+                                                                    type="button" 
+                                                                    class="btn btn-outline-success custom-btn" 
+                                                                    name="category_1"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    <span class="fs-4">Información del cliente</span>
+                                                                    <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <button 
+                                                                    type="button" 
+                                                                    class="btn btn-outline-success custom-btn" 
+                                                                    name="category_2"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    <span class="fs-4">Documentación cotización</span>
+                                                                    <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
+                                                                </div>
                                                             </div>
-                                                            <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                    <h3 class="text-center" style="background-color: rgb(96, 221, 152)">
-                                                        CLIENTE
-                                                    </h3>
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                                    <label for="" class="form-label"> Selecciona el documento </label>
-                                                                    <input
-                                                                        type="file"
-                                                                        id="select"
-                                                                        name="select"
-                                                                    />
+                                                            <div class="col-8 col-lg-4 mb-3">
+                                                                <div class="mb-3">
+                                                                    <button
+                                                                    type="button"
+                                                                    class="btn btn-outline-success custom-btn"
+                                                                    name="category_3"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    
+                                                                    <span class="fs-4">Documentación ingeniería</span>
+                                                                    <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
                                                                 </div>
-                                                                <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                    <h3 class="text-center" style="background-color: rgb(96, 221, 152)">
-                                                        CLIENTE
-                                                    </h3>
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                                    <label for="" class="form-label"> Selecciona el documento </label>
-                                                                    <input
-                                                                        type="file"
-                                                                        id="select"
-                                                                        name="select"
-                                                                    />
+                                                                <div class="mb-3">
+                                                                    <button 
+                                                                    type="button" 
+                                                                    class="btn btn-outline-success custom-btn" 
+                                                                    name="category_4"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    <span class="fs-4">Documentación FIDE</span>
+                                                                    <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
                                                                 </div>
-                                                                <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                     
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                                                        <p>Documentación Cotización</p>
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label"> Selecciona el documento </label>
-                                                            <input
-                                                                type="file"
-                                                                id="select"
-                                                                name="select"
-                                                            />
+                                                            </div>
+                                                            <div class="col-8 col-lg-4 mb-3">
+                                                                <div class="mb-3">
+                                                                    <button 
+                                                                    type="button" 
+                                                                    class="btn btn-outline-success custom-btn" 
+                                                                    name="category_5"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    <span class="fs-4">Documentación CFE</span>
+                                                                    <p>
+                                                                        <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <button 
+                                                                    type="button" 
+                                                                    class="btn btn-outline-success custom-btn" 
+                                                                    name="category_6"
+                                                                    data-option="show_doc"
+                                                                    style="box-shadow:4px 4px #ABEBC6;">
+                                                                    <span class="fs-4">Documentación Tenergy</span>
+                                                                    <p>
+                                                                        <p class="text-center fs-6">Total documentos</p>
+                                                                </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                   </div>
-                                                </div>
                                             </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                                        <p>Documentación Ingeniería</p>
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label"> Selecciona el documento </label>
-                                                            <input
-                                                                type="file"
-                                                                id="select"
-                                                                name="select"
-                                                            />
-                                                        </div>
-                                                        <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                                                        <p>Documentación FIDE</p>
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label"> Selecciona el documento </label>
-                                                            <input
-                                                                type="file"
-                                                                id="select"
-                                                                name="select"
-                                                            />
-                                                        </div>
-                                                        <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="panelsStayOpen-headingFive">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
-                                                        <p>Documentación CFE</p>
-                                                    </button>
-                                                </h2>
-                                                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
-                                                    <div class="accordion-body">
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label"> Selecciona el documento </label>
-                                                            <input
-                                                                type="file"
-                                                                id="select"
-                                                                name="select"
-                                                            />
-                                                        </div>
-                                                        <button type="button" class="btn btn-primary" name="add">Guardar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                          </div>
                                         </div>
                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="col-xl d-none">
@@ -198,15 +166,15 @@
                         <!-- END CONTENIDO -->
                     </div>
                   </main>
-                <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
              </div>
       </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_documents.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
-            ftable_proyects();
+            fprojects_stages();
         </script>
     </body>
 </html>

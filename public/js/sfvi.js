@@ -20,6 +20,7 @@ function ftable_users() {
             { title: "Nombre", data: "name" },
             { title: "Apellidos", data: "surnames" },
             { title: "Correo Electrónico", data: "email" },
+            { title: "Editar", data: "btn_update" },
         ],
 
         language: {
@@ -33,7 +34,7 @@ function ftable_users() {
         switch (option) {
             case "create":
             case "add":
-                $("#mdl_crud_user .modal-header .modal-title").html("AGREGAR USUAIO");
+                $("#mdl_crud_user .modal-header .modal-title").html("AGREGAR USUARIO");
                 $("#mdl_crud_user .modal-body form [name='add']").show();
                 $("#mdl_crud_user .modal-body form [name='update']").hide();
                 $("#mdl_crud_user").modal("show");
@@ -43,6 +44,14 @@ function ftable_users() {
                 $("#mdl_crud_user .modal-body form [name='add']").hide();
                 $("#mdl_crud_user .modal-body form [name='update']").show();
                 $("#mdl_crud_user").modal("show");
+                var fila = $(this).closest("tr");
+                var data = tbl_users.row(fila).data();
+                $("#mdl_crud_user form [name='email']").val(data["email"]);
+                $("#mdl_crud_user form [name='role']").val(data["role"]);
+                $("#mdl_crud_user form [name='name']").val(data["name"]);
+                $("#mdl_crud_user form [name='surnames']").val(data["surnames"]);
+                $("#mdl_crud_user form [name='password']").val(data["password"]);
+
                 break;
             default:
                 alert("Opcion no valida");
@@ -156,6 +165,7 @@ function ftable_clients() {
             { title: "Apellidos", data: "surnames" },
             { title: "Estado", data: "state" },
             { title: "Telefono", data: "phone" },
+            { title: "Editar", data: "btn_update" },
         ],
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
@@ -180,6 +190,19 @@ function ftable_clients() {
                 $("#mdl_crud_client .modal-body form [name='add']").hide();
                 $("#mdl_crud_client .modal-body form [name='update']").show();
                 $("#mdl_crud_client").modal("show");
+                var fila = $(this).closest("tr");
+                var data = tbl_clients.row(fila).data();
+                $("#mdl_crud_client form [name='type']").val(data["type_of_client"]);
+                $("#mdl_crud_client form [name='name']").val(data["name"]);
+                $("#mdl_crud_client form [name='surnames']").val(data["surnames"]);
+                $("#mdl_crud_client form [name='state']").val(data["state"]);
+                $("#mdl_crud_client form [name='municipality']").val(
+                    data["municipality"]
+                );
+                $("#mdl_crud_client form [name='type']").prop("readonly", true);
+                $("#mdl_crud_client form [name='email']").val(data["email"]);
+                $("#mdl_crud_client form [name='phone']").val(data["phone"]);
+                $("#mdl_crud_client form [name='rfc']").val(data["rfc"]);
                 break;
             default:
                 alert("Opcion no valida");
@@ -219,6 +242,7 @@ function ftable_clients() {
             },
         });
     });
+
     // End
 }
 // TODO ------------------------- [ VISITAS ] -------------------------
@@ -262,7 +286,16 @@ function ftable_visits() {
                 $("#mdl_crud_visit .modal-body form [name='add']").hide();
                 $("#mdl_crud_visit .modal-body form [name='update']").show();
                 $("#mdl_crud_visit").modal("show");
+                var fila = $(this).closest("tr");
+                var data = tbl_visits.row(fila).data();
+
+                $("#mdl_crud_visit form [name='id_type']").val(data["id_type"]);
+                $("#mdl_crud_visit form [name='project']").val(data["id_project"]);
+                $("#mdl_crud_visit form [name='id_user']").val(data["id_user"]);
+                $("#mdl_crud_visit form [name='description']").val(data["description"]);
+                $("#mdl_crud_visit form [name='start_date']").val(data["start_date"]);
                 break;
+
             case "show_info":
                 $("#mdl_info_visit .modal-header .modal-title").html(
                     "INFORMACIÓN DE LA VISITA"
@@ -274,7 +307,8 @@ function ftable_visits() {
                 $("#mdl_info_visit form [name='lat']").val(parseFloat(data["lat"]));
                 $("#mdl_info_visit form [name='lng']").val(parseFloat(data["lon"]));
                 $("#mdl_info_visit form [name='type']").val(data["str_type_of_visit"]);
-                $("#mdl_info_visit form [name='project']").val(data["id_project"]);
+                $("#mdl_info_visit form [name='proyect']").val(data["project_folio"]);
+                $("#mdl_info_visit form [name='date']").val(data["start_date"]);
                 $("#mdl_info_visit form [name='visit']").val(data["str_fullname"]);
                 $("#mdl_info_visit form [name='razon']").val(data["description"]);
 
@@ -295,6 +329,25 @@ function ftable_visits() {
             case "refresh_table":
                 tbl_visits.ajax.reload();
                 break;
+            /* case "update":
+                $("#mdl_update_visit .modal-header .modal-title").html("ACTUALIZAR ITA");
+                $("#mdl_update_visit .modal-body form [name='add']").hide();
+                $("#mdl_update_visit .modal-body form [name='update']").show();
+                $("#mdl_update_visit").modal("show");
+                var fila = $(this).closest("tr");
+                var data = tbl_visits.row(fila).data();
+
+                $("#mdl_update_visit form [name='tipo']").val(data["id_type"]);
+                $("#mdl_update_visit form [name='proyect']").val(data["project_folio"]);
+                $("#mdl_update_visit form [name='visit']").val(data["str_fullname"]);
+                $("#mdl_update_visit form [name='razon']").val(data["description"]);
+                $("#mdl_update_visit form [name='razon']").val(data["start_date"]);
+                break; */
+            case "close":
+                $("#mdl_info_visit").modal("hide");
+                cahngeStatus();
+                break;
+
             default:
                 alert("Opcion no valida (tabla visistas)");
         }
@@ -330,8 +383,34 @@ function ftable_visits() {
             },
         });
     });
+
+    $("#mdl_info_visit form").on("submit", function (e) {
+        e.preventDefault();
+        var datos = $(this).serialize();
+        var url = RUTA_URL + "Request/updateStatusVisit/";
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id: id, nuevoEstado: "cerrado" },
+            success: function (response) {
+                $("#mdl_info_visit").modal("hide");
+                if (response.success) {
+                    Swal.fire("Good job!", "Accion exitosa", "success");
+                } else {
+                    Swal.fire("Oops", "fallo algo", "error");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrow) {
+                console.log("hubo un error: ", errorThrow);
+                Swal.fire("Error del servidor", ":(", "error");
+            },
+        });
+    });
+
     // End
 }
+
 // TODO ------------------------- [ PROYECTOS ] -------------------------
 function ftable_projects() {
     var tbl_proyects = new DataTable("#table_proyects", {
@@ -340,7 +419,7 @@ function ftable_projects() {
             dataSrc: "data",
         },
         columns: [
-            { title: "Id", data: "id" },
+            { title: "ID", data: "id" },
             /*{
                 title: "Proyecto",
                 data: "tb_project",
@@ -359,7 +438,7 @@ function ftable_projects() {
             },*/
             { title: "Proyecto", data: "btn_folio" },
             { title: "Cliente", data: "id_client" },
-            { title: "Avance", data: "percentage" },
+            { title: "Avance(%)", data: "percentage" },
             { title: "Documentación", data: "btn_docs" },
             /*  {
                 title: "Documentación",
@@ -484,7 +563,7 @@ function ftable_projects() {
                 $("#mdl_crud_visit .modal-body form [name='update']").hide();
                 $("#mdl_crud_visit").modal("show");
                 break;
-            /*  case "info_stages":
+            case "info_stages":
                 $("#mdl_info_stages .modal-header .modal-title").html(
                     "INFORMACIÓN DEL PROYECTO"
                 );
@@ -492,10 +571,10 @@ function ftable_projects() {
                 $("#mdl_info_stages .modal-body form [name='update']").hide();
                 $("#mdl_info_stages").modal("show");
 
-                var fila = $(this).closest("tr");
+            /* var fila = $(this).closest("tr");
                 var data = tbl_proyects.row(fila).data();
-                $("#mdl_info_stages form [name='id']").val(data["id"]);
-                /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
+                $("#mdl_info_stages form [name='id']").val(data["id"]); */
+            /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
             /*  $("#mdl_info_stages form [name='folio']").val(
                     fila.find("td:eq(1)").text()
                 );
@@ -514,6 +593,7 @@ function ftable_projects() {
             case "refresh_table":
                 tbl_proyects.ajax.reload();
                 break;
+
             default:
                 alert("Opcion no valida");
         }
@@ -604,17 +684,47 @@ function ftable_projects() {
         });
     });
 
-    function marcarCheckbox(checkboxId) {
-        // Obtener el checkbox por su ID
-        var checkbox = document.getElementById(checkboxId);
-
-        // Marcar el checkbox si está desmarcado, y viceversa
-        checkbox.checked = !checkbox.checked;
-    }
-
     // End
 }
 /* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
+
+function fprojects_stages() {
+    var tbl_proyects = new DataTable("#table_proyects", {
+        ajax: {
+            url: RUTA_URL + "Request/getProjects/",
+            dataSrc: "data",
+        },
+        columns: [
+            { title: "Nombre", data: "id" },
+            { title: "Documento", data: "btn_folio" },
+            { title: "Descargar", data: "id_client" },
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        },
+    });
+    $("body").on("click", "[data-option]", function () {
+        let option = $(this).attr("data-option"); // [create / add , update, delete]
+        switch (option) {
+            case "create":
+            case "info_stages":
+                $("#mdl_info_stages .modal-header .modal-title").html(
+                    "INFORMACIÓN DEL PROYECTO"
+                );
+                $("#mdl_info_stages .modal-body form [name='add']").show();
+                $("#mdl_info_stages .modal-body form [name='update']").hide();
+                $("#mdl_info_stages").modal("show");
+                break;
+            case "show_doc":
+                // alert("mijo");
+                $("#mdl_info_documents .modal-header .modal-title").html("DOCUMENTOS");
+                $("#mdl_info_documents .modal-body form [name='show_doc']").show();
+                $("#mdl_info_documents").modal("show");
+                break;
+        }
+    });
+}
+
 // cargar la ubicacion en el mapa
 $("#mdl_crud_proyect form [name='state']").on("change", function () {
     // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");

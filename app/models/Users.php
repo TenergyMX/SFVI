@@ -53,6 +53,28 @@
 			}
 		}
 
+		function updateUser($datos = []) {
+			try {				
+				$resultado = (object) ["success" => false, "error" => ''];
+				$this->db->query("UPDATE users SET email = :email, name = :name, surnames = :surnames, password =:password WHERE id = :id");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':email', $datos["email"]);
+				// $this->db->bind(':role ', $datos["role "]);
+				$this->db->bind(':name', $datos["name"]);
+				$this->db->bind(':surnames', $datos["surnames"]);
+				$this->db->bind(':password', $datos["password"]);
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error = 'No se pudo realizar las modificaciones en la tabla (visit)';
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
+
 		function getUser($datos = []) {
 			$this->db->query("SELECT * FROM user s WHERE s.id = :id");
 			$this->db->bind(':id', $datos["id"]);
@@ -68,7 +90,7 @@
 
 		function getClientsAll() {}
 
-		function updateUser($datos = []) {}
+		/* function updateUser($datos = []) {} */
 
 		function deleteUser($datos = []) {}
 	}

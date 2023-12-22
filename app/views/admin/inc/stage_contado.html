@@ -17,6 +17,7 @@
                         aria-controls="stage"
                         aria-selected="true"
                     >
+                        
                         Etapa 1: Cotización
                     </button>
                 </li>
@@ -58,6 +59,7 @@
                         role="tab"
                         aria-controls="stage"
                         aria-selected="true"
+                        <!-- ?php if (isset($datos["etapas"][3])) { echo "disabled"; } ?>  -->
                     >
                         Etapa 4: Instalación SFV
                     </button>
@@ -72,6 +74,7 @@
                         role="tab"
                         aria-controls="stage"
                         aria-selected="true"
+                        <!-- ?php if (isset($datos["etapas"][4])) { echo "disabled"; } ?> -->
                     >
                         Etapa 5: Instalación medidor CFE
                     </button>
@@ -86,6 +89,7 @@
                         role="tab"
                         aria-controls="stage"
                         aria-selected="true"
+                        <!-- ?php if (isset($datos["etapas"][5])) { echo "disabled"; } ?> -->
                     >
                         Etapa 6: Entrega de proyecto
                     </button>
@@ -183,9 +187,9 @@
                                     >
                                         1.- Recibo CFE
                                     </button>
-                                    <br>
+                                    <br />
 
-                                    <div class="container">
+                                    <div class="" style="width: 32px">
                                         <div class="round">
                                             <input type="checkbox" id="checkbox" />
                                             <label for="checkbox"></label>
@@ -218,7 +222,6 @@
                                     </div>
                                 </div>
                             </div>
-                           
 
                             <div class="accordion-item">
                                 <h2
@@ -235,7 +238,7 @@
                                     >
                                         <span> 2.- Cotización</span>
                                     </button>
-                                    <div class="container">
+                                    <div class="" style="width: 32px">
                                         <div class="round">
                                             <input type="checkbox" id="checkbox1" />
                                             <label for="checkbox1"></label>
@@ -257,220 +260,61 @@
                                                 id="select"
                                                 name="select"
                                             />
-                                        
-                                        </button>
-                                       
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                                name="add"
+                                            >
+                                                Guardar
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- cierra div del col -->
                         </div>
-                        <!-- cierra div del col -->
+                        <!-- cierra div de la seccion 1 -->
                     </div>
-                    <!-- cierra div de la seccion 1 -->
+                    <!-- cierra div del tab-content -->
                 </div>
-                <!-- cierra div del tab-content -->
-            </div>
-            <!-- cierra div del acordeon -->
-            <!-- ------------------ETAPA 2------------------ -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="tab-content m-0">
-                    <div
-                        class="tab-pane fade show 2"
-                        id="stage_2"
-                        role="tabpanel"
-                        aria-labelledby="stage2"
-                    >
-                        <!-- <div class="row"> -->
-                        <div class="col-12 col-lg-12 mb-3">
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header d-flex justify-content-between align-items-center"
-                                    id="panelsStayOpen-headingThree"
-                                >
-                                    <button
-                                        class="accordion-button"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseThree"
-                                        aria-expanded="true"
-                                        aria-controls="panelsStayOpen-collapseThree"
-                                    >
-                                        1.- CSF
-                                    </button>
-                                    <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox2" />
-                                            <label for="checkbox2"></label>
-                                        </div>
-                                    </div>
-                                </h2>
-                                <div
-                                    id="panelsStayOpen-collapseThree"
-                                    class="accordion-collapse collapse show"
-                                    aria-labelledby="panelsStayOpen-headingThree"
-                                >
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">
-                                                Selecciona el documento
-                                            </label>
-                                            <input
-                                                type="file"
-                                                id="select"
-                                                name="select"
-                                            />
-                                        </div>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            name="add"
-                                        >
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header d-flex justify-content-between align-items-center"
-                                    id="panelsStayOpen-headingFour"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFour"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFour"
-                                    >
-                                        2.- INE
-                                    </button>
-                                    <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox3" />
-                                            <label for="checkbox3"></label>
-                                        </div>
-                                    </div>
-                                </h2>
-                                <div
-                                    id="panelsStayOpen-collapseFour"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="panelsStayOpen-headingFour"
-                                >
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">
-                                                Selecciona el documento
-                                            </label>
-                                            <input
-                                                type="file"
-                                                id="select"
-                                                name="select"
-                                            />
-                                        </div>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            name="add"
-                                        >
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header d-flex justify-content-between align-items-center"
-                                    id="panelsStayOpen-headingFive"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFive"
-                                        aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFive"
-                                    >
-                                        3.- Comprobante de pago anticipo
-                                    </button>
-                                   <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox4" />
-                                            <label for="checkbox4"></label>
-                                        </div>
-                                    </div>
-                                </h2>
-                                <div
-                                    id="panelsStayOpen-collapseFive"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="panelsStayOpen-headingFive"
-                                >
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">
-                                                Selecciona el documento
-                                            </label>
-                                            <input
-                                                type="file"
-                                                id="select"
-                                                name="select"
-                                            />
-                                        </div>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            name="add"
-                                        >
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- cierra div del col -->
-                    </div>
-                    <!-- cierra div de la seccion 2 -->
-                </div>
-                <!-- cierra div del tab-content -->
-            </div>
-            <!-- cierra div del acordeon -->
-            <!-- ------------------ETAPA 3------------------ -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="tab-content m-0">
-                    <div
-                        class="tab-pane fade show 3"
-                        id="stage_3"
-                        role="tabpanel"
-                        aria-labelledby="stage3"
-                    >
-                        <div class="row">
-                            <div class="col-8 col-lg-6 mb-3">
+                <!-- cierra div del acordeon -->
+                <!-- ------------------ETAPA 2------------------ -->
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="tab-content m-0">
+                        <div
+                            class="tab-pane fade show 2"
+                            id="stage_2"
+                            role="tabpanel"
+                            aria-labelledby="stage2"
+                        >
+                            <!-- <div class="row"> -->
+                            <div class="col-12 col-lg-12 mb-3">
                                 <div class="accordion-item">
                                     <h2
                                         class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingSix"
+                                        id="panelsStayOpen-headingThree"
                                     >
                                         <button
                                             class="accordion-button"
                                             type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseSix"
+                                            data-bs-target="#panelsStayOpen-collapseThree"
                                             aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseSix"
+                                            aria-controls="panelsStayOpen-collapseThree"
                                         >
-                                            1.- Planos
+                                            1.- CSF
                                         </button>
-                                       <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox5" />
-                                            <label for="checkbox5"></label>
+                                        <div class="" style="width: 32px">
+                                            <div class="round">
+                                                <input type="checkbox" id="checkbox2" />
+                                                <label for="checkbox2"></label>
+                                            </div>
                                         </div>
-                                    </div>
                                     </h2>
                                     <div
-                                        id="panelsStayOpen-collapseSix"
+                                        id="panelsStayOpen-collapseThree"
                                         class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingSix"
+                                        aria-labelledby="panelsStayOpen-headingThree"
                                     >
                                         <div class="accordion-body">
                                             <div class="mb-3">
@@ -496,224 +340,29 @@
                                 <div class="accordion-item">
                                     <h2
                                         class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingSeven"
+                                        id="panelsStayOpen-headingFour"
                                     >
                                         <button
                                             class="accordion-button collapsed"
                                             type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseSeven"
+                                            data-bs-target="#panelsStayOpen-collapseFour"
                                             aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseSeven"
+                                            aria-controls="panelsStayOpen-collapseFour"
                                         >
-                                            2.- Formato de registro
+                                            2.- INE
                                         </button>
-                                        <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox6" />
-                                            <label for="checkbox6"></label>
-                                        </div>
-                                    </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseSeven"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingSeven"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingEight"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseEight"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseEight"
-                                        >
-                                            3.- Lista de materiales y equipo
-                                        </button>
-                                        <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox7" />
-                                            <label for="checkbox7"></label>
-                                        </div>
-                                    </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseEight"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingEight"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingNine1"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseNine1"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseNine1"
-                                        >
-                                            4.- Hojas de contenido y armado
-                                        </button>
-                                        <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox8" />
-                                            <label for="checkbox8"></label>
-                                        </div>
-                                    </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseNine1"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingNine1"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingEight"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseEight"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseEight"
-                                        >
-                                            5.- Checklist suprvisión 1-4
-                                        </button>
-                                        <div class="container">
-                                        <div class="round">
-                                            <input type="checkbox" id="checkbox9" />
-                                            <label for="checkbox9"></label>
-                                        </div>
-                                    </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseEight"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingEight"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- cierra div del col -->
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-heade d-flex justify-content-between align-items-centerr"
-                                        id="panelsStayOpen-headingNine"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseNine"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseNine"
-                                        >
-                                            6.- Formato de trabajo en alturas
-                                        </button>
-                                       <div class="container">
+                                        <div class="" style="width: 32px">
                                             <div class="round">
-                                                <input type="checkbox" id="checkbox10" />
-                                                <label for="checkbox10"></label>
+                                                <input type="checkbox" id="checkbox3" />
+                                                <label for="checkbox3"></label>
                                             </div>
                                         </div>
                                     </h2>
                                     <div
-                                        id="panelsStayOpen-collapseNine"
+                                        id="panelsStayOpen-collapseFour"
                                         class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingNine"
+                                        aria-labelledby="panelsStayOpen-headingFour"
                                     >
                                         <div class="accordion-body">
                                             <div class="mb-3">
@@ -739,125 +388,32 @@
                                 <div class="accordion-item">
                                     <h2
                                         class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTen"
+                                        id="panelsStayOpen-headingFive"
                                     >
                                         <button
                                             class="accordion-button collapsed"
                                             type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTen"
+                                            data-bs-target="#panelsStayOpen-collapseFive"
                                             aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTen"
+                                            aria-controls="panelsStayOpen-collapseFive"
                                         >
-                                            7.- Formato de EPP
+                                            3.- Comprobante de pago (anticipo)
                                         </button>
-                                       <div class="container">
+                                        <div class="" style="width: 32px">
                                             <div class="round">
-                                                <input type="checkbox" id="checkbox11" />
-                                                <label for="checkbox11"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
                                                 <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
+                                                    type="checkbox"
+                                                    id="checkbox4"
                                                 />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingEleven"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseEleven"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseEleven"
-                                        >
-                                            8.- Memoria de cálculo
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox12" />
-                                                <label for="checkbox12"></label>
+                                                <label for="checkbox4"></label>
                                             </div>
                                         </div>
                                     </h2>
                                     <div
-                                        id="panelsStayOpen-collapseEleven"
+                                        id="panelsStayOpen-collapseFive"
                                         class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingEleven"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwelve"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwelve"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwelve"
-                                        >
-                                            9.- Validación compras 100%
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox13" />
-                                                <label for="checkbox13"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwelve"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwelve"
+                                        aria-labelledby="panelsStayOpen-headingFive"
                                     >
                                         <div class="accordion-body">
                                             <div class="mb-3">
@@ -883,902 +439,1131 @@
                             </div>
                             <!-- cierra div del col -->
                         </div>
-                        <!-- cierra div del row -->
+                        <!-- cierra div de la seccion 2 -->
                     </div>
-                    <!-- cierra div de la seccion 3 -->
+                    <!-- cierra div del tab-content -->
                 </div>
-                <!-- cierra div del tab-content -->
-            </div>
-            <!-- cierra div del  acordeon -->
-            <!-- ------------------ETAPA 4------------------ -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="tab-content m-0">
-                    <div
-                        class="tab-pane fade show 4"
-                        id="stage_4"
-                        role="tabpanel"
-                        aria-labelledby="stage4"
-                    >
-                        <div class="row">
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingThirteen"
-                                    >
-                                        <button
-                                            class="accordion-button"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseThirteen"
-                                            aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseThirteen"
+                <!-- cierra div del acordeon -->
+                <!-- ------------------ETAPA 3------------------ -->
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="tab-content m-0">
+                        <div
+                            class="tab-pane fade show 3"
+                            id="stage_3"
+                            role="tabpanel"
+                            aria-labelledby="stage3"
+                        >
+                            <div class="row">
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingSix"
                                         >
-                                            1.- Planos
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox14" />
-                                                <label for="checkbox14"></label>
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseSix"
+                                                aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseSix"
+                                            >
+                                                1.- Planos
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox5"
+                                                    />
+                                                    <label for="checkbox5"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseSix"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby="panelsStayOpen-headingSix"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseThirteen"
-                                        class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingThirteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingSeven"
+                                        >
                                             <button
+                                                class="accordion-button collapsed"
                                                 type="button"
-                                                class="btn btn-primary"
-                                                name="add"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseSeven"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseSeven"
                                             >
-                                                Guardar
+                                                2.- Formato de registro
                                             </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox6"
+                                                    />
+                                                    <label for="checkbox6"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseSeven"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingSeven"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingEight"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseEight"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseEight"
+                                            >
+                                                3.- Lista de materiales y equipo
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox7"
+                                                    />
+                                                    <label for="checkbox7"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseEight"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingEight"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingNine1"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseNine1"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseNine1"
+                                            >
+                                                4.- Hojas de contenido y armado
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox8"
+                                                    />
+                                                    <label for="checkbox8"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseNine1"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingNine1"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingEight"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseEight"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseEight"
+                                            >
+                                                5.- Checklist supervisión 1-4
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox9"
+                                                    />
+                                                    <label for="checkbox9"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseEight"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingEight"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingFourteen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseFourteen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseFourteen"
+                                <!-- cierra div del col -->
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-heade d-flex justify-content-between align-items-centerr"
+                                            id="panelsStayOpen-headingNine"
                                         >
-                                            2.- Formato de registro
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox15" />
-                                                <label for="checkbox15"></label>
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseNine"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseNine"
+                                            >
+                                                6.- Formato de trabajo en alturas
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox10"
+                                                    />
+                                                    <label for="checkbox10"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseNine"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingNine"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseFourteen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingFourteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTen"
+                                        >
                                             <button
+                                                class="accordion-button collapsed"
                                                 type="button"
-                                                class="btn btn-primary"
-                                                name="add"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTen"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTen"
                                             >
-                                                Guardar
+                                                7.- Formato de EPP
                                             </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox11"
+                                                    />
+                                                    <label for="checkbox11"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTen"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTen"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingEleven"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseEleven"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseEleven"
+                                            >
+                                                8.- Memoria de cálculo
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox12"
+                                                    />
+                                                    <label for="checkbox12"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseEleven"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingEleven"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwelve"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwelve"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwelve"
+                                            >
+                                                9.- Validación compras 100%
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox13"
+                                                    />
+                                                    <label for="checkbox13"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwelve"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwelve"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingFifteen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseFifteen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseFifteen"
-                                        >
-                                            3.- Lista de materiales y equipo
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox16" />
-                                                <label for="checkbox16"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseFifteen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingFifteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingSixteen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseSixteen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseSixteen"
-                                        >
-                                            4.- Hojas de contenido y armado
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox17" />
-                                                <label for="checkbox17"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseSixteen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingSixteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- cierra div del col -->
                             </div>
-                            <!-- cierra div del col -->
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingSeventeen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseSeventeen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseSeventeen"
-                                        >
-                                            5.- Checklist suprvisión 1-4
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox18" />
-                                                <label for="checkbox18"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseSeventeen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingSeventeen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingEighteen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseEighteen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseEighteen"
-                                        >
-                                            6.- Formato de trabajo en alturas
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox19" />
-                                                <label for="checkbox19"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseEighteen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingEighteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingNineteen"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseNineteen"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseNineteen"
-                                        >
-                                            7.- Formato de EPP
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox20" />
-                                                <label for="checkbox20"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseNineteen"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingNineteen"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwenty"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwenty"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwenty"
-                                        >
-                                            8.- Memoria de cálculo
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox21" />
-                                                <label for="checkbox21"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwenty"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwenty"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- cierra div del col -->
+                            <!-- cierra div del row -->
                         </div>
-                        <!-- cierra div del display -->
+                        <!-- cierra div de la seccion 3 -->
                     </div>
-                    <!-- cierra div de la seccion 4 -->
+                    <!-- cierra div del tab-content -->
                 </div>
-                <!-- cierra div del tab-content -->
-            </div>
-            <!-- cierra div del  acordeon -->
-            <!-- ------------------ETAPA 5------------------ -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="tab-content m-0">
-                    <div
-                        class="tab-pane fade show 5"
-                        id="stage_5"
-                        role="tabpanel"
-                        aria-labelledby="stage5"
-                    >
-                        <div class="row">
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyOne"
-                                    >
-                                        <button
-                                            class="accordion-button"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyOne"
-                                            aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseTwentyOne"
+                <!-- cierra div del  acordeon -->
+                <!-- ------------------ETAPA 4------------------ -->
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="tab-content m-0">
+                        <div
+                            class="tab-pane fade show 4"
+                            id="stage_4"
+                            role="tabpanel"
+                            aria-labelledby="stage4"
+                        >
+                            <div class="row">
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingThirteen"
                                         >
-                                            1.- Contrato de interconexión
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox22" />
-                                                <label for="checkbox22"></label>
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseThirteen"
+                                                aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseThirteen"
+                                            >
+                                                1.- Reporte fotográfico 
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox14"
+                                                    />
+                                                    <label for="checkbox14"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseThirteen"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby="panelsStayOpen-headingThirteen"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyOne"
-                                        class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingTwentyOne"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- cierra div del col -->
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingFourteen"
+                                        >
                                             <button
+                                                class="accordion-button collapsed"
                                                 type="button"
-                                                class="btn btn-primary"
-                                                name="add"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseFourteen"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseFourteen"
                                             >
-                                                Guardar
+                                                2.- Prueba de funcionamiento 
                                             </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox15"
+                                                    />
+                                                    <label for="checkbox15"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseFourteen"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingFourteen"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyTwo"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyTwo"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentyTwo"
-                                        >
-                                            2.- Contrato de contraprestación
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox23" />
-                                                <label for="checkbox23"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyTwo"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentyTwo"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- cierra div del col -->
                             </div>
-                            <!-- cierra div del col -->
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyThree"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed flex-grow-1"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyThree"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentyThree"
-                                        >
-                                            3.- Anexo 2
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox24" />
-                                                <label for="checkbox24"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyThree"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentyThree"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyFour"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyFour"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentyFour"
-                                        >
-                                            4.- Foto medidor bidireccional
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox25" />
-                                                <label for="checkbox25"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyFour"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentyFour"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- cierra div del col -->
+                            <!-- cierra div del display -->
                         </div>
-                        <!-- cierra div del row -->
+                        <!-- cierra div de la seccion 4 -->
                     </div>
-                    <!-- cierra div de la seccion 5 -->
+                    <!-- cierra div del tab-content -->
                 </div>
-                <!-- cierra div del tab-content -->
-            </div>
-            <!-- cierra div del  acordeon -->
-            <!-- ------------------ETAPA 6------------------ -->
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="tab-content m-0">
-                    <div
-                        class="tab-pane fade show 6"
-                        id="stage_6"
-                        role="tabpanel"
-                        aria-labelledby="stage6"
-                    >
-                        <div class="row">
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyFive"
-                                    >
-                                        <button
-                                            class="accordion-button"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyFive"
-                                            aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseTwentyFive"
+                <!-- cierra div del  acordeon -->
+                <!-- ------------------ETAPA 5------------------ -->
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="tab-content m-0">
+                        <div
+                            class="tab-pane fade show 5"
+                            id="stage_5"
+                            role="tabpanel"
+                            aria-labelledby="stage5"
+                        >
+                            <div class="row">
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyOne"
                                         >
-                                            1.- Conprobante de pago finiquito
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox26" />
-                                                <label for="checkbox26"></label>
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyOne"
+                                                aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseTwentyOne"
+                                            >
+                                                1.- Contrato de interconexión
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox22"
+                                                    />
+                                                    <label for="checkbox22"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyOne"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby="panelsStayOpen-headingTwentyOne"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyFive"
-                                        class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingTwentyFive"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyTwo"
+                                        >
                                             <button
+                                                class="accordion-button collapsed"
                                                 type="button"
-                                                class="btn btn-primary"
-                                                name="add"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyTwo"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentyTwo"
                                             >
-                                                Guardar
+                                                2.- Contrato de contraprestación
                                             </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox23"
+                                                    />
+                                                    <label for="checkbox23"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyTwo"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentyTwo"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentySix"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentySix"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentySix"
+                                <!-- cierra div del col -->
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyThree"
                                         >
-                                            2.- Liberación de pago Tenergy
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox27" />
-                                                <label for="checkbox27"></label>
+                                            <button
+                                                class="accordion-button collapsed flex-grow-1"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyThree"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentyThree"
+                                            >
+                                                3.- Anexo 2
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox24"
+                                                    />
+                                                    <label for="checkbox24"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyThree"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentyThree"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
                                             </div>
                                         </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentySix"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentySix"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyFour"
+                                        >
                                             <button
+                                                class="accordion-button collapsed"
                                                 type="button"
-                                                class="btn btn-primary"
-                                                name="add"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyFour"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentyFour"
                                             >
-                                                Guardar
+                                                4.- Foto medidor bidireccional
                                             </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox25"
+                                                    />
+                                                    <label for="checkbox25"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyFour"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentyFour"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentySeven"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentySeven"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentySeven"
-                                        >
-                                            3.- Pruebas de funcionamiento
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox28" />
-                                                <label for="checkbox28"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentySeven"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentySeven"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- cierra div del col -->
                             </div>
-                            <!-- cierra div del col -->
-                            <div class="col-8 col-lg-6 mb-3">
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyEight"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyEight"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentyEight"
-                                        >
-                                            4.- Operación y mantenimiento SFVI
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox29" />
-                                                <label for="checkbox29"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyEight"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentyEight"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2
-                                        class="accordion-header d-flex justify-content-between align-items-center"
-                                        id="panelsStayOpen-headingTwentyNine"
-                                    >
-                                        <button
-                                            class="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseTwentyNine"
-                                            aria-expanded="false"
-                                            aria-controls="panelsStayOpen-collapseTwentyNine"
-                                        >
-                                            5.- Garantías
-                                        </button>
-                                        <div class="container">
-                                            <div class="round">
-                                                <input type="checkbox" id="checkbox30" />
-                                                <label for="checkbox30"></label>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div
-                                        id="panelsStayOpen-collapseTwentyNine"
-                                        class="accordion-collapse collapse"
-                                        aria-labelledby="panelsStayOpen-headingTwentyNine"
-                                    >
-                                        <div class="accordion-body">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">
-                                                    Selecciona el documento
-                                                </label>
-                                                <input
-                                                    type="file"
-                                                    id="select"
-                                                    name="select"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                name="add"
-                                            >
-                                                Guardar
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- cierra div del col -->
+                            <!-- cierra div del row -->
                         </div>
-                        <!-- cierra div del row -->
+                        <!-- cierra div de la seccion 5 -->
                     </div>
-                    <!-- cierra div de la seccion 5 -->
+                    <!-- cierra div del tab-content -->
                 </div>
-                <!-- cierra div del tab-content -->
+                <!-- cierra div del  acordeon -->
+                <!-- ------------------ETAPA 6------------------ -->
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="tab-content m-0">
+                        <div
+                            class="tab-pane fade show 6"
+                            id="stage_6"
+                            role="tabpanel"
+                            aria-labelledby="stage6"
+                        >
+                            <div class="row">
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyFive"
+                                        >
+                                            <button
+                                                class="accordion-button"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyFive"
+                                                aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseTwentyFive"
+                                            >
+                                                1.- Comprobante de pago finiquito
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox26"
+                                                        <?php if (isset($datos["etapas"][0]->recibo_CFE)) { echo "checked"; } ?>
+                                                    />
+                                                    <label for="checkbox26"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyFive"
+                                            class="accordion-collapse collapse show"
+                                            aria-labelledby="panelsStayOpen-headingTwentyFive"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentySix"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentySix"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentySix"
+                                            >
+                                                2.- Liberación de pago (Tenergy)
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox27"
+                                                    />
+                                                    <label for="checkbox27"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentySix"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentySix"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentySeven"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentySeven"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentySeven"
+                                            >
+                                                3.- Pruebas de funcionamiento
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox28"
+                                                    />
+                                                    <label for="checkbox28"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentySeven"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentySeven"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- cierra div del col -->
+                                <div class="col-8 col-lg-6 mb-3">
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyEight"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyEight"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentyEight"
+                                            >
+                                                4.- Operación y mantenimiento SFVI
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox29"
+                                                    />
+                                                    <label for="checkbox29"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyEight"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentyEight"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2
+                                            class="accordion-header d-flex justify-content-between align-items-center"
+                                            id="panelsStayOpen-headingTwentyNine"
+                                        >
+                                            <button
+                                                class="accordion-button collapsed"
+                                                type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseTwentyNine"
+                                                aria-expanded="false"
+                                                aria-controls="panelsStayOpen-collapseTwentyNine"
+                                            >
+                                                5.- Garantías
+                                            </button>
+                                            <div class="" style="width: 32px">
+                                                <div class="round">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="checkbox30"
+                                                    />
+                                                    <label for="checkbox30"></label>
+                                                </div>
+                                            </div>
+                                        </h2>
+                                        <div
+                                            id="panelsStayOpen-collapseTwentyNine"
+                                            class="accordion-collapse collapse"
+                                            aria-labelledby="panelsStayOpen-headingTwentyNine"
+                                        >
+                                            <div class="accordion-body">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">
+                                                        Selecciona el documento
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="select"
+                                                        name="select"
+                                                    />
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    name="add"
+                                                >
+                                                    Guardar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- cierra div del col -->
+                            </div>
+                            <!-- cierra div del row -->
+                        </div>
+                        <!-- cierra div de la seccion 5 -->
+                    </div>
+                    <!-- cierra div del tab-content -->
+                </div>
+                <!-- cierra div del  acordeon -->
             </div>
-            <!-- cierra div del  acordeon -->
+            <!-- cierra div del card -->
         </div>
-        <!-- cierra div del card -->
     </div>
 </div>
