@@ -36,10 +36,22 @@
 				$this->response->success = true;
                 $this->response->targetFile = $targetFile;
 			} else {
-				$this->response["error"] = "Oops, ocurrio un error al guardar el archivo";
+				$this->response->success = false;
+				$this->response->error = "Oops, ocurrio un error al guardar el archivo";
             }
-
+            $this->response->data['targetFile'] = $targetFile;
+            $this->response->data["file_name"] = $newFileName;
+            // Enviar respuesta
             return $this->response;
+        }
+
+        function promise_saveFile($file, $url = '', $new_name = '') {
+            return new SimplePromise(function ($resolve, $reject) use ($file, $url, $new_name) {
+                // usleep(2000000);
+                $this->saveFile($file, $url, $new_name);
+                $jsonResult = json_encode(['message' => 'Operación exitosa']);
+                $resolve($jsonResult);
+            });
         }
 	}
 ?>

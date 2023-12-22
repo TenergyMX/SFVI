@@ -6,51 +6,89 @@
 			$this->db = new Database;
 		}
 		
-		function addProyect($datos = []) {
+		function addProject($datos = []) {
 			try {
 				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("INSERT INTO
 					project(
 						folio,
 						id_client,
-						quotations,
-						quotations_num,
+						id_category,
+						quotation_num,
 						street,
 						colony,
 						municipality,
 						state,
 						start_date,
+						percentage,
 						lat,
-						lon
+						lon,
+						panels,
+						module_capacity,
+						efficiency
 					) VALUES(
 						:folio,
 						:id_client,
-						:quotation,
+						:id_category,
 						:quotation_num,
 						:street,
 						:colony,
 						:municipality,
 						:state,
 						:start_date,
+						:percentage,
 						:lat,
-						:lng
+						:lng,
+						:panels,
+						:module_capacity,
+						:efficiency
 					)
 				");
 				$this->db->bind(':folio', $datos["folio"]);
 				$this->db->bind(':id_client', $datos["id_client"]);
-				$this->db->bind(':quotation', $datos["quotation"]);
+				$this->db->bind(':id_category', $datos["id_category"]);
+				// $this->db->bind(':quotation', $datos["quotation"]);
 				$this->db->bind(':quotation_num', $datos["quotation_num"]);
 				$this->db->bind(':street', $datos["street"]);
 				$this->db->bind(':colony', $datos["colony"]);
 				$this->db->bind(':municipality', $datos["municipality"]);
 				$this->db->bind(':state', $datos["state"]);
 				$this->db->bind(':start_date', $datos["start_date"]);
+				$this->db->bind(':percentage', $datos["percentage"]);
 				$this->db->bind(':lat', $datos["lat"]);
 				$this->db->bind(':lng', $datos["lng"]);
+				$this->db->bind(':panels', $datos["panels"]);
+				$this->db->bind(':module_capacity', $datos["module_capacity"]);
+				$this->db->bind(':efficiency', $datos["efficiency"]);
+
+				// Ejecutamos y retornamos el id
+				$id = $this->db->execute2();
+				if ($id) {
+					$resultado->success = true;
+					$resultado->id = $id;
+				} else {
+					$resultado->error = 'No se pudo insertar los datos en la tabla (project)';
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
+
+		function addProjectquotation($datos = []) {
+			try {
+				$resultado = (object) ["success" => false, "error" => ''];
+				$this->db->query("UPDATE project SET
+					quotation = :quotation
+					WHERE id = :id
+				");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':quotation', $datos["quotation"]);
 				if ($this->db->execute()) {
 					$resultado->success = true;
 				} else {
-					$resultado->error = 'No se pudo insertar los datos en la tabla (project)';
+					$resultado->error = 'Oops (project)';
 				}
 				return $resultado;
 			} catch (Exception $e) {
@@ -91,6 +129,8 @@
 				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("UPDATE project SET
 					folio = :folio,
+					id_client = :id_client,
+					id_category = :id_category,
 					id_fide = :id_fide,
 					street = :street,
 					colony = :colony,
@@ -103,6 +143,8 @@
 				");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':folio', $datos["folio"]);
+				$this->db->bind(':id_client', $datos["id_client"]);
+				$this->db->bind(':id_category', $datos["id_category"]);
 				$this->db->bind(':id_fide', $datos["id_fide"]);
 				$this->db->bind(':street', $datos["street"]);
 				$this->db->bind(':colony', $datos["colony"]);
@@ -236,13 +278,24 @@
 			return $this->db->registro();
 		}
 
-
-/* 		function getClients() {}
-
-		function getClientsAll() {}
-
-		function updateUser($datos = []) {}
-
-		function deleteUser($datos = []) {} */
+		// No usar esta función de ser necesaria
+		function updateDataInTable($datos = []) {
+			try {				
+				$resultado = (object) ["success" => false, "error" => ''];
+				$this->db->query("UPDATE {$datos["table"]} SET
+					{$datos["data_key"]} = :dato
+					WHERE id = :id
+				");
+				$this->db->bind(':id', 1);
+				$this->db->bind(':dato', $datos["data_value"]);
+				if ($this->db->execute()) {
+					$resultado = (object) ["success" => true];
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
 	}
 ?>

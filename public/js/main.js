@@ -10,6 +10,11 @@ $(".dropdown-style-switcher .dropdown-item").on("click", function () {
     style_mode(theme);
 });
 
+$(".progress-label").on("click", function () {
+    $(".step-wizard-item").removeClass("current-item");
+    $(this).closest(".step-wizard-item").addClass("current-item");
+});
+
 function style_mode(style = "light") {
     const $themeCss = $(".js-stylesheet");
     const $body = $("body");

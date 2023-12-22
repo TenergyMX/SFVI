@@ -74,13 +74,12 @@
                                     <label for="" class="form-label">
                                         Tipo de proyecto
                                     </label>
-                                    <select name="tipo" id="" class="form-select">
+                                    <select name="id_category" id="" class="form-select">
                                         <option value="" selected disabled>
                                             Seleccione el tipo de proyecto
                                         </option>
-                                        <option value="1">Domestico</option>
-                                        <option value="3">Comercial</option>
-                                        <option value="4">Indutrial</option>
+                                        <option value="1">FIDE</option>
+                                        <option value="2">Contado</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -146,7 +145,7 @@
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label"> Id de FIDE </label>
+                                    <label for="" class="form-label"> ID de FIDE </label>
                                     <input
                                         name="id_fide"
                                         type="number"
@@ -157,7 +156,7 @@
                                 </div>
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
-                                        TB de proyecto
+                                        Nom. de proyecto
                                     </label>
                                     <input
                                         type="text"
@@ -175,18 +174,6 @@
                                         class="form-control"
                                         aria-describedby="charge"
                                         placeholder="Carga (KW)"
-                                    />
-                                </div>
-                                <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label">
-                                        Num. Paneles
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="panels"
-                                        class="form-control"
-                                        aria-describedby="panels"
-                                        placeholder="Num. Paneles"
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -211,6 +198,18 @@
                                         class="form-control"
                                         aria-describedby="efficiency"
                                         placeholder="Paneles"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Num. Paneles
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="panels"
+                                        class="form-control"
+                                        aria-describedby="panels"
+                                        placeholder="Num. Paneles"
                                     />
                                 </div>
                             </div>
@@ -313,7 +312,7 @@
                             <!-- map -->
                             <div class="container-map">
                                 <div class="map"></div>
-                                <small class="text-muted text-center d-block mt-2">
+                                <small class="text-danger text-center d-block mt-2">
                                     Mueva el marcador en la ubicación del proyecto
                                 </small>
                             </div>

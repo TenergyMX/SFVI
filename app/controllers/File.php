@@ -14,7 +14,7 @@
 		function index() {}
 
         function getProjectFile($id = 0, $fileName = 'quotation.pdf') {
-            $project = $this->modeloProject->getProject(["id" => $id]);
+            $project = $this->modeloProject->getProject($id);
 
             if (!$project) {
                 $this->response->success = false;

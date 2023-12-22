@@ -21,38 +21,26 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="card-header">
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary me-1"
+                                            title="Agregar Proyecto"
+                                            data-option="create"
+                                        >
+                                            <i class="fa-regular fa-plus me-1"></i>
+                                            Agregar Proyecto
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-info"
+                                            title="Refrescar tabla"
+                                            data-option="refresh_table"
+                                        >
+                                            <i class="fa-regular fa-arrows-rotate"></i>
+                                        </button>
+                                    </div>
                                     <div class="card-body">
-                                        <div class="mb-3">
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                data-option="create"
-                                            >
-                                                <i class="fa-regular fa-plus me-1"></i>
-                                                Agregar Proyecto
-                                            </button>
-                                            
-                                        </div>
-                                        <div>
-                                                <label for="tipoProyecto">Seleccione Tipo de Proyecto:</label>
-                                            <select id="tipoProyecto">
-                                            <option value="1">Doméstico</option>
-                                            <option value="3">Comercial</option>
-                                            <option value="4">Industrial</option>
-                                            </select>
-                                        </div>
-                                        <div id="proyectosContainer">
-                                            <!-- Aquí se cargarán los proyectos -->
-                                            <button
-                                                type="button"
-                                                class="btn btn-info"
-                                                title="Refrescar tabla"
-                                                data-option="refresh_table"
-                                            >
-                                                <i class="fa-regular fa-arrows-rotate me-1"></i>
-                                                Refrescar tabla
-                                            </button>
-                                        </div>
                                         <div class="table-responsive">
                                             <table
                                                 class="table w-100 table-center"

@@ -117,3 +117,30 @@ table.table-center tfoot td {
 .round input[type="checkbox2"]:checked + label:after {
     opacity: 1;
 }
+
+.icon-checkbox {
+    position: absolute;
+    top: 50%;
+    right: 35px;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-checkbox i {
+    visibility: hidden;
+    font-size: 20px;
+    color: #359e3f;
+}
+.icon-checkbox.active i,
+.icon-checkbox.checked i {
+    visibility: initial;
+}
