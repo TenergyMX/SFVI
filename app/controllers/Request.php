@@ -73,12 +73,35 @@
 
 		function getUsers() {
 			$this->response['data'] = $this->modeloUser->getUsers();
+			foreach ($this->response['data'] as &$value) {
+				$btn= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				$value->btn_update = $btn;
+			}
+			
 			$this->response['success'] = true;
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
 			exit;
 		}
-		/* ------------------------------------ CLIENTES ------------------------------ */
+
+		function updateUser(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['email']  = isset($_POST['email']) ? $_POST['email'] : '';
+			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : '';
+			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
+			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
+			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';
+			
+
+			$response = $this->modeloUser->updateUser($datos);
+			$this->response['success'] = $response->success;
+			if ($response->error) {$this->response['error'] = $response->error; }
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+		// ------------------------------------ CLIENTES ------------------------------ 
 		function addClient() {
 			$datos['type'] = isset($_POST['type']) ? $_POST['type'] : 1;
 			$datos['name'] = isset($_POST['name']) ? $_POST['name'] : '';
@@ -100,7 +123,33 @@
 
 		function getClients() {
 			$this->response['data'] = $this->modeloClient->getClients();
+			foreach ($this->response['data'] as &$value) {
+				$btn= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				$value->btn_update = $btn;
+			}
+
 			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function updateClient(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['type_of_client']  = isset($_POST['type_of_client']) ? $_POST['type_of_client'] : '';
+			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
+			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
+			$datos['state']  = isset($_POST['state']) ? $_POST['state'] : '';
+			$datos['municipality']  = isset($_POST['municipality']) ? $_POST['municipality'] : '';
+			$datos['email']  = isset($_POST['email']) ? $_POST['email'] : '';
+			$datos['phone']  = isset($_POST['phone']) ? $_POST['phone'] : '';
+			$datos['rfc']  = isset($_POST['rfc']) ? $_POST['rfc'] : '';
+			
+
+			$response = $this->modeloClient->updateClient($datos);
+			$this->response['success'] = $response->success;
+			if ($response->error) {$this->response['error'] = $response->error; }
+
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
 			exit;
@@ -128,7 +177,10 @@
 			foreach ($this->response['data'] as &$value) {
 				$btn = '<button class="btn btn-success me-1" name="info" data-option="show_info"><i class="fa-light fa-circle-info"></i></button>';
 				$btn .= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				// $btn = '<button class="btn btn-success me-1" name="add" data-option="add"><i class="fa-light fa-circle-info"></i></button>';
 				$value->btn_action = $btn;
+				// $value->btn_close = $btn_close;
+				
 			}
 
 			$this->response['success'] = true;
@@ -139,13 +191,30 @@
 
 		function updateVisit(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : '';
-			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : '';
 			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
+			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
+			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : '';
+			$datos['id_status']  = isset($_POST['id_status']) ? $_POST['id_status'] : '';
+			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : '';
+			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+			$datos['end_date']  = isset($_POST['end_date']) ? $_POST['end_date'] : '';
 			
 
 			$response = $this->modeloVisit->updateVisit($datos);
+			$this->response['success'] = $response->success;
+			if ($response->error) {$this->response['error'] = $response->error; }
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function updateStatusVisit(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['id_status']  = isset($_POST['id_status']) ? $_POST['id_status'] : '';
+
+			$response = $this->modeloVisit->updateStatusVisit($datos);
 			$this->response['success'] = $response->success;
 			if ($response->error) {$this->response['error'] = $response->error; }
 
@@ -337,6 +406,24 @@
 			echo json_encode($this->response);
 			exit;
 		}
+
+		function getDocuments() {
+			$this->response['data'] = $this->modeloProject->getProjects();
+			foreach ($this->response['data'] as &$value) {
+				$btn_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_dcs"><i class="fa-light fa-circle-info"></i></button>';
+				$btn_visit = '<button class="btn btn-success me-1" name="visit" data-option="show_visits"><i class="fa-light fa-circle-info"></i></button>';
+				$btn = '<button class="btn btn-success me-1" name="info" data-option="add"><i class="fa-light fa-circle-info"></i></button>';
+				$btn_update= '<button class="btn btn-primary" name="update" data-option="update_project"><i class="fa-light fa-pen"></i></button>';
+				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
+				$value->btn_action_docs = $btn_docs; 
+			}
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+		
+ 
 		
 	} # fin de las vistas
 ?>

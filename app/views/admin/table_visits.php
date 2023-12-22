@@ -35,7 +35,7 @@
                                                 data-option="refresh_table"
                                             >
                                                 <i class="fa-regular fa-arrows-rotate me-1"></i>
-                                                Refrescar tabla
+                                                
                                             </button>
                                         </div>
                                         <div class="table-responsive">

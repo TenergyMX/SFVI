@@ -50,12 +50,12 @@
                                 aria-labelledby="project1"
                             >
                                 <div class="row">
-                                    <div class="col-12 col-lg-5 md-3">
+                                    <div class="col-12 col-lg-6 md-1">
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Tipo de venta:
                                             </label>
-                                            <span 
+                                            <span style=" margin-left: 37 px;"
                                                 ><?php echo $datos['proyecto']->id_category;
                                                 ?></span
                                             >
@@ -64,7 +64,7 @@
                                             <label for="" class="form-label">
                                                 Tipo de proyecto:
                                             </label>
-                                            <span 
+                                            <span style=" margin-left: 15px;"
                                                 ><?php echo $datos['proyecto']->id_subcategory;
                                                 ?></span
                                             >
@@ -74,28 +74,28 @@
                                             <label for="" class="form-label">
                                                 Usuario:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->id_user; ?></span>
+                                            <span style=" margin-left: 77px;"><?php echo $datos['proyecto']->id_user; ?></span>
                                            
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Cotización:
                                             </label>
-                                            <span ></span><?php echo $datos['proyecto']->quotations; ?></span>
+                                            <span style=" margin-left: 57px;"><?php echo $datos['proyecto']->quotations; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 No. de cotización:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->quotations_num; ?></span>
+                                            <span style=" margin-left: 10px;"><?php echo $datos['proyecto']->quotations_num; ?></span>
 
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Id de FIDE:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->id_fide; ?></span>
+                                            <span style=" margin-left: 58px;"><?php echo $datos['proyecto']->id_fide; ?></span>
                                             
                                         </div>
                                     
@@ -103,21 +103,21 @@
                                             <label for="" class="form-label">
                                                 TB proyecto:
                                             </label>
-                                            <span><?php echo $datos['proyecto']->tb_project; ?></span>
+                                            <span style=" margin-left: 44px;"><?php echo $datos['proyecto']->tb_project; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Carga (KW):
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->charge; ?></span>
+                                            <span style=" margin-left: 49px;"><?php echo $datos['proyecto']->charge; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Calle:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->street; ?></span>
+                                            <span style=" margin-left: 92px;"><?php echo $datos['proyecto']->street; ?></span>
                                            
                                         </div>
 
@@ -125,73 +125,87 @@
                                             <label for="" class="form-label">
                                                 Colonia:
                                             </label>
-                                            <span><?php echo $datos['proyecto']->colony; ?></span>
+                                            <span style=" margin-left: 75px;"><?php echo $datos['proyecto']->colony; ?></span>
                                             
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-lg-5 mb-3">
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Municipio:
                                             </label>
-                                            <span><?php echo $datos['proyecto']->municipality; ?></span>
+                                            <span style=" margin-left: 60px;"><?php echo $datos['proyecto']->municipality; ?></span>
                                             
                                         </div>
-                                        <div class="mb-1">
+                                        
+                                    </div>
+                                    <div class="col-12 col-lg-5 mb-3">
+                                        
+                                    <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Estado:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->state; ?></span>
+                                            <span style=" margin-left: 77px;"><?php echo $datos['proyecto']->state; ?></span>
                                             
                                         </div>
-                                    
                                         <div class="mb-0">
                                             <label for="" class="form-label">
                                                 Fecha de inicio:
                                             </label>
-                                            <span><?php echo $datos['proyecto']->start_date; ?></span>
+                                            <span style=" margin-left: 15px;"><!-- <?php echo $datos['proyecto']->start_date; ?> -->
+                                            <?php 
+                                            $fechaDesdeDB = $datos["proyecto"]->start_date; $fechaObjeto = new
+                                            DateTime($fechaDesdeDB); $fechaFormateada =
+                                            $fechaObjeto->format("d/m/Y"); ?>
+                                            <?= $fechaFormateada; ?></span>
                                             
                                         </div>
+                                        <br>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
-                                                Fecha estimada de fin:
+                                                <p style="line-height: 1;">Fecha estimada</p>
+                                                <span style="line-height: 1;">de fin:<span>
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->end_date; ?></span>
+                                            <span style=" margin-left: 10px;"><!-- <?php echo $datos['proyecto']->end_date; ?> -->
+                                            <?php 
+                                            $fechaDesdeDB = $datos["proyecto"]->end_date; $fechaObjeto = new
+                                            DateTime($fechaDesdeDB); $fechaFormateada =
+                                            $fechaObjeto->format("d/m/Y"); ?>
+                                            <?= $fechaFormateada; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Estatus:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->status; ?></span>
+                                            <span style=" margin-left: 60px;"><?php echo $datos['proyecto']->status; ?></span>
                                            
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
-                                                Porcentaje de avance:
+                                                <p style="line-height: 1;">Porcentaje </p>
+                                                <span style="line-height: 1;">de avance:</span>
                                             </label>
-                                            <span><?php echo $datos['proyecto']->percentage; ?></span>
+                                            <span style=" margin-left: 80px;"><?php echo $datos['proyecto']->percentage; ?></span>
                                            
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
-                                                Paneles:
+                                                Número de paneles:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->panels; ?></span>
+                                            <span style=" margin-left: 103px;"><?php echo $datos['proyecto']->panels; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
-                                                Modulo de eficiencia:
+                                                Capacidad del panel:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->module_capacity; ?></span>
+                                            <span style=" margin-left: 17px;"><?php echo $datos['proyecto']->module_capacity; ?></span>
                                             
                                         </div>
                                         <div class="mb-1">
                                             <label for="" class="form-label">
-                                                Eficiencia:
+                                                Eficiencia del panel:
                                             </label>
-                                            <span ><?php echo $datos['proyecto']->efficiency; ?></span>
+                                            <span style=" margin-left: 91px;"><?php echo $datos['proyecto']->efficiency; ?></span>
                                             
                                         </div>
                                     </div>
@@ -206,8 +220,68 @@
                                     aria-labelledby="client1"
                                 >
                                     <div class="row">
-                                        <div class="col-12 col-lg-4 mb-3">
+                                        <div class="col-12 col-lg-5 mb-3">
                                         <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Tipo de cliente:
+                                            </label>
+                                            <span style=" margin-left: 10px;"><?php echo $datos['cliente']->type_of_client; ?></span>
+                                           
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Nombre:
+                                            </label>
+                                            <span style=" margin-left: 50px;"><?php echo $datos['cliente']->name; ?></span>
+                                            
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Apellidos:
+                                            </label>
+                                            <span style=" margin-left: 43px;"><?php echo $datos['cliente']->surnames; ?></span>
+
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Estado:
+                                            </label>
+                                            <span style=" margin-left: 61px;"><?php echo $datos['cliente']->state; ?></span>
+                                            
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-lg-5 mb-3">
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Municipio:
+                                            </label>
+                                            <span style=" margin-left: 10px;"><?= $datos['cliente']->municipality; ?></span>
+                                           
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Email:
+                                            </label>
+                                            <span style=" margin-left: 33px;"><?php echo $datos['cliente']->email; ?></span>
+                                            
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                Teléfono:
+                                            </label>
+                                            <span style=" margin-left: 10px;"><?php echo $datos['cliente']->phone; ?></span>
+
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="" class="form-label">
+                                                RFC:
+                                            </label>
+                                            <span style=" margin-left: 40px;"><?php echo $datos['cliente']->rfc; ?></span>
+                                            
+                                        </div>
+                                        </div>
+                                        <div class="col-12 col-lg-4 mb-3">
+                                        <!--  <div class="mb-1">
                                             <label for="" class="form-label">
                                                 Usuario:
                                             </label>
@@ -234,67 +308,7 @@
                                             </label>
                                             <span ><?php echo $datos['proyecto']->id_fide; ?></span>
                                             
-                                        </div>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-3">
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Usuario:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_user; ?></span>
-                                           
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Cotización:
-                                            </label>
-                                            <span ></span><?php echo $datos['proyecto']->quotations; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                No. de cotización:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->quotations_num; ?></span>
-
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Id de FIDE:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_fide; ?></span>
-                                            
-                                        </div>
-                                        </div>
-                                        <div class="col-12 col-lg-4 mb-3">
-                                         <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Usuario:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_user; ?></span>
-                                           
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Cotización:
-                                            </label>
-                                            <span ></span><?php echo $datos['proyecto']->quotations; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                No. de cotización:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->quotations_num; ?></span>
-
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Id de FIDE:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_fide; ?></span>
-                                            
-                                        </div>
+                                        </div> -->
                                               
                                             </div>
                                         </div>

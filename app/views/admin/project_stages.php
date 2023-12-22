@@ -14,6 +14,37 @@
                     <div class="container-fluid">
                         <!-- NUEVO CONTENIDO -->
                         <?php if ($datos['proyecto']->id_category == 1) : ?>
+<<<<<<< HEAD
+=======
+                            <div class="row">
+                                <div class="text-center">
+                                    <div class="text-center fw-bolder fs-3">
+                                        <?php if ($datos["proyecto"]->folio != null ||
+                                        $datos["proyecto"]->folio != '') : ?>
+                                        <p>
+                                            Nombre Proyecto:
+                                            <?php echo $datos["proyecto"]->folio; ?>
+                                        </p>
+                                        <?php else: ?>
+                                        <p>Proyecto no disponible</p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                
+                               <!--  <div class="col-6">
+                                    <h5 class="h1">FIDE</h5>
+                                </div> -->
+                                <div class="col-6 text-start">
+                                    <button
+                                        type="button"
+                                        class="btn btn-success mb-3"
+                                        data-option="create"
+                                    >
+                                        Ver información
+                                    </button>
+                                </div>
+                            </div>
+>>>>>>> origin/maria
                             <?php require_once(RUTA_APP.'/views/admin/inc/stage_fide.html'); ?>
                         <?php elseif ($datos['proyecto']->id_category == 2) : ?>
                             <?php require_once(RUTA_APP.'/views/admin/inc/stage_contado.html'); ?>

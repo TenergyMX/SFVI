@@ -1,5 +1,5 @@
 <?php
-	class Documnets {
+	class Documents {
 		function __construct() {
 			$this->db = new Database;
 		}
@@ -28,6 +28,18 @@
 
 		function getDocuments() {
 			$this->db->query("SELECT * FROM project p");
+			return $this->db->registros();
+		}
+
+		function getProjects() {
+			$this->db->query("SELECT * FROM project p;");
+			return $this->db->registros();
+		}
+			
+
+
+		function getClients() {
+			$this->db->query("SELECT * FROM clients c;");
 			return $this->db->registros();
 		}
 	}
