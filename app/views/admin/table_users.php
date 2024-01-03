@@ -20,10 +20,11 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
+                                                name="add-user"
                                                 class="btn btn-primary"
                                                 data-option="create"
-                                            ><i class="fa-solid fa-user-plus"></i>
-                                                
+                                            >
+                                                <i class="fa-solid fa-user-plus"></i>
                                             </button>
                                         </div>
                                         <div class="table-responsive">

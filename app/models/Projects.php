@@ -11,9 +11,11 @@
 				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("INSERT INTO
 					project(
-						folio,
+						tb,
+						name,
 						id_client,
 						id_category,
+						id_subcategory,
 						quotation_num,
 						street,
 						colony,
@@ -27,9 +29,11 @@
 						module_capacity,
 						efficiency
 					) VALUES(
-						:folio,
+						:tb,
+						:name,
 						:id_client,
 						:id_category,
+						:id_subcategory,
 						:quotation_num,
 						:street,
 						:colony,
@@ -44,9 +48,11 @@
 						:efficiency
 					)
 				");
-				$this->db->bind(':folio', $datos["folio"]);
+				$this->db->bind(':tb', $datos["tb"]);
+				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
+				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
 				// $this->db->bind(':quotation', $datos["quotation"]);
 				$this->db->bind(':quotation_num', $datos["quotation_num"]);
 				$this->db->bind(':street', $datos["street"]);
@@ -98,7 +104,16 @@
 		}
 
 		function getProject($id) {
-			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
+			$this->db->query("SELECT p.*,
+				c.description as str_category,
+				sc.description as str_subcategory
+				FROM project p
+				LEFT JOIN category c
+				ON p.id_category = c.id
+				LEFT JOIN subcategory sc
+				ON p.id_subcategory = sc.id
+				WHERE p.id = :id
+			");
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
 		}
@@ -126,26 +141,35 @@
 
 		function updateProject($datos = []) {
 			try {				
-				$resultado = (object) ["success" => false, "error" => ''];
+				$resultado = (object) ["success" => false];
 				$this->db->query("UPDATE project SET
-					folio = :folio,
+					tb = :tb,
+					name = :name,
 					id_client = :id_client,
 					id_category = :id_category,
+					id_subcategory = :id_subcategory,
 					id_fide = :id_fide,
+					charge = :charge,
 					street = :street,
 					colony = :colony,
 					municipality = :municipality,
 					state = :state,
 					start_date = :start_date,
 					lat = :lat,
-					lon = :lng
+					lon = :lng,
+					panels = :panels,
+					module_capacity = :module_capacity,
+					efficiency = :efficiency
 					WHERE id = :id
 				");
 				$this->db->bind(':id', $datos["id"]);
-				$this->db->bind(':folio', $datos["folio"]);
+				$this->db->bind(':tb', $datos["tb"]);
+				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
+				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
 				$this->db->bind(':id_fide', $datos["id_fide"]);
+				$this->db->bind(':charge', $datos["charge"]);
 				$this->db->bind(':street', $datos["street"]);
 				$this->db->bind(':colony', $datos["colony"]);
 				$this->db->bind(':municipality', $datos["municipality"]);
@@ -153,14 +177,23 @@
 				$this->db->bind(':start_date', $datos["start_date"]);
 				$this->db->bind(':lat', $datos["lat"]);
 				$this->db->bind(':lng', $datos["lng"]);
+				$this->db->bind(':panels', $datos["panels"]);
+				$this->db->bind(':module_capacity', $datos["module_capacity"]);
+				$this->db->bind(':efficiency', $datos["efficiency"]);
 				if ($this->db->execute()) {
-					$resultado = (object) ["success" => true];
+					$resultado->success = true;
+				} else {
+					$resultado->error = [
+						'message' => 'Ocurrio un error al tratar de actualizar los datos en la tabla'
+					];
 				}
-				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
 			}
+			return $resultado;
 		}
 
 		# Obtener la hora sol pico de cada estado
@@ -180,25 +213,36 @@
 			return $this->db->registro();
 		} 
 
-		/* function getClientsDocument(){
-			$this->db->query("SELECT name, surnames FROM clients c INNER JOIN project p ON c.id = p.id_client;");
-			return $this->db->registros();
-		} */
+		// TODO ------------------------- [ CREACIÓN DE ETAPAS ] ----------------------
+		function createStages($id_project = NULL, $category = "FIDE") {
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->beginTransaction();
+				$number_of_stages = strtoupper($category) == 'FIDE' ? 7 : 6;
+				$category = strtolower($category);
 
-		/* function getProyectos() {
-			$this->db->query("SELECT * FROM project p;");
-			return $this->db->registros();
-		} */
+				// Utiliza un bucle para insertar las etapas
+				for ($i = 1; $i <= $number_of_stages; $i++) {
+					$this->db->query("INSERT INTO p_{$category}_stage{$i} (id_project) VALUES (:id_project)");
+					$this->db->bind(':id_project', $id_project);
+					$this->db->execute();
+				}
 
-		/* function getDocumentos($id){
-			$this->db->query("SELECT * FROM project p WHERE p.id = :id");
-			$this->db->bind(':id', $id);
-			return $this->db->registro(); 
-		} */
+				// Confirma la transacción
+				$this->db->commit();
 
+				// Establece el éxito en TRUE
+				$resultado->success = true;
+			} catch (Exception $e) {
+				// Revierte la transacción en caso de error
+				$this->db->rollBack();
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
+			}
+			return $resultado;
+		}
 
-
-		/* -----------------------ETAPAS FIDE------------------------ */
+		// TODO ------------------------- [ ETAPAS FIDE ] -----------------------------
 		function getFideEtapa1($id=0){
 			$this->db->query("SELECT * FROM p_fide_stage1 WHERE id_project=:id;");
 			$this->db->bind(':id', $id);
@@ -241,12 +285,14 @@
 			return $this->db->registro();
 		}
 
-		/* function getFideEtapa8($id=0){
-			$this->db->query("SELECT * FROM p_fide_stage8 WHERE id_project=:id;");
+		function getFideEtapa8($id=0){
+			$this->db->query("SELECT * FROM p_fide_stage8 WHERE id_project = :id;");
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
-		} */
-     /* --------------------------ETAPAS CONTADO---------------------- */
+		}
+
+		// TODO ------------------------- [ ETAPAS CONTADO ] --------------------------
+
 		function getContadoEtapa1($id=0){
 			$this->db->query("SELECT * FROM p_contado_stage1 WHERE id_project=:id;");
 			$this->db->bind(':id', $id);

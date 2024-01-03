@@ -10,9 +10,13 @@ $(".dropdown-style-switcher .dropdown-item").on("click", function () {
     style_mode(theme);
 });
 
-$(".progress-label").on("click", function () {
+$(".step-wizard-item .progress-count").on("click", function (e) {
     $(".step-wizard-item").removeClass("current-item");
     $(this).closest(".step-wizard-item").addClass("current-item");
+    var tabId = $(this).attr("id");
+    if (tabId.includes("-tab")) {
+        $("#" + tabId).tab("show");
+    }
 });
 
 function style_mode(style = "light") {

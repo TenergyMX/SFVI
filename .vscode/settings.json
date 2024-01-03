@@ -9,7 +9,7 @@
 
     "prettier.tabWidth": 4,
     "prettier.trailingComma": "es5",
-    "prettier.printWidth": 90,
+    "prettier.printWidth": 105,
     "better-comments.highlightPlainText": true,
     "editor.inlineSuggest.showToolbar": "onHover"
 }

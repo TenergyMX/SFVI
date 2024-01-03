@@ -3,6 +3,7 @@
 	require_once("config/configurar.php");
 	require_once("helpers/redirect.php");
 	require_once("helpers/mail.php");
+	require_once("helpers/info.php");
 
 	spl_autoload_register(function($nombreClase) {
 		require_once('librerias/' . $nombreClase . '.php');

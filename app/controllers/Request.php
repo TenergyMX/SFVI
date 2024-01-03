@@ -90,12 +90,11 @@
 			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : '';
 			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
 			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
-			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';
-			
+			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';			
 
 			$response = $this->modeloUser->updateUser($datos);
 			$this->response['success'] = $response->success;
-			if ($response->error) {$this->response['error'] = $response->error; }
+			if (isset($response->error)) {$this->response['error'] = $response->error; }
 
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
@@ -227,9 +226,11 @@
 
 		function addProyect(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : 0;
-			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
+			$datos['tb']  = isset($_POST['tb']) ? $_POST['tb'] : NULL;
+			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : 'unknown';
+			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : NULL;
 			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : '';
+			$datos['id_subcategory']  = isset($_POST['id_subcategory']) ? $_POST['id_subcategory'] : NULL;
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
 			$datos['quotation']  = '';
 			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : '';
@@ -250,21 +251,44 @@
 			$response = $this->modeloProject->addProject($datos);
 			$this->response['success'] = $response->success;
 			if ($response->error) {$this->response['error'] = $response->error; }
+			
 
-			# Paso 2: Si se recibe un archivo guardarlo en el servidor.
+			# Paso 2: Crear carpetas del proyecto basado en su categoria
+			if ($this->response['success']) {
+				$datos["id_project"] = $response->id;
+				$arr_subdirectory = getProjectSubfolderNames( $datos['id_category'] );
+				foreach($arr_subdirectory as $subdirectory) {
+					$targetDirectory = trim($datos['name']);
+					$targetDirectory = strtoupper($targetDirectory);
+					$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+					$subdirectory = $targetDirectory . $subdirectory;
+					$this->modeloFile->makeDirectory( $subdirectory );
+				}
+			}
+
+			# paso 3: guardar el archivo de cotizacion en caso de existir
 			if (isset($_FILES['quotation']) && $this->response['success']) {
-				$targetDirectory = trim($datos['folio']);
+				$info = getDatosDeGuardadoDelArchivoDeProyecto( 'cotizacion' );
+				$targetDirectory = trim($datos['name']);
 				$targetDirectory = strtoupper($targetDirectory);
 				$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+				$targetDirectory .= $info['dirs_to_save'][0] . '/';
 				$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
 				if ($r_file->success) {
-					$datos["id"] = $response->id;
-					$datos["quotation"] = $r_file->targetFile;
+					$datos["quotation"] = $r_file->data["file"]["path"];
 					$this->modeloProject->addProjectquotation($datos);
 				} else {
 					$this->response['error'] = "Proyecto guardo, pero hubo un error al guardar el archivo";
 				}
 			}
+
+			# paso 4: Crear un registro vacio de las etapas del proyecto
+			if ($this->response['success'] && $datos['id_category'] == 1) {
+				$this->modeloProject->createStages($datos["id_project"], "FIDE");
+			} elseif ($this->response['success'] && $datos['id_category'] == 2) {
+				$this->modeloProject->createStages($datos["id_project"], "CONTADO");
+			} else {}
+
 			# Respuesta
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
@@ -280,8 +304,12 @@
 					$value->quotation = $filename;
 				}
 				// Botones de acciones
-				$value->btn_folio = "<a href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->folio}</a>";
-				$value->btn_docs = "<a href=\"".RUTA_URL."Project/documents/{$value->id}/\">{$value->folio}</a>";
+				if (isset($value->tb) && $value->tb !== null) {
+					$value->btn_project_code = "<a href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->tb} - {$value->name}</a>";
+				} else {
+					$value->btn_project_code = "<a href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->name}</a>";
+				}
+				$value->btn_docs = "<a href=\"".RUTA_URL."Project/documents/{$value->id}/\">{$value->name}</a>";
 				$value->btn_action_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_docs"><i class="fa-regular fa-folder-open"></i></button>';
 				$value->btn_action_visit = '<button class="btn btn-success me-1" name="add_visit" data-option="add_visit"><i class="fa-solid fa-user-plus"></i></button>';
 				$value->btn_action = '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-solid fa-pen"></i></button>';
@@ -292,7 +320,7 @@
 			exit;
 		}
 
-			function getStages() {
+		function getStages() {
 			$this->response['data'] = $this->modeloProject->getStages();
 			foreach ($this->response['data'] as &$value) {
 				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
@@ -307,9 +335,11 @@
 
 		function updateProject() {
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : '';
+			$datos['tb']  = isset($_POST['tb']) ? $_POST['tb'] : NULL;
+			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : 'unknown';
 			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : NULL;
 			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : NULL;
+			$datos['id_subcategory']  = isset($_POST['id_subcategory']) ? $_POST['id_subcategory'] : NULL;
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : NULL;
 			// $datos['quotation']  = isset($_POST['quotation']) ? $_POST['quotation'] : '';
 			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : 0;
@@ -322,6 +352,10 @@
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
 			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
 			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
+			$datos['panels']  = isset($_POST['panels']) ? $_POST['panels'] : '';
+			$datos['module_capacity']  = isset($_POST['module_capacity']) ? $_POST['module_capacity'] : '';
+			$datos['efficiency']  = isset($_POST['efficiency']) ? $_POST['efficiency'] : '';
+
 			# Ejecutar
 			$response = $this->modeloProject->updateProject($datos);
 			$this->response['success'] = $response->success;
@@ -329,9 +363,11 @@
 
 			# Paso 2: Si se recibe un archivo guardarlo en el servidor.
 			if (isset($_FILES['quotation']) && $this->response['success']) {
-				$targetDirectory = trim($datos['folio']);
+				$info = getDatosDeGuardadoDelArchivoDeProyecto( 'cotizacion' );
+				$targetDirectory = trim($datos['name']);
 				$targetDirectory = strtoupper($targetDirectory);
 				$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+				$targetDirectory .= $info['dirs_to_save'][0] . '/';
 				$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
 				if ($r_file->success) {
 					$datos["quotation"] = $r_file->targetFile;
@@ -340,6 +376,7 @@
 					$this->response['error'] = "Proyecto guardo, pero hubo un error al guardar el archivo";
 				}
 			}
+
 			# Respuesta
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
@@ -348,57 +385,60 @@
 
 		function updateStageData() {
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['folio']  = isset($_POST['folio']) ? $_POST['folio'] : 'unknown';
+			$datos['name_project']  = isset($_POST['name_project']) ? $_POST['name_project'] : 'unknown';
 			$datos['category']  = isset($_POST['category']) ? $_POST['category'] : 'contado';
 			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : '1';
 			$datos['table']  = "p_{$datos['category']}_stage{$datos['stage']}";
 			$datos['data_key'] = "cotizacion";
 			$datos['data_value'] = NULL;
-			$datos['info'] = [
-				'recibo_CFE' => [
-					'new_name' => 'recibo_CFE',
-					'dirs_to_save' => ['INFORMACION_CLIENTE', 'COTIZACION']
-				],
-				'cotizacion' => [
-					'new_name' => 'cotizacion',
-					'dirs_to_save' => ['COTIZACION']
-				]
-			];
 
-			// Detectar si se subio un arhivo
+			// Detectar si se subio un archivo
 			if (!empty($_FILES)) {
 				foreach (array_keys($_FILES) as $nombreCampo) { $datos['data_key'] = $nombreCampo; }
-				$targetDirectory = trim($datos['folio']);
+				$info = getDatosDeGuardadoDelArchivoDeProyecto( $datos['data_key'] );
+				$targetDirectory = trim($datos['name_project']);
 				$targetDirectory = strtoupper($targetDirectory);
 				$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
 
-				$a = $datos['info'][ $datos['data_key'] ]['dirs_to_save'];
-				$new_name = $datos['info'][ $datos['data_key'] ]['new_name'];
-				foreach (['INFORMACION_CLIENTE', 'DOS'] as $data) {
-					$dir = $targetDirectory . $data . '/';
-					// $r_file = $this->modeloFile->saveFile($_FILES["recibo_CFE"], $dir, $new_name);
+				$key =  $datos['data_key'];
+				$new_name = $info['new_name'];
+				$directory_1 = $targetDirectory . $info['dirs_to_save'][0] . '/'; 
+				if ($new_name) {
+					$r_file = $this->modeloFile->saveFile($_FILES[$datos['data_key']], $directory_1, $new_name );
+				} else {
+					$r_file = $this->modeloFile->saveFile($_FILES[$datos['data_key']], $directory_1 );
 				}
-				$file = $_FILES["recibo_CFE"];
-				$file2 = array_merge([], $file);
+				
+				// ! Este archivo se debe de guardar en mas de una carpeta
+				if ( $r_file->success and count( $info['dirs_to_save'] ) > 1 ) {
+					$i = 0;
+					foreach ($info['dirs_to_save'] as $data) {
+						if ($i !== 0) {
+							$directory_x = $targetDirectory . $info['dirs_to_save'][$i] . '/';
+							$this->modeloFile->makeDirectory($directory_x);
+							copy($r_file->data["file"]['path'], $directory_x . $r_file->data["file"]['name']);
+						}
+						$i += 1;
+					}
+				}
 
-				$dir = $targetDirectory . 'INFORMACION_CLIENTE/';
-				$r_file = $this->modeloFile->saveFile($file, $dir, $new_name);
-				$this->response["r_1"] = $r_file;
+				// Estructuramos la respuesta
+				if ($r_file->success) {
+					$datos['data_value'] = $r_file->data["file"]["full_path"];
+					$r2 = $this->modeloProject->updateDataInTable($datos);
+					$this->response['data']['project']['id'] = $datos['id'];
+					$this->response['data']['file']['name'] = $r_file->data["file"]['name'];
+					$this->response['data']['file']['path'] = $r_file->data["file"]['path'];
+					
+					$this->response['success'] = $r2->success;
+					$d = [
+						'new_name' => 'NADA',
+						'dirs_to_save' => ['div_nada']
+					];
+				} else {
+					$this->response['error'] = "Oops, hubo un error al guardar el archivo";
+				}
 
-				$dir = $targetDirectory . 'COTIZACION/';
-				$r_file = $this->modeloFile->saveFile($file2, $dir, $new_name);
-				$this->response["r_2"] = $r_file;
-
-				// $r_file = $this->modeloFile->saveFile($_FILES["{$datos['data_key']}"], $targetDirectory, $datos['data_key'] );
-				// if ($r_file->success) {
-				// 	$datos["data_value"] = $r_file->targetFile;
-				// 	$r2 = $this->modeloProject->updateDataInTable($datos);
-				// 	$this->response['data']['id'] = $datos['id'];
-				// 	$this->response['data']['fileName'] = $r_file->data["file_name"];
-				// 	$this->response['success'] = $r2->success;
-				// } else {
-				// 	$this->response['error'] = "Oops, hubo un error al guardar el archivo";
-				// }
 			}
 			// Responder
 			$this->response['table'] = $datos['table'];

@@ -12,7 +12,13 @@
 
 		function login($datos = []) {
 			try {
-				$this->db->query("SELECT * FROM users s WHERE s.email = :email");
+				$this->db->query("SELECT u.*,
+					r.description AS str_role
+					FROM users u
+					LEFT JOIN role r 
+					ON u.role = r.id;
+					WHERE s.email = :email
+				");
 				$this->db->bind(':email', $datos["email"]);
 				// Ejecucion de la consulta
 				$resultado = $this->db->registro();
@@ -54,25 +60,28 @@
 		}
 
 		function updateUser($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {				
-				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE users SET email = :email, name = :name, surnames = :surnames, password =:password WHERE id = :id");
+				$this->db->query("UPDATE users SET email = :email, role = :role, name = :name, surnames = :surnames WHERE id = :id");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':email', $datos["email"]);
-				// $this->db->bind(':role ', $datos["role "]);
+				$this->db->bind(':role', $datos["role"]);
 				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':surnames', $datos["surnames"]);
-				$this->db->bind(':password', $datos["password"]);
 				if ($this->db->execute()) {
 					$resultado->success = true;
 				} else {
-					$resultado->error = 'No se pudo realizar las modificaciones en la tabla (visit)';
+					$resultado->error['message'] = 'No se pudo realizar las modificaciones en la tabla (visit)';
 				}
+
 				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
 			}
+			return $resultado;
 		}
 
 		function getUser($datos = []) {

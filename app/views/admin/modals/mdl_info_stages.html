@@ -1,323 +1,507 @@
 <div class="modal fade" id="mdl_info_stages" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog ">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">INFORMACIÓN PROYECTO</h1>
+                <h5 class="modal-title">INFORMACIÓN DEL PROYECTO</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    <input name="id" class="form-control" hidden />
-                    <!-- hidden es para ocultar -->
-                    <div class="row">
-                        <ul class="nav nav-underline nav-justified">
-                            <li class="nav-item">
-                                <button
-                                    class="nav-link proyecto"
-                                    id="project1"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#project_1"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="modal"
-                                    aria-selected="true"
-                                >
-                                    Proyecto
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <button
-                                    class="nav-link cliente"
-                                    id="client1"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#client_1"
-                                    type="button"
-                                    role="tab"
-                                    aria-controls="modal"
-                                    aria-selected="true"
-                                >
-                                    Cliente
-                                </button>
-                            </li>
-                        </ul>
-                        <br />
-                        <br />
-                        <!-- -------------------------PROYECTO----------------- -->
-                        <div class="tab-content m-0">
-                            <div
-                                class="tab-pane fade show proyecto"
-                                id="project_1"
-                                role="tabpanel"
-                                aria-labelledby="project1"
+                <!-- form -->
+                <form action="" class="form" onsubmit="return false;">
+                    <!-- navegación -->
+                    <ul class="nav nav-underline nav-justified">
+                        <li class="nav-item">
+                            <button
+                                class="nav-link active"
+                                id="project1"
+                                data-bs-toggle="tab"
+                                data-bs-target="#project_1"
+                                type="button"
+                                role="tab"
+                                aria-controls="modal"
+                                aria-selected="true"
                             >
-                                <div class="row">
-                                    <div class="col-12 col-lg-6 md-1">
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Tipo de venta:
-                                            </label>
-                                            <span style=" margin-left: 37 px;"
-                                                ><?php echo $datos['proyecto']->id_category;
-                                                ?></span
-                                            >
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Tipo de proyecto:
-                                            </label>
-                                            <span style=" margin-left: 15px;"
-                                                ><?php echo $datos['proyecto']->id_subcategory;
-                                                ?></span
-                                            >
-                                        </div>
-
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Usuario:
-                                            </label>
-                                            <span style=" margin-left: 77px;"><?php echo $datos['proyecto']->id_user; ?></span>
-                                           
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Cotización:
-                                            </label>
-                                            <span style=" margin-left: 57px;"><?php echo $datos['proyecto']->quotations; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                No. de cotización:
-                                            </label>
-                                            <span style=" margin-left: 10px;"><?php echo $datos['proyecto']->quotations_num; ?></span>
-
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Id de FIDE:
-                                            </label>
-                                            <span style=" margin-left: 58px;"><?php echo $datos['proyecto']->id_fide; ?></span>
-                                            
-                                        </div>
-                                    
-                                        <div class="mb-2">
-                                            <label for="" class="form-label">
-                                                TB proyecto:
-                                            </label>
-                                            <span style=" margin-left: 44px;"><?php echo $datos['proyecto']->tb_project; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Carga (KW):
-                                            </label>
-                                            <span style=" margin-left: 49px;"><?php echo $datos['proyecto']->charge; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Calle:
-                                            </label>
-                                            <span style=" margin-left: 92px;"><?php echo $datos['proyecto']->street; ?></span>
-                                           
-                                        </div>
-
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Colonia:
-                                            </label>
-                                            <span style=" margin-left: 75px;"><?php echo $datos['proyecto']->colony; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Municipio:
-                                            </label>
-                                            <span style=" margin-left: 60px;"><?php echo $datos['proyecto']->municipality; ?></span>
-                                            
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-12 col-lg-5 mb-3">
-                                        
-                                    <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Estado:
-                                            </label>
-                                            <span style=" margin-left: 77px;"><?php echo $datos['proyecto']->state; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-0">
-                                            <label for="" class="form-label">
-                                                Fecha de inicio:
-                                            </label>
-                                            <span style=" margin-left: 15px;"><!-- <?php echo $datos['proyecto']->start_date; ?> -->
-                                            <?php 
-                                            $fechaDesdeDB = $datos["proyecto"]->start_date; $fechaObjeto = new
-                                            DateTime($fechaDesdeDB); $fechaFormateada =
-                                            $fechaObjeto->format("d/m/Y"); ?>
-                                            <?= $fechaFormateada; ?></span>
-                                            
-                                        </div>
-                                        <br>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                <p style="line-height: 1;">Fecha estimada</p>
-                                                <span style="line-height: 1;">de fin:<span>
-                                            </label>
-                                            <span style=" margin-left: 10px;"><!-- <?php echo $datos['proyecto']->end_date; ?> -->
-                                            <?php 
-                                            $fechaDesdeDB = $datos["proyecto"]->end_date; $fechaObjeto = new
-                                            DateTime($fechaDesdeDB); $fechaFormateada =
-                                            $fechaObjeto->format("d/m/Y"); ?>
-                                            <?= $fechaFormateada; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Estatus:
-                                            </label>
-                                            <span style=" margin-left: 60px;"><?php echo $datos['proyecto']->status; ?></span>
-                                           
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                <p style="line-height: 1;">Porcentaje </p>
-                                                <span style="line-height: 1;">de avance:</span>
-                                            </label>
-                                            <span style=" margin-left: 80px;"><?php echo $datos['proyecto']->percentage; ?></span>
-                                           
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Número de paneles:
-                                            </label>
-                                            <span style=" margin-left: 103px;"><?php echo $datos['proyecto']->panels; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Capacidad del panel:
-                                            </label>
-                                            <span style=" margin-left: 17px;"><?php echo $datos['proyecto']->module_capacity; ?></span>
-                                            
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Eficiencia del panel:
-                                            </label>
-                                            <span style=" margin-left: 91px;"><?php echo $datos['proyecto']->efficiency; ?></span>
-                                            
+                                Proyecto
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button
+                                class="nav-link cliente"
+                                id="client1"
+                                data-bs-toggle="tab"
+                                data-bs-target="#client_1"
+                                type="button"
+                                role="tab"
+                                aria-controls="modal"
+                                aria-selected="true"
+                            >
+                                Cliente
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button
+                                class="nav-link map"
+                                id="map1"
+                                data-bs-toggle="tab"
+                                data-bs-target="#map_1"
+                                type="button"
+                                role="tab"
+                                aria-controls="modal"
+                                aria-selected="true"
+                            >
+                                Mapa
+                            </button>
+                        </li>
+                    </ul>
+                    <!-- contenido -->
+                    <div class="tab-content mt-3">
+                        <!-- proyecto -->
+                        <div
+                            class="tab-pane fade show active"
+                            id="project_1"
+                            role="tabpanel"
+                            aria-labelledby="project1"
+                        >
+                            <div class="row gx-md-2 gx-lg-5">
+                                <div class="col-md-4 d-none">
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value="<?= $datos['proyecto']->id ?>"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Tipo de venta:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                name="str_category"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->str_category ?>"
+                                                readonly
+                                            />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--  ---------------------------CLIENTE----------------------- -->
-                            <div class="tab-content m-0">
-                                <div
-                                    class="tab-pane fade show cliente"
-                                    id="client_1"
-                                    role="tabpanel"
-                                    aria-labelledby="client1"
-                                >
-                                    <div class="row">
-                                        <div class="col-12 col-lg-5 mb-3">
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Tipo de cliente:
-                                            </label>
-                                            <span style=" margin-left: 10px;"><?php echo $datos['cliente']->type_of_client; ?></span>
-                                           
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Tipo de proyecto:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->str_subcategory ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Nombre:
-                                            </label>
-                                            <span style=" margin-left: 50px;"><?php echo $datos['cliente']->name; ?></span>
-                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Usuario:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->id_user ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Apellidos:
-                                            </label>
-                                            <span style=" margin-left: 43px;"><?php echo $datos['cliente']->surnames; ?></span>
-
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            No. de cotización:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext"
+                                                value="<?= $datos['proyecto']->quotation_num ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Estado:
-                                            </label>
-                                            <span style=" margin-left: 61px;"><?php echo $datos['cliente']->state; ?></span>
-                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col-md col-form-label fw-bold">
+                                            ID FIDE:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->id_fide ?>"
+                                                readonly
+                                            />
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold"> TB: </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext"
+                                                value="<?= $datos['proyecto']->tb ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="col-12 col-lg-5 mb-3">
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Municipio:
-                                            </label>
-                                            <span style=" margin-left: 10px;"><?= $datos['cliente']->municipality; ?></span>
-                                           
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Nombre proyecto:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                name="project_name"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->name ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Email:
-                                            </label>
-                                            <span style=" margin-left: 33px;"><?php echo $datos['cliente']->email; ?></span>
-                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Carga (KW):
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext"
+                                                value="<?= $datos['proyecto']->charge ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Teléfono:
-                                            </label>
-                                            <span style=" margin-left: 10px;"><?php echo $datos['cliente']->phone; ?></span>
-
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold"> Calle: </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->street ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                RFC:
-                                            </label>
-                                            <span style=" margin-left: 40px;"><?php echo $datos['cliente']->rfc; ?></span>
-                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Colonia:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->colony ?>"
+                                                readonly
+                                            />
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Municipio:
+                                        </label>
+                                        <div class="col-7 col-lg-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->municipality ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="col-12 col-lg-4 mb-3">
-                                        <!--  <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Usuario:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_user; ?></span>
-                                           
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Estado:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->state ?>"
+                                                readonly
+                                            />
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Cotización:
-                                            </label>
-                                            <span ></span><?php echo $datos['proyecto']->quotations; ?></span>
-                                            
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Fecha Inicio:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <?php if (isset($datos["proyecto"]->start_date) &&
+                                            $datos["proyecto"]->start_date !== null): ?>
+                                            <?php 
+                                            $fechaFormateada = date("Y-m-d", strtotime( $datos["proyecto"]->start_date
+                                            )); ?>
+                                            <input
+                                                type="date"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $fechaFormateada; ?>"
+                                                readonly
+                                            />
+                                            <?php else: ?>
+                                            <input
+                                                type="date"
+                                                class="form-control-plaintext text-truncate"
+                                                readonly
+                                            />
+                                            <?php endif; ?>
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                No. de cotización:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->quotations_num; ?></span>
-
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Fecha Estimada:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <?php if (isset($datos["proyecto"]->end_date) &&
+                                            $datos["proyecto"]->end_date !== null): ?>
+                                            <?php 
+                                            $fechaFormateada = date("Y-m-d", strtotime( $datos["proyecto"]->end_date
+                                            )); ?>
+                                            <input
+                                                type="date"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $fechaFormateada; ?>"
+                                                readonly
+                                            />
+                                            <?php else: ?>
+                                            <input
+                                                type="date"
+                                                class="form-control-plaintext text-truncate"
+                                                readonly
+                                            />
+                                            <?php endif; ?>
                                         </div>
-                                        <div class="mb-1">
-                                            <label for="" class="form-label">
-                                                Id de FIDE:
-                                            </label>
-                                            <span ><?php echo $datos['proyecto']->id_fide; ?></span>
-                                            
-                                        </div> -->
-                                              
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Estatus:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->status ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Porcentaje de avance:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <div class="d-flex align-items-center h-100">
+                                                <div class="w-100">
+                                                    <div class="progress">
+                                                        <div
+                                                            class="progress-bar progress-bar-striped progress-bar-animated"
+                                                            role="progressbar"
+                                                            aria-label="Example with label"
+                                                            style="width: 0%"
+                                                            aria-valuenow="0"
+                                                            aria-valuemin="0"
+                                                            aria-valuemax="100"
+                                                        >
+                                                            0%
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            No. Paneles:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->panels ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Capacidad del modulo:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->module_capacity ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Eficiencia:
+                                        </label>
+                                        <div class="col-7 col-md-6">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['proyecto']->efficiency ?>"
+                                                readonly
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- cliente -->
+                        <div
+                            class="tab-pane fade cliente"
+                            id="client_1"
+                            role="tabpanel"
+                            aria-labelledby="client1"
+                        >
+                            <div class="row gx-lg-5">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Tipo de cliente:
+                                        </label>
+                                        <div class="col-7 col-md-7">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->str_type_of_client; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Nombre:
+                                        </label>
+                                        <div class="col-7 col-md-8">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->name; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            Apellidos:
+                                        </label>
+                                        <div class="col-7 col-md-8">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->surnames; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold"> email: </label>
+                                        <div class="col-7 col-md-8">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->email; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold">
+                                            telefono:
+                                        </label>
+                                        <div class="col-7 col-md-8">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->phone; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="row mb-2">
+                                        <label for="" class="col col-form-label fw-bold"> RFC: </label>
+                                        <div class="col-7 col-md-8">
+                                            <input
+                                                type="text"
+                                                class="form-control-plaintext text-truncate"
+                                                value="<?= $datos['cliente']->rfc; ?>"
+                                                readonly
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- mapa -->
+                        <div class="tab-pane fade" id="map_1" role="tabpanel" aria-labelledby="client1">
+                            <p>Ubicación del proyecto:</p>
+                            <div class="container-map">
+                                <div class="map"></div>
+                            </div>
+                        </div>
+                        <!-- end -->
                     </div>
                 </form>
+                <!-- end form -->
             </div>
         </div>
     </div>

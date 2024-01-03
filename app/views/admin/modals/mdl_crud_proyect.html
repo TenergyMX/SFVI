@@ -60,30 +60,39 @@
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         Tipo de venta
-                                    </label>
-                                    <select name="" id="" class="form-select">
-                                        <option value="" selected disabled>
-                                            Seleccione el tipo de venta
-                                        </option>
-                                        <option value="1">Domestico</option>
-                                        <option value="3">Comercial</option>
-                                        <option value="4">Indutrial</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label">
-                                        Tipo de proyecto
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <select name="id_category" id="" class="form-select">
                                         <option value="" selected disabled>
-                                            Seleccione el tipo de proyecto
+                                            Seleccione el tipo de venta
                                         </option>
                                         <option value="1">FIDE</option>
                                         <option value="2">Contado</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label"> Cliente </label>
+                                    <label for="" class="form-label">
+                                        Tipo de proyecto
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select
+                                        name="id_subcategory"
+                                        id=""
+                                        class="form-select"
+                                    >
+                                        <option value="" selected disabled>
+                                            Seleccione el tipo de proyecto
+                                        </option>
+                                        <option value="1">Domestico</option>
+                                        <option value="2">Comercial</option>
+                                        <option value="3">Indutrial</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Cliente
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <select
                                         name="id_client"
                                         class="form-select"
@@ -103,13 +112,6 @@
                                 </div>
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label"> Cotización </label>
-                                    <!-- <input
-                                        type="file"
-                                        name="quotation"
-                                        class="form-control"
-                                        aria-describedby="quotation"
-                                        placeholder="Cotización"
-                                    /> -->
                                     <div class="row gx-2">
                                         <div class="col">
                                             <input
@@ -135,6 +137,7 @@
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         No. de cotización de proyecto
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <input
                                         name="quotation_num"
@@ -155,19 +158,37 @@
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label">
-                                        Nom. de proyecto
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="folio"
-                                        class="form-control"
-                                        aria-describedby="folio"
-                                        placeholder="TB de proyecto (Opcional)"
-                                    />
+                                    <div class="row gx-2">
+                                        <div class="col-md-4">
+                                            <label for="" class="form-label"> TB </label>
+                                            <input
+                                                type="text"
+                                                name="tb"
+                                                class="form-control"
+                                                aria-describedby="tb"
+                                                placeholder="TB de proyecto (Opcional)"
+                                            />
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="form-label">
+                                                Nombre
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                class="form-control"
+                                                aria-describedby="name"
+                                                placeholder="Nombre del proyecto"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 col-xl-4">
-                                    <label for="" class="form-label"> Carga (KW) </label>
+                                    <label for="" class="form-label">
+                                        Carga (KW)
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <input
                                         type="text"
                                         name="charge"
@@ -179,6 +200,7 @@
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         Capacidad del modulo
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -191,6 +213,7 @@
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         Eficiencia del panel
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <input
                                         type="text"
@@ -203,12 +226,26 @@
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         Num. Paneles
+                                        <span class="text-danger">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         name="panels"
                                         class="form-control"
                                         aria-describedby="panels"
+                                        placeholder="Num. Paneles"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Fecha de inicio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="start_date"
+                                        class="form-control"
+                                        aria-describedby="start_date"
                                         placeholder="Num. Paneles"
                                     />
                                 </div>
@@ -238,7 +275,10 @@
                             <!-- input's -->
                             <div class="row gx-3 gy-2 mb-3">
                                 <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label"> Calle </label>
+                                    <label for="" class="form-label">
+                                        Calle
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <input
                                         type="text"
                                         name="street"
@@ -248,7 +288,10 @@
                                     />
                                 </div>
                                 <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label"> Colonia </label>
+                                    <label for="" class="form-label">
+                                        Colonia
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <input
                                         type="text"
                                         name="colony"
@@ -258,7 +301,10 @@
                                     />
                                 </div>
                                 <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label"> Municipio </label>
+                                    <label for="" class="form-label">
+                                        Municipio
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <input
                                         type="text"
                                         name="municipality"
@@ -268,7 +314,10 @@
                                     />
                                 </div>
                                 <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label"> Estado </label>
+                                    <label for="" class="form-label">
+                                        Estado
+                                        <span class="text-danger">*</span>
+                                    </label>
                                     <select name="state" id="" class="form-select">
                                         <option value="" data-state="" selected disabled>
                                             Seleccione el estado
@@ -316,7 +365,9 @@
                                     Mueva el marcador en la ubicación del proyecto
                                 </small>
                             </div>
-                            <div class="row justify-content-center gx-3 mt-3">
+                            <div
+                                class="row justify-content-center gx-3 gy-3 gy-md-0 mt-3"
+                            >
                                 <div class="col-md-4 col-lg-3">
                                     <button
                                         type="button"

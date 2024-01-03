@@ -1,7 +1,4 @@
-<nav
-    class="navbar navbar-expand navbar-light navbar-bg"
-    style="background-color: #1be521"
->
+<nav class="navbar navbar-expand navbar-light navbar-bg" style="background-color: #1be521">
     <a class="sidebar-toggle js-sidebar-toggle">
         <i class="hamburger align-self-center"></i>
     </a>
@@ -45,7 +42,7 @@
                         <i class="fa-light fa-sun-bright"></i>
                         <span class="ms-1">Light</span>
                     </button>
-                    <button class="dropdown-item" data-theme="dark">
+                    <button class="dropdown-item" data-theme="dark" disabled>
                         <i class="fa-light fa-moon"></i>
                         <span class="ms-1">Dark</span>
                     </button>
@@ -67,9 +64,9 @@
                     aria-label="profile"
                 >
                     <img
-                        src="<?php echo RUTA_URL; ?>img/avatars/avatar.jpg"
+                        src="<?= RUTA_URL; ?>img/avatars/user.png"
                         class="avatar img-fluid rounded"
-                        alt="Charles Hall"
+                        alt="avatar"
                         loading="lazy"
                     />
                 </a>

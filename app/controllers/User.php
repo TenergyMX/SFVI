@@ -9,7 +9,8 @@
 			session_start();
 			$this->modeloUser = $this->modelo('Users');
 			$this->modeloCalc = $this->modelo('Calc');
-			$this->datos['user']['str_role'] = 'Administrador';
+			$this->datos['user']['str_role'] = isset($_SESSION['user']['str_role']) ? $_SESSION['user']['str_role'] : 'Cliente';
+			$this->datos['sidebar-item'] = 'dashboard';
 		}
 
 		function index() {
@@ -37,7 +38,7 @@
 					$_SESSION['session'] = true;
 					$_SESSION['user']['id'] = $response->data->id;
 					$_SESSION['user']['int_rol'] = $response->data->rol;
-					$_SESSION['user']['str_rol'] = $response->data->str_rol;
+					$_SESSION['user']['str_role'] = $response->data->str_role;
 					$_SESSION['user']['name'] = $response->data->name;
 					$_SESSION['user']['surnames'] = $response->data->surnames;
 					$_SESSION['user']['email'] = $response->data->email;
@@ -105,6 +106,7 @@
 
 		function table() {
 			isUserLoggedIn();
+			$this->datos['sidebar-item'] = 'usuarios';
 			if ($this->datos['user']['str_role'] == 'Administrador') {
 				$this->vista("Admin/table_users", $this->datos);
 			} else {
@@ -114,6 +116,7 @@
 
 		function clients() {
 			isUserLoggedIn();
+			$this->datos['sidebar-item'] = 'clientes';
 			if ($this->datos['user']['str_role'] == 'Administrador') {
 				$this->vista("Admin/table_clients", $this->datos);
 			} else {

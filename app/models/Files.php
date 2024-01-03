@@ -7,11 +7,18 @@
 			$this->db = new Database;
             $this->response = (object) ["success" => false];
 		}
-		
+
+        function makeDirectory($path = '') {
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+            return true;
+        }
+
         function saveFile($file, $url, $new_name = '') {
             $originalFileName = pathinfo($file["name"], PATHINFO_FILENAME);
-		    $fileExtension = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
-			
+            $fileExtension = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+
             // Nombre del archivo
             if ($new_name == '') {
                 $newFileName = $originalFileName . "." . $fileExtension;
@@ -21,8 +28,8 @@
 
             // Directorio
             if (!file_exists($url)) {
-            	mkdir($url, 0777, true);
-        	}
+                mkdir($url, 0777, true);
+            }
 
             $targetFile = $url . $newFileName;
 
@@ -35,23 +42,16 @@
             if (move_uploaded_file($file["tmp_name"], $targetFile)) {
 				$this->response->success = true;
                 $this->response->targetFile = $targetFile;
+                unset($this->response->error);
 			} else {
 				$this->response->success = false;
 				$this->response->error = "Oops, ocurrio un error al guardar el archivo";
             }
-            $this->response->data['targetFile'] = $targetFile;
-            $this->response->data["file_name"] = $newFileName;
+            $this->response->data["file"]["full_path"] = $targetFile;
+            $this->response->data["file"]["path"] = str_replace(RUTA_DOCS, "", $targetFile);
+            $this->response->data["file"]["name"] = $newFileName;
             // Enviar respuesta
             return $this->response;
-        }
-
-        function promise_saveFile($file, $url = '', $new_name = '') {
-            return new SimplePromise(function ($resolve, $reject) use ($file, $url, $new_name) {
-                // usleep(2000000);
-                $this->saveFile($file, $url, $new_name);
-                $jsonResult = json_encode(['message' => 'Operación exitosa']);
-                $resolve($jsonResult);
-            });
         }
 	}
 ?>
