@@ -152,6 +152,16 @@
             $datos['stage'][$i]->EPP = $datos['stage'][$i]->EPP != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->EPP) : NULL;
             $datos['stage'][$i]->memoria_calculo = $datos['stage'][$i]->memoria_calculo != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->memoria_calculo) : NULL;
             $datos['stage'][$i]->valid_compras = $datos['stage'][$i]->valid_compras != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->valid_compras) : NULL;
+        } else {
+            // etapa 4
+            $i = 3;
+            $datos['stage'][$i]->contrato_tripartita = $datos['stage'][$i]->contrato_tripartita != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->contrato_tripartita) : NULL;
+            $datos['stage'][$i]->pagare = $datos['stage'][$i]->pagare != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->pagare) : NULL;
+            $datos['stage'][$i]->sol_credito = $datos['stage'][$i]->sol_credito != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->sol_credito) : NULL;
+            $datos['stage'][$i]->insentivo_energetico = $datos['stage'][$i]->insentivo_energetico != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->insentivo_energetico) : NULL;
+            $datos['stage'][$i]->card_comp_OS = $datos['stage'][$i]->card_comp_OS != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->card_comp_OS) : NULL;
+            $datos['stage'][$i]->card_reconocimiento = $datos['stage'][$i]->card_reconocimiento != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->card_reconocimiento) : NULL;
+
         }
 
         // Respuesta
