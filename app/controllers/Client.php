@@ -6,7 +6,7 @@
 		function __construct() {
 			session_start();
 			$this->modeloClient = $this->modelo('Clients');
-			$this->datos['user']['str_rol'] = isset($_SESSION['user']['str_rol']) ? $_SESSION['user']['str_rol'] : 'Cliente';
+			$this->datos['user'] = datos_session_usuario();		
 			$this->datos['sidebar-item'] = 'clientes';
 		}
 

@@ -11,7 +11,7 @@
 			$this->modeloProject = $this->modelo('Projects');
 			$this->modeloClient = $this->modelo('Clients');
 			$this->modeloVisit = $this->modelo('Visits');
-			$this->datos['user']['str_role'] = isset($_SESSION['user']['str_rol']) ? $_SESSION['user']['str_rol'] : 'Cliente';
+			$this->datos['user'] = datos_session_usuario();
 			$this->datos['sidebar-item'] = 'proyectos';
 		}
 

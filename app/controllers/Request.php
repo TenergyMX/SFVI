@@ -3,9 +3,12 @@
 	class Request extends Controlador {
 		private $datos = [];
 		private $response;
-		private $modeloProject;
-		private $modeloFile;
-
+		private $modeloUser,
+			$modeloClient,
+			$modeloVisit,
+			$modeloProject,
+			$modeloFile;
+		
 		// Constructor
 		function __construct() {
 			session_start();
@@ -39,14 +42,12 @@
 				$r = $correo->enviar();
 				if ($r->success) {
 					$this->response['success'] = true;
-					$this->response['msg'] = "Correo enviado para el cambio de contraseña";
 				} else {
-					$this->response['error'] = "Oops.. hubo un error al tratar de enviar el correo";
+					$this->response['error']['message'] = "Oops.. hubo un error al tratar de enviar el correo";
 				}
 			} catch (Exception $e) {
-				$this->response['msg'] = "catch";
-				$this->response['error'] = $e;
-				$this->response['error'] = "Oops.. Error al procesar el correo";
+				$this->response['error']['message'] = $e->getMessage();
+				$this->response['error']['code'] = $e->getCode();
 			}			
 
 			header('Content-Type: application/json');
@@ -87,12 +88,15 @@
 		function updateUser(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
 			$datos['email']  = isset($_POST['email']) ? $_POST['email'] : '';
-			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : '';
+			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : NULL;
 			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
 			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
 			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';			
-
-			$response = $this->modeloUser->updateUser($datos);
+			if (isset($datos['role'])) {
+				$response = $this->modeloUser->updateUser($datos);
+			} else {
+				$response = $this->modeloUser->updateUser_profile($datos);
+			}
 			$this->response['success'] = $response->success;
 			if (isset($response->error)) {$this->response['error'] = $response->error; }
 

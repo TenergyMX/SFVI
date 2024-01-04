@@ -9,6 +9,8 @@ table td {
     font-size: 14px;
 }
 
+/* TODO | Estilos para el Dashboard */
+
 .sidebar-item.active > .sidebar-link {
     background: linear-gradient(
         90deg,
@@ -48,6 +50,16 @@ table.table-center tfoot th,
 table.table-center tfoot td {
     text-align: center;
     vertical-align: middle;
+}
+
+.btn-sfvi-1 {
+    --bs-btn-color: #ff900b;
+    --bs-btn-bg: #012130;
+    --bs-btn-border-color: #012130;
+    --bs-btn-hover-color: #ff900b;
+    --bs-btn-hover-bg: #03364e;
+    --bs-btn-focus-shadow-rgb: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
 }
 
 .card-body .container-map {

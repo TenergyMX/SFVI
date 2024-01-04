@@ -155,6 +155,29 @@ function ftable_users() {
     // End
 }
 
+$("form[name='form-profile']").on("submit", function (e) {
+    e.preventDefault();
+    var datos = $(this).serialize();
+    var url = RUTA_URL + "Request/" + "updateUser/";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: datos,
+        success: function (response) {
+            console.log(response);
+            if (response.success) {
+                Swal.fire("Good job!", "Accion exitosa", "success");
+            } else {
+                Swal.fire("Oops", response.error["message"], "error");
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrow) {
+            console.log(errorThrow);
+            Swal.fire("Error del servidor", errorThrow["message"], "error");
+        },
+    });
+});
+
 // TODO ------------------------- [ CLIENTES ] -------------------------
 function ftable_clients() {
     var tbl_clients = new DataTable("#table_clients", {
