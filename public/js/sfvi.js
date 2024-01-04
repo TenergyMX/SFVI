@@ -798,18 +798,18 @@ $("#mdl_crud_proyect form [name='state']").on("change", function () {
 // TODO ------------------------- [ DOCUMENTOS GENERALES] -------------------------
 function ftable_documents() {
     var tbl_documents = new DataTable("#table_documents", {
-        ajax: {
-            url: RUTA_URL + "Request/getDocumentsGeneral/",
-            dataSrc: "data",
-        },
-        columns: [
-            { title: "Nombre", data: "folio" },
-            { title: "Documento", data: "show_document" },
-            { title: "Descargar", data: "btn_dowloand" },
-        ],
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
-        },
+        // ajax: {
+        //     url: RUTA_URL + "Request/getDocumentsGeneral/",
+        //     dataSrc: "data",
+        // },
+        // columns: [
+        //     { title: "Nombre", data: "folio" },
+        //     { title: "Documento", data: "show_document" },
+        //     { title: "Descargar", data: "btn_dowloand" },
+        // ],
+        // language: {
+        //     url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        // },
     });
 
     $("body").on("click", "[data-option]", function () {
