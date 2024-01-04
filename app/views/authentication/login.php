@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <title>Dashboard</title>
+        <title>Login</title>
     </head>
 
     <body

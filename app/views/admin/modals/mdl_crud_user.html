@@ -19,11 +19,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <select
-                            name="name-clients"
-                            class="form-select"
-                            style="display: none"
-                        ></select>
+                        <select name="name-clients" class="form-select" style="display: none"></select>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label"> Nombre: </label>
@@ -58,7 +54,7 @@
                             placeholder="Correo Electrónico (Opcional)"
                         />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 password">
                         <label for="" class="form-label"> Contraseña: </label>
                         <input
                             type="password"
@@ -70,10 +66,8 @@
                             minlength="8"
                         />
                     </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label" name="confirmation">
-                            Confirmar Contraseña:
-                        </label>
+                    <div class="mb-3 password">
+                        <label for="" class="form-label"> Confirmar Contraseña: </label>
                         <input
                             type="password"
                             class="form-control"
@@ -84,14 +78,15 @@
                             minlength="8"
                         />
                     </div>
+                    <div class="mb-3 password user-resetPassword">
+                        <button type="button" name="" class="btn btn-info" onclick="resetPassword();">
+                            <i class="fa-solid fa-unlock-keyhole me-2"></i>
+                            Solicitar cambio de Contraseña
+                        </button>
+                    </div>
 
                     <div class="botones text-center">
-                        <button
-                            type="submit"
-                            class="btn"
-                            name="add"
-                            style="background-color: #012130"
-                        >
+                        <button type="submit" class="btn" name="add" style="background-color: #012130">
                             <span style="color: #ffb154">Agregar usuario</span>
                         </button>
                         <button

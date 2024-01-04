@@ -12,7 +12,13 @@
 
 		function login($datos = []) {
 			try {
-				$this->db->query("SELECT * FROM users s WHERE s.email = :email");
+				$this->db->query("SELECT u.*,
+					r.description AS str_role
+					FROM users u
+					LEFT JOIN role r 
+					ON u.role = r.id;
+					WHERE s.email = :email
+				");
 				$this->db->bind(':email', $datos["email"]);
 				// Ejecucion de la consulta
 				$resultado = $this->db->registro();
@@ -54,25 +60,51 @@
 		}
 
 		function updateUser($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {				
-				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE users SET email = :email, role = :role, name = :name, surnames = :surnames, password =:password WHERE id = :id");
+				$this->db->query("UPDATE users SET email = :email, role = :role, name = :name, surnames = :surnames WHERE id = :id");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':email', $datos["email"]);
 				$this->db->bind(':role', $datos["role"]);
 				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':surnames', $datos["surnames"]);
-				$this->db->bind(':password', $datos["password"]);
 				if ($this->db->execute()) {
 					$resultado->success = true;
 				} else {
-					$resultado->error = 'No se pudo realizar las modificaciones en la tabla (visit)';
+					$resultado->error['message'] = 'No se pudo realizar las modificaciones en la tabla (visit)';
+				}
+
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
+			}
+			return $resultado;
+		}
+
+		function updateUser_profile($datos = []) {
+			$resultado = (object) ["success" => false];
+			try {				
+				$this->db->query("UPDATE users SET email = :email, name = :name, surnames = :surnames WHERE id = :id");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':email', $datos["email"]);
+				$this->db->bind(':name', $datos["name"]);
+				$this->db->bind(':surnames', $datos["surnames"]);
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = 'No se pudo realizar las modificaciones en la tabla (Usuarios)';
 				}
 				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
 			}
+			return $resultado;
 		}
 
 		function getUser($datos = []) {
@@ -81,17 +113,57 @@
 			return $this->db->registro();
 		}
 
+		function getUser_email($email = 'ejemplo@gmail.com') {
+			$this->db->query("SELECT * FROM users u WHERE u.email = :email");
+			$this->db->bind(':email', $email);
+			return $this->db->registro();
+		}
+
 		function getUsers() {
 			$this->db->query("SELECT u.*, r.description str_role FROM users u LEFT JOIN role r on u.role = r.id;");
 			return $this->db->registros();
 		}
 
-		function getClients() {}
-
-		function getClientsAll() {}
 
 		/* function updateUser($datos = []) {} */
 
 		function deleteUser($datos = []) {}
+
+		function updatePassword($datos = []) {
+			$resultado = (object) ["success" => true];
+			try {
+				$this->db->query("UPDATE users SET
+					password = :password,
+					token = NULL
+					WHERE id = :id
+				");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':password', $datos["password"]);
+				if (!$this->db->execute()) {
+					$resultado->success = false;
+					$resultado->error = "Oops, ocurrio un error";
+				}
+			} catch (Exception $e) {
+				$resultado->success = false;
+				$resultado->error = $e;
+			}
+			return $resultado;
+		}
+		
+		function addtokenUser_email($email = 0) {
+			$resultado = (object) ["success" => true];
+			try {
+				$this->db->query("UPDATE users SET token = SHA2(CONCAT(UUID(), NOW()), 256) WHERE email = :email");
+				$this->db->bind(':email', $email);
+				// Ejecucion de la consulta
+				if ($this->db->execute()) {
+					$resultado->success = false;
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado = (object) ["success" => false, "error" => $e];
+				return $resultado;
+			}
+		}
 	}
 ?>

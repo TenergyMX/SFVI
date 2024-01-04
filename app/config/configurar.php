@@ -15,6 +15,7 @@
 	define('NAME_SITE', 'SFVI');
 
 	// correo
-	define('EMAIL_USERNAME', '');
-	define('EMAIL_PASSWORD', '');
+	define('EMAIL_HOST', 'tenergy.com.mx');
+	define('EMAIL_USERNAME', 'hermes@tenergy.com.mx');
+	define('EMAIL_PASSWORD', 'Energia2023!');
 ?>

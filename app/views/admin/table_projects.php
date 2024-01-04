@@ -21,6 +21,25 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+                                    <div class="card-header">
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary me-1"
+                                            title="Agregar Proyecto"
+                                            data-option="create"
+                                        >
+                                            <i class="fa-regular fa-plus me-1"></i>
+                                            Agregar Proyecto
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-info"
+                                            title="Refrescar tabla"
+                                            data-option="refresh_table"
+                                        >
+                                            <i class="fa-regular fa-arrows-rotate"></i>
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <button

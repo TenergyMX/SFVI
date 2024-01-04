@@ -25,43 +25,48 @@
         </a>
         <div class="sidebar-user d-none"></div>
         <ul class="sidebar-nav">
-            <li class="sidebar-item">
+            <li class="sidebar-header pt-1">Opciones</li>
+            <li class="sidebar-item <?= ($datos['sidebar-item'] == 'dashboard') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>">
                     <i class="fa-solid fa-chart-tree-map"></i>
                     <span class="align-middle" > Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <?php if ($datos['user']['role'] <= 2) : ?>
+            <li class="sidebar-item <?= ($datos['sidebar-item'] == 'usuarios') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>User/table/">
                     <i class="fa-regular fa-users"></i>
                      <span class="align-middle" >Usuarios</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item <?= ($datos['sidebar-item'] == 'clientes') ? 'active' : ''; ?>" >
                 <a
                     class="sidebar-link"
                     href="<?php echo RUTA_URL; ?>Client/ver_clientes/"
                 >
                     <i class="fa-solid fa-user-group-simple"></i> 
                     <span class="align-middle" >Clientes
-                </a>
-            </li>
-            <li class="sidebar-item">
+            <?php endif; ?>
+            
+            <li class="sidebar-item <?= ($datos['sidebar-item'] == 'visitas') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Visit/">
                     <i class="fa-solid fa-house-person-return"></i>
                      <span class="align-middle">Visitas</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item <?= ($datos['sidebar-item'] == 'proyectos') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
                     <i class="fa-duotone fa-solar-panel"></i>
                     <span class="align-middle" >Proyectos</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li
+                class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'documentos') ? 'active' : ''; ?>"
+            >
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Document/">
-                    <i class="fa-solid fa-folder"></i>
-                    <span class="align-middle">Documentos</span>
+                    <i class="fa-solid fa-folder icon-desactive"></i>
+                    <i class="fa-solid fa-folder-open icon-active"></i>
+                    Documentos
                 </a>
             </li>
         </ul>

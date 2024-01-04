@@ -56,7 +56,13 @@
 		
 
 		function getClient($id) {
-			$this->db->query("SELECT * FROM clients s WHERE s.id = :id");
+			$this->db->query("SELECT c.*,
+				tc.description AS str_type_of_client
+				FROM clients c
+				LEFT JOIN type_of_client tc
+				ON C.type_of_client = tc.id
+				WHERE c.id = :id
+			");
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
 		}

@@ -9,7 +9,8 @@
 			session_start();
 			$this->modeloUser = $this->modelo('Users');
 			$this->modeloCalc = $this->modelo('Calc');
-			$this->datos['user']['str_role'] = 'Administrador';
+			$this->datos['user'] = datos_session_usuario();		
+			$this->datos['sidebar-item'] = 'dashboard';
 		}
 
 		function index() {
@@ -36,8 +37,9 @@
 				if ($response->success) {
 					$_SESSION['session'] = true;
 					$_SESSION['user']['id'] = $response->data->id;
-					$_SESSION['user']['int_rol'] = $response->data->rol;
-					$_SESSION['user']['str_rol'] = $response->data->str_rol;
+					$_SESSION['user']['role'] = $response->data->role;
+					$_SESSION['user']['int_role'] = $response->data->role;
+					$_SESSION['user']['str_role'] = $response->data->str_role;
 					$_SESSION['user']['name'] = $response->data->name;
 					$_SESSION['user']['surnames'] = $response->data->surnames;
 					$_SESSION['user']['email'] = $response->data->email;
@@ -53,11 +55,44 @@
 			$this->vista("authentication/login", $datos);
 		}
 
-		function resetPassword($id = 0) {
-			# vista 1: enviar correo
-			# vista 2: confirmar token
-			$datos = [];
-			$this->vista("authentication/reset-password", $datos);
+		function resetPassword($id = '', $token = '') {
+			$datos = [ "alert-script" => "", "email" => $id, "token" => $token ];
+
+			// ? Vista para enviar token al correo del usuario
+			if (empty($id)) {
+				$this->vista("authentication/reset-password", $datos);
+				exit;
+			}
+
+			$user = $this->modeloUser->getUser_email($datos["email"]);
+
+			if (!$user) {
+				$datos["alert-script"] = "Usuario no encontrado";
+				echo $datos["alert-script"];
+				exit;
+			}
+
+			$datos["id"] = $user->id;
+			if (!hash_equals($user->token , $datos["token"])) {
+				$datos["alert-script"] = "Error: el token no coincide";
+				echo $datos["alert-script"];
+				exit;
+			}
+
+			if ($_POST) {
+				$datos['password'] = trim($_POST['password']);
+				$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
+				$resultado = $this->modeloUser->updatePassword($datos);
+				if ($resultado) {
+					header('Location: ' . RUTA_URL . 'User/login/');
+					exit;
+				} else {
+					$datos["alert-script"] = "Ocurrió un error inesperado";
+				}
+			}
+			// ? Vista No. 2: token valido
+			$this->vista("authentication/new-password", $datos);
+			exit;
 		}
 
 		function logout() {
@@ -67,11 +102,15 @@
 		}
 
 		function profile($id = null) {
-			echo 'Vista Perfil';
+			isUserLoggedIn();
+			$this->datos['profile'] = $this->datos['user'];
+			$this->datos['sidebar-item'] = 'Perfil';
+			$this->vista("Admin/profile", $this->datos);
 		}
 
 		function table() {
 			isUserLoggedIn();
+			$this->datos['sidebar-item'] = 'usuarios';
 			if ($this->datos['user']['str_role'] == 'Administrador') {
 				$this->vista("Admin/table_users", $this->datos);
 			} else {
@@ -81,6 +120,7 @@
 
 		function clients() {
 			isUserLoggedIn();
+			$this->datos['sidebar-item'] = 'clientes';
 			if ($this->datos['user']['str_role'] == 'Administrador') {
 				$this->vista("Admin/table_clients", $this->datos);
 			} else {
