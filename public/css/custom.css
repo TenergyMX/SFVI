@@ -1,3 +1,45 @@
+html,
+body {
+    font-family: "Product Sans Infanity", sans-serif;
+}
+
+table tr,
+table td {
+    font-family: "SF Pro Display", sans-serif;
+    font-size: 14px;
+}
+
+.modal > * {
+    font-family: "SF Pro Display", sans-serif;
+}
+
+.sidebar,
+.sidebar-content,
+.sidebar-link,
+a.sidebar-link {
+    background-color: #012130;
+}
+
+.sidebar-link {
+    font-size: 17px;
+}
+
+.navbar i,
+.navbar i:hover,
+.navbar .sidebar-toggle {
+    color: #012130;
+}
+
+.custom-btn {
+    /* box-shadow: 4px 4px #abebc6; */
+    border-radius: 8%;
+    background-color: #012130;
+    color: white;
+    -webkit-box-shadow: 14px 14px 12px -2px #7f8c8d;
+    -moz-box-shadow: 14px 14px 12px -2px #7f8c8d;
+    box-shadow: 14px 14px 12px -2px #7f8c8d;
+}
+
 table.table-center thead th,
 table.table-center thead td,
 table.table-center tbody th,
@@ -19,6 +61,10 @@ table.table-center tfoot td {
     min-height: 202px;
     background-color: #ccc;
     border-radius: 0px;
+}
+
+.print-map .map {
+    height: 33.333333vh;
 }
 
 @media (min-width: 576px) {

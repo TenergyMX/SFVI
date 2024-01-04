@@ -44,7 +44,7 @@
 		function getUsers() {
 			$this->response['data'] = $this->modeloUser->getUsers();
 			foreach ($this->response['data'] as &$value) {
-				$btn= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				$btn= '<button class="btn" name="update" data-option="update" style="background-color: #012130"><i class="fa-light fa-pen" style="color: #FFB154"></i></button>';
 				$value->btn_update = $btn;
 			}
 			
@@ -94,7 +94,7 @@
 		function getClients() {
 			$this->response['data'] = $this->modeloClient->getClients();
 			foreach ($this->response['data'] as &$value) {
-				$btn= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				$btn= '<button class="btn " name="update" data-option="update" style="background-color: #012130"><i class="fa-light fa-pen" style="color: #FFB154" ></i></button>';
 				$value->btn_update = $btn;
 			}
 
@@ -106,7 +106,7 @@
 
 		function updateClient(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['type_of_client']  = isset($_POST['type_of_client']) ? $_POST['type_of_client'] : '';
+			$datos['type_of_client']  = isset($_POST['type']) ? $_POST['type'] : '';  
 			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
 			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
 			$datos['state']  = isset($_POST['state']) ? $_POST['state'] : '';
@@ -145,10 +145,13 @@
 		function getVisits() {
 			$this->response['data'] = $this->modeloVisit->getVisits();
 			foreach ($this->response['data'] as &$value) {
-				$btn = '<button class="btn btn-success me-1" name="info" data-option="show_info"><i class="fa-light fa-circle-info"></i></button>';
-				$btn .= '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
+				$btn = '<button class="btn me-1" name="info" data-option="show_info" style="background-color: #012130"><i class="fa-light fa-circle-info" style="color: #FFF254"></i></button>';
+				$btn_update= '<button class="btn" name="update" data-option="update" style="background-color: #012130"><i class="fa-light fa-pen" style="color: #FFB154"></i></button>';
+				$btn_generate_pdf= '<button class="btn btn-primary" name="generate_pdf" data-option="pdf"><i class="fa-light fa-pen"></i></button>';
 				// $btn = '<button class="btn btn-success me-1" name="add" data-option="add"><i class="fa-light fa-circle-info"></i></button>';
 				$value->btn_action = $btn;
+				$value->btn_update = $btn_update;
+				$value->btn_pdf = $btn_generate_pdf;
 				// $value->btn_close = $btn_close;
 				
 			}
@@ -161,15 +164,25 @@
 
 		function updateVisit(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : '';
+			$datos['id_project']  = isset($_POST['project']) ? $_POST['project'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
-			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
+			// $datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
 			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : '';
-			$datos['id_status']  = isset($_POST['id_status']) ? $_POST['id_status'] : '';
+			$datos['id_status']  = isset($_POST['id_status']) ? $_POST['id_status'] : 1;
 			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : '';
-			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
-			$datos['end_date']  = isset($_POST['end_date']) ? $_POST['end_date'] : '';
+			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : NULL;
+			$datos['start_date_old']  = isset($_POST['start_date_old']) ? $_POST['start_date_old'] : NULL;
+			$datos['note']  = isset($_POST['note']) ? $_POST['note'] : NULL;
 			
+			// le damos valos a la fecha vieja si no tiene
+			if ($datos['start_date_old'] == NULL || $datos['start_date_old'] == '') {
+				$datos['start_date_old'] = $datos['start_date'];
+			}
+
+			// Verificamos si la fecha fue modificada
+			if ($datos['start_date'] != $datos['start_date_old']) {
+				$datos['id_status'] = 5;
+			}
 
 			$response = $this->modeloVisit->updateVisit($datos);
 			$this->response['success'] = $response->success;
@@ -192,6 +205,35 @@
 			echo json_encode($this->response);
 			exit;
 		}
+
+		
+		function updateVisitsAfter24Hours(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['id_status']  = isset($_POST['id_status']) ? $_POST['id_status'] : '';
+
+			$response = $this->modeloVisit->updateVisitsAfter24Hours($datos);
+			$this->response['success'] = $response->success;
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+			
+		}
+
+		function generatePdf() {
+			$this->response['data'] = $this->modeloVisit->getVisits();
+			foreach ($this->response['data'] as &$value) {
+				$value->btn_pdf = "<a href=\"".RUTA_URL."Visit/generatePdf/{$value->id}/\">{$value->folio}</a>" ;
+
+			}
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+    
+   		 }
+
+
 
 		// TODO ------------------------- [ PROYECTOS ] -------------------------
 
@@ -234,20 +276,20 @@
 		function getProjects() {
 			$this->response['data'] = $this->modeloProject->getProjects();
 			foreach ($this->response['data'] as &$value) {
-				$btn_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_dcs"><i class="fa-light fa-circle-info"></i></button>';
+				$btn_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_dcs" ><i class="fa-light fa-circle-info"></i></button>';
 				$btn_visit = '<button class="btn btn-success me-1" name="visit" data-option="show_visits"><i class="fa-light fa-circle-info"></i></button>';
 				$btn = '<button class="btn btn-success me-1" name="info" data-option="add"><i class="fa-light fa-circle-info"></i></button>';
-				$btn_update= '<button class="btn btn-primary" name="update" data-option="update_project"><i class="fa-light fa-pen"></i></button>';
+				$btn_update= '<button class="btn" name="update" data-option="update_project" style="background-color: #012130"><i class="fa-light fa-pen" style="color: #FFB154"></i></button>';
 				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
 				$value->btn_action_docs = $btn_docs; 
 				$value->btn_action_visit = $btn_visit; 
 				$value->btn_action = $btn; 
 				$value->btn_action_update = $btn_update; 
 				$value->btn_action_stages = $btn_stages;
-				$value->btn_folio = "<a href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->folio}</a>";
-				$value->btn_docs = "<a href=\"".RUTA_URL."Project/documents/{$value->id}/\">{$value->folio}</a>";
+				$value->btn_folio = "<a class='btn btn-sm btn-warning rounded-3' href=\"".RUTA_URL."Project/stages/{$value->id}/\">{$value->folio}</a> " ;
+				$value->btn_docs = "<a class='btn btn-sm btn-warning rounded-3' href=\"".RUTA_URL."Project/documents/{$value->id}/\" >{$value->folio}</a>" ;
 				$value->btn_action_docs = '<button class="btn btn-success me-1" name="docs" data-option="show_docs"><i class="fa-regular fa-folder-open"></i></button>';
-				$value->btn_action_visit = '<button class="btn btn-success me-1" name="add_visit" data-option="add_visit"><i class="fa-solid fa-user-plus"></i></button>';
+				$value->btn_action_visit = '<button class="btn me-1" name="add_visit" data-option="add_visit" style="background-color: #012130"><i class="fa-regular fa-calendar-circle-plus" style="color: #8721F3"></i></button>';
 				$value->btn_action = '<button class="btn btn-primary" name="update" data-option="update"><i class="fa-solid fa-pen"></i></button>';
 			}
 			$this->response['success'] = true;
@@ -256,7 +298,7 @@
 			exit;
 		}
 
-			function getStages() {
+		function getStages() {
 			$this->response['data'] = $this->modeloProject->getStages();
 			foreach ($this->response['data'] as &$value) {
 				$btn_stages= '<button class="btn btn-primary" name="stages" data-option="info_stages"><i class="fa-light fa-pen"></i></button>';
@@ -340,4 +382,20 @@
  
 		
 	} # fin de las vistas
+
+	/* 		-------------------------------------DOCUMENTOS GENERALES------------------------------------- */
+		
+		function getDocumentsGeneral() {
+			$this->response['data'] = $this->modeloDocuments->getDocuments();
+			foreach ($this->response['data'] as &$value) {
+				$btn_doc = '<button class="btn btn-success me-1" name="doc" data-option="show_document"><i class="fa-solid fa-file-pdf"></i></button>';
+				$btn_dowloand = '<button class="btn btn-success me-1" name="dowloand" data-option="dowloand"><i class="fa-solid fa-file-arrow-down"></i></button>';
+				$value->btn_doc = $btn_doc; 
+				$value->btn_dowloand = $btn_dowloand; 
+			}
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
 ?>

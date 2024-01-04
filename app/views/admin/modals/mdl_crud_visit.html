@@ -10,7 +10,7 @@
                     <!-- hidden es para ocultar -->
                     <div class="mb-3">
                         <label for="" class="form-label"> Tipo de visita: </label>
-                        <select name="id_type" id="" class="form-select">
+                        <select name="id_type" id="" class="form-select" required>
                             <option value="" selected disabled>
                                 Seleccione el Tipo de visita
                             </option>
@@ -31,6 +31,7 @@
                             class="form-select"
                             aria-describedby="project"
                             placeholder="Proyecto"
+                            required
                         >
                             <option value="" data-folio="" selected disabled>
                                 Seleccione el Proyecto
@@ -52,6 +53,7 @@
                             name="description"
                             aria-describedby="description"
                             placeholder="Razón de visita"
+                            required
                         />
                     </div>
 
@@ -63,6 +65,7 @@
                             class="form-select"
                             aria-describedby="id_user"
                             placeholder="Nombre de visitante"
+                            required
                         >
                             <option value="" selected disabled>
                                 Seleccione el visitante
@@ -84,20 +87,44 @@
                             name="start_date"
                             aria-describedby="start_date"
                             placeholder="Fecha y hora de visita"
+                            required
                         />
                     </div>
-
+                    <div class="mb-3">
+                        <label for="" class="form-label" name="note"> Nota: </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="note"
+                            aria-describedby="note"
+                            placeholder="Nota"
+                        />
+                    </div>
+                    <div class="d-none">
+                        <input
+                            type="datetime-local"
+                            class="form-control"
+                            name="start_date_old"
+                            aria-describedby="start_date_old"
+                            placeholder="Fecha y hora de visita"
+                        />
+                    </div>
                     <div class="botones text-center">
-                        <button type="submit" class="btn btn-primary" name="add">
-                            Agregar visita
+                        <button
+                            type="submit"
+                            class="btn"
+                            name="add"
+                            style="background-color: #012130; color: #ffb154"
+                        >
+                            Agregar visita</span>
                         </button>
                         <button
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn"
                             name="update"
-                            style="display: none"
+                            style="display: none; background-color: #012130"
                         >
-                            Actualizar visita
+                            <span style="color: #ffb154">Actualizar visita</span>
                         </button>
                     </div>
                 </form>

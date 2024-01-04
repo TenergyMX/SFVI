@@ -20,33 +20,41 @@
                 <main class="content">
                     <div class="container-fluid p-0">
                         <!-- 1 -->
-                        <div class="row">
-                            <div class="col-12 col-lg-6 mb-3">
+                        <div class="row gx-5 gy-5">
+                            <div class="col-12 col-lg-6">
                                 <div
                                     class="card h-100 rounded-4"
                                     style="
-                                        box-shadow: 4px 4px #f39c12;
-                                        border: 1px solid #f39c12;
+                                        -webkit-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        -moz-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
                                     "
                                 >
-                                    <div class="card-header h3 text-center">
+                                    <div
+                                        class="card-header h3 text-center rounded-4 fw-bold"
+                                        style="font-family: 'Product Sans Infanity'; color: black";
+                                    >
                                         Tipos de proyectos
                                     </div>
 
-                                    <div class="card-body">
+                                    <div class="card-body rounded-4">
                                         <div id="chart"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-6 mb-3">
+                            <div class="col-12 col-lg-6">
                                 <div
                                     class="card h-100 rounded-4"
                                     style="
-                                        box-shadow: 4px 4px #f39c12;
-                                        border: 1px solid #f39c12;
+                                        -webkit-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        -moz-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
                                     "
                                 >
-                                    <div class="card-header h3 text-center">
+                                    <div
+                                        class="card-header h3 text-center rounded-4 fw-bold"
+                                        style="font-family: 'Product Sans Infanity'; color: black";
+                                    >
                                         Tipos de venta
                                     </div>
                                     <div class="card-body">
@@ -63,19 +71,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg mb-3">
+                            <div class="col-12 col-lg">
                                 <div
                                     class="card h-100 rounded-4"
                                     style="
-                                        box-shadow: 4px 4px #f39c12;
-                                        border: 1px solid #f39c12;
+                                        -webkit-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        -moz-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
                                     "
                                 >
-                                    <div class="card-header pb-0">
+                                    <div class="card-header pb-0 rounded-4">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
                                                 <button
-                                                    class="nav-link active"
+                                                    class="nav-link active fw-bold"
                                                     id="home-tab"
                                                     data-bs-toggle="tab"
                                                     data-bs-target="#tab-1"
@@ -89,7 +98,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <button
-                                                    class="nav-link"
+                                                    class="nav-link fw-bold"
                                                     id="profile-tab"
                                                     data-bs-toggle="tab"
                                                     data-bs-target="#profile"
@@ -105,23 +114,33 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="tab-content m-0">
-                                            <h2 class="h2 text-center">
-                                                Energía Solar Generada Por Tenergy
+                                            <h2
+                                                class="h3 text-center fw-bold"
+                                                style="font-family: 'Product Sans Infanity'" 
+                                                ;
+                                            >
+                                                <p>Energía Generada</p>
                                             </h2>
+
                                             <!-- General -->
                                             <div
-                                                class="tab-pane fade show active"
+                                                class="tab-pane fade show active py-5"
                                                 id="tab-1"
                                                 role="tabpanel"
                                                 aria-labelledby="home-tab"
                                             >
                                                 <div
                                                     class="text-center"
-                                                    style="font-size: 5rem"
+                                                    style="
+                                                        font-size: 52px;
+                                                        transform: scaleY(2);
+                                                        font-family: 'SF Pro Display';
+                                                        color: black;
+                                                        font-weight: 950;
+                                                    "
                                                 >
                                                     <?php echo number_format($datos['calculo Tenergy']->data['general'],2,'.','');
-                                                    ?>
-                                                    <span>KW/h</span>
+                                                    ?> kW/h
                                                 </div>
                                             </div>
                                             <!-- individual -->
@@ -150,7 +169,7 @@
                                                                 </th>
                                                                 <td>
                                                                     <?php echo number_format($data['tenergy'],2,'.',''); ?>
-                                                                    KW/H
+                                                                    kW/h
                                                                 </td>
                                                             </tr>
                                                             <?php endforeach; ?>
@@ -162,19 +181,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg mb-3">
+                            <div class="col-12 col-lg">
                                 <div
                                     class="card h-100 rounded-4"
                                     style="
-                                        box-shadow: 4px 4px #f39c12;
-                                        border: 1px solid #f39c12;
+                                        -webkit-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        -moz-box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
+                                        box-shadow: 14px 14px 21px -2px rgba(184, 182, 184, 1);
                                     "
                                 >
-                                    <div class="card-header pb-0">
+                                    <div class="card-header pb-0 rounded-4">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
                                                 <button
-                                                    class="nav-link active"
+                                                    class="nav-link active fw-bold"
                                                     id="home-tab"
                                                     data-bs-toggle="tab"
                                                     data-bs-target="#tab-3"
@@ -188,7 +208,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <button
-                                                    class="nav-link"
+                                                    class="nav-link fw-bold"
                                                     id="profile-tab"
                                                     data-bs-toggle="tab"
                                                     data-bs-target="#profile3"
@@ -204,7 +224,11 @@
                                     </div>
                                     <div class="card-body bg-ecologico">
                                         <div class="tab-content m-0">
-                                            <h2 class="text-center">
+                                            <h2
+                                                class="text-center fw-bold"
+                                                style="font-family: 'Product Sans Infanity'"
+                                                ;
+                                            >
                                                 Apartado Ecológico
                                             </h2>
                                             <!-- General -->
@@ -223,7 +247,7 @@
                                                             style="font-size: 3rem"
                                                         >
                                                             <span
-                                                                class="h5 d-block text-center"
+                                                                class="h4 d-block text-center"
                                                                 >Dióxido De Carbono</span
                                                             >
                                                             <span class="fw-bold">
@@ -241,10 +265,10 @@
                                                             style="font-size: 3rem"
                                                         >
                                                             <span
-                                                                class="h5 d-block text-center"
+                                                                class="h4 mb-0 d-block text-center"
                                                                 >Cantidad De Árboles</span
                                                             >
-                                                            <span class="fw-bold">
+                                                            <span class="fw-bold my-0">
                                                                 <?php echo number_format((($datos['calculo Tenergy']->data['general']
                                                                 * 0.385)/60),0, '.','');
                                                                 ?>
@@ -262,15 +286,7 @@
                                             >
                                                 <div class="table-responsive">
                                                     <table
-                                                        class="table table-bordered table-striped w-100"
-                                                        style="
-                                                            background-color: rgba(
-                                                                255,
-                                                                255,
-                                                                255,
-                                                                0.7
-                                                            );
-                                                        "
+                                                        class="table table-primary w-100"
                                                     >
                                                         <thead>
                                                             <tr>
@@ -319,6 +335,8 @@
                 background-blend-mode: multiply;
                 background-size: cover;
                 background-position: center;
+                border-bottom-left-radius: var(--bs-border-radius-xl);
+                border-bottom-right-radius: var(--bs-border-radius-xl);
             }
             .bg-ecologico * {
                 color: #f4f4f4;
@@ -326,12 +344,30 @@
         </style>
         <script>
             var options = {
-                series: [44, 55, 13, 43],
+                series: [44, 55, 30, 60],
                 chart: {
                     width: 380,
                     type: "pie",
                 },
-                labels: ["Doméstico", "Comercial", "Indutsrial", "General"],
+                dataLabels: {
+                    style: {
+                        fontSize: "14px", // Tamaño de la fuente para las etiquetas de datos
+                        fontFamily: "SF Pro Display",
+                        fontWeight: "100",
+                    },
+                },
+                tooltip: {
+                    style: {
+                        fontSize: "14px", // Tamaño de la fuente para las etiquetas de datos
+                        fontFamily: "SF Pro Display",
+                        fontWeight: "100",
+                    },
+                },
+                labels: ["Doméstico", "Comercial", "Industrial", "General"],
+                colors: ["#FD8310", "#FD9536", "#FDAD62", "#FDC28B"],
+                stroke: {
+                    show: false,
+                },
 
                 responsive: [
                     {
@@ -354,37 +390,65 @@
             var options5 = {
                 series: [50],
                 chart: {
-                    height: 200,
+                    height: 280,
                     type: "radialBar",
                 },
                 plotOptions: {
                     radialBar: {
                         hollow: {
-                            size: "70%",
+                            size: "60%",
+                        },
+                        dataLabels: {
+                            name: {
+                                show: true,
+                                fontSize: "17px", // Tamaño de la fuente para el porcentaje
+                                fontFamily: "SF Pro Display",
+                                fontWeight: "100",
+                            },
+                            value: {
+                                show: true,
+                                fontSize: "17px", // Tamaño de la fuente para el porcentaje
+                                fontFamily: "SF Pro Display",
+                                fontWeight: "100",
+                            },
                         },
                     },
                 },
                 labels: ["Financiamiento"],
-                colors: ["#28B463"],
+                colors: ["#FFA200"],
                 size: "80%",
             };
             var options6 = {
                 series: [90],
                 colors: ["#2874A6"],
                 chart: {
-                    height: 190,
+                    height: 280,
                     type: "radialBar",
                 },
                 plotOptions: {
                     radialBar: {
                         hollow: {
-                            size: "70%",
+                            size: "60%",
                             colors: ["#283593"],
+                        },
+                        dataLabels: {
+                            name: {
+                                show: true,
+                                fontSize: "17px", // Tamaño de la fuente para el porcentaje
+                                fontFamily: "SF Pro Display",
+                                fontWeight: "100",
+                            },
+                            value: {
+                                show: true,
+                                fontSize: "17px", // Tamaño de la fuente para el porcentaje
+                                fontFamily: "SF Pro Display",
+                                fontWeight: "100",
+                            },
                         },
                     },
                 },
                 labels: ["Contado"],
-                colors: ["#283593"],
+                colors: ["#FF6624"],
             };
 
             var chart_5 = new ApexCharts(document.querySelector("#chart_5"), options5);

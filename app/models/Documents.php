@@ -6,14 +6,7 @@
 		
 		function addDocument($datos = []) {
 			try {
-				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("INSERT INTO clients(type_of_client, name, surnames, state, municipality, email, phone, rfc) VALUES(:type_of_client, :name, :surnames, :state, :municipality, :email, :phone, :rfc)");				
-				if ($this->db->execute()) {
-					$resultado->success = true;
-				} else {
-					$resultado->error = 'No se pudo insertar los datos en la tabla (user)';
-				}
-				return $resultado;
+				
 			} catch (Exception $e) {
 				$resultado = (object) ["success" => false, "error" => $e];
 				return $resultado;
@@ -36,11 +29,10 @@
 			return $this->db->registros();
 		}
 			
-
-
 		function getClients() {
 			$this->db->query("SELECT * FROM clients c;");
 			return $this->db->registros();
 		}
+
 	}
 ?>

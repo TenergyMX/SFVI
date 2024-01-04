@@ -43,14 +43,18 @@ function ftable_users() {
                 $("#mdl_crud_user .modal-header .modal-title").html("ACTUALIZAR USUARIO");
                 $("#mdl_crud_user .modal-body form [name='add']").hide();
                 $("#mdl_crud_user .modal-body form [name='update']").show();
+                $("#mdl_crud_user .modal-body form [name='confirmation']").hide();
+                $("#mdl_crud_user .modal-body form [name='password']").hide();
                 $("#mdl_crud_user").modal("show");
                 var fila = $(this).closest("tr");
                 var data = tbl_users.row(fila).data();
+                $("#mdl_crud_user form [name='id']").val(data["id"]);
                 $("#mdl_crud_user form [name='email']").val(data["email"]);
                 $("#mdl_crud_user form [name='role']").val(data["role"]);
                 $("#mdl_crud_user form [name='name']").val(data["name"]);
                 $("#mdl_crud_user form [name='surnames']").val(data["surnames"]);
-                $("#mdl_crud_user form [name='password']").val(data["password"]);
+                // $("#mdl_crud_user form [name='password']").val(data["password"]);
+                // $("#mdl_crud_user form [name='confirmation']").val(data["password"]);
 
                 break;
             default:
@@ -192,6 +196,8 @@ function ftable_clients() {
                 $("#mdl_crud_client").modal("show");
                 var fila = $(this).closest("tr");
                 var data = tbl_clients.row(fila).data();
+
+                $("#mdl_crud_client form [name='id']").val(data["id"]);
                 $("#mdl_crud_client form [name='type']").val(data["type_of_client"]);
                 $("#mdl_crud_client form [name='name']").val(data["name"]);
                 $("#mdl_crud_client form [name='surnames']").val(data["surnames"]);
@@ -210,7 +216,7 @@ function ftable_clients() {
         // end option
     });
 
-    // Create and update user
+    // Create and update
     $("#mdl_crud_client form").on("submit", function (e) {
         e.preventDefault();
         var option = $('button[type="submit"]:focus', this).attr("name");
@@ -228,7 +234,7 @@ function ftable_clients() {
                 tbl_clients.ajax.reload();
                 $("#mdl_crud_client").modal("hide");
                 if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
+                    Swal.fire("", "Accion exitosa", "success");
                 } else {
                     Swal.fire("Oops", "fallo algo", "error");
                 }
@@ -256,12 +262,68 @@ function ftable_visits() {
             { title: "Tipo de visita", data: "str_type_of_visit" },
             { title: "Nombre visitante", data: "str_fullname" },
             { title: "Hora y fecha", data: "start_date" },
-            { title: "Estatus", data: "id_status" },
+            { title: "Estatus", data: "str_status_of_visit" },
             { title: "Proyecto", data: "project_folio" },
-            { title: "Acción", data: "btn_action" },
+            { title: "Info. visit", data: "btn_action" },
+            { title: "Editar", data: "btn_update" },
+        ],
+        columnDefs: [
+            {
+                targets: 2, // La columna "Hora y fecha" está en la posición 2
+                render: function (data, type, row, meta) {
+                    // Formatear la fecha a d/m/a h:m:s
+                    var fecha = new Date(data);
+                    var dia = ("0" + fecha.getDate()).slice(-2);
+                    var mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+                    var anio = fecha.getFullYear();
+                    var horas = ("0" + fecha.getHours()).slice(-2);
+                    var minutos = ("0" + fecha.getMinutes()).slice(-2);
+                    var segundos = ("0" + fecha.getSeconds()).slice(-2);
+                    return (
+                        dia +
+                        "/" +
+                        mes +
+                        "/" +
+                        anio +
+                        " " +
+                        horas +
+                        ":" +
+                        minutos +
+                        ":" +
+                        segundos
+                    );
+                },
+            },
         ],
         createdRow: function (row, data, dataIndex) {
             $(row).attr("data-id", data.id);
+            var cell = $(row).children("td:eq(3)");
+            // Añadir una clase CSS según el estatus
+            switch (data.str_status_of_visit) {
+                case "Nueva":
+                    cell.css("color", "#F3AA21");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "En proceso":
+                    cell.css("color", "#0090CB");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Finalizada":
+                    cell.css("color", "#026B00");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Atrasada":
+                    cell.css("color", "#B51300");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Reagendada":
+                    cell.css("color", "#6300B6");
+                    cell.css("font-weight", "bold");
+                    break;
+                default:
+                    cell.css("color", "black");
+                    cell.css("background-color", "white");
+            }
         },
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
@@ -279,6 +341,7 @@ function ftable_visits() {
                 $("#mdl_crud_visit .modal-header .modal-title").html("AGREGAR VISITA");
                 $("#mdl_crud_visit .modal-body form [name='add']").show();
                 $("#mdl_crud_visit .modal-body form [name='update']").hide();
+                $("#mdl_crud_visit .modal-body form [name='note']").hide();
                 $("#mdl_crud_visit").modal("show");
                 break;
             case "update":
@@ -289,11 +352,20 @@ function ftable_visits() {
                 var fila = $(this).closest("tr");
                 var data = tbl_visits.row(fila).data();
 
+                $("#mdl_crud_visit form [name='id']").val(data["id"]);
                 $("#mdl_crud_visit form [name='id_type']").val(data["id_type"]);
                 $("#mdl_crud_visit form [name='project']").val(data["id_project"]);
                 $("#mdl_crud_visit form [name='id_user']").val(data["id_user"]);
                 $("#mdl_crud_visit form [name='description']").val(data["description"]);
                 $("#mdl_crud_visit form [name='start_date']").val(data["start_date"]);
+                $("#mdl_crud_visit form [name='start_date_old']").val(data["start_date"]);
+
+                if (data["id_status"] == 3) {
+                    $("#mdl_crud_visit [name='update']").prop("disabled", true);
+                } else {
+                    $("#mdl_crud_visit [name='update']").prop("disabled", false);
+                }
+
                 break;
 
             case "show_info":
@@ -307,10 +379,17 @@ function ftable_visits() {
                 $("#mdl_info_visit form [name='lat']").val(parseFloat(data["lat"]));
                 $("#mdl_info_visit form [name='lng']").val(parseFloat(data["lon"]));
                 $("#mdl_info_visit form [name='type']").val(data["str_type_of_visit"]);
+                $("#mdl_info_visit form [name='razon']").val(data["description"]);
                 $("#mdl_info_visit form [name='proyect']").val(data["project_folio"]);
                 $("#mdl_info_visit form [name='date']").val(data["start_date"]);
                 $("#mdl_info_visit form [name='visit']").val(data["str_fullname"]);
-                $("#mdl_info_visit form [name='razon']").val(data["description"]);
+                $("#mdl_info_visit form [name='note']").val(data["note"]);
+
+                if (data["id_status"] == 3) {
+                    $("#mdl_info_visit [name='close']").prop("disabled", true);
+                } else {
+                    $("#mdl_info_visit [name='close']").prop("disabled", false);
+                }
 
                 // Mapa
                 if (data["lat"] != null) {
@@ -323,51 +402,99 @@ function ftable_visits() {
                 } else {
                     obj_map.marcador.setVisible(false);
                 }
+
+                // cargar ruta para el PDF
+                $("#mdl_info_visit form a[name='pdf']").attr(
+                    "href",
+                    `${RUTA_URL}Visit/generatePdf/${data["id"]}/`
+                );
+
                 // mostrar le modal
                 $("#mdl_info_visit").modal("show");
                 break;
             case "refresh_table":
                 tbl_visits.ajax.reload();
-                break;
-            /* case "update":
-                $("#mdl_update_visit .modal-header .modal-title").html("ACTUALIZAR ITA");
-                $("#mdl_update_visit .modal-body form [name='add']").hide();
-                $("#mdl_update_visit .modal-body form [name='update']").show();
-                $("#mdl_update_visit").modal("show");
-                var fila = $(this).closest("tr");
-                var data = tbl_visits.row(fila).data();
 
-                $("#mdl_update_visit form [name='tipo']").val(data["id_type"]);
-                $("#mdl_update_visit form [name='proyect']").val(data["project_folio"]);
-                $("#mdl_update_visit form [name='visit']").val(data["str_fullname"]);
-                $("#mdl_update_visit form [name='razon']").val(data["description"]);
-                $("#mdl_update_visit form [name='razon']").val(data["start_date"]);
-                break; */
+                var datos = $("#mdl_crud_visit form").serialize();
+                var url = RUTA_URL + "Request/updateVisitsAfter24Hours/";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: datos,
+
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire(
+                                "Visita actualizada!",
+                                "Estatus: En progreso",
+                                "success"
+                            );
+                            tbl_visits.ajax.reload();
+                        } else {
+                            Swal.fire("Oops", "Fallo algo en la actualización", "error");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrow) {
+                        console.log("Hubo un error: ", errorThrow);
+                        Swal.fire("Error del servidor", ":(", "error");
+                    },
+                });
+
+                break;
+
             case "close":
-                $("#mdl_info_visit").modal("hide");
-                cahngeStatus();
-                break;
+                $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
 
+                var datos = $("#mdl_info_visit form").serialize();
+                var url = RUTA_URL + "Request/updateStatusVisit/";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: datos,
+
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire("Visita actualizada!", "", "success");
+                            tbl_visits.ajax.reload();
+                        } else {
+                            Swal.fire("Oops", "Fallo algo en la actualización", "error");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrow) {
+                        console.log("Hubo un error: ", errorThrow);
+                        Swal.fire("Error del servidor", ":(", "error");
+                    },
+                });
+                break;
+            case "pdf":
+                $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
+                console.log("Click en el botón PDF");
+
+                break;
             default:
-                alert("Opcion no valida (tabla visistas)");
+                alert("Opcion no valida (tbl_visits)");
         }
         // end option
     });
 
-    $("#mdl_update_visit form").on("submit", function (e) {
+    /* $("#mdl_crud_visit form").on("submit", function (e) {
         e.preventDefault();
         var datos = $(this).serialize();
         var url = RUTA_URL + "Request/updateVisit/";
+        // var url = RUTA_URL + "Request/updateStatusReagendada/";
 
         $.ajax({
             type: "POST",
             url: url,
             data: datos,
             beforeSend: function () {
-                $("#mdl_update_visit form [type='submit']").prop("disabled", true);
+                $("#mdl_crud_visit form [type='submit']").prop("disabled", true);
             },
             success: function (response) {
-                $("#mdl_update_visit").modal("hide");
+                updateStatusToReagendada(data["id"]);
+                $("#mdl_crud_visit").modal("hide");
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
                 } else {
@@ -379,34 +506,10 @@ function ftable_visits() {
                 Swal.fire("Error del servidor", ":(", "error");
             },
             complete: function () {
-                $("#mdl_update_visit form [type='submit']").prop("disabled", false);
+                $("#mdl_crud_visit form [type='submit']").prop("disabled", false);
             },
         });
-    });
-
-    $("#mdl_info_visit form").on("submit", function (e) {
-        e.preventDefault();
-        var datos = $(this).serialize();
-        var url = RUTA_URL + "Request/updateStatusVisit/";
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: { id: id, nuevoEstado: "cerrado" },
-            success: function (response) {
-                $("#mdl_info_visit").modal("hide");
-                if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
-                } else {
-                    Swal.fire("Oops", "fallo algo", "error");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrow) {
-                console.log("hubo un error: ", errorThrow);
-                Swal.fire("Error del servidor", ":(", "error");
-            },
-        });
-    });
+    }); */
 
     // End
 }
@@ -420,40 +523,10 @@ function ftable_projects() {
         },
         columns: [
             { title: "ID", data: "id" },
-            /*{
-                title: "Proyecto",
-                data: "tb_project",
-                render: function (data, type, row) {
-                    return (
-                        '<a href="' +
-                        RUTA_URL +
-                        "project_Stages/" +
-                        data +
-                        '">' +
-                        data +
-                        "</a>"
-    
-                    );
-                },
-            },*/
             { title: "Proyecto", data: "btn_folio" },
             { title: "Cliente", data: "id_client" },
             { title: "Avance(%)", data: "percentage" },
             { title: "Documentación", data: "btn_docs" },
-            /*  {
-                title: "Documentación",
-                data: "id_client",
-                render: function (data, type, row) {
-                    return (
-                        '<a href="' +
-                        RUTA_URL +
-                        "Document/" +
-                        data +
-                        '"><button class="btn btn-success"><i class="fa-solid fa-folder"></i></button>' +
-                        "</a>"
-                    );
-                },
-            }, */
             { title: "Visitas", data: "btn_action_visit" },
             { title: "Editar", data: "btn_action_update" },
         ],
@@ -686,23 +759,10 @@ function ftable_projects() {
 
     // End
 }
-/* --------------------------------------ETAPAS PROYECTOS--------------------------------------------- */
+// TODO --------------------------------------ETAPAS PROYECTOS---------------------------------------------
 
 function fprojects_stages() {
-    var tbl_proyects = new DataTable("#table_proyects", {
-        ajax: {
-            url: RUTA_URL + "Request/getProjects/",
-            dataSrc: "data",
-        },
-        columns: [
-            { title: "Nombre", data: "id" },
-            { title: "Documento", data: "btn_folio" },
-            { title: "Descargar", data: "id_client" },
-        ],
-        language: {
-            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
-        },
-    });
+    var tbl_proyects = new DataTable("#table_proyects", {});
     $("body").on("click", "[data-option]", function () {
         let option = $(this).attr("data-option"); // [create / add , update, delete]
         switch (option) {
@@ -714,12 +774,6 @@ function fprojects_stages() {
                 $("#mdl_info_stages .modal-body form [name='add']").show();
                 $("#mdl_info_stages .modal-body form [name='update']").hide();
                 $("#mdl_info_stages").modal("show");
-                break;
-            case "show_doc":
-                // alert("mijo");
-                $("#mdl_info_documents .modal-header .modal-title").html("DOCUMENTOS");
-                $("#mdl_info_documents .modal-body form [name='show_doc']").show();
-                $("#mdl_info_documents").modal("show");
                 break;
         }
     });
@@ -741,6 +795,37 @@ $("#mdl_crud_proyect form [name='state']").on("change", function () {
 
 // End
 
+// TODO ------------------------- [ DOCUMENTOS GENERALES] -------------------------
+function ftable_documents() {
+    var tbl_documents = new DataTable("#table_documents", {
+        ajax: {
+            url: RUTA_URL + "Request/getDocumentsGeneral/",
+            dataSrc: "data",
+        },
+        columns: [
+            { title: "Nombre", data: "folio" },
+            { title: "Documento", data: "show_document" },
+            { title: "Descargar", data: "btn_dowloand" },
+        ],
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
+        },
+    });
+
+    $("body").on("click", "[data-option]", function () {
+        let option = $(this).attr("data-option"); // [create / add , update, delete]
+        switch (option) {
+            case "create":
+            case "show_doc":
+                // alert("mijo");
+                $("#mdl_info_documents .modal-header .modal-title").html("DOCUMENTOS");
+                $("#mdl_info_documents .modal-body form [name='show_doc']").show();
+                $("#mdl_info_documents").modal("show");
+
+                break;
+        }
+    });
+}
 // TODO ------------------------- [ Eventos Globales ] -------------------------
 
 $("#mdl_crud_visit form").on("submit", function (e) {
@@ -748,6 +833,16 @@ $("#mdl_crud_visit form").on("submit", function (e) {
     var datos = $(this).serialize();
     var option = $('button[type="submit"]:focus', this).attr("name");
     var url = RUTA_URL + "Request/" + (option == "add" ? "addVisit" : "updateVisit");
+    // Obtener la fecha y hora actual
+    var fechaActual = new Date();
+    // Obtener la fecha y hora seleccionada por el usuario
+    var nuevaFecha = new Date($("#mdl_crud_visit form [name='start_date']").val());
+    // Comparar con la fecha actual
+    if (nuevaFecha < fechaActual) {
+        // Mostrar mensaje de error o tomar alguna acción
+        alert("La fecha de visita no puede ser anterior a la fecha y hora actuales.");
+        return;
+    }
 
     $.ajax({
         type: "POST",

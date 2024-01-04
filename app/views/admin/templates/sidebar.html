@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="<?php echo RUTA_URL; ?>">
-            <span class="sidebar-brand-text align-middle">
+            <span class="sidebar-brand-text align-middle" style="font-size: 25px;">
                 <?php echo NAME_SITE; ?>
                 <sup><small class="badge bg-primary text-uppercase"></small></sup>
             </span>
@@ -25,16 +25,16 @@
         </a>
         <div class="sidebar-user d-none"></div>
         <ul class="sidebar-nav">
-            <li class="sidebar-header pt-1">Opciones</li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>">
-                    <i class="fa-light fa-user"></i>
-                    <span class="align-middle">Dashboard</span>
+                    <i class="fa-solid fa-chart-tree-map"></i>
+                    <span class="align-middle" > Dashboard</span>
                 </a>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>User/table/">
-                    <i class="fa-light fa-sliders-up"></i>Usuarios
+                    <i class="fa-regular fa-users"></i>
+                     <span class="align-middle" >Usuarios</span>
                 </a>
             </li>
             <li class="sidebar-item">
@@ -42,35 +42,26 @@
                     class="sidebar-link"
                     href="<?php echo RUTA_URL; ?>Client/ver_clientes/"
                 >
-                    <i class="fa-solid fa-person"></i>Clientes
+                    <i class="fa-solid fa-user-group-simple"></i> 
+                    <span class="align-middle" >Clientes
                 </a>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Visit/">
-                    <i class="fa-light fa-sliders-up"></i>Visitas
+                    <i class="fa-solid fa-house-person-return"></i>
+                     <span class="align-middle">Visitas</span>
                 </a>
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
-                    <i class="fa-light fa-sliders-up"></i>Proyectos
+                    <i class="fa-duotone fa-solar-panel"></i>
+                    <span class="align-middle" >Proyectos</span>
                 </a>
             </li>
-            <!--  <li class="sidebar-item">
-                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Stage_project/">
-                    <i class="fa-light fa-sliders-up"></i>Etapas Proyectos Contado
-                </a>
-            </li> -->
-            <!--  <li class="sidebar-item">
-                <a
-                    class="sidebar-link"
-                    href="<?php echo RUTA_URL; ?>Stage_project/ver_etapas"
-                >
-                    <i class="fa-light fa-sliders-up"></i>Etapas Proyectos FIDE
-                </a>
-            </li> -->
             <li class="sidebar-item">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Document/">
-                    <i class="fa-light fa-sliders-up"></i>Documentos
+                    <i class="fa-solid fa-folder"></i>
+                    <span class="align-middle">Documentos</span>
                 </a>
             </li>
         </ul>

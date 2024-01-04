@@ -20,9 +20,10 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
-                                                class="btn btn-primary"
+                                                class="btn"
                                                 data-option="create"
-                                            ><i class="fa-solid fa-user-plus"></i>
+                                                style="background-color: #012130"
+                                            ><i class="fa-solid fa-user-plus" style="color: #FFB154"></i>
                                                 
                                             </button>
                                         </div>

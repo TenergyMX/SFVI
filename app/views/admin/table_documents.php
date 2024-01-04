@@ -32,7 +32,7 @@
                                                         </label>
                                                     </div>
                                                     <p>
-                                                    <div class="row">
+                                                    <div class="row ">
                                                         <div class="col-12 col-lg-6 mb-2">
                                                             <div class="mb-3">
                                                                 <label for="" class="form-label fs-4"> Proyecto: </label>
@@ -58,100 +58,101 @@
                                                         </div>
                                                     </div>
                                                     <div class="container d-flex justify-content-center align-items-center">
-                                        <div class="card" style="background-color: transparent;">
-                                            <div class="row">
-                                                <style>
-                                                    .custom-btn {
-                                                        width: 200px;
-                                                        height: 160px;
-                                                    }
-                                                </style>
-
+                                                    <div class="card" style="background-color: transparent;">
                                                         <div class="row">
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_1"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Información del cliente</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_2"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación cotización</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button
-                                                                    type="button"
-                                                                    class="btn btn-outline-success custom-btn"
-                                                                    name="category_3"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    
-                                                                    <span class="fs-4">Documentación ingeniería</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_4"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación FIDE</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_5"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación CFE</span>
-                                                                    <p>
-                                                                        <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_6"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación Tenergy</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
+                                                            <style>
+                                                                .custom-btn {
+                                                                    width: 200px;
+                                                                    height: 160px;
+
+                                                                }
+                                                            </style>
+
+                                                                    <div class="row">
+                                                                        <div class="col-8 col-lg-4 mb-3 rounded-4">
+                                                                            <div class="mb-3 rounded-4">
+                                                                                <button 
+                                                                                type="button" 
+                                                                                class="btn custom-btn" 
+                                                                                name="category_1"
+                                                                                data-option="show_doc"
+                                                                                >
+                                                                                <span class="fs-4">Información del cliente</span>
+                                                                                <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <button 
+                                                                                type="button" 
+                                                                                class="btn custom-btn" 
+                                                                                name="category_2"
+                                                                                data-option="show_doc"
+                                                                                >
+                                                                                <span class="fs-4">Documentación cotización</span>
+                                                                                <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-8 col-lg-4 mb-3">
+                                                                            <div class="mb-3">
+                                                                                <button
+                                                                                type="button"
+                                                                                class="btn custom-btn"
+                                                                                name="category_3"
+                                                                                data-option="show_doc"
+                                                                                >
+                                                                                
+                                                                                <span class="fs-4">Documentación ingeniería</span>
+                                                                                <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <button 
+                                                                                type="button" 
+                                                                                class="btn custom-btn" 
+                                                                                name="category_4"
+                                                                                data-option="show_doc"
+                                                                               >
+                                                                                <span class="fs-4">Documentación FIDE</span>
+                                                                                <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-8 col-lg-4 mb-3">
+                                                                            <div class="mb-3">
+                                                                                <button 
+                                                                                type="button" 
+                                                                                class="btn custom-btn" 
+                                                                                name="category_5"
+                                                                                data-option="show_doc"
+                                                                                >
+                                                                                <span class="fs-4">Documentación CFE</span>
+                                                                                <p>
+                                                                                    <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <button 
+                                                                                type="button" 
+                                                                                class="btn custom-btn" 
+                                                                                name="category_6"
+                                                                                data-option="show_doc"
+                                                                                >
+                                                                                <span class="fs-4">Documentación Tenergy</span>
+                                                                                <p>
+                                                                                    <p class="text-center fs-6">Total documentos</p>
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                             </div>
                                                         </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -170,11 +171,10 @@
       </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_documents.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
-            fprojects_stages();
+            ftable_documents();
         </script>
     </body>
 </html>

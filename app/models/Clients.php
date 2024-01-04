@@ -31,9 +31,9 @@
 		function updateClient($datos = []) {
 			try {				
 				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE clients SET type_of_client = :type,  name = :name, surnames = :surnames, state = :state, municipality = :municipality, email = :email, phone = :phone, rfc = :rfc WHERE id = :id");
+				$this->db->query("UPDATE clients SET type_of_client = :type_of_client,  name = :name, surnames = :surnames, state = :state, municipality = :municipality, email = :email, phone = :phone, rfc = :rfc WHERE id = :id");
 				$this->db->bind(':id', $datos["id"]);
-				$this->db->bind(':type', $datos["type_of_client"]);
+				$this->db->bind(':type_of_client', $datos["type_of_client"]);
 				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':surnames', $datos["surnames"]);
 				$this->db->bind(':state', $datos["state"]);

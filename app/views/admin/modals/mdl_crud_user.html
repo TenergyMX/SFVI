@@ -71,7 +71,9 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label"> Confirmar Contraseña: </label>
+                        <label for="" class="form-label" name="confirmation">
+                            Confirmar Contraseña:
+                        </label>
                         <input
                             type="password"
                             class="form-control"
@@ -84,11 +86,21 @@
                     </div>
 
                     <div class="botones text-center">
-                        <button type="submit" class="btn btn-primary" name="add">
-                            Agregar usuario
+                        <button
+                            type="submit"
+                            class="btn"
+                            name="add"
+                            style="background-color: #012130"
+                        >
+                            <span style="color: #ffb154">Agregar usuario</span>
                         </button>
-                        <button type="submit" class="btn btn-primary" name="update">
-                            Actualizar usuario
+                        <button
+                            type="submit"
+                            class="btn"
+                            name="update"
+                            style="background-color: #012130"
+                        >
+                            <span style="color: #ffb154">Actualizar usuario</span>
                         </button>
                     </div>
                 </form>

@@ -20,21 +20,23 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
-                                                class="btn btn-primary"
+                                                class="btn"
                                                 title="Agregar Visita"
                                                 data-option="create"
+                                                style="background-color: white"
                                             >
-                                                <i class="fa-regular fa-plus me-1"></i>
-                                                Agregar Visita
+                                                <i class="fa-regular fa-plus me-1" style="color: #012130"></i>
+                                                   <span style="color: #012130">Agregar Visita<span>
                                                 
                                             </button>
                                             <button
                                                 type="button"
-                                                class="btn btn-info"
+                                                class="btn"
                                                 title="Actualizar tabla"
                                                 data-option="refresh_table"
+                                                style="background-color: #012130"
                                             >
-                                                <i class="fa-regular fa-arrows-rotate me-1"></i>
+                                                <i class="fa-regular fa-arrows-rotate me-1" style="color: #54F7FF"></i>
                                                 
                                             </button>
                                         </div>
@@ -48,6 +50,8 @@
                                                         <th>4</th>
                                                         <th>5</th>
                                                         <th>6</th>
+                                                        <th>7</th>
+                                                        <th>8</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
