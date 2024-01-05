@@ -15,13 +15,10 @@
 			$this->response['error'] = 'without request';
             $this->vista("Admin/table_clients", $this->datos);
 		}
-<<<<<<< HEAD
 
         function ver_clientes() {
-			$this->vista("Admin/table_clients");
+			$this->vista("Admin/table_clients", $this->datos);
 		}
 
-=======
->>>>>>> L-Ulices
 	}
 ?>

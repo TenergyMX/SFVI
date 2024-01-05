@@ -7,8 +7,8 @@
 		}
 		
 		function addProject($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {
-				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("INSERT INTO
 					project(
 						tb,
@@ -16,7 +16,10 @@
 						id_client,
 						id_category,
 						id_subcategory,
+						id_user,
 						quotation_num,
+						id_fide,
+						charge,
 						street,
 						colony,
 						municipality,
@@ -34,7 +37,10 @@
 						:id_client,
 						:id_category,
 						:id_subcategory,
+						:id_user,
 						:quotation_num,
+						:id_fide,
+						:charge,
 						:street,
 						:colony,
 						:municipality,
@@ -53,8 +59,10 @@
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
 				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
-				// $this->db->bind(':quotation', $datos["quotation"]);
+				$this->db->bind(':id_user', $datos["id_user"]);
 				$this->db->bind(':quotation_num', $datos["quotation_num"]);
+				$this->db->bind(':id_fide', $datos["id_fide"]);
+				$this->db->bind(':charge', $datos["charge"]);
 				$this->db->bind(':street', $datos["street"]);
 				$this->db->bind(':colony', $datos["colony"]);
 				$this->db->bind(':municipality', $datos["municipality"]);
@@ -73,13 +81,13 @@
 					$resultado->success = true;
 					$resultado->id = $id;
 				} else {
-					$resultado->error = 'No se pudo insertar los datos en la tabla (project)';
+					$resultado->error['message'] = 'No se pudo insertar los datos en la tabla (project)';
 				}
-				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
+			return $resultado;
 		}
 
 		function addProjectquotation($datos = []) {
@@ -128,6 +136,18 @@
 			return $this->db->registros();
 		}
 
+		function getMyProjects($id_user = 3) {
+			$this->db->query("SELECT p.*,
+				CONCAT(c.name, ' ', c.surnames) AS customer_fullName
+				FROM project p
+				LEFT JOIN clients c
+				ON p.id_client = c.id
+				WHERE p.id_client = :id_user OR p.id_user = :id_user;
+			");
+			$this->db->bind(':id_user', $id_user);
+			return $this->db->registros();
+		}
+
 		function getStages() {
 			$this->db->query("SELECT * FROM project p;");
 			return $this->db->registros();
@@ -144,7 +164,6 @@
 				$resultado = (object) ["success" => false];
 				$this->db->query("UPDATE project SET
 					tb = :tb,
-					name = :name,
 					id_client = :id_client,
 					id_category = :id_category,
 					id_subcategory = :id_subcategory,
@@ -164,7 +183,6 @@
 				");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':tb', $datos["tb"]);
-				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
 				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);

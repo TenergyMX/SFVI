@@ -7,12 +7,8 @@
 		function __construct() {
 			session_start();
 			$this->modeloVisit = $this->modelo('Visits');
-<<<<<<< HEAD
-			$this->modeloProject = $this->modelo('Projects');
-=======
 			$this->datos['user'] = datos_session_usuario();
 			$this->datos['sidebar-item'] = 'visitas';
->>>>>>> L-Ulices
 		}
 
 		function index() {

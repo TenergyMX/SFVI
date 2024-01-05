@@ -43,7 +43,7 @@
                 
                 // paso 2:
                 $this->response->data['individual'][] = [
-                    'project' => $value->folio,
+                    'project' => $value->name,
                     'tenergy' => (($value->module_capacity * $hps_promedio * ($value->efficiency/100) * $value->panels)/1000)*$diasPasados
                 ];
             }

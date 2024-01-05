@@ -11,7 +11,7 @@
                 class="card border-0 bg-transparent"
                 style="min-height: 100vh; box-shadow: none"
             >
-                <div class="card-header p-0">
+                <div class="card-header bg-transparent p-0">
                     <img
                         src="<?php echo RUTA_URL; ?>img/avatars/head.svg"
                         class="img-fluid w-100"
@@ -22,8 +22,7 @@
                         <?= $datos['info']->description ?>
                     </div>
                 </div>
-
-                <div class="card-body">
+                <div class="card-body bg-transparent">
                     <form
                         action=""
                         method="get"
@@ -135,7 +134,7 @@
                         <div class="map"></div>
                     </div>
                 </div>
-                <div class="card-footer p-0">
+                <div class="card-footer bg-transparent p-0">
                     <img
                         src="<?php echo RUTA_URL; ?>img/avatars/footer.svg"
                         class="img-fluid w-100"

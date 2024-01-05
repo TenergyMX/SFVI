@@ -280,7 +280,7 @@ function ftable_visits() {
             { title: "Nombre visitante", data: "str_fullname" },
             { title: "Hora y fecha", data: "start_date" },
             { title: "Estatus", data: "str_status_of_visit" },
-            { title: "Proyecto", data: "project_folio" },
+            { title: "Proyecto", data: "project_name" },
             { title: "Info. visit", data: "btn_action" },
             { title: "Editar", data: "btn_update" },
         ],
@@ -370,9 +370,7 @@ function ftable_visits() {
                 } else {
                     $("#mdl_crud_visit [name='update']").prop("disabled", false);
                 }
-
                 break;
-
             case "show_info":
                 $("#mdl_info_visit .modal-header .modal-title").html("INFORMACIÓN DE LA VISITA");
                 var fila = $(this).closest("tr");
@@ -413,31 +411,7 @@ function ftable_visits() {
                 break;
             case "refresh_table":
                 tbl_visits.ajax.reload();
-
-                var datos = $("#mdl_crud_visit form").serialize();
-                var url = RUTA_URL + "Request/updateVisitsAfter24Hours/";
-
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: datos,
-
-                    success: function (response) {
-                        if (response.success) {
-                            Swal.fire("Visita actualizada!", "Estatus: En progreso", "success");
-                            tbl_visits.ajax.reload();
-                        } else {
-                            Swal.fire("Oops", "Fallo algo en la actualización", "error");
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrow) {
-                        console.log("Hubo un error: ", errorThrow);
-                        Swal.fire("Error del servidor", ":(", "error");
-                    },
-                });
-
                 break;
-
             case "close":
                 $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
 
@@ -466,45 +440,12 @@ function ftable_visits() {
             case "pdf":
                 $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
                 console.log("Click en el botón PDF");
-
                 break;
             default:
                 alert("Opcion no valida (tbl_visits)");
         }
         // end option
     });
-
-    /* $("#mdl_crud_visit form").on("submit", function (e) {
-        e.preventDefault();
-        var datos = $(this).serialize();
-        var url = RUTA_URL + "Request/updateVisit/";
-        // var url = RUTA_URL + "Request/updateStatusReagendada/";
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: datos,
-            beforeSend: function () {
-                $("#mdl_crud_visit form [type='submit']").prop("disabled", true);
-            },
-            success: function (response) {
-                updateStatusToReagendada(data["id"]);
-                $("#mdl_crud_visit").modal("hide");
-                if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
-                } else {
-                    Swal.fire("Oops", "fallo algo", "error");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrow) {
-                console.log("hubo un error: ", errorThrow);
-                Swal.fire("Error del servidor", ":(", "error");
-            },
-            complete: function () {
-                $("#mdl_crud_visit form [type='submit']").prop("disabled", false);
-            },
-        });
-    }); */
 
     // End
 }
@@ -518,10 +459,10 @@ function ftable_projects() {
         },
         columns: [
             { title: "ID", data: "id" },
-            { title: "Proyecto", data: "btn_project_code" },
+            { title: "Proyecto", data: "btn_project" },
             { title: "Cliente", data: "customer_fullName" },
             { title: "Avance (%)", data: "percentage" },
-            { title: "Documentación", data: "btn_docs" },
+            { title: "Documentación", data: "btn_action_docs" },
             { title: "Visitas", data: "btn_action_visit" },
             { title: "Editar", data: "btn_action" },
         ],
@@ -645,6 +586,24 @@ function ftable_projects() {
         // end option
     });
 
+    // ubicacion del proyecto
+    $("#mdl_crud_proyect form [name='state']").on("change", function () {
+        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
+        var option = $(this).find("option:selected");
+        var estado = option.attr("data-state");
+        var formulario = $("#mdl_crud_proyect .modal-body form");
+        var street = formulario.find("[name='street']").val();
+        var colony = formulario.find("[name='colony']").val();
+        var municipality = formulario.find("[name='municipality']").val();
+        var address = "";
+        address = street != "" ? `${street},` : "";
+        address = colony != "" ? `${address} col. ${colony},` : "";
+        address = municipality != "" ? `${address} ${municipality},` : "";
+        address = estado != "" ? `${address} ${estado}` : "";
+        // $("#pills-address small.address").html(address);
+        address_on_the_map(obj_map, address);
+    });
+
     // Create and update proyect
     $("#mdl_crud_proyect form").on("submit", function (e) {
         e.preventDefault();
@@ -730,7 +689,8 @@ function ftable_projects() {
 
     // End
 }
-// TODO --------------------------------------ETAPAS PROYECTOS---------------------------------------------
+
+// TODO ------------------------- [ ETAPAS PROYECTOS ] -------------------------
 
 function fprojects_stages() {
     var tbl_proyects = new DataTable("#table_proyects", {});
@@ -746,23 +706,6 @@ function fprojects_stages() {
                 break;
         }
     });
-    $("#mdl_crud_proyect form [name='state']").on("change", function () {
-        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
-        var option = $(this).find("option:selected");
-        var estado = option.attr("data-state");
-        var formulario = $("#mdl_crud_proyect .modal-body form");
-        var street = formulario.find("[name='street']").val();
-        var colony = formulario.find("[name='colony']").val();
-        var municipality = formulario.find("[name='municipality']").val();
-        var address = "";
-        address = street != "" ? `${street},` : "";
-        address = colony != "" ? `${address} col. ${colony},` : "";
-        address = municipality != "" ? `${address} ${municipality},` : "";
-        address = estado != "" ? `${address} ${estado}` : "";
-        $("#pills-address small.address").html(address);
-        address_on_the_map(obj_map, address);
-    });
-
     // End project
 }
 

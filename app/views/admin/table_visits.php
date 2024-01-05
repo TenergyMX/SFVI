@@ -51,7 +51,6 @@
                                                         <th>5</th>
                                                         <th>6</th>
                                                         <th>7</th>
-                                                        <th>8</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>

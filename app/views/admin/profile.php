@@ -123,7 +123,11 @@
                                                     <button type="submit" class="btn btn-primary me-2">
                                                         Actualizar
                                                     </button>
-                                                    <button type="button" class="btn btn-info">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-info"
+                                                        onclick="resetPassword('<?= $datos['user']['email'] ?>');"
+                                                    >
                                                         Cambiar contraseña
                                                     </button>
                                                 </div>

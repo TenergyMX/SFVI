@@ -6,6 +6,7 @@
         return [
             'id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0,
             'role' => isset($_SESSION['user']['role']) ? $_SESSION['user']['role'] : 6,
+            'int_role' => isset($_SESSION['user']['int_role']) ? $_SESSION['user']['int_role'] : 6,
             'str_role' => isset($_SESSION['user']['str_role']) ? $_SESSION['user']['str_role'] : 'Cliente',
             'name' => isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : 'Usuario',
             'surnames' => isset($_SESSION['user']['surnames']) ? $_SESSION['user']['surnames'] : NULL,

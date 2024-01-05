@@ -11,13 +11,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label"> Tipo de visita: </label>
                         <select name="id_type" id="" class="form-select" required>
-                            <option value="" selected disabled>
-                                Seleccione el Tipo de visita
-                            </option>
+                            <option value="" selected disabled>Seleccione el Tipo de visita</option>
                             <option value="1">Levantamiento técnico</option>
-                            <option value="2">
-                                Primera supervisión y entrega de materiales
-                            </option>
+                            <option value="2">Primera supervisión y entrega de materiales</option>
                             <option value="3">Mantenimiento</option>
                             <option value="4">Encendido del sistema</option>
                             <option value="5">Cierre de proyecto</option>
@@ -38,9 +34,7 @@
                             </option>
                             <?php foreach($datos['nombre_proyectos'] as $key =>
                             $data) : ?>
-                            <option value="<?php echo $data->id; ?>">
-                                <?php echo $data->folio; ?>
-                            </option>
+                            <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -67,9 +61,7 @@
                             placeholder="Nombre de visitante"
                             required
                         >
-                            <option value="" selected disabled>
-                                Seleccione el visitante
-                            </option>
+                            <option value="" selected disabled>Seleccione el visitante</option>
                             <?php foreach($datos['nombres_visitantes'] as $key =>
                             $data) : ?>
                             <option value="<?php echo $data->id; ?>">
@@ -110,21 +102,9 @@
                         />
                     </div>
                     <div class="botones text-center">
-                        <button
-                            type="submit"
-                            class="btn"
-                            name="add"
-                            style="background-color: #012130; color: #ffb154"
-                        >
-                            Agregar visita</span>
-                        </button>
-                        <button
-                            type="submit"
-                            class="btn"
-                            name="update"
-                            style="display: none; background-color: #012130"
-                        >
-                            <span style="color: #ffb154">Actualizar visita</span>
+                        <button type="submit" class="btn btn-sfvi-1" name="add">Agregar visita</button>
+                        <button type="submit" class="btn btn-sfvi-1" name="update" style="display: none">
+                            Actualizar visita
                         </button>
                     </div>
                 </form>

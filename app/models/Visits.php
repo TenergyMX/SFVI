@@ -71,24 +71,24 @@
 
 		function getVisit($datos = []) {
 			$this->db->query("SELECT v.*,
-					CONCAT(u.name, ' ', u.surnames) AS str_fullname,
-					tvisit.description AS str_type_of_visit,
-					p.folio AS project_folio,
-					svisit.description AS str_status_of_visit,
-					CONCAT(p.street, ', ', p.colony, ', ', p.municipality, ', ', p.state) AS direccion,    
-					p.lat,
-					p.lon
-					FROM visit v
-					LEFT JOIN project p
-					ON v.id_project = p.id
-					LEFT JOIN users u
-					ON v.id_user = u.id
-					LEFT JOIN type_of_visit tvisit
-					ON v.id_type = tvisit.id
-					LEFT JOIN status_of_visit svisit
-					ON v.id_status = svisit.id
-					WHERE v.id = :id
-				");
+				CONCAT(u.name, ' ', u.surnames) AS str_fullname,
+				tvisit.description AS str_type_of_visit,
+				p.name AS project_folio,
+				svisit.description AS str_status_of_visit,
+				CONCAT(p.street, ', ', p.colony, ', ', p.municipality, ', ', p.state) AS direccion,    
+				p.lat,
+				p.lon
+				FROM visit v
+				LEFT JOIN project p
+				ON v.id_project = p.id
+				LEFT JOIN users u
+				ON v.id_user = u.id
+				LEFT JOIN type_of_visit tvisit
+				ON v.id_type = tvisit.id
+				LEFT JOIN status_of_visit svisit
+				ON v.id_status = svisit.id
+				WHERE v.id = :id
+			");
 			$this->db->bind(':id', $datos["id"]);
 			return $this->db->registro();
 		}
@@ -98,7 +98,7 @@
 				$this->db->query("SELECT v.*,
 					CONCAT(u.name, ' ', u.surnames) AS str_fullname,
 					tvisit.description AS str_type_of_visit,
-					p.folio AS project_folio,
+					p.name AS project_name,
 					svisit.description AS str_status_of_visit,
 					p.lat,
 					p.lon
@@ -129,8 +129,6 @@
 			return $this->db->registros();
 		}
 
-		
-
 		function updateStatusVisit($datos = []) {
 			try {				
 				$resultado = (object) ["success" => false, "error" => ''];
@@ -149,7 +147,6 @@
 				return $resultado;
 			}
 		}
-
 
 		function getDateVisit($datos = []){
 			try {
@@ -185,9 +182,4 @@
 			}
 
 		}
-
-		
-
-
-
 	}

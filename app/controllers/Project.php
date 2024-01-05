@@ -70,10 +70,7 @@
 			isUserLoggedIn();
 			$this->datos['documento'] = $this->modeloPoject->getProyect($id);
 			$this->vista("Admin/individual_documents", $this->datos);
-<<<<<<< HEAD
-=======
 		
->>>>>>> L-Ulices
 		}
 
 		function Documentos($id=0){
