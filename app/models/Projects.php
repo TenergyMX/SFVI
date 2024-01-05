@@ -218,7 +218,7 @@
 			$resultado = (object) ["success" => false];
 			try {
 				$this->db->beginTransaction();
-				$number_of_stages = strtoupper($category) == 'FIDE' ? 7 : 6;
+				$number_of_stages = strtoupper($category) == 'FIDE' ? 8 : 6;
 				$category = strtolower($category);
 
 				// Utiliza un bucle para insertar las etapas
@@ -331,22 +331,25 @@
 
 		// No usar esta función de ser necesaria
 		function updateDataInTable($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {				
-				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("UPDATE {$datos["table"]} SET
 					{$datos["data_key"]} = :dato
-					WHERE id = :id
+					WHERE {$datos["where_data_key"]} = :where_data_value
 				");
-				$this->db->bind(':id', 1);
+				$this->db->bind(':where_data_value', $datos['where_data_value']); // actualizar cuando se pueda
 				$this->db->bind(':dato', $datos["data_value"]);
 				if ($this->db->execute()) {
-					$resultado = (object) ["success" => true];
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = "Oops, ocurrio un error al actualizar el dato";
 				}
 				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
+			return $resultado;
 		}
 	}
 ?>

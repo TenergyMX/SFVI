@@ -137,14 +137,15 @@ function ftable_users() {
             success: function (response) {
                 tbl_users.ajax.reload();
                 $("#mdl_crud_user").modal("hide");
+                console.log(response);
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
                 } else {
-                    Swal.fire("Oops", "fallo algo", "error");
+                    Swal.fire("Oops", response["error"]["message"], "error");
                 }
             },
             error: function (jqXHR, textStatus, errorThrow) {
-                console.log(errorThrow["message"]);
+                console.log(errorThrow);
                 Swal.fire("Error del servidor", errorThrow["message"], "error");
             },
             complete: function () {
@@ -223,12 +224,13 @@ function ftable_clients() {
                 $("#mdl_crud_client form [type='submit']").prop("disabled", true);
             },
             success: function (response) {
+                $("#mdl_crud_client form [type='submit']").prop("disabled", false);
                 tbl_clients.ajax.reload();
                 $("#mdl_crud_client").modal("hide");
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
                 } else {
-                    Swal.fire("Oops", "fallo algo", "error");
+                    Swal.fire("Oops", response["error"]["message"], "error");
                 }
             },
             error: function (jqXHR, textStatus, errorThrow) {

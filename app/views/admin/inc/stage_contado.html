@@ -1,18 +1,3 @@
-<div class="d-flex justify-content-center align-items-center mb-4">
-    <h2 class="text-center d-inline-block mb-0">
-        <?= (isset($datos['proyecto']->tb) && $datos['proyecto']->tb !== null) ? $datos['proyecto']->tb .
-        ' - ' . $datos['proyecto']->name : $datos['proyecto']->name ?>
-        <span class="progreso" title="Progreso actual">[0%]</span>
-    </h2>
-    <button
-        type="button"
-        class="btn btn-sm btn-info p-0 rounded-circle ms-2 btn-info-project"
-        style="width: 20px; height: 20px"
-        title="Información del proyecto"
-    >
-        <i class="fa-solid fa-info"></i>
-    </button>
-</div>
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
@@ -259,6 +244,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="recibo_CFE"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -355,6 +342,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="cotizacion"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -485,7 +474,13 @@
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
-                                                    <input class="form-control" type="file" name="CSF" />
+                                                    <input
+                                                        class="form-control"
+                                                        type="file"
+                                                        name="CSF"
+                                                        accept="application/pdf"
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
@@ -574,7 +569,13 @@
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
-                                                    <input class="form-control" type="file" name="INE" />
+                                                    <input
+                                                        class="form-control"
+                                                        type="file"
+                                                        name="INE"
+                                                        accept="application/pdf"
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
@@ -669,6 +670,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="pago_anticipo"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -804,20 +807,21 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="planos"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
                                                         <?php if ($datos["stage"][2]->planos !== null) :
                                                         ?>
-                                                        <?php $path = $datos["stage"][2]->planos; ?>
                                                         <div class="col col-download">
                                                             <button
                                                                 type="button"
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][2]->planos ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -900,6 +904,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="f_registro"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -996,10 +1002,26 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="material_equipo"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
+                                                        <?php if (isset($datos["stage"][2]->material_equipo)
+                                                        ): ?>
+                                                        <div class="col col-download">
+                                                            <button
+                                                                type="button"
+                                                                class="btn btn-success w-100 download"
+                                                                title="Descargar"
+                                                                data-id-project="<?= $datos['proyecto']->id; ?>"
+                                                                data-path="<?= $datos['stage'][2]->material_equipo; ?>"
+                                                            >
+                                                                <i class="fa-solid fa-down-to-line"></i>
+                                                            </button>
+                                                        </div>
+                                                        <?php else: ?>
                                                         <div
                                                             class="col col-download"
                                                             style="display: none"
@@ -1012,6 +1034,7 @@
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
                                                         </div>
+                                                        <?php endif; ?>
                                                         <div class="col">
                                                             <button
                                                                 type="submit"
@@ -1074,6 +1097,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contenido_armado"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1169,6 +1194,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="checkList"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1268,6 +1295,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="trabajo_alturas"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1354,7 +1383,13 @@
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
-                                                    <input class="form-control" type="file" name="EPP" />
+                                                    <input
+                                                        class="form-control"
+                                                        type="file"
+                                                        name="EPP"
+                                                        accept="application/pdf"
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
@@ -1446,6 +1481,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="memoria_calculo"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1673,6 +1710,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="report_fotografico"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1686,7 +1725,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][3]->report_fotografico; ?>"
+                                                                data-path="<?= $datos['stage'][3]->report_fotografico; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -1770,6 +1809,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="pruebas_funcionamiento"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1782,7 +1823,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][3]->pruebas_funcionamiento; ?>"
+                                                                data-path="<?= $datos['stage'][3]->pruebas_funcionamiento; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -1906,6 +1947,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="interconexion"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1919,7 +1962,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][4]->interconexion; ?>"
+                                                                data-path="<?= $datos['stage'][4]->interconexion; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2003,6 +2046,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contraprestacion"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2016,7 +2060,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][4]->contraprestacion; ?>"
+                                                                data-path="<?= $datos['stage'][4]->contraprestacion; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2097,6 +2141,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="anexo_2"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2110,7 +2155,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][4]->anexo_2; ?>"
+                                                                data-path="<?= $datos['stage'][4]->anexo_2; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2194,6 +2239,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="img_medidor_b"
+                                                        accept="image/jpeg, image/png"
                                                         required
                                                     />
                                                 </div>
@@ -2207,7 +2253,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][4]->img_medidor_b; ?>"
+                                                                data-path="<?= $datos['stage'][4]->img_medidor_b; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2323,6 +2369,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="comprobante_pago"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2337,7 +2384,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][5]->comprobante_pago; ?>"
+                                                                data-path="<?= $datos['stage'][5]->comprobante_pago; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2421,6 +2468,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="liberacion_proyecto"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2435,7 +2483,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][5]->liberacion_proyecto; ?>"
+                                                                data-path="<?= $datos['stage'][5]->liberacion_proyecto; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2520,6 +2568,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="pruebas_funcionamiento_finales"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2534,7 +2583,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][5]->pruebas_funcionamiento_finales; ?>"
+                                                                data-path="<?= $datos['stage'][5]->pruebas_funcionamiento_finales; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2623,6 +2672,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="operacion_mante"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2636,7 +2686,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][5]->operacion_mante; ?>"
+                                                                data-path="<?= $datos['stage'][5]->operacion_mante; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -2720,6 +2770,7 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="garantias"
+                                                        accept="application/pdf"
                                                         required
                                                     />
                                                 </div>
@@ -2733,7 +2784,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][5]->garantias; ?>"
+                                                                data-path="<?= $datos['stage'][5]->garantias; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>

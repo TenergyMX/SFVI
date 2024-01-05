@@ -62,9 +62,42 @@
 			$datos['password'] = isset($_POST['password']) ? $_POST['password'] : '1234';
 			$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
 
+			// Paso 1: ver si existe este correo
+			$r = $this->modeloUser->getUser_email( $datos['email'] );
+
+			if ($r) {
+				$this->response['error']['message'] = 'Este correo existe';
+				header('Content-Type: application/json');
+				echo json_encode($this->response);
+				exit;
+			}
+
+			// Paso 2: insertar
 			$response = $this->modeloUser->addUser($datos);
 			$this->response['success'] = $response->success;
 			if ($response->error) {$this->response['error'] = $response->error; }
+
+			// enviamos correo de bienvenida
+			if ($this->response['success']) {
+				try {
+				$correo = new Correo();
+				$correo->subject("Bienvenida");
+				$correo->addAddress( $datos['email'] );
+				$correo->html_template("welcome", $datos);
+				$r = $correo->enviar();
+				if ($r->success) {
+					$this->response['success'] = true;
+					$this->response['msg'] = "Correo enviado para el cambio de contraseña";
+				} else {
+					$this->response['error'] = "Oops.. hubo un error al tratar de enviar el correo";
+				}
+			} catch (Exception $e) {
+				$this->response['msg'] = "catch";
+				$this->response['error'] = $e;
+				$this->response['error'] = "Oops.. Error al procesar el correo";
+			}	
+
+			}
 
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
@@ -90,7 +123,16 @@
 			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : '';
 			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : '';
 			$datos['surnames']  = isset($_POST['surnames']) ? $_POST['surnames'] : '';
-			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';			
+			$datos['password']  = isset($_POST['password']) ? $_POST['password'] : '';	
+			
+			$r = $this->modeloUser->getUser_email( $datos['email'] );
+
+			if ($r) {
+				$this->response['error']['message'] = 'Este correo existe';
+				header('Content-Type: application/json');
+				echo json_encode($this->response);
+				exit;
+			}
 
 			$response = $this->modeloUser->updateUser($datos);
 			$this->response['success'] = $response->success;
@@ -385,12 +427,15 @@
 
 		function updateStageData() {
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['id_project']  = isset($_POST['id']) ? $_POST['id'] : 0;
 			$datos['name_project']  = isset($_POST['name_project']) ? $_POST['name_project'] : 'unknown';
 			$datos['category']  = isset($_POST['category']) ? $_POST['category'] : 'contado';
 			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : '1';
 			$datos['table']  = "p_{$datos['category']}_stage{$datos['stage']}";
 			$datos['data_key'] = "cotizacion";
 			$datos['data_value'] = NULL;
+			$datos['where_data_key'] = "id_project";
+			$datos['where_data_value'] = $datos['id_project'];
 
 			// Detectar si se subio un archivo
 			if (!empty($_FILES)) {
@@ -416,7 +461,7 @@
 						if ($i !== 0) {
 							$directory_x = $targetDirectory . $info['dirs_to_save'][$i] . '/';
 							$this->modeloFile->makeDirectory($directory_x);
-							copy($r_file->data["file"]['path'], $directory_x . $r_file->data["file"]['name']);
+							copy($r_file->data["file"]['full_path'], $directory_x . $r_file->data["file"]['name']);
 						}
 						$i += 1;
 					}
@@ -429,12 +474,7 @@
 					$this->response['data']['project']['id'] = $datos['id'];
 					$this->response['data']['file']['name'] = $r_file->data["file"]['name'];
 					$this->response['data']['file']['path'] = $r_file->data["file"]['path'];
-					
 					$this->response['success'] = $r2->success;
-					$d = [
-						'new_name' => 'NADA',
-						'dirs_to_save' => ['div_nada']
-					];
 				} else {
 					$this->response['error'] = "Oops, hubo un error al guardar el archivo";
 				}
