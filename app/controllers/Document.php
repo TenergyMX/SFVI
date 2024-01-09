@@ -9,7 +9,7 @@
 			session_start();
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->modeloDocument = $this->modelo('Documents');
-			$this->datos['user']['str_role'] = isset($_SESSION['user']['str_rol']) ? $_SESSION['user']['str_rol'] : 'Cliente';
+			$this->datos['user'] = datos_session_usuario();
 			$this->datos['sidebar-item'] = 'document';
 		}
 

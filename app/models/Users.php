@@ -84,6 +84,29 @@
 			return $resultado;
 		}
 
+		function updateUser_profile($datos = []) {
+			$resultado = (object) ["success" => false];
+			try {				
+				$this->db->query("UPDATE users SET email = :email, name = :name, surnames = :surnames WHERE id = :id");
+				$this->db->bind(':id', $datos["id"]);
+				$this->db->bind(':email', $datos["email"]);
+				$this->db->bind(':name', $datos["name"]);
+				$this->db->bind(':surnames', $datos["surnames"]);
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = 'No se pudo realizar las modificaciones en la tabla (Usuarios)';
+				}
+				return $resultado;
+			} catch (Exception $e) {
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
+			}
+			return $resultado;
+		}
+
 		function getUser($datos = []) {
 			$this->db->query("SELECT * FROM user s WHERE s.id = :id");
 			$this->db->bind(':id', $datos["id"]);

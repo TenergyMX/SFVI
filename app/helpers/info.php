@@ -1,4 +1,19 @@
 <?php
+    // TODO | Archivo para la modificación de los datos
+
+    function datos_session_usuario() {
+        // retornamos los datos tipo session del usuario que entra al sistema
+        return [
+            'id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0,
+            'role' => isset($_SESSION['user']['role']) ? $_SESSION['user']['role'] : 6,
+            'str_role' => isset($_SESSION['user']['str_role']) ? $_SESSION['user']['str_role'] : 'Cliente',
+            'name' => isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : 'Usuario',
+            'surnames' => isset($_SESSION['user']['surnames']) ? $_SESSION['user']['surnames'] : NULL,
+            'email' => isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : 'ejemplo@tenergy.com.mx',
+            'url_avatar' => RUTA_URL . 'img/avatars/user.png'
+        ];
+    }
+
     function getProjectSubfolderNames($category) {
         if ($category == NULL) { return []; }
 

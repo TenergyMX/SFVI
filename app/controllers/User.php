@@ -9,7 +9,7 @@
 			session_start();
 			$this->modeloUser = $this->modelo('Users');
 			$this->modeloCalc = $this->modelo('Calc');
-			$this->datos['user']['str_role'] = isset($_SESSION['user']['str_role']) ? $_SESSION['user']['str_role'] : 'Cliente';
+			$this->datos['user'] = datos_session_usuario();		
 			$this->datos['sidebar-item'] = 'dashboard';
 		}
 
@@ -37,7 +37,8 @@
 				if ($response->success) {
 					$_SESSION['session'] = true;
 					$_SESSION['user']['id'] = $response->data->id;
-					$_SESSION['user']['int_rol'] = $response->data->rol;
+					$_SESSION['user']['role'] = $response->data->role;
+					$_SESSION['user']['int_role'] = $response->data->role;
 					$_SESSION['user']['str_role'] = $response->data->str_role;
 					$_SESSION['user']['name'] = $response->data->name;
 					$_SESSION['user']['surnames'] = $response->data->surnames;
@@ -101,7 +102,10 @@
 		}
 
 		function profile($id = null) {
-			echo 'Vista Perfil';
+			isUserLoggedIn();
+			$this->datos['profile'] = $this->datos['user'];
+			$this->datos['sidebar-item'] = 'Perfil';
+			$this->vista("Admin/profile", $this->datos);
 		}
 
 		function table() {
