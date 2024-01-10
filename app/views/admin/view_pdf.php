@@ -2,7 +2,16 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <?php require_once(RUTA_APP.'/views/templates/head-pwa.html'); ?>
+        <style>
+            @media print {
+                body {
+                    margin: 0;
+                }
+                @page {
+                    margin: 0.5cm;
+                }
+            }
+        </style>
         <title>Información Visita</title>
     </head>
     <body>

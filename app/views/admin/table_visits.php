@@ -20,24 +20,20 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
-                                                class="btn"
+                                                class="btn btn-sfvi-1"
                                                 title="Agregar Visita"
                                                 data-option="create"
-                                                style="background-color: white"
                                             >
-                                                <i class="fa-regular fa-plus me-1" style="color: #012130"></i>
-                                                   <span style="color: #012130">Agregar Visita<span>
-                                                
+                                                <i class="fa-regular fa-plus me-1"></i>
+                                                Agregar Visita
                                             </button>
                                             <button
                                                 type="button"
-                                                class="btn"
+                                                class="btn btn-sfvi-1"
                                                 title="Actualizar tabla"
                                                 data-option="refresh_table"
-                                                style="background-color: #012130"
                                             >
-                                                <i class="fa-regular fa-arrows-rotate me-1" style="color: #54F7FF"></i>
-                                                
+                                                <i class="fa-regular fa-arrows-rotate"></i>
                                             </button>
                                         </div>
                                         <div class="table-responsive">

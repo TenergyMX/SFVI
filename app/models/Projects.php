@@ -28,6 +28,7 @@
 						percentage,
 						lat,
 						lon,
+						period,
 						panels,
 						module_capacity,
 						efficiency
@@ -49,6 +50,7 @@
 						:percentage,
 						:lat,
 						:lng,
+						:period,
 						:panels,
 						:module_capacity,
 						:efficiency
@@ -71,6 +73,7 @@
 				$this->db->bind(':percentage', $datos["percentage"]);
 				$this->db->bind(':lat', $datos["lat"]);
 				$this->db->bind(':lng', $datos["lng"]);
+				$this->db->bind(':period', $datos["period"]);
 				$this->db->bind(':panels', $datos["panels"]);
 				$this->db->bind(':module_capacity', $datos["module_capacity"]);
 				$this->db->bind(':efficiency', $datos["efficiency"]);
@@ -88,27 +91,6 @@
 				$resultado->error['code'] = $e->getCode();
 			}
 			return $resultado;
-		}
-
-		function addProjectquotation($datos = []) {
-			try {
-				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE project SET
-					quotation = :quotation
-					WHERE id = :id
-				");
-				$this->db->bind(':id', $datos["id"]);
-				$this->db->bind(':quotation', $datos["quotation"]);
-				if ($this->db->execute()) {
-					$resultado->success = true;
-				} else {
-					$resultado->error = 'Oops (project)';
-				}
-				return $resultado;
-			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
-			}
 		}
 
 		function getProject($id) {
@@ -236,7 +218,7 @@
 			$resultado = (object) ["success" => false];
 			try {
 				$this->db->beginTransaction();
-				$number_of_stages = strtoupper($category) == 'FIDE' ? 7 : 6;
+				$number_of_stages = strtoupper($category) == 'FIDE' ? 8 : 6;
 				$category = strtolower($category);
 
 				// Utiliza un bucle para insertar las etapas
@@ -349,22 +331,24 @@
 
 		// No usar esta función de ser necesaria
 		function updateDataInTable($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {				
-				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("UPDATE {$datos["table"]} SET
 					{$datos["data_key"]} = :dato
-					WHERE id = :id
+					{$datos["where"]}
 				");
-				$this->db->bind(':id', 1);
 				$this->db->bind(':dato', $datos["data_value"]);
 				if ($this->db->execute()) {
-					$resultado = (object) ["success" => true];
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = "Oops, ocurrio un error al actualizar el dato";
 				}
 				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
+			return $resultado;
 		}
 	}
 ?>

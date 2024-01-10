@@ -42,6 +42,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-2"
                         aria-selected="false"
+                        disabled
                     >
                         2
                     </button>
@@ -57,6 +58,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-3"
                         aria-selected="false"
+                        disabled
                     >
                         3
                     </button>
@@ -72,6 +74,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-4"
                         aria-selected="false"
+                        disabled
                     >
                         4
                     </button>
@@ -87,6 +90,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-5"
                         aria-selected="false"
+                        disabled
                     >
                         5
                     </button>
@@ -102,6 +106,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-6"
                         aria-selected="false"
+                        disabled
                     >
                         6
                     </button>
@@ -117,6 +122,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-7"
                         aria-selected="false"
+                        disabled
                     >
                         7
                     </button>
@@ -132,6 +138,7 @@
                         role="tab"
                         aria-controls="pills-fide-etapa-8"
                         aria-selected="false"
+                        disabled
                     >
                         8
                     </button>
@@ -216,6 +223,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="recibo_CFE"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -228,7 +237,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?php $datos['stage'][0]->recibo_CFE; ?>"
+                                                                data-path="<?= $datos['stage'][0]->recibo_CFE; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -311,6 +320,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="cotizacion"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -324,7 +335,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][0]->cotizacion; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -444,6 +455,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="CSF_PM"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -457,7 +470,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->CSF_PM; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -540,6 +553,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="acta_constitutiva_pm"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -554,7 +569,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->acta_constitutiva_pm; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -637,6 +652,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="poder_notarial_pm"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -651,7 +668,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->poder_notarial_pm; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -703,7 +720,7 @@
                                         aria-expanded="false"
                                         aria-controls="collapse-etapa_2__INE"
                                     >
-                                        3. INE
+                                        4. INE
                                     </button>
                                     <?php if ( $datos["stage"][1]->INE !== null) : ?>
                                     <div class="icon-checkbox checked">
@@ -731,7 +748,13 @@
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
-                                                    <input class="form-control" type="file" name="INE" />
+                                                    <input
+                                                        class="form-control"
+                                                        type="file"
+                                                        name="INE"
+                                                        accept="application/pdf"
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
@@ -743,7 +766,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->INE; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -826,6 +849,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="buro_de_credito"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -840,7 +865,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->buro_de_credito; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -923,6 +948,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="recibo_CFE"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -936,7 +963,7 @@
                                                                 class="btn btn-success w-100 download"
                                                                 title="Descargar"
                                                                 data-id-project="<?= $datos['proyecto']->id; ?>"
-                                                                data-path="<?= $path ?>"
+                                                                data-path="<?= $datos['stage'][1]->recibo_CFE; ?>"
                                                             >
                                                                 <i class="fa-solid fa-down-to-line"></i>
                                                             </button>
@@ -1059,6 +1086,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="INE_solidario"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1155,6 +1184,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="CSF_solidario"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1244,7 +1275,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1252,6 +1283,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="CSF_repre_legal"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1339,7 +1372,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1347,6 +1380,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="recibo_CFE_aval"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1434,7 +1469,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1442,6 +1477,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="com_domi_aval"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1529,7 +1566,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1537,6 +1574,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="com_dom_rl"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1624,7 +1663,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1632,6 +1671,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="com_dom_negocio"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1686,7 +1727,7 @@
                     </div>
                     <div class="col-sm">
                         <div class="accordion">
-                            <!-- Etapa 2 : INE RL negocio -->
+                            <!-- Etapa 3 : INE RL negocio -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header position-relative">
                                     <button
@@ -1732,6 +1773,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="INE_rl_negocio"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1819,7 +1862,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="2"
+                                                value="3"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -1827,6 +1870,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="predial_negocio"
+                                                        accept="image/jpeg, image/png"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -1922,6 +1967,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="img_medidor"
+                                                        accept="image/jpeg, image/png"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2017,6 +2064,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="img_fachada"
+                                                        accept="image/jpeg, image/png"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2112,6 +2161,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="ref_personal_1"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2207,6 +2258,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="ref_personal_2"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2267,7 +2320,7 @@
                                         aria-expanded="false"
                                         aria-controls="collapse-etapa_3__anexo_tecnico"
                                     >
-                                        14. Referencia personal 2
+                                        14. Anexo tecnico
                                     </button>
                                     <?php if ( $datos["stage"][2]->anexo_tecnico !== null) : ?>
                                     <div class="icon-checkbox checked">
@@ -2302,6 +2355,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="anexo_tecnico"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2437,6 +2492,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contrato_tripartita"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2498,7 +2555,7 @@
                                         aria-expanded="false"
                                         aria-controls="collapse-etapa_4__pagare"
                                     >
-                                        4. Pagare
+                                        2. Pagare
                                     </button>
                                     <?php if ( $datos["stage"][3]->pagare !== null) : ?>
                                     <div class="icon-checkbox checked">
@@ -2530,6 +2587,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="pagare"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2626,6 +2685,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="sol_credito"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2728,6 +2789,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="insentivo_energetico"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2823,6 +2886,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="card_comp_OS"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2918,6 +2983,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="card_reconocimiento"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -2987,7 +3054,7 @@
                         <button
                             class="btn btn-info w-100 btn-back"
                             title="Regresar"
-                            onclick="project_stage_transition('#pills-fide-etapa-5-tab');"
+                            onclick="project_stage_transition('#pills-fide-etapa-4-tab');"
                         >
                             <i class="fa-solid fa-arrow-left"></i>
                         </button>
@@ -2997,7 +3064,7 @@
                         <button
                             class="btn btn-info w-100 btn-next"
                             title="Suguiente"
-                            onclick="project_stage_transition('#pills-fide-etapa-5-tab');"
+                            onclick="project_stage_transition('#pills-fide-etapa-6-tab');"
                         >
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
@@ -3050,6 +3117,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="planos"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3146,6 +3215,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="f_registro"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3242,6 +3313,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="material_equipo"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3338,6 +3411,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contenido_armado"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3434,6 +3509,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="checkList"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3535,6 +3612,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="trabajo_alturas"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3624,7 +3703,13 @@
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
-                                                    <input class="form-control" type="file" name="EPP" />
+                                                    <input
+                                                        class="form-control"
+                                                        type="file"
+                                                        name="EPP"
+                                                        accept="application/pdf"
+                                                        required
+                                                    />
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="row gx-2">
@@ -3719,6 +3804,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="memoria_calculo"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3815,6 +3902,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="valid_compras"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -3951,6 +4040,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="repor_fotografico"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4046,6 +4137,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="p_funcionamiento"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4182,6 +4275,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contrato_interconexion"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4279,6 +4374,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="contrato_contrapestacion"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4372,6 +4469,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="anexo_2"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4468,6 +4567,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="img_medidor_b"
+                                                        accept="image/jpeg, image/png"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4588,7 +4689,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="7"
+                                                value="8"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -4596,6 +4697,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="liberacion_proyecto"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4683,7 +4786,7 @@
                                                 type="hidden"
                                                 name="stage"
                                                 class="form-control"
-                                                value="7"
+                                                value="8"
                                             />
                                             <div class="row gx-2">
                                                 <div class="col-md">
@@ -4691,6 +4794,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="operacion_mante"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4787,6 +4892,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="garantias"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">
@@ -4882,6 +4989,8 @@
                                                         class="form-control"
                                                         type="file"
                                                         name="doc_finales_fide"
+                                                        accept="application/pdf"
+                                                        required
                                                     />
                                                 </div>
                                                 <div class="col-md-3">

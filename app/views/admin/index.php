@@ -96,6 +96,7 @@
                                                     General
                                                 </button>
                                             </li>
+                                            <?php if ($datos['user']['int_role'] <= 2) : ?>
                                             <li class="nav-item">
                                                 <button
                                                     class="nav-link fw-bold"
@@ -110,6 +111,7 @@
                                                     Individual
                                                 </button>
                                             </li>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                     <div class="card-body">
@@ -206,6 +208,7 @@
                                                     General
                                                 </button>
                                             </li>
+                                            <?php if ($datos['user']['int_role'] <= 2) : ?>
                                             <li class="nav-item">
                                                 <button
                                                     class="nav-link fw-bold"
@@ -220,6 +223,7 @@
                                                     Individual
                                                 </button>
                                             </li>
+                                            <?php endif; ?>
                                         </ul>
                                     </div>
                                     <div class="card-body bg-ecologico">

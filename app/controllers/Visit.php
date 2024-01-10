@@ -30,10 +30,7 @@
 
 		function generatePdf($id=0){
 			$this->datos['info'] = $this->modeloVisit->getVisit(['id' => $id]);
-			
-
 			$this->vista("Admin/view_pdf", $this->datos);
-			// echo "<script> window.print(); </script>";
 		}  
 		
 	}

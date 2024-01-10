@@ -57,7 +57,7 @@
 
         public function enviar() {
             try {
-                $this->mail->setFrom('hermes@tenergy.com.mx', 'Ulices de Tenergy');
+                $this->mail->setFrom('hermes@tenergy.com.mx', 'SFVI de Tenergy');
                 // $this->mail->addAddress($destinatario);
                 $this->mail->isHTML(true);
                 $this->mail->CharSet = 'UTF-8';

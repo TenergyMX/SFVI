@@ -137,14 +137,15 @@ function ftable_users() {
             success: function (response) {
                 tbl_users.ajax.reload();
                 $("#mdl_crud_user").modal("hide");
+                console.log(response);
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
                 } else {
-                    Swal.fire("Oops", "fallo algo", "error");
+                    Swal.fire("Oops", response["error"]["message"], "error");
                 }
             },
             error: function (jqXHR, textStatus, errorThrow) {
-                console.log(errorThrow["message"]);
+                console.log(errorThrow);
                 Swal.fire("Error del servidor", errorThrow["message"], "error");
             },
             complete: function () {
@@ -248,12 +249,13 @@ function ftable_clients() {
                 $("#mdl_crud_client form [type='submit']").prop("disabled", true);
             },
             success: function (response) {
+                $("#mdl_crud_client form [type='submit']").prop("disabled", false);
                 tbl_clients.ajax.reload();
                 $("#mdl_crud_client").modal("hide");
                 if (response.success) {
                     Swal.fire("", "Accion exitosa", "success");
                 } else {
-                    Swal.fire("Oops", "fallo algo", "error");
+                    Swal.fire("Oops", response["error"]["message"], "error");
                 }
             },
             error: function (jqXHR, textStatus, errorThrow) {
@@ -268,6 +270,7 @@ function ftable_clients() {
 
     // End
 }
+
 // TODO ------------------------- [ VISITAS ] -------------------------
 function ftable_visits() {
     var tbl_visits = new DataTable("#table_visits", {
@@ -452,7 +455,7 @@ function ftable_visits() {
 
 // TODO ------------------------- [ PROYECTOS ] -------------------------
 function ftable_projects() {
-    var tbl_proyects = new DataTable("#table_proyects", {
+    var tbl_projects = new DataTable("#table_proyects", {
         ajax: {
             url: RUTA_URL + "Request/getProjects/",
             dataSrc: "data",
@@ -496,23 +499,19 @@ function ftable_projects() {
                 $("#mdl_crud_proyect .modal-body form [name='update']").show();
                 // Asignar valores
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 var formulario = $("#mdl_crud_proyect .modal-body form");
+                formulario.find(".col-existing-file").addClass("d-none");
+
                 $.each(data, function (index, value) {
                     if (index != "quotation") {
                         formulario.find(`[name="${index}"]`).val(value);
                     }
                 });
+
                 formulario.find("[name='lng']").val(data["lon"]);
                 if (data["start_date"] != null) {
-                    console.log(data["start_date"]);
                     formulario.find("[name='start_date']").val(data["start_date"].split(" ")[0]);
-                }
-                formulario.find("[name='existing_file']").attr("onclick", `open_window('${RUTA_URL}')`);
-                if (data["quotation"] !== null) {
-                    $(".col-existing-file").removeClass("d-none");
-                } else {
-                    $(".col-existing-file").addClass("d-none");
                 }
 
                 // Actualizar las cordenas
@@ -528,7 +527,7 @@ function ftable_projects() {
                 $("#mdl_update_proyect .modal-body form [name='add']").hide();
                 $("#mdl_update_proyect .modal-body form [name='update']").show();
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 $("#mdl_update_proyect form [name='id']").val(data["id"]);
                 $("#mdl_update_proyect form [name='tb_project']").val(fila.find("td:eq(1)").text());
                 $("#mdl_update_proyect form [name='id_client']").val(fila.find("td:eq(2)").text());
@@ -545,41 +544,20 @@ function ftable_projects() {
                 $("#mdl_update_proyect form [name='start_date']").val(data["start_date"]);
                 $("#mdl_update_proyect").modal("show");
                 break;
-            case "show_visits":
-                $("#mdl_crud_visit .modal-header .modal-title").html("AGREGAR VISITA");
-                $("#mdl_crud_visit .modal-body form [name='add']").show();
-                $("#mdl_crud_visit .modal-body form [name='update']").hide();
-                $("#mdl_crud_visit").modal("show");
-                break;
             case "info_stages":
                 $("#mdl_info_stages .modal-header .modal-title").html("INFORMACIÓN DEL PROYECTO");
                 $("#mdl_info_stages .modal-body form [name='add']").show();
                 $("#mdl_info_stages .modal-body form [name='update']").hide();
                 $("#mdl_info_stages").modal("show");
-
-            /* var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
-                $("#mdl_info_stages form [name='id']").val(data["id"]); */
-            /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
-            /*  $("#mdl_info_stages form [name='folio']").val(
-                    fila.find("td:eq(1)").text()
-                );
-                $("#mdl_info_stages form [name = 'id_client']").val(
-                    fila.find("td:eq(2)").text()
-                );
-                $("#mdl_info_stages").modal("show");
-
-                break; */
             case "add_visit":
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 $("#mdl_crud_visit form [name='project']").val(data["id"]);
                 $("#mdl_crud_visit").modal("show");
                 break;
             case "refresh_table":
-                tbl_proyects.ajax.reload();
+                tbl_projects.ajax.reload();
                 break;
-
             default:
                 alert("Opcion no valida");
         }
@@ -600,6 +578,7 @@ function ftable_projects() {
         address = colony != "" ? `${address} col. ${colony},` : "";
         address = municipality != "" ? `${address} ${municipality},` : "";
         address = estado != "" ? `${address} ${estado}` : "";
+        address = $.trim(address);
         // $("#pills-address small.address").html(address);
         address_on_the_map(obj_map, address);
     });
@@ -628,7 +607,7 @@ function ftable_projects() {
 
         var option = $('button[type="submit"]:focus', this).attr("name");
         var datos = new FormData($("#mdl_crud_proyect form")[0]);
-        var url = RUTA_URL + "Request/" + (option == "add" ? "addProyect" : "updateProject");
+        var url = RUTA_URL + "Request/" + (option == "add" ? "addProject" : "updateProject");
         $.ajax({
             type: "POST",
             url: url,
@@ -642,7 +621,7 @@ function ftable_projects() {
                 console.log(response);
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
-                    tbl_proyects.ajax.reload();
+                    tbl_projects.ajax.reload();
                     $("#mdl_crud_proyect").modal("hide");
                 } else {
                     Swal.fire("Oops", response.error.message, "error");
@@ -690,10 +669,41 @@ function ftable_projects() {
     // End
 }
 
+function calc_panels() {
+    var form = $("#mdl_crud_proyect form");
+    var charge = form.find("[name='charge']").val();
+    var periodo = form.find("[name='period']").val();
+    var hsp = $("[name='state'] option:selected").attr("data-hsp");
+    var eficiencia_panel = form.find("[name='efficiency']").val();
+    var capacidad_panel = form.find("[name='module_capacity']").val();
+
+    charge = charge ? parseFloat(charge) : 0; // ! unidad: kWh
+    eficiencia_panel = eficiencia_panel ? parseFloat(eficiencia_panel) / 100 : 0;
+    capacidad_panel = capacidad_panel ? parseFloat(capacidad_panel) : 0;
+
+    // calcular...
+    var consumo_diario = charge / periodo; // ! Unidad: kWh
+    // Pasar carga a cantidad W
+    var carga_diaria = consumo_diario * 1000; // ! unidad: W
+    // paneles
+    var num_panels = carga_diaria / (hsp * eficiencia_panel * capacidad_panel);
+    if (Number.isFinite(num_panels)) {
+        num_panels = Math.ceil(num_panels);
+    } else {
+        num_panels = 0;
+    }
+    form.find("[name='panels']").val(num_panels);
+    return num_panels;
+}
+
+$("form .calc-panels").on("input", function () {
+    calc_panels();
+});
+
 // TODO ------------------------- [ ETAPAS PROYECTOS ] -------------------------
 
 function fprojects_stages() {
-    var tbl_proyects = new DataTable("#table_proyects", {});
+    var tbl_projects = new DataTable("#table_proyects", {});
     $("body").on("click", "[data-option]", function () {
         let option = $(this).attr("data-option"); // [create / add , update, delete]
         switch (option) {
@@ -753,7 +763,7 @@ $(".btn-info-project").on("click", function () {
     $("#mdl_info_stages").modal("show");
 });
 
-$("button.download").on("click", function () {
+$("body").on("click", "button.download, .download-file", function () {
     var id_project = $(this).attr("data-id-project");
     var path = $(this).attr("data-path");
     open_window(`${RUTA_URL}File/get_project_file/${id_project}?path=${path}`);
@@ -868,36 +878,99 @@ function calcularProgresoEtapa() {
 }
 
 // TODO ------------------------- [ DOCUMENTOS GENERALES] -------------------------
-function ftable_documents() {
-    var tbl_documents = new DataTable("#table_documents", {
-        // ajax: {
-        //     url: RUTA_URL + "Request/getDocumentsGeneral/",
-        //     dataSrc: "data",
-        // },
-        // columns: [
-        //     { title: "Nombre", data: "folio" },
-        //     { title: "Documento", data: "show_document" },
-        //     { title: "Descargar", data: "btn_dowloand" },
-        // ],
-        // language: {
-        //     url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
-        // },
-    });
+$("[name='project-documents']").on("change", function (e) {
+    e.preventDefault();
+    var _id_project = $(this).val();
 
-    $("body").on("click", "[data-option]", function () {
-        let option = $(this).attr("data-option"); // [create / add , update, delete]
-        switch (option) {
-            case "create":
-            case "show_doc":
-                // alert("mijo");
-                $("#mdl_info_documents .modal-header .modal-title").html("DOCUMENTOS");
-                $("#mdl_info_documents .modal-body form [name='show_doc']").show();
-                $("#mdl_info_documents").modal("show");
+    $.ajax({
+        type: "GET",
+        url: RUTA_URL + "Request/getDocs/",
+        data: {
+            id_project: _id_project,
+        },
+        success: function (response) {
+            var folder_names = $("div[data-folder-name]");
+            folder_names.hide();
 
-                break;
-        }
+            if (!("data" in response)) {
+                console.log(response);
+                console.log("Sin datos");
+                return;
+            }
+
+            // Mostrar las carpetas del proyecto
+            $.each(response.data.docs, function (key, value) {
+                if (Array.isArray(value)) {
+                    // console.log("Es un array:", key, "=>", value);
+                    // folder_names.filter(`[data-folder-name="${key}"]`).show();
+                    filter = folder_names.filter(`[data-folder-name="${key}"]`);
+                    if (filter.length > 0) {
+                        filter.show();
+                    } else {
+                        // Crear folder en caso de no existir
+                        var clonedFolder = $($("div[data-folder-name]")[0]).clone();
+                        clonedFolder.show();
+                        clonedFolder.attr("data-folder-name", key);
+                        clonedFolder.find(".folder-name").html(key);
+                        clonedFolder.appendTo(".row-folders");
+                    }
+                }
+            });
+
+            $("[data-folder-name]").on("click", function (e) {
+                e.preventDefault();
+                var key = $(this).attr("data-folder-name");
+                var html = "";
+                $("#mdl_project_documentsLabel").html(key);
+                $.each(response.data.docs[key], function (key, value) {
+                    // Dividir la ruta en partes usando el separador "/"
+                    var partes = value.split("/");
+
+                    // Tomar la última parte que debería ser el nombre del archivo
+                    var nombreArchivoConExtension = partes[partes.length - 1];
+
+                    // Dividir el nombre del archivo en nombre y extensión usando el punto "."
+                    var nombreYExtension = nombreArchivoConExtension.split(".");
+                    var nombreArchivo = nombreYExtension[0];
+                    var extensionArchivo = nombreYExtension[1];
+
+                    console.log("Nombre del archivo: " + nombreArchivo);
+                    console.log("Extensión del archivo: " + extensionArchivo);
+                    console.log("---");
+
+                    var icon = RUTA_URL + "img/icons/icon-";
+                    icon = icon + (extensionArchivo == "pdf" ? "pdf" : "image") + ".png";
+
+                    html += `<div class="col-6 col-md-3 col-lg-3">
+                        <div
+                            class="file download-file p-2"
+                            data-id-project="${response.data.project["id"]}"
+                            data-path="${value}"
+                        >
+                            <div class="file-icon px-1">
+                                <img
+                                    src="${icon}"
+                                    alt=""
+                                    class="card-img w-100"
+                                />
+                            </div>
+                            <div class="file-name text-center">${nombreArchivo}</div>
+                        </div>
+                    </div>
+                    `;
+                });
+
+                // Cargar las columnas de los archivos...
+                $(".row-files").html(html);
+
+                // Mostrar el modal
+                $("#mdl_project_documents").modal("show");
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrow) {},
+        complete: function () {},
     });
-}
+});
 // TODO ------------------------- [ Eventos Globales ] -------------------------
 
 // Envia un link al correo del usuario para cambiar su contraseña

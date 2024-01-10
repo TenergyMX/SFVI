@@ -19,8 +19,8 @@
             }
 
 
-            $this->db->query("SELECT * FROM project");
-			$datos_project =  $this->db->registros();
+            $this->db->query("SELECT * FROM project p");
+            $datos_project =  $this->db->registros();
             $hps_promedio = 0;
             $generacion_t = 0;
 
@@ -32,15 +32,15 @@
                     }
                 }
                 
-                $fechaInicial = $value->end_date;
+                $fechaInicial = $value->start_date;
                 $fechaActual = date('Y-m-d');
                 // Calcular la diferencia en segundos entre las dos fechas
                 $diferenciaEnSegundos = strtotime($fechaActual) - strtotime($fechaInicial);
                 // Calcular la cantidad de días redondeando hacia abajo
                 $diasPasados = floor($diferenciaEnSegundos / (60 * 60 * 24));
+                $diasPasados = $diasPasados >= 1 ? $diasPasados : 1;
 
                 $generacion_t += (($value->module_capacity * $hps_promedio * ($value->efficiency/100) * $value->panels)/1000)*$diasPasados;
-                
                 // paso 2:
                 $this->response->data['individual'][] = [
                     'project' => $value->name,

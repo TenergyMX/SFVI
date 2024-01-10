@@ -13,12 +13,11 @@
 			$this->datos['sidebar-item'] = 'document';
 		}
 
-		function index() {
-			$this->datos['nombre_proyectos'] = $this->modeloDocument->getProjects(); 
-			$this->datos['nombre_clientes'] = $this->modeloDocument->getClients();
+		function index($id_project = NULL) {
+			$this->datos['proyectos'] = $this->modeloDocument->getProjects();
 			$this->datos['sidebar-item'] = 'documentos';
+			$this->datos['project']['id'] = $id_project;
 			$this->vista("Admin/table_documents", $this->datos); 
 		}
-		
 	}
 ?>
