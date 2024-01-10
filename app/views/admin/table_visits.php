@@ -20,22 +20,20 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
-                                                class="btn btn-primary"
+                                                class="btn btn-sfvi-1"
                                                 title="Agregar Visita"
                                                 data-option="create"
                                             >
                                                 <i class="fa-regular fa-plus me-1"></i>
                                                 Agregar Visita
-                                                
                                             </button>
                                             <button
                                                 type="button"
-                                                class="btn btn-info"
+                                                class="btn btn-sfvi-1"
                                                 title="Actualizar tabla"
                                                 data-option="refresh_table"
                                             >
-                                                <i class="fa-regular fa-arrows-rotate me-1"></i>
-                                                
+                                                <i class="fa-regular fa-arrows-rotate"></i>
                                             </button>
                                         </div>
                                         <div class="table-responsive">
@@ -48,6 +46,7 @@
                                                         <th>4</th>
                                                         <th>5</th>
                                                         <th>6</th>
+                                                        <th>7</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>

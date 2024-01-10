@@ -78,7 +78,7 @@
 			$this->vista("Admin/individual_document", $this->datos);
 			if ($this->datos['documento']->id_category == 1) {
 				echo 'Proyecto FIDE. Nombre: '.$this->datos['documento']->folio;
-			} else {
+			} else { 
 				echo 'Proyecto no disponible';
 			}
 			$this->modeloProject = $this->modelo('Projects');
@@ -91,12 +91,5 @@
 			$this->vista("Admin/project_stages", $this->datos);
 		}  
 
-        //  funcion para obtener el cliente de los proyectos mandados llamar en el modelo projects
-		// function documentsClients($id=0){
-			// $this->datos['cliente'] = $this->modeloProject->getClientsDocument($id);
-			// $this->vista("Admin/individual_documents", $this->datos);
-		// }
-
-		
 	}
 ?>

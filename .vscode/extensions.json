@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "PKief.material-icon-theme",
+        "aaron-bond.better-comments",
+        "anseki.vscode-color",
+        "katsute.code-background",
+        "GitLab.gitlab-workflow"
+    ]
+}

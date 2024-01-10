@@ -17,20 +17,6 @@
                         <li class="nav-item" role="presentation">
                             <button
                                 class="nav-link active"
-                                id="pills-project-tab"
-                                data-bs-toggle="pill"
-                                data-bs-target="#pills-project"
-                                type="button"
-                                role="tab"
-                                aria-controls="pills-project"
-                                aria-selected="true"
-                            >
-                                Proyecto
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button
-                                class="nav-link"
                                 id="pills-address-tab"
                                 data-bs-toggle="pill"
                                 data-bs-target="#pills-address"
@@ -42,14 +28,142 @@
                                 Dirección
                             </button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="pills-project-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-project"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-project"
+                                aria-selected="true"
+                            >
+                                Proyecto
+                            </button>
+                        </li>
                     </ul>
                     <!-- end nav -->
                     <input name="id" class="form-control" value="0" hidden />
                     <!-- contenido -->
                     <div class="tab-content">
-                        <!-- contenido del tipo del proyecto -->
+                        <!-- contenido tipo dirección -->
                         <div
                             class="tab-pane fade show active"
+                            id="pills-address"
+                            role="tabpanel"
+                            aria-labelledby="pills-address-tab"
+                            tabindex="0"
+                        >
+                            <!-- input's -->
+                            <div class="row gx-3 gy-2 mb-3">
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Calle
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="street"
+                                        class="form-control"
+                                        aria-describedby="street"
+                                        placeholder="Calle"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Colonia
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="colony"
+                                        class="form-control"
+                                        aria-describedby="colony"
+                                        placeholder="Colonia"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Municipio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="municipality"
+                                        class="form-control"
+                                        aria-describedby="municipality"
+                                        placeholder="Municipio"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Estado
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="state" id="" class="form-select">
+                                        <option value="" data-state="" selected disabled>
+                                            Seleccione el estado
+                                        </option>
+                                        <?php foreach($datos['nombre_estados'] as $key =>$data) : ?>
+                                        <option
+                                            value="<?= $data->estado; ?>"
+                                            data-state="<?= $data->estado; ?>"
+                                            data-hsp="<?= $data->promedio; ?>"
+                                        >
+                                            <?= $data->estado; ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <small class="d-block text-center address"></small>
+                                </div>
+                            </div>
+                            <!-- lat y lng -->
+                            <div class="row gx-3qk">
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lat"
+                                        class="form-control"
+                                        placeholder="Latitud"
+                                        hidden
+                                    />
+                                </div>
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lng"
+                                        class="form-control"
+                                        placeholder="Longitud"
+                                        hidden
+                                    />
+                                </div>
+                            </div>
+                            <!-- map -->
+                            <div class="container-map">
+                                <div class="map"></div>
+                                <small class="text-danger text-center d-block mt-2">
+                                    Mueva el marcador en la ubicación del proyecto
+                                </small>
+                            </div>
+                            <div class="row justify-content-center gx-3 gy-3 gy-md-0 mt-3">
+                                <div class="col-md-4 col-lg-3">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sfvi-1 w-100"
+                                        onclick="$('#pills-project-tab').tab('show');"
+                                    >
+                                        Siguiente
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- end map -->
+                        </div>
+                        <!-- contenido del tipo del proyecto -->
+                        <div
+                            class="tab-pane fade"
                             id="pills-project"
                             role="tabpanel"
                             aria-labelledby="pills-project-tab"
@@ -67,7 +181,7 @@
                                             Seleccione el tipo de venta
                                         </option>
                                         <option value="1">FIDE</option>
-                                        <option value="2">Contado</option>
+                                        <option value="2">CONTADO</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -75,11 +189,7 @@
                                         Tipo de proyecto
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <select
-                                        name="id_subcategory"
-                                        id=""
-                                        class="form-select"
-                                    >
+                                    <select name="id_subcategory" id="" class="form-select">
                                         <option value="" selected disabled>
                                             Seleccione el tipo de proyecto
                                         </option>
@@ -98,14 +208,11 @@
                                         class="form-select"
                                         placeholder="Nombre de visitante"
                                     >
-                                        <option value="" selected disabled>
-                                            Seleccione el cliente
-                                        </option>
+                                        <option value="" selected disabled>Seleccione el cliente</option>
                                         <?php foreach($datos['nombre_clientes'] as $key =>
                                         $data) : ?>
                                         <option value="<?php echo $data->id; ?>">
-                                            <?php echo "{$data->name} {$data->surnames}"
-                                            ?>
+                                            <?php echo "{$data->name} {$data->surnames}" ?>
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -186,7 +293,7 @@
                                 </div>
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
-                                        Carga (KW)
+                                        Carga (KWh)
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input
@@ -194,7 +301,8 @@
                                         name="charge"
                                         class="form-control"
                                         aria-describedby="charge"
-                                        placeholder="Carga (KW)"
+                                        placeholder="Carga promedio"
+                                        step="any"
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -203,11 +311,11 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="module_capacity"
-                                        class="form-control"
+                                        class="form-control calc-panels"
                                         aria-describedby="module_capacity"
-                                        placeholder="Paneles"
+                                        placeholder="Potencia del panel"
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -216,11 +324,13 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         name="efficiency"
-                                        class="form-control"
+                                        class="form-control calc-panels"
                                         aria-describedby="efficiency"
-                                        placeholder="Paneles"
+                                        placeholder="Porcentaje de eficiencia"
+                                        min="0"
+                                        max="100"
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -234,6 +344,7 @@
                                         class="form-control"
                                         aria-describedby="panels"
                                         placeholder="Num. Paneles"
+                                        readonly
                                     />
                                 </div>
                                 <div class="col-md-6 col-xl-4">
@@ -249,152 +360,38 @@
                                         placeholder="Num. Paneles"
                                     />
                                 </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Periodo
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="period" class="form-control calc-panels">
+                                        <option value="30" data-days="30">Mensual</option>
+                                        <option value="59" data-days="59" selected>Bimestral</option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- end input's -->
                             <div class="row justify-content-center gx-3 mt-3">
                                 <div class="col-md-6 col-lg-3">
                                     <button
                                         type="button"
-                                        class="btn btn-info w-100"
+                                        class="btn btn-sfvi-1 w-100"
                                         onclick="$('#pills-address-tab').tab('show');"
-                                    >
-                                        Siguiente
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- end -->
-                        </div>
-                        <!-- contenido tipo dirección -->
-                        <div
-                            class="tab-pane fade"
-                            id="pills-address"
-                            role="tabpanel"
-                            aria-labelledby="pills-address-tab"
-                            tabindex="0"
-                        >
-                            <!-- input's -->
-                            <div class="row gx-3 gy-2 mb-3">
-                                <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label">
-                                        Calle
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="street"
-                                        class="form-control"
-                                        aria-describedby="street"
-                                        placeholder="Calle"
-                                    />
-                                </div>
-                                <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label">
-                                        Colonia
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="colony"
-                                        class="form-control"
-                                        aria-describedby="colony"
-                                        placeholder="Colonia"
-                                    />
-                                </div>
-                                <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label">
-                                        Municipio
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="municipality"
-                                        class="form-control"
-                                        aria-describedby="municipality"
-                                        placeholder="Municipio"
-                                    />
-                                </div>
-                                <div class="col-md-6 col-lg-3">
-                                    <label for="" class="form-label">
-                                        Estado
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <select name="state" id="" class="form-select">
-                                        <option value="" data-state="" selected disabled>
-                                            Seleccione el estado
-                                        </option>
-                                        <?php foreach($datos['nombre_estados'] as $key =>$data)
-                                        : ?>
-                                        <option
-                                            value="<?php echo $data->estado; ?>"
-                                            data-state="<?php echo $data->estado; ?>"
-                                        >
-                                            <?php echo $data->estado; ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <small class="d-block text-center address"></small>
-                                </div>
-                            </div>
-                            <!-- lat y lng -->
-                            <div class="row gx-3qk">
-                                <div class="col">
-                                    <input
-                                        type="text"
-                                        name="lat"
-                                        class="form-control"
-                                        placeholder="Latitud"
-                                        hidden
-                                    />
-                                </div>
-                                <div class="col">
-                                    <input
-                                        type="text"
-                                        name="lng"
-                                        class="form-control"
-                                        placeholder="Longitud"
-                                        hidden
-                                    />
-                                </div>
-                            </div>
-                            <!-- map -->
-                            <div class="container-map">
-                                <div class="map"></div>
-                                <small class="text-danger text-center d-block mt-2">
-                                    Mueva el marcador en la ubicación del proyecto
-                                </small>
-                            </div>
-                            <div
-                                class="row justify-content-center gx-3 gy-3 gy-md-0 mt-3"
-                            >
-                                <div class="col-md-4 col-lg-3">
-                                    <button
-                                        type="button"
-                                        class="btn btn-info w-100"
-                                        onclick="$('#pills-project-tab').tab('show');"
                                     >
                                         Anterior
                                     </button>
                                 </div>
                                 <div class="col-md-4 col-lg-3">
-                                    <button
-                                        type="submit"
-                                        name="add"
-                                        class="btn btn-primary w-100"
-                                    >
+                                    <button type="submit" name="add" class="btn btn-sfvi-1 w-100">
                                         Añadir Proyecto
                                     </button>
-                                    <button
-                                        type="submit"
-                                        name="update"
-                                        class="btn btn-primary w-100"
-                                    >
+                                    <button type="submit" name="update" class="btn btn-sfvi-1 w-100">
                                         Actualizar Proyecto
                                     </button>
                                 </div>
                             </div>
-                            <!-- end map -->
+                            <!-- end -->
                         </div>
                     </div>
                     <!-- end contenido -->

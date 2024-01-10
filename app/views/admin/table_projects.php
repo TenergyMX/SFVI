@@ -24,7 +24,7 @@
                                     <div class="card-header">
                                         <button
                                             type="button"
-                                            class="btn btn-primary me-1"
+                                            class="btn btn-sfvi-1 me-1"
                                             title="Agregar Proyecto"
                                             data-option="create"
                                         >
@@ -33,7 +33,7 @@
                                         </button>
                                         <button
                                             type="button"
-                                            class="btn btn-info"
+                                            class="btn btn-sfvi-1"
                                             title="Refrescar tabla"
                                             data-option="refresh_table"
                                         >

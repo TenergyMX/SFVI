@@ -7,8 +7,8 @@
 		}
 		
 		function addProject($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {
-				$resultado = (object) ["success" => false, "error" => ''];
 				$this->db->query("INSERT INTO
 					project(
 						tb,
@@ -16,7 +16,10 @@
 						id_client,
 						id_category,
 						id_subcategory,
+						id_user,
 						quotation_num,
+						id_fide,
+						charge,
 						street,
 						colony,
 						municipality,
@@ -25,6 +28,7 @@
 						percentage,
 						lat,
 						lon,
+						period,
 						panels,
 						module_capacity,
 						efficiency
@@ -34,7 +38,10 @@
 						:id_client,
 						:id_category,
 						:id_subcategory,
+						:id_user,
 						:quotation_num,
+						:id_fide,
+						:charge,
 						:street,
 						:colony,
 						:municipality,
@@ -43,6 +50,7 @@
 						:percentage,
 						:lat,
 						:lng,
+						:period,
 						:panels,
 						:module_capacity,
 						:efficiency
@@ -53,8 +61,10 @@
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
 				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
-				// $this->db->bind(':quotation', $datos["quotation"]);
+				$this->db->bind(':id_user', $datos["id_user"]);
 				$this->db->bind(':quotation_num', $datos["quotation_num"]);
+				$this->db->bind(':id_fide', $datos["id_fide"]);
+				$this->db->bind(':charge', $datos["charge"]);
 				$this->db->bind(':street', $datos["street"]);
 				$this->db->bind(':colony', $datos["colony"]);
 				$this->db->bind(':municipality', $datos["municipality"]);
@@ -63,6 +73,7 @@
 				$this->db->bind(':percentage', $datos["percentage"]);
 				$this->db->bind(':lat', $datos["lat"]);
 				$this->db->bind(':lng', $datos["lng"]);
+				$this->db->bind(':period', $datos["period"]);
 				$this->db->bind(':panels', $datos["panels"]);
 				$this->db->bind(':module_capacity', $datos["module_capacity"]);
 				$this->db->bind(':efficiency', $datos["efficiency"]);
@@ -73,34 +84,13 @@
 					$resultado->success = true;
 					$resultado->id = $id;
 				} else {
-					$resultado->error = 'No se pudo insertar los datos en la tabla (project)';
+					$resultado->error['message'] = 'No se pudo insertar los datos en la tabla (project)';
 				}
-				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
-		}
-
-		function addProjectquotation($datos = []) {
-			try {
-				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("UPDATE project SET
-					quotation = :quotation
-					WHERE id = :id
-				");
-				$this->db->bind(':id', $datos["id"]);
-				$this->db->bind(':quotation', $datos["quotation"]);
-				if ($this->db->execute()) {
-					$resultado->success = true;
-				} else {
-					$resultado->error = 'Oops (project)';
-				}
-				return $resultado;
-			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
-			}
+			return $resultado;
 		}
 
 		function getProject($id) {
@@ -128,6 +118,18 @@
 			return $this->db->registros();
 		}
 
+		function getMyProjects($id_user = 3) {
+			$this->db->query("SELECT p.*,
+				CONCAT(c.name, ' ', c.surnames) AS customer_fullName
+				FROM project p
+				LEFT JOIN clients c
+				ON p.id_client = c.id
+				WHERE p.id_client = :id_user OR p.id_user = :id_user;
+			");
+			$this->db->bind(':id_user', $id_user);
+			return $this->db->registros();
+		}
+
 		function getStages() {
 			$this->db->query("SELECT * FROM project p;");
 			return $this->db->registros();
@@ -144,7 +146,6 @@
 				$resultado = (object) ["success" => false];
 				$this->db->query("UPDATE project SET
 					tb = :tb,
-					name = :name,
 					id_client = :id_client,
 					id_category = :id_category,
 					id_subcategory = :id_subcategory,
@@ -164,7 +165,6 @@
 				");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':tb', $datos["tb"]);
-				$this->db->bind(':name', $datos["name"]);
 				$this->db->bind(':id_client', $datos["id_client"]);
 				$this->db->bind(':id_category', $datos["id_category"]);
 				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
@@ -335,9 +335,8 @@
 			try {				
 				$this->db->query("UPDATE {$datos["table"]} SET
 					{$datos["data_key"]} = :dato
-					WHERE {$datos["where_data_key"]} = :where_data_value
+					{$datos["where"]}
 				");
-				$this->db->bind(':where_data_value', $datos['where_data_value']); // actualizar cuando se pueda
 				$this->db->bind(':dato', $datos["data_value"]);
 				if ($this->db->execute()) {
 					$resultado->success = true;

@@ -20,15 +20,14 @@
                                         <div class="mb-3">
                                             <button
                                                 type="button"
-                                                name="add-user"
-                                                class="btn btn-primary"
+                                                class="btn btn-sfvi-1"
                                                 data-option="create"
                                             >
-                                                <i class="fa-solid fa-user-plus"></i>
+                                               <i class="fa-solid fa-user-plus"></i>
                                             </button>
                                         </div>
                                         <div class="table-responsive">
-                                            <table class="table w-100" id="table_users">
+                                            <table class="table table-center w-100" id="table_users">
                                                 <thead>
                                                     <tr>
                                                         <th>1</th>

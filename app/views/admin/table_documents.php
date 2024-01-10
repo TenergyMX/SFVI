@@ -2,179 +2,146 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-        <title>DOCUMENTACIÓN GENERAL</title>
+        <link rel="canonical" href="<?= RUTA_URL ?>Documents/">
+        <title>Documentos</title>
     </head>
-
-    <body
-        data-theme="default"
-        data-layout="fluid" 
-        data-sidebar-position="left"
-        data-sidebar-layout="default"
-    >
+    <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
         <div class="wrapper">
             <?php require_once(RUTA_APP.'/views/admin/templates/sidebar.html'); ?>
             <div class="main">
                 <?php require_once(RUTA_APP.'/views/admin/templates/navbar.html'); ?>
                 <main class="content">
+                    <div class="container">
+                        <div class="row gx-2 justify-content-center mb-5">
+                            <label class="col-auto col-form-label">
+                                Proyecto:
+                            </label>
+                            <div class="col-12 col-sm-4">
+                                <select name="project-documents" class="form-control">
+                                    <option value="">
+                                        Selecione
+                                    </option>
+                                    <?php foreach($datos['proyectos'] as $dato) : ?>
+                                    <option
+                                        value="<?= $dato->id; ?>"
+                                    >
+                                        <?= $dato->name; ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="container-fluid">
-                        <!-- NUEVO CONTENIDO -->
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="text-center mt-8" style="padding-top: -50%;">DOCUMENTACIÓN GENERAL</h2>
-                                <div class="container d-flex justify-content-center align-items-center">
-                                        <div class="card" style="max-width: 800px; /* border: 2px solid #D4E6F1 ; */">
-                                            <div class="card-body">
-                                          
-                                                <div class="table-responsive"></div>
-                                                    <div id="table_documents_filter" class="dataTables_filter d-flex justify-content-end">
-                                                        <label>Buscar:
-                                                        <input type="search" class placeholder aria-controls="table_documents">
-                                                        </label>
-                                                    </div>
-                                                    <p>
-                                                    <div class="row">
-                                                        <div class="col-12 col-lg-6 mb-2">
-                                                            <div class="mb-3">
-                                                                <label for="" class="form-label fs-4"> Proyecto: </label>
-                                                                    <select
-                                                                        name="project"
-                                                                        id=""
-                                                                        class="form-select"
-                                                                        aria-describedby="project"
-                                                                        placeholder="Proyecto"
-                                                                        style="width: 361px;"
-                                                                    >
-                                                                        <option value="" data-folio="" selected disabled>
-                                                                            <span class="fs-4" >Seleccione el Proyecto</span>
-                                                                        </option>
-                                                                        <?php foreach($datos['nombre_proyectos'] as $key =>
-                                                                        $data) : ?>
-                                                                        <option value="<?php echo $data->id; ?>">
-                                                                            <?php echo $data->folio; ?>
-                                                                        </option>
-                                                                        <?php endforeach; ?>style="height: 30px; font-size: 12px;"
-                                                                    </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="container d-flex justify-content-center align-items-center">
-                                        <div class="card" style="background-color: transparent;">
-                                            <div class="row">
-                                                <style>
-                                                    .custom-btn {
-                                                        width: 200px;
-                                                        height: 160px;
-                                                    }
-                                                </style>
-
-                                                        <div class="row">
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_1"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Información del cliente</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_2"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación cotización</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button
-                                                                    type="button"
-                                                                    class="btn btn-outline-success custom-btn"
-                                                                    name="category_3"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    
-                                                                    <span class="fs-4">Documentación ingeniería</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_4"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación FIDE</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8 col-lg-4 mb-3">
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_5"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación CFE</span>
-                                                                    <p>
-                                                                        <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <button 
-                                                                    type="button" 
-                                                                    class="btn btn-outline-success custom-btn" 
-                                                                    name="category_6"
-                                                                    data-option="show_doc"
-                                                                    style="box-shadow:4px 4px #ABEBC6;">
-                                                                    <span class="fs-4">Documentación Tenergy</span>
-                                                                    <p>
-                                                                        <p class="text-center fs-6">Total documentos</p>
-                                                                </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                            </div>
-                                        </div>
+                        <div class="row g-3 row-folders">
+                            <!-- CFE -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="CFE" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                 </div>
+            					<div class="folder-name">CFE</div>
                             </div>
-                            <div class="col-xl d-none">
-                                <div class="card">
-                                    <div class="card-body"></div>
+                            <!-- COTIZACIÓN -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="COTIZACION" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
                                 </div>
+            					<div class="folder-name">COTIZACIÓN</div>
                             </div>
+                            <!-- FIDE -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="FIDE" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
+                                </div>
+            					<div class="folder-name">FIDE</div>
+                            </div>
+                            <!-- FORMATO_DE_EPP -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="FORMATO_DE_EPP" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
+                                </div>
+            					<div class="folder-name">FORMATO DE EPP</div>
+                            </div>
+                            <!-- INFORMACION_CLIENTE -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="INFORMACION_CLIENTE" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
+                                </div>
+            					<div class="folder-name">INFORMACIÓN CLIENTE</div>
+                            </div>
+                            <!-- INGENIERIA -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="INGENIERIA" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
+                                </div>
+            					<div class="folder-name">INGENIERIA</div>
+                            </div>
+                            <!-- TENERGY -->
+                            <div class="col-6 col-md-3 col-lg-2" data-folder-name="TENERGY" style="display:none">
+                                <div class="folder">
+                                    <div class="folder__back">
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="paper"></div>
+                                        <div class="folder__front"></div>
+                                        <div class="folder__front right"></div>
+                                    </div>
+                                </div>
+            					<div class="folder-name">TENERGY</div>
+                            </div>
+                            <!-- END -->
                         </div>
                         <!-- END CONTENIDO -->
                     </div>
-                  </main>
-             </div>
-      </div>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_documents.html'); ?>
+                </main>
+                <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
+            </div>
+        </div>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_project_documents.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <script>
-            fprojects_stages();
+            <?php if ($datos['project']['id'] != NULL) : ?>
+                const miSelect = $("[name='project-documents']");
+                const miOption = miSelect.find("option[value='<?= $datos['project']['id']?>']");
+                miOption.prop('selected', true);
+                miSelect.trigger('change');
+            <?php endif; ?>
         </script>
     </body>
 </html>

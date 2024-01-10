@@ -217,6 +217,8 @@ function ftable_clients() {
                 $("#mdl_crud_client").modal("show");
                 var fila = $(this).closest("tr");
                 var data = tbl_clients.row(fila).data();
+
+                $("#mdl_crud_client form [name='id']").val(data["id"]);
                 $("#mdl_crud_client form [name='type']").val(data["type_of_client"]);
                 $("#mdl_crud_client form [name='name']").val(data["name"]);
                 $("#mdl_crud_client form [name='surnames']").val(data["surnames"]);
@@ -233,7 +235,7 @@ function ftable_clients() {
         // end option
     });
 
-    // Create and update user
+    // Create and update
     $("#mdl_crud_client form").on("submit", function (e) {
         e.preventDefault();
         var option = $('button[type="submit"]:focus', this).attr("name");
@@ -251,7 +253,7 @@ function ftable_clients() {
                 tbl_clients.ajax.reload();
                 $("#mdl_crud_client").modal("hide");
                 if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
+                    Swal.fire("", "Accion exitosa", "success");
                 } else {
                     Swal.fire("Oops", response["error"]["message"], "error");
                 }
@@ -268,6 +270,7 @@ function ftable_clients() {
 
     // End
 }
+
 // TODO ------------------------- [ VISITAS ] -------------------------
 function ftable_visits() {
     var tbl_visits = new DataTable("#table_visits", {
@@ -279,12 +282,56 @@ function ftable_visits() {
             { title: "Tipo de visita", data: "str_type_of_visit" },
             { title: "Nombre visitante", data: "str_fullname" },
             { title: "Hora y fecha", data: "start_date" },
-            { title: "Estatus", data: "id_status" },
-            { title: "Proyecto", data: "project_folio" },
-            { title: "Acción", data: "btn_action" },
+            { title: "Estatus", data: "str_status_of_visit" },
+            { title: "Proyecto", data: "project_name" },
+            { title: "Info. visit", data: "btn_action" },
+            { title: "Editar", data: "btn_update" },
+        ],
+        columnDefs: [
+            {
+                targets: 2, // La columna "Hora y fecha" está en la posición 2
+                render: function (data, type, row, meta) {
+                    // Formatear la fecha a d/m/a h:m:s
+                    var fecha = new Date(data);
+                    var dia = ("0" + fecha.getDate()).slice(-2);
+                    var mes = ("0" + (fecha.getMonth() + 1)).slice(-2);
+                    var anio = fecha.getFullYear();
+                    var horas = ("0" + fecha.getHours()).slice(-2);
+                    var minutos = ("0" + fecha.getMinutes()).slice(-2);
+                    var segundos = ("0" + fecha.getSeconds()).slice(-2);
+                    return dia + "/" + mes + "/" + anio + " " + horas + ":" + minutos + ":" + segundos;
+                },
+            },
         ],
         createdRow: function (row, data, dataIndex) {
             $(row).attr("data-id", data.id);
+            var cell = $(row).children("td:eq(3)");
+            // Añadir una clase CSS según el estatus
+            switch (data.str_status_of_visit) {
+                case "Nueva":
+                    cell.css("color", "#F3AA21");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "En proceso":
+                    cell.css("color", "#0090CB");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Finalizada":
+                    cell.css("color", "#026B00");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Atrasada":
+                    cell.css("color", "#B51300");
+                    cell.css("font-weight", "bold");
+                    break;
+                case "Reagendada":
+                    cell.css("color", "#6300B6");
+                    cell.css("font-weight", "bold");
+                    break;
+                default:
+                    cell.css("color", "black");
+                    cell.css("background-color", "white");
+            }
         },
         language: {
             url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json",
@@ -302,6 +349,7 @@ function ftable_visits() {
                 $("#mdl_crud_visit .modal-header .modal-title").html("AGREGAR VISITA");
                 $("#mdl_crud_visit .modal-body form [name='add']").show();
                 $("#mdl_crud_visit .modal-body form [name='update']").hide();
+                $("#mdl_crud_visit .modal-body form [name='note']").hide();
                 $("#mdl_crud_visit").modal("show");
                 break;
             case "update":
@@ -312,13 +360,20 @@ function ftable_visits() {
                 var fila = $(this).closest("tr");
                 var data = tbl_visits.row(fila).data();
 
+                $("#mdl_crud_visit form [name='id']").val(data["id"]);
                 $("#mdl_crud_visit form [name='id_type']").val(data["id_type"]);
                 $("#mdl_crud_visit form [name='project']").val(data["id_project"]);
                 $("#mdl_crud_visit form [name='id_user']").val(data["id_user"]);
                 $("#mdl_crud_visit form [name='description']").val(data["description"]);
                 $("#mdl_crud_visit form [name='start_date']").val(data["start_date"]);
-                break;
+                $("#mdl_crud_visit form [name='start_date_old']").val(data["start_date"]);
 
+                if (data["id_status"] == 3) {
+                    $("#mdl_crud_visit [name='update']").prop("disabled", true);
+                } else {
+                    $("#mdl_crud_visit [name='update']").prop("disabled", false);
+                }
+                break;
             case "show_info":
                 $("#mdl_info_visit .modal-header .modal-title").html("INFORMACIÓN DE LA VISITA");
                 var fila = $(this).closest("tr");
@@ -328,10 +383,17 @@ function ftable_visits() {
                 $("#mdl_info_visit form [name='lat']").val(parseFloat(data["lat"]));
                 $("#mdl_info_visit form [name='lng']").val(parseFloat(data["lon"]));
                 $("#mdl_info_visit form [name='type']").val(data["str_type_of_visit"]);
+                $("#mdl_info_visit form [name='razon']").val(data["description"]);
                 $("#mdl_info_visit form [name='proyect']").val(data["project_folio"]);
                 $("#mdl_info_visit form [name='date']").val(data["start_date"]);
                 $("#mdl_info_visit form [name='visit']").val(data["str_fullname"]);
-                $("#mdl_info_visit form [name='razon']").val(data["description"]);
+                $("#mdl_info_visit form [name='note']").val(data["note"]);
+
+                if (data["id_status"] == 3) {
+                    $("#mdl_info_visit [name='close']").prop("disabled", true);
+                } else {
+                    $("#mdl_info_visit [name='close']").prop("disabled", false);
+                }
 
                 // Mapa
                 if (data["lat"] != null) {
@@ -340,89 +402,52 @@ function ftable_visits() {
                 } else {
                     obj_map.marcador.setVisible(false);
                 }
+
+                // cargar ruta para el PDF
+                $("#mdl_info_visit form a[name='pdf']").attr(
+                    "href",
+                    `${RUTA_URL}Visit/generatePdf/${data["id"]}/`
+                );
+
                 // mostrar le modal
                 $("#mdl_info_visit").modal("show");
                 break;
             case "refresh_table":
                 tbl_visits.ajax.reload();
                 break;
-            /* case "update":
-                $("#mdl_update_visit .modal-header .modal-title").html("ACTUALIZAR ITA");
-                $("#mdl_update_visit .modal-body form [name='add']").hide();
-                $("#mdl_update_visit .modal-body form [name='update']").show();
-                $("#mdl_update_visit").modal("show");
-                var fila = $(this).closest("tr");
-                var data = tbl_visits.row(fila).data();
-
-                $("#mdl_update_visit form [name='tipo']").val(data["id_type"]);
-                $("#mdl_update_visit form [name='proyect']").val(data["project_folio"]);
-                $("#mdl_update_visit form [name='visit']").val(data["str_fullname"]);
-                $("#mdl_update_visit form [name='razon']").val(data["description"]);
-                $("#mdl_update_visit form [name='razon']").val(data["start_date"]);
-                break; */
             case "close":
-                $("#mdl_info_visit").modal("hide");
-                cahngeStatus();
-                break;
+                $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
 
+                var datos = $("#mdl_info_visit form").serialize();
+                var url = RUTA_URL + "Request/updateStatusVisit/";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: datos,
+
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire("Visita actualizada!", "", "success");
+                            tbl_visits.ajax.reload();
+                        } else {
+                            Swal.fire("Oops", "Fallo algo en la actualización", "error");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrow) {
+                        console.log("Hubo un error: ", errorThrow);
+                        Swal.fire("Error del servidor", ":(", "error");
+                    },
+                });
+                break;
+            case "pdf":
+                $("#mdl_info_visit").modal("hide"); // Cerrar el modal primero
+                console.log("Click en el botón PDF");
+                break;
             default:
-                alert("Opcion no valida (tabla visistas)");
+                alert("Opcion no valida (tbl_visits)");
         }
         // end option
-    });
-
-    $("#mdl_update_visit form").on("submit", function (e) {
-        e.preventDefault();
-        var datos = $(this).serialize();
-        var url = RUTA_URL + "Request/updateVisit/";
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: datos,
-            beforeSend: function () {
-                $("#mdl_update_visit form [type='submit']").prop("disabled", true);
-            },
-            success: function (response) {
-                $("#mdl_update_visit").modal("hide");
-                if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
-                } else {
-                    Swal.fire("Oops", "fallo algo", "error");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrow) {
-                console.log("hubo un error: ", errorThrow);
-                Swal.fire("Error del servidor", ":(", "error");
-            },
-            complete: function () {
-                $("#mdl_update_visit form [type='submit']").prop("disabled", false);
-            },
-        });
-    });
-
-    $("#mdl_info_visit form").on("submit", function (e) {
-        e.preventDefault();
-        var datos = $(this).serialize();
-        var url = RUTA_URL + "Request/updateStatusVisit/";
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: { id: id, nuevoEstado: "cerrado" },
-            success: function (response) {
-                $("#mdl_info_visit").modal("hide");
-                if (response.success) {
-                    Swal.fire("Good job!", "Accion exitosa", "success");
-                } else {
-                    Swal.fire("Oops", "fallo algo", "error");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrow) {
-                console.log("hubo un error: ", errorThrow);
-                Swal.fire("Error del servidor", ":(", "error");
-            },
-        });
     });
 
     // End
@@ -430,17 +455,17 @@ function ftable_visits() {
 
 // TODO ------------------------- [ PROYECTOS ] -------------------------
 function ftable_projects() {
-    var tbl_proyects = new DataTable("#table_proyects", {
+    var tbl_projects = new DataTable("#table_proyects", {
         ajax: {
             url: RUTA_URL + "Request/getProjects/",
             dataSrc: "data",
         },
         columns: [
             { title: "ID", data: "id" },
-            { title: "Proyecto", data: "btn_project_code" },
+            { title: "Proyecto", data: "btn_project" },
             { title: "Cliente", data: "customer_fullName" },
             { title: "Avance (%)", data: "percentage" },
-            { title: "Documentación", data: "btn_docs" },
+            { title: "Documentación", data: "btn_action_docs" },
             { title: "Visitas", data: "btn_action_visit" },
             { title: "Editar", data: "btn_action" },
         ],
@@ -474,23 +499,19 @@ function ftable_projects() {
                 $("#mdl_crud_proyect .modal-body form [name='update']").show();
                 // Asignar valores
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 var formulario = $("#mdl_crud_proyect .modal-body form");
+                formulario.find(".col-existing-file").addClass("d-none");
+
                 $.each(data, function (index, value) {
                     if (index != "quotation") {
                         formulario.find(`[name="${index}"]`).val(value);
                     }
                 });
+
                 formulario.find("[name='lng']").val(data["lon"]);
                 if (data["start_date"] != null) {
-                    console.log(data["start_date"]);
                     formulario.find("[name='start_date']").val(data["start_date"].split(" ")[0]);
-                }
-                formulario.find("[name='existing_file']").attr("onclick", `open_window('${RUTA_URL}')`);
-                if (data["quotation"] !== null) {
-                    $(".col-existing-file").removeClass("d-none");
-                } else {
-                    $(".col-existing-file").addClass("d-none");
                 }
 
                 // Actualizar las cordenas
@@ -506,7 +527,7 @@ function ftable_projects() {
                 $("#mdl_update_proyect .modal-body form [name='add']").hide();
                 $("#mdl_update_proyect .modal-body form [name='update']").show();
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 $("#mdl_update_proyect form [name='id']").val(data["id"]);
                 $("#mdl_update_proyect form [name='tb_project']").val(fila.find("td:eq(1)").text());
                 $("#mdl_update_proyect form [name='id_client']").val(fila.find("td:eq(2)").text());
@@ -523,45 +544,43 @@ function ftable_projects() {
                 $("#mdl_update_proyect form [name='start_date']").val(data["start_date"]);
                 $("#mdl_update_proyect").modal("show");
                 break;
-            case "show_visits":
-                $("#mdl_crud_visit .modal-header .modal-title").html("AGREGAR VISITA");
-                $("#mdl_crud_visit .modal-body form [name='add']").show();
-                $("#mdl_crud_visit .modal-body form [name='update']").hide();
-                $("#mdl_crud_visit").modal("show");
-                break;
             case "info_stages":
                 $("#mdl_info_stages .modal-header .modal-title").html("INFORMACIÓN DEL PROYECTO");
                 $("#mdl_info_stages .modal-body form [name='add']").show();
                 $("#mdl_info_stages .modal-body form [name='update']").hide();
                 $("#mdl_info_stages").modal("show");
-
-            /* var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
-                $("#mdl_info_stages form [name='id']").val(data["id"]); */
-            /* $("#mdl_info_visit form [name='tipo']").val("id_type"); */
-            /*  $("#mdl_info_stages form [name='folio']").val(
-                    fila.find("td:eq(1)").text()
-                );
-                $("#mdl_info_stages form [name = 'id_client']").val(
-                    fila.find("td:eq(2)").text()
-                );
-                $("#mdl_info_stages").modal("show");
-
-                break; */
             case "add_visit":
                 var fila = $(this).closest("tr");
-                var data = tbl_proyects.row(fila).data();
+                var data = tbl_projects.row(fila).data();
                 $("#mdl_crud_visit form [name='project']").val(data["id"]);
                 $("#mdl_crud_visit").modal("show");
                 break;
             case "refresh_table":
-                tbl_proyects.ajax.reload();
+                tbl_projects.ajax.reload();
                 break;
-
             default:
                 alert("Opcion no valida");
         }
         // end option
+    });
+
+    // ubicacion del proyecto
+    $("#mdl_crud_proyect form [name='state']").on("change", function () {
+        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
+        var option = $(this).find("option:selected");
+        var estado = option.attr("data-state");
+        var formulario = $("#mdl_crud_proyect .modal-body form");
+        var street = formulario.find("[name='street']").val();
+        var colony = formulario.find("[name='colony']").val();
+        var municipality = formulario.find("[name='municipality']").val();
+        var address = "";
+        address = street != "" ? `${street},` : "";
+        address = colony != "" ? `${address} col. ${colony},` : "";
+        address = municipality != "" ? `${address} ${municipality},` : "";
+        address = estado != "" ? `${address} ${estado}` : "";
+        address = $.trim(address);
+        // $("#pills-address small.address").html(address);
+        address_on_the_map(obj_map, address);
     });
 
     // Create and update proyect
@@ -588,7 +607,7 @@ function ftable_projects() {
 
         var option = $('button[type="submit"]:focus', this).attr("name");
         var datos = new FormData($("#mdl_crud_proyect form")[0]);
-        var url = RUTA_URL + "Request/" + (option == "add" ? "addProyect" : "updateProject");
+        var url = RUTA_URL + "Request/" + (option == "add" ? "addProject" : "updateProject");
         $.ajax({
             type: "POST",
             url: url,
@@ -602,7 +621,7 @@ function ftable_projects() {
                 console.log(response);
                 if (response.success) {
                     Swal.fire("Good job!", "Accion exitosa", "success");
-                    tbl_proyects.ajax.reload();
+                    tbl_projects.ajax.reload();
                     $("#mdl_crud_proyect").modal("hide");
                 } else {
                     Swal.fire("Oops", response.error.message, "error");
@@ -647,23 +666,56 @@ function ftable_projects() {
         });
     });
 
-    $("#mdl_crud_proyect form [name='state']").on("change", function () {
-        // var input_municipality = $("#mdl_crud_proyect form [name='municipality']");
-        var option = $(this).find("option:selected");
-        var estado = option.attr("data-state");
-        var formulario = $("#mdl_crud_proyect .modal-body form");
-        var street = formulario.find("[name='street']").val();
-        var colony = formulario.find("[name='colony']").val();
-        var municipality = formulario.find("[name='municipality']").val();
-        var address = "";
-        address = street != "" ? `${street},` : "";
-        address = colony != "" ? `${address} col. ${colony},` : "";
-        address = municipality != "" ? `${address} ${municipality},` : "";
-        address = estado != "" ? `${address} ${estado}` : "";
-        $("#pills-address small.address").html(address);
-        address_on_the_map(obj_map, address);
-    });
+    // End
+}
 
+function calc_panels() {
+    var form = $("#mdl_crud_proyect form");
+    var charge = form.find("[name='charge']").val();
+    var periodo = form.find("[name='period']").val();
+    var hsp = $("[name='state'] option:selected").attr("data-hsp");
+    var eficiencia_panel = form.find("[name='efficiency']").val();
+    var capacidad_panel = form.find("[name='module_capacity']").val();
+
+    charge = charge ? parseFloat(charge) : 0; // ! unidad: kWh
+    eficiencia_panel = eficiencia_panel ? parseFloat(eficiencia_panel) / 100 : 0;
+    capacidad_panel = capacidad_panel ? parseFloat(capacidad_panel) : 0;
+
+    // calcular...
+    var consumo_diario = charge / periodo; // ! Unidad: kWh
+    // Pasar carga a cantidad W
+    var carga_diaria = consumo_diario * 1000; // ! unidad: W
+    // paneles
+    var num_panels = carga_diaria / (hsp * eficiencia_panel * capacidad_panel);
+    if (Number.isFinite(num_panels)) {
+        num_panels = Math.ceil(num_panels);
+    } else {
+        num_panels = 0;
+    }
+    form.find("[name='panels']").val(num_panels);
+    return num_panels;
+}
+
+$("form .calc-panels").on("input", function () {
+    calc_panels();
+});
+
+// TODO ------------------------- [ ETAPAS PROYECTOS ] -------------------------
+
+function fprojects_stages() {
+    var tbl_projects = new DataTable("#table_proyects", {});
+    $("body").on("click", "[data-option]", function () {
+        let option = $(this).attr("data-option"); // [create / add , update, delete]
+        switch (option) {
+            case "create":
+            case "info_stages":
+                $("#mdl_info_stages .modal-header .modal-title").html("INFORMACIÓN DEL PROYECTO");
+                $("#mdl_info_stages .modal-body form [name='add']").show();
+                $("#mdl_info_stages .modal-body form [name='update']").hide();
+                $("#mdl_info_stages").modal("show");
+                break;
+        }
+    });
     // End project
 }
 
@@ -711,7 +763,7 @@ $(".btn-info-project").on("click", function () {
     $("#mdl_info_stages").modal("show");
 });
 
-$("button.download").on("click", function () {
+$("body").on("click", "button.download, .download-file", function () {
     var id_project = $(this).attr("data-id-project");
     var path = $(this).attr("data-path");
     open_window(`${RUTA_URL}File/get_project_file/${id_project}?path=${path}`);
@@ -825,6 +877,100 @@ function calcularProgresoEtapa() {
     return resultado;
 }
 
+// TODO ------------------------- [ DOCUMENTOS GENERALES] -------------------------
+$("[name='project-documents']").on("change", function (e) {
+    e.preventDefault();
+    var _id_project = $(this).val();
+
+    $.ajax({
+        type: "GET",
+        url: RUTA_URL + "Request/getDocs/",
+        data: {
+            id_project: _id_project,
+        },
+        success: function (response) {
+            var folder_names = $("div[data-folder-name]");
+            folder_names.hide();
+
+            if (!("data" in response)) {
+                console.log(response);
+                console.log("Sin datos");
+                return;
+            }
+
+            // Mostrar las carpetas del proyecto
+            $.each(response.data.docs, function (key, value) {
+                if (Array.isArray(value)) {
+                    // console.log("Es un array:", key, "=>", value);
+                    // folder_names.filter(`[data-folder-name="${key}"]`).show();
+                    filter = folder_names.filter(`[data-folder-name="${key}"]`);
+                    if (filter.length > 0) {
+                        filter.show();
+                    } else {
+                        // Crear folder en caso de no existir
+                        var clonedFolder = $($("div[data-folder-name]")[0]).clone();
+                        clonedFolder.show();
+                        clonedFolder.attr("data-folder-name", key);
+                        clonedFolder.find(".folder-name").html(key);
+                        clonedFolder.appendTo(".row-folders");
+                    }
+                }
+            });
+
+            $("[data-folder-name]").on("click", function (e) {
+                e.preventDefault();
+                var key = $(this).attr("data-folder-name");
+                var html = "";
+                $("#mdl_project_documentsLabel").html(key);
+                $.each(response.data.docs[key], function (key, value) {
+                    // Dividir la ruta en partes usando el separador "/"
+                    var partes = value.split("/");
+
+                    // Tomar la última parte que debería ser el nombre del archivo
+                    var nombreArchivoConExtension = partes[partes.length - 1];
+
+                    // Dividir el nombre del archivo en nombre y extensión usando el punto "."
+                    var nombreYExtension = nombreArchivoConExtension.split(".");
+                    var nombreArchivo = nombreYExtension[0];
+                    var extensionArchivo = nombreYExtension[1];
+
+                    console.log("Nombre del archivo: " + nombreArchivo);
+                    console.log("Extensión del archivo: " + extensionArchivo);
+                    console.log("---");
+
+                    var icon = RUTA_URL + "img/icons/icon-";
+                    icon = icon + (extensionArchivo == "pdf" ? "pdf" : "image") + ".png";
+
+                    html += `<div class="col-6 col-md-3 col-lg-3">
+                        <div
+                            class="file download-file p-2"
+                            data-id-project="${response.data.project["id"]}"
+                            data-path="${value}"
+                        >
+                            <div class="file-icon px-1">
+                                <img
+                                    src="${icon}"
+                                    alt=""
+                                    class="card-img w-100"
+                                />
+                            </div>
+                            <div class="file-name text-center">${nombreArchivo}</div>
+                        </div>
+                    </div>
+                    `;
+                });
+
+                // Cargar las columnas de los archivos...
+                $(".row-files").html(html);
+
+                // Mostrar el modal
+                $("#mdl_project_documents").modal("show");
+            });
+        },
+        error: function (jqXHR, textStatus, errorThrow) {},
+        complete: function () {},
+    });
+});
 // TODO ------------------------- [ Eventos Globales ] -------------------------
 
 // Envia un link al correo del usuario para cambiar su contraseña
@@ -867,6 +1013,16 @@ $("#mdl_crud_visit form").on("submit", function (e) {
     var datos = $(this).serialize();
     var option = $('button[type="submit"]:focus', this).attr("name");
     var url = RUTA_URL + "Request/" + (option == "add" ? "addVisit" : "updateVisit");
+    // Obtener la fecha y hora actual
+    var fechaActual = new Date();
+    // Obtener la fecha y hora seleccionada por el usuario
+    var nuevaFecha = new Date($("#mdl_crud_visit form [name='start_date']").val());
+    // Comparar con la fecha actual
+    if (nuevaFecha < fechaActual) {
+        // Mostrar mensaje de error o tomar alguna acción
+        alert("La fecha de visita no puede ser anterior a la fecha y hora actuales.");
+        return;
+    }
 
     $.ajax({
         type: "POST",

@@ -1,6 +1,7 @@
 <?php
 	class Visit extends Controlador {
 		private $modeloVisit;
+		private $modeloProject;
 		private $datos = [];
 		// Constructor
 		function __construct() {
@@ -19,6 +20,17 @@
 		function status($id=0){
 			$this->datos['estatus'] = $this->modeloVisit->updateStatusVisit($id);
 			$this->vista("Admin/table_visits", $this->datos);
+		}  
+
+
+		function statusAfter24Hours($id=0){
+			$this->datos['estatusAfter'] = $this->modeloVisit->updateVisitsAfter24Hours($id);
+			$this->vista("Admin/table_visits", $this->datos);
+		}  
+
+		function generatePdf($id=0){
+			$this->datos['info'] = $this->modeloVisit->getVisit(['id' => $id]);
+			$this->vista("Admin/view_pdf", $this->datos);
 		}  
 		
 	}

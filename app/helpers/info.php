@@ -6,6 +6,7 @@
         return [
             'id' => isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0,
             'role' => isset($_SESSION['user']['role']) ? $_SESSION['user']['role'] : 6,
+            'int_role' => isset($_SESSION['user']['int_role']) ? $_SESSION['user']['int_role'] : 6,
             'str_role' => isset($_SESSION['user']['str_role']) ? $_SESSION['user']['str_role'] : 'Cliente',
             'name' => isset($_SESSION['user']['name']) ? $_SESSION['user']['name'] : 'Usuario',
             'surnames' => isset($_SESSION['user']['surnames']) ? $_SESSION['user']['surnames'] : NULL,
@@ -29,270 +30,70 @@
 
     function getDatosDeGuardadoDelArchivoDeProyecto($clave) {
         $datos = [
-            'recibo_CFE' => [
-                'new_name' => 'recibo_CFE',
-                'dirs_to_save' => ['INFORMACION_CLIENTE', 'COTIZACION']
-            ],
-            'cotizacion' => [
-                'new_name' => 'cotizacion',
-                'dirs_to_save' => ['COTIZACION']
-            ],
-            'CSF' => [
-                'new_name' => 'CSF',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'INE' => [
-                'new_name' => 'INE',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'pago_anticipo' => [
-                'new_name' => 'comprobante_anticipo',
-                'dirs_to_save' => ['TENERGY']
-            ],
-            'planos' => [
-                'new_name' => 'planos',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'f_registro' => [
-                'new_name' => 'for_registro',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'material_equipo' => [
-                'new_name' => 'lista_materiales_equipo',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'contenido_armado' => [
-                'new_name' => 'contenido_armado',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'checkList' => [
-                'new_name' => 'check_supervisión',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'trabajo_alturas' => [
-                'new_name' => 'for_trabajo_alturas',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'EPP' => [
-                'new_name' => 'lista_materiales_equipo',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'memoria_calculo' => [
-                'new_name' => 'memoria_cálculo',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'valid_compras' => [
-                'new_name' => 'validación_compras',
-                'dirs_to_save' => ['TENERGY']
-            ],
-            'report_fotografico' => [
-                'new_name' => 'reporte_fotográfico',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'pruebas_funcionamiento' => [
-                'new_name' => 'pruebas_funcionamiento',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'interconexion' => [
-                'new_name' => 'contrato_interconexión',
-                'dirs_to_save' => ['CFE']
-            ],
-            'contraprestacion' => [
-                'new_name' => 'contrato_contraprestacion',
-                'dirs_to_save' => ['CFE']
-            ],
-            'anexo_2' => [
-                'new_name' => 'anexo_2',
-                'dirs_to_save' => ['CFE']
-            ],
-            'img_medidor_b' => [
-                'new_name' => 'medidor_bidereccional',
-                'dirs_to_save' => ['CFE']
-            ],
-            'comprobante_pago' => [
-                'new_name' => 'comprobante_finiquito',
-                'dirs_to_save' => ['TENERGY']
-            ],
-            'liberacion_proyecto' => [
-                'new_name' => 'liberación_pago_Tenergy',
-                'dirs_to_save' => ['TENERGY'],
-                'description' => 'Liberacion de pago Tenergy'
-            ],
-            'pruebas_funcionamiento_finales' => [
-                'new_name' => 'operacion_mante',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'operacion_mante' => [
-                'new_name' => 'Operación_mantenimiento_SFVI',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'garantias' => [
-                'new_name' => 'garantias',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'CSF_PM' => [
-                'new_name' => 'CSF_PM',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'acta_constitutiva_pm' => [
-                'new_name' => 'acta_constitutiva_pm',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'poder_notarial_pm' => [
-                'new_name' => 'poder_notarial_pm',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'buro_de_credito' => [
-                'new_name' => 'buro_de_credito',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'INE_solidario' => [
-                'new_name' => 'INE_solidario',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'CSF_solidario' => [
-                'new_name' => 'CSF_solidario',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'CSF_repre_legal' => [
-                'new_name' => 'CSF_repre_legal',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'recibo_CFE_aval' => [
-                'new_name' => 'recibo_CFE_aval',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'com_domi_aval' => [
-                'new_name' => 'com_domi_aval',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'com_dom_rl' => [
-                'new_name' => 'com_dom_rl',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'com_dom_negocio' => [
-                'new_name' => 'com_dom_negocio',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'INE_rl_negocio' => [
-                'new_name' => 'INE_rl_negocio',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'predial_negocio' => [
-                'new_name' => 'predial_negocio',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'img_medidor' => [
-                'new_name' => 'img_medidor',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'img_fachada' => [
-                'new_name' => 'img_fachada',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'ref_personal_1' => [
-                'new_name' => 'ref_personal_1',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'ref_personal_2' => [
-                'new_name' => 'ref_personal_2',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'anexo_tecnico' => [
-                'new_name' => 'anexo_tecnico',
-                'dirs_to_save' => ['INFORMACION_CLIENTE']
-            ],
-            'contrato_tripartita' => [
-                'new_name' => 'contrato_tripartita',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'pagare' => [
-                'new_name' => 'pagare',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'sol_credito' => [
-                'new_name' => 'sol_credito',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'insentivo_energetico' => [
-                'new_name' => 'insentivo_energetico',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'card_comp_OS' => [
-                'new_name' => 'card_comp_OS',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'card_reconocimiento' => [
-                'new_name' => 'card_reconocimiento',
-                'dirs_to_save' => ['FIDE']
-            ],
-            'planos' => [
-                'new_name' => 'planos',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'f_registro' => [
-                'new_name' => 'f_registro',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'material_equipo' => [
-                'new_name' => 'material_equipo',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'contenido_armado' => [
-                'new_name' => 'contenido_armado',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'checkList' => [
-                'new_name' => 'checkList',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'trabajo_alturas' => [
-                'new_name' => 'trabajo_alturas',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'EPP' => [
-                'new_name' => 'EPP',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'memoria_calculo' => [
-                'new_name' => 'memoria_calculo',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'valid_compras' => [
-                'new_name' => 'valid_compras',
-                'dirs_to_save' => ['TENERGY']
-            ],
-            'repor_fotografico' => [
-                'new_name' => 'repor_fotografico',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'p_funcionamiento' => [
-                'new_name' => 'p_funcionamiento',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'contrato_interconexion' => [
-                'new_name' => 'contrato_interconexion',
-                'dirs_to_save' => ['CFE']
-            ],
-            'contrato_contrapestacion' => [
-                'new_name' => 'contrato_contrapestacion',
-                'dirs_to_save' => ['CFE']
-            ],
-            'anexo_2' => [
-                'new_name' => 'anexo_2',
-                'dirs_to_save' => ['CFE']
-            ],
-            'img_medidor_b' => [
-                'new_name' => 'img_medidor_b',
-                'dirs_to_save' => ['INGENIERIA']
-            ],
-            'doc_finales_fide' => [
-                'new_name' => 'doc_finales_fide',
-                'dirs_to_save' => ['TENERGY']
-            ],
-
-
-
+            'recibo_CFE' => ['new_name' => 'recibo_CFE', 'dirs_to_save' => ['INFORMACION_CLIENTE', 'COTIZACION']],
+            'cotizacion' => ['new_name' => 'cotizacion', 'dirs_to_save' => ['COTIZACION']],
+            'CSF' => ['new_name' => 'CSF', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'INE' => ['new_name' => 'INE', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'pago_anticipo' => ['new_name' => 'comprobante_anticipo', 'dirs_to_save' => ['TENERGY']],
+            'planos' => ['new_name' => 'planos', 'dirs_to_save' => ['INGENIERIA']],
+            'f_registro' => ['new_name' => 'f_registro', 'dirs_to_save' => ['INGENIERIA']],
+            'material_equipo' => ['new_name' => 'material_equipo', 'dirs_to_save' => ['INGENIERIA']],
+            'contenido_armado' => ['new_name' => 'contenido_armado', 'dirs_to_save' => ['INGENIERIA']],
+            'checkList' => ['new_name' => 'check_supervisión', 'dirs_to_save' => ['INGENIERIA']],
+            'trabajo_alturas' => ['new_name' => 'for_trabajo_alturas', 'dirs_to_save' => ['INGENIERIA']],
+            'EPP' => ['new_name' => 'lista_materiales_equipo', 'dirs_to_save' => ['INGENIERIA']],
+            'memoria_calculo' => ['new_name' => 'memoria_cálculo', 'dirs_to_save' => ['INGENIERIA']],
+            'valid_compras' => ['new_name' => 'validación_compras', 'dirs_to_save' => ['TENERGY']],
+            'report_fotografico' => ['new_name' => 'reporte_fotográfico', 'dirs_to_save' => ['INGENIERIA']],
+            'pruebas_funcionamiento' => ['new_name' => 'pruebas_funcionamiento', 'dirs_to_save' => ['INGENIERIA']],
+            'interconexion' => ['new_name' => 'contrato_interconexión', 'dirs_to_save' => ['CFE']],
+            'contraprestacion' => ['new_name' => 'contrato_contraprestacion', 'dirs_to_save' => ['CFE']],
+            'anexo_2' => ['new_name' => 'anexo_2', 'dirs_to_save' => ['CFE']],
+            'img_medidor_b' => ['new_name' => 'medidor_bidereccional', 'dirs_to_save' => ['CFE']],
+            'comprobante_pago' => ['new_name' => 'comprobante_finiquito', 'dirs_to_save' => ['TENERGY']],
+            'liberacion_proyecto' => ['new_name' => 'liberación_pago_Tenergy', 'dirs_to_save' => ['TENERGY'], 'description' => 'Liberacion de pago Tenergy'],
+            'pruebas_funcionamiento_finales' => ['new_name' => 'operacion_mante', 'dirs_to_save' => ['INGENIERIA']],
+            'operacion_mante' => ['new_name' => 'Operación_mantenimiento_SFVI', 'dirs_to_save' => ['INGENIERIA']],
+            'garantias' => ['new_name' => 'garantias', 'dirs_to_save' => ['INGENIERIA']],
+            'CSF_PM' => ['new_name' => 'CSF_PM', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'acta_constitutiva_pm' => ['new_name' => 'acta_constitutiva_pm', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'poder_notarial_pm' => ['new_name' => 'poder_notarial_pm', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'buro_de_credito' => ['new_name' => 'buro_de_credito', 'dirs_to_save' => ['FIDE']],
+            'INE_solidario' => ['new_name' => 'INE_solidario', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'CSF_solidario' => ['new_name' => 'CSF_solidario', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'CSF_repre_legal' => ['new_name' => 'CSF_repre_legal', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'recibo_CFE_aval' => ['new_name' => 'recibo_CFE_aval', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'com_domi_aval' => ['new_name' => 'com_domi_aval', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'com_dom_rl' => ['new_name' => 'com_dom_rl', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'com_dom_negocio' => ['new_name' => 'com_dom_negocio', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'INE_rl_negocio' => ['new_name' => 'INE_rl_negocio', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'predial_negocio' => ['new_name' => 'predial_negocio', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'img_medidor' => ['new_name' => 'img_medidor', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'img_fachada' => ['new_name' => 'img_fachada', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'ref_personal_1' => ['new_name' => 'ref_personal_1', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'ref_personal_2' => ['new_name' => 'ref_personal_2', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'anexo_tecnico' => ['new_name' => 'anexo_tecnico', 'dirs_to_save' => ['INFORMACION_CLIENTE']],
+            'contrato_tripartita' => ['new_name' => 'contrato_tripartita', 'dirs_to_save' => ['FIDE']],
+            'pagare' => ['new_name' => 'pagare', 'dirs_to_save' => ['FIDE']],
+            'sol_credito' => ['new_name' => 'sol_credito', 'dirs_to_save' => ['FIDE']],
+            'insentivo_energetico' => ['new_name' => 'insentivo_energetico', 'dirs_to_save' => ['FIDE']],
+            'card_comp_OS' => ['new_name' => 'card_comp_OS', 'dirs_to_save' => ['FIDE']],
+            'card_reconocimiento' => ['new_name' => 'card_reconocimiento', 'dirs_to_save' => ['FIDE']],
+            'f_registro' => ['new_name' => 'f_registro', 'dirs_to_save' => ['INGENIERIA']],
+            'material_equipo' => ['new_name' => 'material_equipo', 'dirs_to_save' => ['INGENIERIA']],
+            'contenido_armado' => ['new_name' => 'contenido_armado', 'dirs_to_save' => ['INGENIERIA']],
+            'checkList' => ['new_name' => 'checkList', 'dirs_to_save' => ['INGENIERIA']],
+            'trabajo_alturas' => ['new_name' => 'trabajo_alturas', 'dirs_to_save' => ['INGENIERIA']],
+            'EPP' => ['new_name' => 'EPP', 'dirs_to_save' => ['INGENIERIA']],
+            'memoria_calculo' => ['new_name' => 'memoria_calculo', 'dirs_to_save' => ['INGENIERIA']],
+            'valid_compras' => ['new_name' => 'valid_compras', 'dirs_to_save' => ['TENERGY']],
+            'repor_fotografico' => ['new_name' => 'repor_fotografico', 'dirs_to_save' => ['INGENIERIA']],
+            'p_funcionamiento' => ['new_name' => 'p_funcionamiento', 'dirs_to_save' => ['INGENIERIA']],
+            'contrato_interconexion' => ['new_name' => 'contrato_interconexion', 'dirs_to_save' => ['CFE']],
+            'contrato_contrapestacion' => ['new_name' => 'contrato_contrapestacion', 'dirs_to_save' => ['CFE']],
+            'anexo_2' => ['new_name' => 'anexo_2', 'dirs_to_save' => ['CFE']],
+            'img_medidor_b' => ['new_name' => 'img_medidor_b', 'dirs_to_save' => ['INGENIERIA']],
+            'doc_finales_fide' => ['new_name' => 'doc_finales_fide', 'dirs_to_save' => ['TENERGY']],
         ];
 
         $default = [
@@ -314,7 +115,7 @@
             // etapa 1
             $i = 0;
             $datos['stage'][$i]->recibo_CFE = $datos['stage'][$i]->recibo_CFE != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->recibo_CFE) : NULL;
-            $datos['stage'][$i]->cotizacion = str_replace(RUTA_DOCS, "", $datos['stage'][$i]->cotizacion);
+            $datos['stage'][$i]->cotizacion = $datos['stage'][$i]->cotizacion != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->cotizacion) : NULL;
             // etapa 2
             $i = 1;
             $datos['stage'][$i]->CSF = $datos['stage'][$i]->CSF != null ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->CSF) : NULL;

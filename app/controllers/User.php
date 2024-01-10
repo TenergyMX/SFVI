@@ -9,7 +9,7 @@
 			session_start();
 			$this->modeloUser = $this->modelo('Users');
 			$this->modeloCalc = $this->modelo('Calc');
-			$this->datos['user'] = datos_session_usuario();		
+			$this->datos['user'] = datos_session_usuario();
 			$this->datos['sidebar-item'] = 'dashboard';
 		}
 
@@ -51,12 +51,11 @@
 					$_SESSION['user']['name'] = $response->data->name;
 					$_SESSION['user']['surnames'] = $response->data->surnames;
 					$_SESSION['user']['email'] = $response->data->email;
-					// $_SESSION['user']['password'] = $response->data->password;
 					header("location:" . RUTA_URL. '');
 					exit;
 				} else {
-					$datos['alert'] = $response->error;
-					$datos['alert'] = 'Error en las credenciales';
+					$datos['alert'] = $response->error['message'];
+					// $datos['alert'] = 'Error en las credenciales';
 				}
 			}
 			// ? Carga la vista
@@ -81,12 +80,15 @@
 			}
 
 			$datos["id"] = $user->id;
-			if (!hash_equals($user->token , $datos["token"])) {
+			
+			// Verificar si el token en la base de datos no es nulo antes de comparar
+			if ($user->token === null || !hash_equals($user->token, $datos["token"])) {
 				$datos["alert-script"] = "Error: el token no coincide";
 				echo $datos["alert-script"];
 				exit;
 			}
 
+			// Hacer el cambio de contraseña del usuario
 			if ($_POST) {
 				$datos['password'] = trim($_POST['password']);
 				$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
@@ -98,6 +100,7 @@
 					$datos["alert-script"] = "Ocurrió un error inesperado";
 				}
 			}
+
 			// ? Vista No. 2: token valido
 			$this->vista("authentication/new-password", $datos);
 			exit;

@@ -10,14 +10,10 @@
                     <!-- hidden es para ocultar -->
                     <div class="mb-3">
                         <label for="" class="form-label"> Tipo de visita: </label>
-                        <select name="id_type" id="" class="form-select">
-                            <option value="" selected disabled>
-                                Seleccione el Tipo de visita
-                            </option>
+                        <select name="id_type" id="" class="form-select" required>
+                            <option value="" selected disabled>Seleccione el Tipo de visita</option>
                             <option value="1">Levantamiento técnico</option>
-                            <option value="2">
-                                Primera supervisión y entrega de materiales
-                            </option>
+                            <option value="2">Primera supervisión y entrega de materiales</option>
                             <option value="3">Mantenimiento</option>
                             <option value="4">Encendido del sistema</option>
                             <option value="5">Cierre de proyecto</option>
@@ -31,15 +27,14 @@
                             class="form-select"
                             aria-describedby="project"
                             placeholder="Proyecto"
+                            required
                         >
                             <option value="" data-folio="" selected disabled>
                                 Seleccione el Proyecto
                             </option>
                             <?php foreach($datos['nombre_proyectos'] as $key =>
                             $data) : ?>
-                            <option value="<?php echo $data->id; ?>">
-                                <?php echo $data->folio; ?>
-                            </option>
+                            <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -52,6 +47,7 @@
                             name="description"
                             aria-describedby="description"
                             placeholder="Razón de visita"
+                            required
                         />
                     </div>
 
@@ -63,10 +59,9 @@
                             class="form-select"
                             aria-describedby="id_user"
                             placeholder="Nombre de visitante"
+                            required
                         >
-                            <option value="" selected disabled>
-                                Seleccione el visitante
-                            </option>
+                            <option value="" selected disabled>Seleccione el visitante</option>
                             <?php foreach($datos['nombres_visitantes'] as $key =>
                             $data) : ?>
                             <option value="<?php echo $data->id; ?>">
@@ -84,19 +79,31 @@
                             name="start_date"
                             aria-describedby="start_date"
                             placeholder="Fecha y hora de visita"
+                            required
                         />
                     </div>
-
+                    <div class="mb-3">
+                        <label for="" class="form-label" name="note"> Nota: </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="note"
+                            aria-describedby="note"
+                            placeholder="Nota"
+                        />
+                    </div>
+                    <div class="d-none">
+                        <input
+                            type="datetime-local"
+                            class="form-control"
+                            name="start_date_old"
+                            aria-describedby="start_date_old"
+                            placeholder="Fecha y hora de visita"
+                        />
+                    </div>
                     <div class="botones text-center">
-                        <button type="submit" class="btn btn-primary" name="add">
-                            Agregar visita
-                        </button>
-                        <button
-                            type="submit"
-                            class="btn btn-primary"
-                            name="update"
-                            style="display: none"
-                        >
+                        <button type="submit" class="btn btn-sfvi-1" name="add">Agregar visita</button>
+                        <button type="submit" class="btn btn-sfvi-1" name="update" style="display: none">
                             Actualizar visita
                         </button>
                     </div>

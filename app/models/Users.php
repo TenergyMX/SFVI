@@ -11,31 +11,34 @@
 		}
 
 		function login($datos = []) {
+			$resultado = (object) ["success" => false];
 			try {
 				$this->db->query("SELECT u.*,
 					r.description AS str_role
 					FROM users u
 					LEFT JOIN role r 
-					ON u.role = r.id;
-					WHERE s.email = :email
+					ON u.role = r.id
+					WHERE u.email = :email
 				");
 				$this->db->bind(':email', $datos["email"]);
 				// Ejecucion de la consulta
-				$resultado = $this->db->registro();
-				if ($resultado) {
-					if (password_verify($datos['password'], $resultado->password)) {					
-						$resultado = (object) ["success" => true, "data" => $resultado];
+				$response = $this->db->registro();;
+				if ($response) {
+					if (password_verify($datos['password'], $response->password)) {	
+						$resultado->success = TRUE;				
+						$resultado->data = $response;
 					} else {
-						$resultado = (object) ["success" => false, "error" => 'Incorrect password'];
+						$resultado->error['message'] = 'Incorrect password';
 					}
 				} else {
-					$resultado = (object) ["success" => false, "error" => 'Email not found!'];
+					$resultado->error['message'] = 'Email not found!';
 				}
 				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
+			return $resultado;
 		}
 		
 		function addUser($datos = []) {
@@ -124,13 +127,10 @@
 			return $this->db->registros();
 		}
 
-
-		/* function updateUser($datos = []) {} */
-
 		function deleteUser($datos = []) {}
 
 		function updatePassword($datos = []) {
-			$resultado = (object) ["success" => true];
+			$resultado = (object) ["success" => false];
 			try {
 				$this->db->query("UPDATE users SET
 					password = :password,
@@ -139,31 +139,34 @@
 				");
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':password', $datos["password"]);
-				if (!$this->db->execute()) {
-					$resultado->success = false;
-					$resultado->error = "Oops, ocurrio un error";
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = "Oops, ocurrio un error al actualizar la contraseña";
 				}
 			} catch (Exception $e) {
-				$resultado->success = false;
-				$resultado->error = $e;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
 			return $resultado;
 		}
 		
 		function addtokenUser_email($email = 0) {
-			$resultado = (object) ["success" => true];
+			$resultado = (object) ["success" => false];
 			try {
 				$this->db->query("UPDATE users SET token = SHA2(CONCAT(UUID(), NOW()), 256) WHERE email = :email");
 				$this->db->bind(':email', $email);
 				// Ejecucion de la consulta
 				if ($this->db->execute()) {
-					$resultado->success = false;
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = "Oops, ocurrio un error";
 				}
-				return $resultado;
 			} catch (Exception $e) {
-				$resultado = (object) ["success" => false, "error" => $e];
-				return $resultado;
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
 			}
+			return $resultado;
 		}
 	}
 ?>
