@@ -326,12 +326,12 @@
         </style>
         <script>
             var options = {
-                series: [44, 55, 13, 43],
+                series: [<?= $datos['tipos_de_proyecto']['domestico'] ?>, <?= $datos['tipos_de_proyecto']['comercial'] ?>, <?= $datos['tipos_de_proyecto']['industrial'] ?>],
                 chart: {
                     width: 380,
                     type: "pie",
                 },
-                labels: ["Doméstico", "Comercial", "Indutsrial", "General"],
+                labels: ["Doméstico", "Comercial", "Indutsrial"],
 
                 responsive: [
                     {
@@ -352,7 +352,7 @@
             chart.render();
 
             var options5 = {
-                series: [50],
+                series: [<?= $datos['tipos_de_venta']['fide'] ?>],
                 chart: {
                     height: 200,
                     type: "radialBar",
@@ -369,7 +369,7 @@
                 size: "80%",
             };
             var options6 = {
-                series: [90],
+                series: [<?= $datos['tipos_de_venta']['contado'] ?>],
                 colors: ["#2874A6"],
                 chart: {
                     height: 190,

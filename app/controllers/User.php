@@ -14,8 +14,16 @@
 		}
 
 		function index() {
+			$tipos_de_venta = $this->modeloCalc->calcTipos_de_venta();
+			$tipos_de_proyecto = $this->modeloCalc->calcTipos_de_proyect();
+			// echo "<pre>";
+			// print_r($r);
+			// echo "</pre>";
 			isUserLoggedIn();
 			$this->datos['calculo Tenergy'] = $this->modeloCalc->calcTenergy();
+			$this->datos['tipos_de_venta'] = $tipos_de_venta->data;
+			$this->datos['tipos_de_proyecto'] = $tipos_de_proyecto->data;
+
 			$this->vista("Admin/index", $this->datos);
 		}
 
