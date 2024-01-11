@@ -2,12 +2,12 @@
 <link rel="manifest" href="<?php echo RUTA_URL; ?>manifest.json" />
 <!-- Add to homescreen for Chrome on Android -->
 <meta name="mobile-web-app-capable" content="yes" />
-<meta name="application-name" content="Smart Meter" />
+<meta name="application-name" content="SFVI" />
 <!-- Chrome for Android theme color -->
-<meta name="theme-color" content="#ADC53B" />
+<meta name="theme-color" content="#ff900b" />
 <!-- Add to homescreen for Safari on iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Smart Meter" />
+<meta name="apple-mobile-web-app-title" content="SFVI" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <link
     rel="apple-touch-icon"
@@ -40,17 +40,13 @@
     name="msapplication-TileImage"
     content="<?php echo RUTA_URL; ?>img/icons/regular/icon-512x512.png"
 />
-<link
-    rel="icon"
-    sizes="512x512"
-    href="<?php echo RUTA_URL; ?>img/icons/regular/icon-512x512.png"
-/>
-<!-- <script type="text/javascript">
+<link rel="icon" sizes="512x512" href="<?php echo RUTA_URL; ?>img/icons/regular/icon-512x512.png" />
+<script type="text/javascript">
     // Initialize the service worker
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-            .register("/serviceworker.js", {
-                scope: "/",
+            .register("/sfvi/serviceworker.js", {
+                scope: "/sfvi/",
             })
             .then(
                 function (registration) {
@@ -66,5 +62,5 @@
                 }
             );
     }
-</script> -->
+</script>
 <!-- end PWA -->

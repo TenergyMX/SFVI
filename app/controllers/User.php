@@ -24,7 +24,7 @@
 			$this->datos['tipos_de_venta'] = $tipos_de_venta->data;
 			$this->datos['tipos_de_proyecto'] = $tipos_de_proyecto->data;
 
-			$this->vista("Admin/index", $this->datos);
+			$this->vista("admin/index", $this->datos);
 		}
 
 		function register() {
@@ -55,7 +55,7 @@
 					exit;
 				} else {
 					$datos['alert'] = $response->error['message'];
-					// $datos['alert'] = 'Error en las credenciales';
+					$datos['alert'] = 'Error en las credenciales';
 				}
 			}
 			// ? Carga la vista
@@ -116,27 +116,31 @@
 			isUserLoggedIn();
 			$this->datos['profile'] = $this->datos['user'];
 			$this->datos['sidebar-item'] = 'Perfil';
-			$this->vista("Admin/profile", $this->datos);
+			$this->vista("admin/profile", $this->datos);
 		}
 
 		function table() {
 			isUserLoggedIn();
 			$this->datos['sidebar-item'] = 'usuarios';
-			if ($this->datos['user']['str_role'] == 'Administrador') {
-				$this->vista("Admin/table_users", $this->datos);
-			} else {
+			if ($this->datos['user']['str_role'] != 'Administrador') {
 				$this->vista("authentication/not-authorized", $this->datos);
+				exit;
 			}
+
+			// Cargar la vista
+			$this->vista("admin/table_users", $this->datos);
 		}
 
 		function clients() {
 			isUserLoggedIn();
 			$this->datos['sidebar-item'] = 'clientes';
-			if ($this->datos['user']['str_role'] == 'Administrador') {
-				$this->vista("Admin/table_clients", $this->datos);
-			} else {
+			if ($this->datos['user']['str_role'] != 'Administrador') {
 				$this->vista("authentication/not-authorized", $this->datos);
+				exit;
 			}
+
+			// cargar vista
+			$this->vista("admin/table_clients", $this->datos);
 		}
 
 	}

@@ -523,8 +523,7 @@
 			// Tenemos el id del proyecto
 			$datos['project']['id'] = isset($_GET['id_project']) ? $_GET['id_project'] : 0;
 			$project = $this->modeloProject->getProject($datos['project']['id']);
-			$project = $this->modeloProject->getProject(1);
-			$ruta = RUTA_DOCS . $project->name;
+			$ruta = RUTA_DOCS . strtoupper($project->name);
 			$datos['docs'] = [];
 			function contenido($directorio, &$data) {
 				$archivos = scandir($directorio);
@@ -550,7 +549,7 @@
 			# Estructuramos la respuesta
 			$this->response['success'] = TRUE;
 			$this->response['data']['docs'] = $datos['docs'];
-			$this->response['data']['project']['id'] = 6;
+			$this->response['data']['project']['id'] = $datos['project']['id'];
 			
 			# Respuesta
 			header('Content-Type: application/json');

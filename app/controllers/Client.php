@@ -12,13 +12,8 @@
 		}
 
 		function index() {
-			$this->response['error'] = 'without request';
-            $this->vista("Admin/table_clients", $this->datos);
+			isUserLoggedIn();
+            $this->vista("admin/table_clients", $this->datos);
 		}
-
-        function ver_clientes() {
-			$this->vista("Admin/table_clients", $this->datos);
-		}
-
 	}
 ?>

@@ -933,13 +933,7 @@ $("[name='project-documents']").on("change", function (e) {
                     var nombreYExtension = nombreArchivoConExtension.split(".");
                     var nombreArchivo = nombreYExtension[0];
                     var extensionArchivo = nombreYExtension[1];
-
-                    console.log("Nombre del archivo: " + nombreArchivo);
-                    console.log("Extensión del archivo: " + extensionArchivo);
-                    console.log("---");
-
-                    var icon = RUTA_URL + "img/icons/icon-";
-                    icon = icon + (extensionArchivo == "pdf" ? "pdf" : "image") + ".png";
+                    var icon = RUTA_URL + "img/icons/icon-" + extensionArchivo + ".png";
 
                     html += `<div class="col-6 col-md-3 col-lg-3">
                         <div
@@ -950,8 +944,9 @@ $("[name='project-documents']").on("change", function (e) {
                             <div class="file-icon px-1">
                                 <img
                                     src="${icon}"
-                                    alt=""
+                                    alt="icon image"
                                     class="card-img w-100"
+                                    onerror="this.src='${RUTA_URL}img/icons/icon-file.png'"
                                 />
                             </div>
                             <div class="file-name text-center">${nombreArchivo}</div>

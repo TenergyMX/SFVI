@@ -32,7 +32,7 @@
                     }
                 }
                 
-                $fechaInicial = $value->start_date;
+                $fechaInicial = $value->end_date;
                 $fechaActual = date('Y-m-d');
                 // Calcular la diferencia en segundos entre las dos fechas
                 $diferenciaEnSegundos = strtotime($fechaActual) - strtotime($fechaInicial);
@@ -53,36 +53,41 @@
         }
 
         function calcTipos_de_venta() {
+            $response = (object) ["success" => FALSE];
             try {
                 $this->db->query("SELECT 
-                    SUM(CASE WHEN id_category = 1 THEN 1 ELSE 0 END) AS contado,
-                    SUM(CASE WHEN id_category = 2 THEN 1 ELSE 0 END) AS fide,
+                    SUM(CASE WHEN id_category = 1 THEN 1 ELSE 0 END) AS fide,
+                    SUM(CASE WHEN id_category = 2 THEN 1 ELSE 0 END) AS contado,
                     COUNT(id) AS cant_projects
                     FROM project;
                 ");
                 $resultado = $this->db->registro();
                 $resultado->fide = $resultado->fide ? $resultado->fide : 0;
                 $resultado->contado = $resultado->contado ? $resultado->contado: 0;
-                // calc
-                $this->response->data['fide'] = number_format(($resultado->fide * 100) / $resultado->cant_projects, 2);
-                $this->response->data['contado'] = number_format(($resultado->contado * 100) / $resultado->cant_projects, 2);
-                $this->response->success = TRUE;
+                
+                // calculo
+                $propiedades = ['fide', 'contado'];
+                foreach ($propiedades as $propiedad) {
+                    $response->data[$propiedad] = ($resultado->$propiedad > 0) ? number_format(($resultado->$propiedad * 100) / $resultado->cant_projects, 2) : 0;
+                }
+
+                $response->success = TRUE;
             } catch (\DivisionByZeroError $e) {
-                $this->response->data['fide'] = number_format(0, 2);
-                $this->response->data['contado'] = number_format(0, 2);
-                $this->response->error['message'] = "No se puede divir entre 0";
-                $this->response->success = TRUE;
+                $response->data['fide'] = number_format(0, 2);
+                $response->data['contado'] = number_format(0, 2);
+                $response->error['message'] = "No se puede divir entre 0";
+                $response->success = TRUE;
             } catch (Error $e) {
-                $this->response->error['message'] = $e->getMessage();
-				$this->response->error['code'] = $e->getCode();
-                $this->response->success = FALSE;
+                $response->error['message'] = $e->getMessage();
+				$response->error['code'] = $e->getCode();
+                $response->success = FALSE;
             }
-            return $this->response;
+            return $response;
         }
 
 
         function calcTipos_de_proyect() {
-
+            $response = (object) ["success" => FALSE];
             try {
                 $this->db->query("SELECT 
                     SUM(CASE WHEN id_subcategory = 1 THEN 1 ELSE 0 END) AS domestico,
@@ -91,28 +96,29 @@
                     COUNT(id) AS cant_projects
                     FROM project;
                 ");
-
                 $resultado = $this->db->registro();
                 $resultado->domestico = $resultado->domestico ? $resultado->domestico : 0;
                 $resultado->comercial = $resultado->comercial ? $resultado->comercial: 0;
                 $resultado->industrial = $resultado->industrial ? $resultado->industrial: 0;
-                // calc
-                $this->response->data['domestico'] = number_format(($resultado->domestico * 100) / $resultado->cant_projects, 2);
-                $this->response->data['comercial'] = number_format(($resultado->comercial * 100) /  $resultado->cant_projects, 2);
-                $this->response->data['industrial'] = number_format(($resultado->industrial * 100) /    $resultado->cant_projects, 2);
-                $this->response->success = TRUE;
+
+                // calculo
+                $tipos = ['domestico', 'comercial', 'industrial'];
+                foreach ($tipos as $tipo) {
+                    $response->data[$tipo] = ($resultado->$tipo > 0) ? number_format(($resultado->$tipo * 100) / $resultado->cant_projects, 2) : 0;
+                }
+                $response->success = TRUE;
             } catch (\DivisionByZeroError $e) {
-                $this->response->data['domestico'] = number_format(0, 2);
-                $this->response->data['comercial'] = number_format(0, 2);
-                $this->response->data['industrial'] = number_format(0, 2);
-                $this->response->error["message"] = "No se puede divir entre 0";
-                $this->response->success = TRUE;
+                $response->data['domestico'] = number_format(0, 2);
+                $response->data['comercial'] = number_format(0, 2);
+                $response->data['industrial'] = number_format(0, 2);
+                $response->error["message"] = "No se puede divir entre 0";
+                $response->success = TRUE;
             } catch (Error $e) {
-                $this->response->error['message'] = $e->getMessage();
-				$this->response->error['code'] = $e->getCode();
-                $this->response->success = FALSE;
+                $response->error['message'] = $e->getMessage();
+				$response->error['code'] = $e->getCode();
+                $response->success = FALSE;
             }
-            return $this->response;
+            return $response;
         }
 	}
 ?>

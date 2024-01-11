@@ -14,10 +14,11 @@
 		}
 
 		function index($id_project = NULL) {
+			isUserLoggedIn();
 			$this->datos['proyectos'] = $this->modeloDocument->getProjects();
 			$this->datos['sidebar-item'] = 'documentos';
 			$this->datos['project']['id'] = $id_project;
-			$this->vista("Admin/table_documents", $this->datos); 
+			$this->vista("admin/table_documents", $this->datos); 
 		}
 	}
 ?>

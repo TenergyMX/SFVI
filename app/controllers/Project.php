@@ -21,16 +21,15 @@
 			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
 			$this->datos['nombre_proyectos'] = $this->modeloProject->getProjects();
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
-			$this->vista("Admin/table_projects", $this->datos);
+			$this->vista("admin/table_projects", $this->datos);
 		}
 
-		function stages($id=0) {
+		function stages($id = 0) {
 			isUserLoggedIn();
 			$this->datos['proyecto'] = $this->modeloProject->getProject($id);
 			$id_project = $this->datos['proyecto']->id;
 			$id_client = $this->datos['proyecto']->id_client;
-			$this->datos['cliente'] = $this->modeloClient->getClient(1);
-
+			$this->datos['cliente'] = $this->modeloClient->getClient($id_client);
 
 			if ($this->datos['proyecto']->id_category == 1) {
 				$this->datos['stage'][0] = $this->modeloProject->getFideEtapa1($id_project);
@@ -51,45 +50,7 @@
 			}
 			generate_project_file_path( $this->datos );
 			// Cargar la vista
-			$this->vista("Admin/project_stages", $this->datos);
+			$this->vista("admin/project_stages", $this->datos);
 		}
-
-		function Etapas($id=0){
-		    $this->datos['proyecto'] = $this->modeloProject->getStages($id);
-			$this->vista("Admin/project_stages", $this->datos);
-			if ($this->datos['proyecto']->id_category == 1) {
-				# code
-			} elseif ($this->datos['proyecto']->id_category == 2) {
-				$this->datos["stage"][] = $this->modeloProject->getContadoEtapa1($id);
-				$this->datos["stage"][] = $this->modeloProject->getContadoEtapa2($id);
-			}
-			$this->vista("Admin/project_stages", $this->datos);
-		}
-
-		function documents($id=0) {
-			isUserLoggedIn();
-			$this->datos['documento'] = $this->modeloPoject->getProyect($id);
-			$this->vista("Admin/individual_documents", $this->datos);
-		
-		}
-
-		function Documentos($id=0){
-			$this->datos['documento'] = $this->modeloProject->getProject($id);
-			$this->vista("Admin/individual_document", $this->datos);
-			if ($this->datos['documento']->id_category == 1) {
-				echo 'Proyecto FIDE. Nombre: '.$this->datos['documento']->folio;
-			} else { 
-				echo 'Proyecto no disponible';
-			}
-			$this->modeloProject = $this->modelo('Projects');
-			$this->modeloClient = $this->modelo('Clients');
-			$this->modeloVisit = $this->modelo('Visits');
-		}
-
-		function Clients($id=0){
-			$this->datos['cliente'] = $this->modeloProject->getClientsProjects($id);
-			$this->vista("Admin/project_stages", $this->datos);
-		}  
-
 	}
 ?>
