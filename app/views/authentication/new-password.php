@@ -21,7 +21,7 @@
                             <div class="text-center mt-4">
                                 <h1 class="h2">Nueva Contraseña</h1>
                                 <p class="lead">
-                                    Digita tu nueva contraseña
+                                    Crear nueva contraseña
                                 </p>
                             </div>
 
@@ -42,7 +42,7 @@
                                                     class="form-control form-control-lg"
                                                     type="password"
                                                     name="password"
-                                                    placeholder="Enter your password"
+                                                    placeholder="Ingresa nueva contraseña"
                                                 />
                                             </div>
                                             <div class="mb-3">
@@ -50,7 +50,7 @@
                                                     class="form-control form-control-lg"
                                                     type="password"
                                                     name="password2"
-                                                    placeholder="Confirm your password"
+                                                    placeholder="Confirmar contraseña"
                                                 />
                                             </div>
                                             <div class="d-grid gap-2 mt-3">

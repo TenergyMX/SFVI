@@ -329,6 +329,48 @@
 			return $this->db->registro();
 		}
 
+		function getComments($datos = []) {
+			$resultado = (object) ["success" => false];
+
+			try {
+				$this->db->query("SELECT sf.*, u.name AS author
+					FROM stage_foro sf
+					LEFT JOIN users u ON sf.id_user = u.id
+				");
+				$resultado->data = $this->db->registros();
+			} catch (Exception $e) {
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
+			}
+			return $resultado;
+		}
+
+		function addComments($datos = []) {
+			$resultado = (object) ["success" => false];
+
+			try {
+				$this->db->query("INSERT INTO stage_foro
+					(id_user, id_project, stage, comentario) VALUES
+					(:id_user, :id_project, :stage, :comentario);
+				");
+				$this->db->bind(':id_user', $datos['id_user']);
+				$this->db->bind(':id_project', $datos['id_project']);
+				$this->db->bind(':stage', $datos['stage']);
+				$this->db->bind(':comentario', $datos['comentario']);
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				} else {
+					$resultado->error['message'] = 'Ocurrio un error al tratar de agregar un comentario';
+				}
+			} catch (Exception $e) {
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
+			}
+			return $resultado;
+		}
+
+
+
 		// No usar esta función de ser necesaria
 		function updateDataInTable($datos = []) {
 			$resultado = (object) ["success" => false];

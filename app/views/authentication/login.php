@@ -19,8 +19,8 @@
                     >
                         <div class="d-table-cell align-middle">
                             <div class="text-center mt-4">
-                                <h1 class="h2">Welcome back!</h1>
-                                <p class="lead">Sign in to your account to continue</p>
+                                <h1 class="h2">Bienvenido!</h1>
+                                <p class="lead">Inicia sesión en tu cuenta para continuar</p>
                             </div>
 
                             <div class="card">
@@ -28,27 +28,27 @@
                                     <div class="m-sm-3">
                                         <form action="" method="post">
                                             <div class="mb-3">
-                                                <label class="form-label">Email</label>
+                                                <label class="form-label">Correo electrónico</label>
                                                 <input
                                                     class="form-control form-control-lg"
                                                     type="email"
                                                     name="email"
-                                                    placeholder="Enter your email"
+                                                    placeholder="Ingresa tu correo electrónico"
                                                     value="<?php echo $datos["email"]; ?>"
                                                 />
                                             </div>
                                             <div class="mb-3">
-                                                <label class="form-label">Password</label>
+                                                <label class="form-label">Contraseña</label>
                                                 <input
                                                     class="form-control form-control-lg"
                                                     type="password"
                                                     name="password"
-                                                    placeholder="Enter your password"
+                                                    placeholder="Ingresa tu contraseña"
                                                     value=""
                                                 />
                                                 <small>
                                                     <a href="<?php echo RUTA_URL.'User/resetPassword/'?>">
-														Forgot password?
+														¿Has olvidado tu contraseña?
 													</a>
                                                 </small>
                                             </div>

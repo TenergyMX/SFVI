@@ -54,7 +54,7 @@
                                                         <th>Avance(%)</th>
                                                         <th>Documentación</th>
                                                         <th>Visitas</th>
-                                                        <th>Editar</th>
+                                                        <th>Editar</th>}
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>

@@ -381,6 +381,17 @@ table.table-center .sorting {
     visibility: initial;
 }
 
+.fc-state-active {
+    background-color: #03364e !important;
+    color: #fff;
+}
+
+.fc-toolbar .fc-state-hover {
+    background-color: #03364e !important;
+    background-position: 0 -51px !important;
+    color: white;
+}
+
 @media (min-width: 576px) {
     .container-map .map {
         border-radius: 0.6rem;
@@ -429,3 +440,4 @@ table.table-center .sorting {
 
 @media (min-width: 1400px) {
 }
+

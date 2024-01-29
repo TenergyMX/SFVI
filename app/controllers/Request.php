@@ -7,7 +7,8 @@
 			$modeloClient,
 			$modeloVisit,
 			$modeloProject,
-			$modeloFile;
+			$modeloFile,
+			$modeloCalendar;
 		
 		// Constructor
 		function __construct() {
@@ -17,6 +18,7 @@
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->modeloProject = $this->modelo('Projects');
 			$this->modeloFile = $this->modelo('Files');
+			$this->modeloCalendar = $this->modelo('Calendars');
 			$this->datos['user'] = datos_session_usuario();
 			$this->response = array('success' => false);
 		}
@@ -556,5 +558,90 @@
 			echo json_encode($this->response);
 			exit;	
 		}
+
+		// TODO ------------------------- [ CALENADARIO ] -------------------------
+
+		function addEventCaledar() {
+			// Recibimos datos del form mediante peticion
+			$datos['id_user']  = $this->datos['user']['id'];
+			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : NULL;
+			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : NULL;
+			$datos['title']  = isset($_POST['title']) ? $_POST['title'] : NULL;
+			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : NULL;
+			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : NULL;
+			$datos['end_date']  = isset($_POST['end_date']) ? $_POST['end_date'] : NULL;
+			$datos['color']  = isset($_POST['color']) ? $_POST['color'] : NULL;
+
+			$r = $this->modeloCalendar->addEvent( $datos );
+
+			$this->response['success'] = $r->success;
+			if (isset($r->error)) {$this->r['error'] = $r->error; }
+
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function getEventCaledar() {
+			// Paso 1: obtener los datos del calendario
+			$this->response['data'] = $this->modeloCalendar->getEvents();
+
+			// Paso 2: carga la segunda tabla (Visitas)
+			$t2 = $this->modeloVisit->getMisVisitas( $this->datos['user']['id'] );
+			// $t2 = $this->modeloVisit->getMisVisitas( 1 );
+			
+			// Paso X: hacer suma u fusionar los datos que parezcan semejantes es decir parecer a la tabla calendar
+			foreach ($t2 as $value) {
+				$this->response['data'][] = [
+					'title' => 'Visita',
+					'description' => $value->description,
+					'start_date' => $value->start_date,
+					'end_date' => $value->end_date,
+					'color' => '#FFD300',
+				];
+			}
+
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		// TODO ------------------------- [ CHAT ] -------------------------
+		function addComments() {
+			$datos['id_user']  = $this->datos['user']['id'];
+			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : NULL;
+			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : NULL;
+			$datos['comentario']  = isset($_POST['comentario']) ? $_POST['comentario'] : NULL;
+
+			$r = $this->modeloProject->addComments( $datos );
+
+			$this->response['success'] = $r->success;
+			if (isset($r->error)) {$this->response['error'] = $r->error; }
+			
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+
+		function getComments() {
+			$my_id_user = $this->datos['user']['id'];
+			$r = $this->modeloProject->getComments();
+			$this->response['success'] = TRUE;
+			$this->response['data'] = $r->data;
+
+			foreach ($this->response['data'] as &$value) {
+				if ($value->id_user == $my_id_user) { $value->author = 'Tu'; }
+			}
+
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
 	} # fin de las vistas
 ?>

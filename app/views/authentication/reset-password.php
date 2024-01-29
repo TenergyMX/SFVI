@@ -19,7 +19,7 @@
                     >
                         <div class="d-table-cell align-middle">
                             <div class="text-center mt-4">
-                                <h1 class="h2">Reset password</h1>
+                                <h1 class="h2">Restablecer la contraseña</h1>
                                 <p class="lead">
                                     Ingresa tu correo electrónico para restablecer tu contraseña
                                 </p>
@@ -29,17 +29,17 @@
                                     <div class="m-sm-3">
                                         <form  name="reset-password">
                                             <div class="mb-3">
-                                                <label class="form-label">Email</label>
+                                                <label class="form-label">Correo electrónico</label>
                                                 <input
                                                     class="form-control form-control-lg"
                                                     type="email"
                                                     name="email"
-                                                    placeholder="Enter your email"
+                                                    placeholder="Introduce tu correo electrónico"
                                                 />
                                             </div>
                                             <div class="d-grid gap-2 mt-3">
                                                 <button type="submit" class="btn btn-lg btn-primary">
-                                                    Reset password
+                                                    Recuperar contraseña
                                                 </button>
                                             </div>
                                         </form>

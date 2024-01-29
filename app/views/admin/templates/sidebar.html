@@ -53,6 +53,14 @@
                     <span class="align-middle">Visitas</span>
                 </a>
             </li>
+            <li
+                class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'Calendario') ? 'active' : ''; ?>"
+            >
+                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Calendar/">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    Calendario
+                </a>
+            </li>
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'proyectos') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
                     <i class="fa-duotone fa-solar-panel"></i>

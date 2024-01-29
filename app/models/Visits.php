@@ -124,6 +124,17 @@
 			return $this->db->registros();
 		}
 
+		function getMisVisitas($id = 1) {
+			$this->db->query("SELECT v.*, u.email
+				FROM visit v
+				LEFT JOIN users u
+				ON u.id = v.id_user
+				WHERE v.id_user = :id OR v.id_client = :id;
+			");
+			$this->db->bind(':id', $id);
+			return $this->db->registros();
+		}
+
 		function getProyectos() {
 			$this->db->query("SELECT * FROM project p;");
 			return $this->db->registros();
