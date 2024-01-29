@@ -150,38 +150,11 @@
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_calendar.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
         <!-- Modal para agregar evento -->
+        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/locale/es.js'></script>
         <script>
             $( document ).ready(function() {
                 calendar();
             });
-
-            
-           $(document).ready(function(){
-                var fechaHoy = new Date();
-                var dia = fechaHoy.getDate();
-                var mes = fechaHoy.getMonth() + 1; // Enero es 0
-                var año = fechaHoy.getFullYear();
-
-                if(dia < 10) {
-                    dia = '0' + dia;
-                } 
-
-                if(mes < 10) {
-                    mes = '0' + mes;
-                } 
-
-                fechaHoy = año + '-' + mes + '-' + dia;
-                $('.fecha').attr('min', fechaHoy);
-            });
-  
-
-    // calendar.render();
-
-    // Actualizar calendario
-    function updateCalendar() {
-        calendar.fullCalendar("refetchEvents");
-    }
         </script>
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/locale/es.js'></script>
     </body>
 </html>
