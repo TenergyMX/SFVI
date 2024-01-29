@@ -110,7 +110,31 @@
             return $datos;
         }
 
-        if (count($datos['stage']) == 6) {
+        if ($datos['id_type'] == 1 ) {
+            // ANTEPROYECTO
+            // etapa 1
+            $i = 0;
+            $datos['stage'][$i]->file_calculo = $datos['stage'][$i]->file_calculo != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_calculo) : NULL;
+            // etapa 2
+            $i = 1;
+            $datos['stage'][$i]->file_materiales = $datos['stage'][$i]->file_materiales != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_materiales) : NULL;
+             // etapa 3
+            $i = 2;
+            $datos['stage'][$i]->visto_dg = $datos['stage'][$i]->visto_dg != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->visto_dg) : NULL;
+            // etapa 4
+            $i = 3;
+            $datos['stage'][$i]->file_presen = $datos['stage'][$i]->file_presen != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_presen) : NULL;
+            // etapa 5
+            $i = 4;
+            $datos['stage'][$i]->file_neg = $datos['stage'][$i]->file_neg != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_neg) : NULL;
+            // etapa 6
+            $i = 5;
+            $datos['stage'][$i]->file_segui = $datos['stage'][$i]->file_segui != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_segui) : NULL;
+            // etapa 7
+            $i = 6;
+            $datos['stage'][$i]->file_acep = $datos['stage'][$i]->file_acep != NULL ? str_replace(RUTA_DOCS, "", $datos['stage'][$i]->file_acep) : NULL;
+
+        } else if (count($datos['stage']) == 6) {
             // CONTADO
             // etapa 1
             $i = 0;

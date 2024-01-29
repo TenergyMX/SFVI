@@ -54,10 +54,31 @@
                 </a>
             </li>
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'proyectos') ? 'active' : ''; ?>">
-                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
+                <a
+                    data-bs-target="#dashboards"
+                    data-bs-toggle="collapse"
+                    class="sidebar-link collapsed"
+                    aria-expanded="false"
+                >
                     <i class="fa-duotone fa-solar-panel"></i>
-                    <span class="align-middle">Proyectos</span>
-                </a>
+                    <span class="align-middle">Proyectos</span></a
+                >
+                <ul
+                    id="dashboards"
+                    class="sidebar-dropdown list-unstyled collapse"
+                    data-bs-parent="#sidebar"
+                >
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/anteproject">
+                            <span class="align-middle">Anteproyectos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
+                            <span class="align-middle">Proyectos</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li
                 class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'documentos') ? 'active' : ''; ?>"

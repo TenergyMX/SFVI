@@ -24,15 +24,6 @@
                                     <div class="card-header">
                                         <button
                                             type="button"
-                                            class="btn btn-sfvi-1 me-1"
-                                            title="Agregar Proyecto"
-                                            data-option="create"
-                                        >
-                                            <i class="fa-regular fa-plus me-1"></i>
-                                            Agregar Proyecto
-                                        </button>
-                                        <button
-                                            type="button"
                                             class="btn btn-sfvi-1"
                                             title="Refrescar tabla"
                                             data-option="refresh_table"

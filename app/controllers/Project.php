@@ -21,7 +21,8 @@
 			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
 			$this->datos['nombre_proyectos'] = $this->modeloProject->getProjects();
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
-			$this->vista("admin/table_projects", $this->datos);
+			// Cargar la vista
+			$this->vista("admin/table_projects", $this->datos);	
 		}
 
 		function stages($id = 0) {
@@ -51,6 +52,24 @@
 			generate_project_file_path( $this->datos );
 			// Cargar la vista
 			$this->vista("admin/project_stages", $this->datos);
+		}
+
+		function project() {
+			
+		}
+
+		function anteproject() {
+			isUserLoggedIn();
+			$this->datos['nombre_clientes'] = $this->modeloClient->getClients();
+			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
+			$this->datos['nombre_proyectos'] = $this->modeloProject->getProjects();
+			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
+			// cargar vista
+			$this->vista("admin/table_ante_projects", $this->datos);
+		}
+
+		function anteStages() {
+			
 		}
 	}
 ?>
