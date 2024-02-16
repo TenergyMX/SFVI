@@ -77,7 +77,7 @@
 				svisit.description AS str_status_of_visit,
 				CONCAT(p.street, ', ', p.colony, ', ', p.municipality, ', ', p.state) AS direccion,    
 				p.lat,
-				p.lon
+				p.lng
 				FROM visit v
 				LEFT JOIN project p
 				ON v.id_project = p.id
@@ -101,7 +101,7 @@
 					p.name AS project_name,
 					svisit.description AS str_status_of_visit,
 					p.lat,
-					p.lon
+					p.lng
 					FROM visit v
 					LEFT JOIN project p
 					ON v.id_project = p.id

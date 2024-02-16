@@ -114,6 +114,21 @@
                                             <?= $data->estado; ?>
                                         </option>
                                         <?php endforeach; ?>
+                                         </option>
+                                         <!-- Quiero corregir si no me afectara en algún otro código -->
+                                                <?php
+                                        $estados_mexico = [
+                                            'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua',
+                                            'Coahuila', 'Colima', 'Durango', 'Estado de México', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco',
+                                            'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo',
+                                            'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+                                        ];
+
+                                        foreach ($estados_mexico as $estado) {
+                                            echo "<option value='$estado'>$estado</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     </select>
                                 </div>
                                 <div class="col-12">
@@ -169,8 +184,11 @@
                             aria-labelledby="pills-project-tab"
                             tabindex="0"
                         >
-                            <!-- input's -->
+                            <!-- input ante -->
                             <div class="row gx-3 gy-2">
+                                <div class="col-md-6 col-xd-4 d-none">
+                                    <input type="text" name="id_type" class="form-control" value="1" />
+                                </div>
                                 <div class="col-md-6 col-xl-4">
                                     <label for="" class="form-label">
                                         Tipo de venta
@@ -217,7 +235,7 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="col-md-6 col-xl-4">
+                                <div class="col-md-6 col-xl-4 col-project">
                                     <label for="" class="form-label"> Cotización </label>
                                     <div class="row gx-2">
                                         <div class="col">
@@ -241,7 +259,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-xl-4">
+                                <div class="col-md-6 col-xl-4 col-project">
                                     <label for="" class="form-label">
                                         No. de cotización de proyecto
                                         <span class="text-danger">*</span>
@@ -254,7 +272,7 @@
                                         placeholder="No. de cotización de proyecto (Opcional)"
                                     />
                                 </div>
-                                <div class="col-md-6 col-xl-4">
+                                <div class="col-md-6 col-xl-4 col-project">
                                     <label for="" class="form-label"> ID de FIDE </label>
                                     <input
                                         name="id_fide"
@@ -266,7 +284,7 @@
                                 </div>
                                 <div class="col-md-6 col-xl-4">
                                     <div class="row gx-2">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 col-project">
                                             <label for="" class="form-label"> TB </label>
                                             <input
                                                 type="text"
@@ -347,7 +365,7 @@
                                         readonly
                                     />
                                 </div>
-                                <div class="col-md-6 col-xl-4">
+                                <div class="col-md-6 col-xl-4 col-project">
                                     <label for="" class="form-label">
                                         Fecha de inicio
                                         <span class="text-danger">*</span>
@@ -371,6 +389,8 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <!-- input ante -->
                             <!-- end input's -->
                             <div class="row justify-content-center gx-3 mt-3">
                                 <div class="col-md-6 col-lg-3">
@@ -383,10 +403,32 @@
                                     </button>
                                 </div>
                                 <div class="col-md-4 col-lg-3">
-                                    <button type="submit" name="add" class="btn btn-sfvi-1 w-100">
-                                        Añadir Proyecto
+                                    <button
+                                        type="submit"
+                                        name="createAnteProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Añadir AnteProyecto
                                     </button>
-                                    <button type="submit" name="update" class="btn btn-sfvi-1 w-100">
+                                    <button
+                                        type="submit"
+                                        name="updateAnteProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Actualizar AnteProyecto
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="createProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Crear Proyecto
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="updateProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
                                         Actualizar Proyecto
                                     </button>
                                 </div>

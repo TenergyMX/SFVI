@@ -1,7 +1,7 @@
-<div class="card">
+<input type="hidden" name="id_type" value="2" />
+<div class="card mb-3">
     <div class="card-body">
         <div class="table-responsive">
-            <!-- x -->
             <ul class="nav nav-pills flex-nowrap step-wizard-list">
                 <li class="nav-item step-wizard-item current-item">
                     <button
@@ -47,19 +47,6 @@
                         2
                     </button>
                     <span class="progress-label"> Aceptación de cotización </span>
-                    <!-- <div class="container-progress-bar">
-                        <div class="progress">
-                            <div
-                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-label="Animated striped"
-                                aria-valuenow="0"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 0%"
-                            ></div>
-                        </div>
-                    </div> -->
                 </li>
                 <li class="nav-item step-wizard-item">
                     <button
@@ -76,19 +63,6 @@
                         3
                     </button>
                     <span class="progress-label"> Suministros de materiales e ingeniería </span>
-                    <!-- <div class="container-progress-bar">
-                        <div class="progress">
-                            <div
-                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-label="Animated striped"
-                                aria-valuenow="0"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 0%"
-                            ></div>
-                        </div>
-                    </div> -->
                 </li>
                 <li class="nav-item step-wizard-item">
                     <button
@@ -105,19 +79,6 @@
                         4
                     </button>
                     <span class="progress-label"> Instalación SFV </span>
-                    <!-- <div class="container-progress-bar">
-                        <div class="progress">
-                            <div
-                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-label="Animated striped"
-                                aria-valuenow="0"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 0%"
-                            ></div>
-                        </div>
-                    </div> -->
                 </li>
                 <li class="nav-item step-wizard-item">
                     <button
@@ -134,19 +95,6 @@
                         5
                     </button>
                     <span class="progress-label"> Instalación medidor CFE </span>
-                    <!-- <div class="container-progress-bar">
-                        <div class="progress">
-                            <div
-                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                role="progressbar"
-                                aria-label="Animated striped"
-                                aria-valuenow="0"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style="width: 0%"
-                            ></div>
-                        </div>
-                    </div> -->
                 </li>
                 <li class="nav-item step-wizard-item">
                     <button
@@ -165,11 +113,13 @@
                     <span class="progress-label"> Entrega de proyecto </span>
                 </li>
             </ul>
-            <!-- x -->
         </div>
+    </div>
+</div>
 
-        <!-- contenido -->
-        <div class="tab-content pt-4">
+<div class="card">
+    <div class="card-body">
+        <div class="tab-content p-0">
             <!-- Etapa 1 -->
             <div
                 class="tab-pane fade position-relative tab-stage active show"
@@ -185,7 +135,7 @@
                     <div class="col-3 col-md-1 text-end">
                         <button
                             class="btn btn-info w-100 btn-next"
-                            title="Suguiente"
+                            title="Siguiente"
                             onclick="project_stage_transition('#pills-contado-etapa-2-tab');"
                             style="display: none"
                         >
@@ -232,6 +182,12 @@
                                             name="form_etapa_1__recibo_cfe"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -330,6 +286,12 @@
                                             name="form_etapa_1__cotizacion"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -468,6 +430,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="2"
@@ -561,6 +529,12 @@
                                             name="form_etapa_2__INE"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -658,6 +632,12 @@
                                             name="form_etapa_2__ine"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -797,6 +777,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -892,6 +878,12 @@
                                             name="form_etapa_3__f_registro"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -992,6 +984,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1085,6 +1083,12 @@
                                             name="form_etapa_3__contenido_armado"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1182,6 +1186,12 @@
                                             name="form_etapa_3__checkList"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1285,6 +1295,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1375,6 +1391,12 @@
                                             name="form_etapa_3__EPP"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1471,6 +1493,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1564,6 +1592,12 @@
                                             name="form_etapa_3__valid_compras"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1700,6 +1734,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="4"
@@ -1797,6 +1837,12 @@
                                             name="form_etapa_4__recibo_pruebas_funcionamiento"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1937,6 +1983,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -2036,6 +2088,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -2129,6 +2187,12 @@
                                             name="form_etapa_5__recibo_anexo_2"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2227,6 +2291,12 @@
                                             name="form_etapa_5__recibo_img_medidor_b"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2359,6 +2429,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="6"
@@ -2456,6 +2532,12 @@
                                             name="form_etapa_6__recibo_liberacion_proyecto"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2556,6 +2638,12 @@
                                             name="form_etapa_6__recibo_pruebas_funcionamiento_finales"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2662,6 +2750,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="6"
@@ -2760,6 +2854,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="contado" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="6"
@@ -2828,6 +2928,5 @@
                 <!-- end -->
             </div>
         </div>
-        <!-- end contenido -->
     </div>
 </div>

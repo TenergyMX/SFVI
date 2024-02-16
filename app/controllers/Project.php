@@ -17,11 +17,11 @@
 
 		function index() {
 			isUserLoggedIn();
-			$this->datos['nombre_clientes'] = $this->modeloClient->getClients();
-			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
-			$this->datos['nombre_proyectos'] = $this->modeloProject->getProjects();
+			$clientes = $this->modeloClient->getClient_users();
+			$this->datos['nombre_clientes'] = $clientes->data;
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
-			$this->vista("admin/table_projects", $this->datos);
+			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();
+			$this->vista("admin/table_projects", $this->datos);	
 		}
 
 		function stages($id = 0) {
@@ -29,8 +29,8 @@
 			$this->datos['proyecto'] = $this->modeloProject->getProject($id);
 			$id_project = $this->datos['proyecto']->id;
 			$id_client = $this->datos['proyecto']->id_client;
-			$this->datos['cliente'] = $this->modeloClient->getClient($id_client);
-
+			$this->datos['cliente'] = $this->modeloClient->getUser_client($id_client);
+			$this->datos['id_type'] = 2;
 			if ($this->datos['proyecto']->id_category == 1) {
 				$this->datos['stage'][0] = $this->modeloProject->getFideEtapa1($id_project);
 				$this->datos['stage'][1] = $this->modeloProject->getFideEtapa2($id_project);

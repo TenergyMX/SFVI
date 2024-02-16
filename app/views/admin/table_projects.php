@@ -24,15 +24,6 @@
                                     <div class="card-header">
                                         <button
                                             type="button"
-                                            class="btn btn-sfvi-1 me-1"
-                                            title="Agregar Proyecto"
-                                            data-option="create"
-                                        >
-                                            <i class="fa-regular fa-plus me-1"></i>
-                                            Agregar Proyecto
-                                        </button>
-                                        <button
-                                            type="button"
                                             class="btn btn-sfvi-1"
                                             title="Refrescar tabla"
                                             data-option="refresh_table"
@@ -54,7 +45,7 @@
                                                         <th>Avance(%)</th>
                                                         <th>Documentación</th>
                                                         <th>Visitas</th>
-                                                        <th>Editar</th>}
+                                                        <th>Editar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody></tbody>
@@ -77,6 +68,15 @@
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
+
+        <style>
+            <?php if ($datos['user']['int_role'] >= 6) : ?>
+            table thead th:nth-last-child(-n+2),
+            table tbody td:nth-last-child(-n+2) {
+                display: none;
+            }
+            <?php endif; ?>
+        </style>
         <script>
             $( document ).ready(function() {
                 ftable_projects();

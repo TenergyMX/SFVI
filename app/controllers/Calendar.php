@@ -15,11 +15,11 @@
 			$this->datos['sidebar-item'] = 'Calendario';
 		}
 
-		function index($id_project = NULL) {
+		function index() {
 			isUserLoggedIn();
 			$this->datos['proyectos'] = $this->modeloDocument->getProjects();
 			$this->datos['usuarios'] = $this->modeloUser->getUsers();
-			$this->vista("admin/Calendar_v", $this->datos); 
+			$this->vista("admin/calendar", $this->datos); 
 		}
 	}
 ?>

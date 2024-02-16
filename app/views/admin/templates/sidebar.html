@@ -23,6 +23,7 @@
                 <path d="M20 16L12 20L4 16"></path>
             </svg>
         </a>
+        <?php if ($datos['user']['int_role'] != 4 && in_array($datos['user']['int_role'], [2, 3, 5, 6])) : ?>
         <div class="sidebar-user d-none"></div>
         <ul class="sidebar-nav">
             <li class="sidebar-header pt-1 d-none">Opciones</li>
@@ -31,8 +32,9 @@
                     <i class="fa-solid fa-chart-tree-map"></i>
                     <span class="align-middle"> Dashboard</span>
                 </a>
+                <?php endif; ?>
             </li>
-            <?php if ($datos['user']['role'] <= 2) : ?>
+            <?php if ($datos['user']['int_role'] <= 2) : ?>
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'usuarios') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>User/table/">
                     <i class="fa-regular fa-users"></i>
@@ -40,19 +42,23 @@
                 </a>
             </li>
             <?php endif; ?>
+            <?php if ($datos['user']['int_role'] == 3 || ($datos['user']['int_role'] <= 2 || $datos['user']['int_role'] == 5)) : ?>
+
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'clientes') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Client/">
                     <i class="fa-solid fa-user-group-simple"></i>
                     <span class="align-middle">Clientes</span>
                 </a>
             </li>
-
+            <?php endif; ?>
+            <?php if ($datos['user']['int_role'] <= 2 || $datos['user']['int_role'] < 6 ) : ?>
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'visitas') ? 'active' : ''; ?>">
                 <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Visit/">
                     <i class="fa-solid fa-house-person-return"></i>
                     <span class="align-middle">Visitas</span>
                 </a>
             </li>
+            <?php endif; ?>
             <li
                 class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'Calendario') ? 'active' : ''; ?>"
             >
@@ -61,12 +67,37 @@
                     Calendario
                 </a>
             </li>
+            <?php if ($datos['user']['int_role'] == 5 || $datos['user']['int_role'] == 6 || in_array($datos['user']['int_role'], [2, 3])) : ?>
+
             <li class="sidebar-item <?= ($datos['sidebar-item'] == 'proyectos') ? 'active' : ''; ?>">
-                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
+                <a
+                    data-bs-target="#dashboards"
+                    data-bs-toggle="collapse"
+                    class="sidebar-link collapsed"
+                    aria-expanded="false"
+                >
                     <i class="fa-duotone fa-solar-panel"></i>
-                    <span class="align-middle">Proyectos</span>
-                </a>
+                    <span class="align-middle">Proyectos</span></a
+                >
+                <ul
+                    id="dashboards"
+                    class="sidebar-dropdown list-unstyled collapse"
+                    data-bs-parent="#sidebar"
+                >
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="<?php echo RUTA_URL; ?>AnteProject/">
+                            <span class="align-middle">Anteproyectos</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Project/">
+                            <span class="align-middle">Proyectos</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
+            <?php endif; ?>
+            <?php if ($datos['user']['int_role'] == 2 || $datos['user']['int_role'] == 5 || $datos['user']['int_role'] == 6) : ?>
             <li
                 class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'documentos') ? 'active' : ''; ?>"
             >
@@ -76,6 +107,7 @@
                     Documentos
                 </a>
             </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>

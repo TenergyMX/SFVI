@@ -38,110 +38,115 @@
                         class="mx-auto"
                         style="max-width: 750px; width: 100%"
                     >
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4">
                                 Tipo de visita:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="type"
-                                    class="form-control-plaintext"
-                                    value="<?= $datos['info']->str_type_of_visit ?>"
+                                    class="form-control-plaintext fs-4"
+                                
+                                    value="<?= $datos['info']->str_type_of_visit ?>" 
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4">
                                 Razón de visita:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="razon"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4"
                                     value="<?= $datos['info']->description ?>"
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
+                        <div class="mb-2 row gx-2">
                             <label
                                 for=""
-                                class="col-form-label col-sm"
+                                class="col-form-label col-sm-auto  fw-bolder fs-4"
                                 style="box-shadow: inset"
                             >
                                 Proyecto:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="proyect"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4"
                                     value="<?= $datos['info']->project_folio ?>"
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4">
                                 Fecha de visita:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="date"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4"
                                     value="<?= $datos['info']->start_date ?>"
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4">
                                 Visitante:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="visit"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4"
                                     value="<?= $datos['info']->str_fullname ?>"
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm"> Nota: </label>
-                            <div class="col-sm-9">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4"> Nota: </label>
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="note"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4 "
                                     value="<?= $datos['info']->note ?>"
                                     readonly
                                 />
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="" class="col-form-label col-sm">
+                        <div class="mb-2 row gx-2">
+                            <label for="" class="col-form-label col-sm-auto  fw-bolder fs-4">
                                 Dirección de la visita:
                             </label>
-                            <div class="col-sm-8">
+                            <div class="col-sm">
                                 <input
                                     type="text"
                                     name="direction"
-                                    class="form-control-plaintext"
+                                    class="form-control-plaintext fs-4"
                                     value="<?= $datos['info']->direccion ?>"
                                     readonly
                                 />
                             </div>
                         </div>
                     </form>
-                    <div class="container-map print-map">
-                        <div class="map"></div>
+                   <div class="d-flex justify-content-center align-items-center" >
+                        <div class="container-map print-map" style="width: 800px; height: 400px;">
+                            <div class="map"></div>
+                        </div>
                     </div>
+
+
                 </div>
                 <div class="card-footer bg-transparent p-0">
                     <img
@@ -158,19 +163,21 @@
                 var opcionesMap = {
                     center: {
                         lat: parseFloat(<?= $datos['info']->lat ?>),
-                        lng: parseFloat(<?= $datos['info']->lon ?>)
+                        lng: parseFloat(<?= $datos['info']->lng ?>)
                     },
-                    zoom: 13,
+                    zoom: 18,
                 }
                 try {
                     var obj_map = createMap_id(".map", opcionesMap);
+                    $("[name='btn-location']").hide();
                 } catch (error) {
                     console.log("oops, ocurrio un error con el mapa");
                 }
                 // inmpirmir
                 setTimeout(() => {
+                    $("[name='btn-location']").hide();
                     window.print();
-                }, 500);
+                }, 550);
             });
         </script>
     </body>

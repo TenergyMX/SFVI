@@ -220,6 +220,7 @@
 			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : NULL;
 			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : NULL;
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : NULL;
+			$datos['note']  = isset($_POST['note']) ? $_POST['note'] : NULL;
 
 			$response = $this->modeloVisit->addVisit($datos);
 			$this->response['success'] = $response->success;
@@ -233,12 +234,9 @@
 		function getVisits() {
 			$this->response['data'] = $this->modeloVisit->getVisits();
 			foreach ($this->response['data'] as &$value) {
-				$btn = '<button class="btn btn-sfvi-1 me-1" name="info" data-option="show_info"><i class="fa-light fa-circle-info"></i></button>';
-				$btn_update= '<button class="btn btn-sfvi-1" name="update" data-option="update"><i class="fa-light fa-pen"></i></button>';
-				$btn_generate_pdf= '<button class="btn btn-primary" name="generate_pdf" data-option="pdf"><i class="fa-light fa-pen"></i></button>';
-				$value->btn_action = $btn;
-				$value->btn_update = $btn_update;
-				$value->btn_pdf = $btn_generate_pdf;
+				$value->btn_pdf = '';
+				$value->btn_info = "<button class=\"btn btn-sfvi-1 me-1\" name=\"info\" data-option=\"show_info\"><i class=\"fa-light fa-circle-info\"></i></button>";
+				$value->btn_action = "<button class=\"btn btn-sfvi-1\" name=\"update\" data-option=\"update\"><i class=\"fa-light fa-pen\"></i></button>";
 			}
 
 			$this->response['success'] = true;
@@ -302,8 +300,36 @@
 			exit;
 		}
 
-		// TODO ------------------------- [ PROYECTOS ] -------------------------
+		// TODO ------------------------- [ ANTE PROYECTOS ] -------------------------
+		function getAnteProjects() {
+			// Cargar los proyectos dependiendo del usuario
+			if ($this->datos['user']['int_role'] <= 2 || $this->datos['user']['int_role'] == 3) {
+				$this->response['data'] = $this->modeloProject->getAnteProjects();
+			} else {
+				$this->response['data'] = $this->modeloProject->getMyAnteProjects( $this->datos['user']['id'] );
+			}
 
+			foreach ($this->response['data'] as &$value) {
+				$value->btn_project = "<a href=\"".RUTA_URL."AnteProject/stages/{$value->id}/\" class=\"btn btn-sfvi-1 text-truncate\">{$value->name}</a>";
+				$value->btn_action = '<button class="btn btn-sfvi-1" name="update" data-option="update-anteproject"><i class="fa-solid fa-pen"></i></button>';
+				$value->btn_action_create = "<i class=\"fa-solid fa-hourglass-start fa-spin fa-xl\" title=\"Etapas en proceso\"></i>";
+				if ($value->percentage == 100 && $value->file_acep && $this->datos['user']['int_role'] <= 2) {
+					$value->btn_action_create = '<button class="btn btn-sfvi-1" data-option="createProject"><i class="fa-solid fa-plus"></i></button>';
+				} elseif ($value->percentage == 100 && $value->file_acep === 1) {
+					$value->btn_action_create = "<i class=\"fa-regular fa-clock fa-fade fa-xl\" title=\"Esperando su creación\"></i>";
+				} elseif ($value->percentage == 100 && $value->file_acep == 0 && $value->file_acep != null) {
+					$value->btn_action_create = "<i class=\"fa-solid fa-face-pensive fa-fade fa-xl\" title=\"Cancelado\"></i>";
+				}
+			}
+
+			$this->response['success'] = true;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		// TODO ------------------------- [ PROYECTOS ] -------------------------
+		// copia
 		function addProject(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
 			$datos["id_project"] = $datos['id'];
@@ -383,9 +409,101 @@
 			exit;
 		}
 
+		function addAnteProject(){
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : NULL;
+			$datos["id_project"] = $datos['id'];
+			$datos['tb']  = isset($_POST['tb']) ? trim($_POST['tb']) : NULL;
+			$datos['name']  = isset($_POST['name']) ? trim($_POST['name']) : 'unknown';
+			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : NULL;
+			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : 1;
+			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : '';
+			$datos['id_subcategory']  = isset($_POST['id_subcategory']) ? $_POST['id_subcategory'] : NULL;
+			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : $this->datos['user']['id'];
+			$datos['quotation_num']  = isset($_POST['quotation_num']) ? $_POST['quotation_num'] : '';
+			$datos['id_fide']  = isset($_POST['id_fide']) ? $_POST['id_fide'] : '';
+			$datos['charge']  = isset($_POST['charge']) ? $_POST['charge'] : NULL;
+			$datos['street']  = isset($_POST['street']) ? $_POST['street'] : NULL;
+			$datos['colony']  = isset($_POST['colony']) ? $_POST['colony'] : NULL;
+			$datos['municipality']  = isset($_POST['municipality']) ? $_POST['municipality'] : '';
+			$datos['state']  = isset($_POST['state']) ? $_POST['state'] : NULL;
+			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : NULL;
+			$datos['antepercentage']  = isset($_POST['antepercentage']) ? $_POST['antepercentage'] : 0;
+			$datos['percentage']  = isset($_POST['percentage']) ? $_POST['percentage'] : 0;
+			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
+			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
+			$datos['period']  = isset($_POST['period']) ? $_POST['period'] : 30;
+			$datos['panels']  = isset($_POST['panels']) ? $_POST['panels'] : NULL;
+			$datos['module_capacity']  = isset($_POST['module_capacity']) ? $_POST['module_capacity'] : NULL;
+			$datos['efficiency']  = isset($_POST['efficiency']) ? $_POST['efficiency'] : NULL;
+			
+			# Paso 1: Guardar la informacion.
+			$response = $this->modeloProject->addAnteProject($datos);
+			$this->response['success'] = $response->success;
+			if (isset($response->error)) {$this->response['error'] = $response->error; }
+			
+			# Paso 2: Crear carpetas del proyecto basado en su categoria
+			if ($this->response['success']) {
+				$datos["id_project"] = $response->id;
+			}
+
+			# Paso 3: Crear un registro vacio de las etapas del proyecto
+			$this->modeloProject->createStagesAnte($datos["id_project"]);
+
+			# Paso 4: guardar el archivo de cotizacion en caso de existir
+			if (isset($_FILES['quotation']) && $this->response['success']) {
+				$info = getDatosDeGuardadoDelArchivoDeProyecto( 'cotizacion' );
+				$targetDirectory = trim($datos['name']);
+				$targetDirectory = strtoupper($targetDirectory);
+				$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+				$targetDirectory .= $info['dirs_to_save'][0] . '/';
+				$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
+				if ($r_file->success) {
+					$categoria = $datos['id_category'] == 1 ? 'fide' : 'contado';
+					$datos["table"] = "p_{$categoria}_stage1";
+					$datos["data_key"] = "cotizacion";
+					$datos["data_value"] = $r_file->data["file"]["full_path"];
+					$datos["where"] = "WHERE id_project = {$datos["id_project"]}";
+					// Guardamos la ruta en la tabla
+					$this->modeloProject->updateDataInTable($datos);
+				} else {
+					$this->response['error']['message'] = "Proyecto guardado, pero hubo un error al guardar el archivo";
+				}
+			}
+
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function createProject() {
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : NULL;
+			$datos["id_project"] = $datos['id'];
+			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : NULL;
+			$datos['id_subcategory']  = isset($_POST['id_subcategory']) ? $_POST['id_subcategory'] : NULL;
+			
+			# Paso 1: Cambiamos de anteproyecto a proyecto (update)
+			$this->modeloProject->createProject( $datos['id'] );
+			$this->response['success'] = TRUE;
+
+			# Paso x: Crear un registros vacios de las etapas del proyecto
+			if ($this->response['success'] && $datos['id_category'] == 1) {
+				$this->modeloProject->createStages($datos["id_project"], "FIDE");
+			} elseif ($this->response['success'] && $datos['id_category'] == 2) {
+				$this->modeloProject->createStages($datos["id_project"], "CONTADO");
+			} else {
+				$this->response['error']['message'] = "Categoria de proyecto desconocido";
+			}
+
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
 		function getProjects() {
 			// Cargar los proyectos dependiendo del usuario
-			if ($this->datos['user']['int_role'] <= 2) {
+			if ($this->datos['user']['int_role'] <= 2 || $this->datos['user']['int_role'] == 3) {
 				$this->response['data'] = $this->modeloProject->getProjects();
 			} else {
 				$this->response['data'] = $this->modeloProject->getMyProjects( $this->datos['user']['id'] );
@@ -401,6 +519,37 @@
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
 			exit;
+		}
+
+		function updateAnteProject() {
+			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : 'unknown';
+			$datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : NULL;
+			$datos['id_category']  = isset($_POST['id_category']) ? $_POST['id_category'] : NULL;
+			$datos['id_subcategory']  = isset($_POST['id_subcategory']) ? $_POST['id_subcategory'] : NULL;
+			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : NULL;
+			$datos['id_fide']  = isset($_POST['id_fide']) ? $_POST['id_fide'] : NULL;
+			$datos['charge']  = isset($_POST['charge']) ? $_POST['charge'] : '';
+			$datos['street']  = isset($_POST['street']) ? $_POST['street'] : '';
+			$datos['colony']  = isset($_POST['colony']) ? $_POST['colony'] : '';
+			$datos['municipality']  = isset($_POST['municipality']) ? $_POST['municipality'] : '';
+			$datos['state']  = isset($_POST['state']) ? $_POST['state'] : '';
+			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : '';
+			$datos['lat']  = isset($_POST['lat']) ? $_POST['lat'] : '';
+			$datos['lng']  = isset($_POST['lng']) ? $_POST['lng'] : '';
+			$datos['panels']  = isset($_POST['panels']) ? $_POST['panels'] : '';
+			$datos['module_capacity']  = isset($_POST['module_capacity']) ? $_POST['module_capacity'] : '';
+			$datos['efficiency']  = isset($_POST['efficiency']) ? $_POST['efficiency'] : '';
+			
+			# Ejecutar
+			$response = $this->modeloProject->updateAnteProject($datos);
+			$this->response['success'] = $response->success;
+			if (isset($response->error)) {$this->response['error'] = $response->error; }
+			
+			# Respuesta
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;	
 		}
 
 		function updateProject() {
@@ -440,10 +589,15 @@
 				$targetDirectory .= $info['dirs_to_save'][0] . '/';
 				$r_file = $this->modeloFile->saveFile($_FILES["quotation"], $targetDirectory, "quotation");
 				if ($r_file->success) {
-					$datos["quotation"] = $r_file->targetFile;
-					$this->modeloProject->addProjectquotation($datos);
+					$categoria = $datos['id_category'] == 1 ? 'fide' : 'contado';
+					$datos["table"] = "p_{$categoria}_stage1";
+					$datos["data_key"] = "cotizacion";
+					$datos["data_value"] = $r_file->data["file"]["full_path"];
+					$datos["where"] = "WHERE id_project = {$datos["id_project"]}";
+					// Guardamos la ruta en la tabla
+					$this->modeloProject->updateDataInTable($datos);
 				} else {
-					$this->response['error'] = "Proyecto guardo, pero hubo un error al guardar el archivo";
+					$this->response['error']['message'] = "Proyecto guardado, pero hubo un error al guardar el archivo";
 				}
 			}
 
@@ -454,21 +608,30 @@
 		}
 
 		function updateStageData() {
-			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['id_project']  = $datos['id'];
-			$datos['name_project']  = isset($_POST['name_project']) ? $_POST['name_project'] : 'unknown';
+			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : NULL;
+			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : NULL;
+			$datos['project_name']  = isset($_POST['project_name']) ? $_POST['project_name'] : 'unknown';
 			$datos['category']  = isset($_POST['category']) ? $_POST['category'] : 'contado';
 			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : '1';
 			$datos['table']  = "p_{$datos['category']}_stage{$datos['stage']}";
-			$datos['data_key'] = "cotizacion";
+			$datos['table'] = strtolower($datos['table']);
+			$datos['data_key'] = isset($_POST['data_key']) ? $_POST['data_key'] : NULL;
 			$datos['data_value'] = NULL;
 			$datos['where'] = "WHERE id_project = {$datos['id_project']}";
+			$saved = false;	// Indicamos si hara un update en la tabla
 
-			// Detectar si se subio un archivo
 			if (!empty($_FILES)) {
+				// Se guarda un archivo de una etapa
 				foreach (array_keys($_FILES) as $nombreCampo) { $datos['data_key'] = $nombreCampo; }
-				$info = getDatosDeGuardadoDelArchivoDeProyecto( $datos['data_key'] );
-				$targetDirectory = trim($datos['name_project']);
+
+				if ($datos['category'] == "ante") {
+					$info["dirs_to_save"] = ["ANTEPROJET"];
+					$info["new_name"] = NULL;
+				} else {
+					$info = getDatosDeGuardadoDelArchivoDeProyecto( $datos['data_key'] );
+				}
+
+				$targetDirectory = trim($datos['project_name']);
 				$targetDirectory = strtoupper($targetDirectory);
 				$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
 
@@ -480,7 +643,7 @@
 				} else {
 					$r_file = $this->modeloFile->saveFile($_FILES[$datos['data_key']], $directory_1 );
 				}
-				
+
 				//  Este archivo se debe de guardar en mas de una carpeta
 				if ( $r_file->success and count( $info['dirs_to_save'] ) > 1 ) {
 					$i = 0;
@@ -497,16 +660,66 @@
 				// Estructuramos la respuesta
 				if ($r_file->success) {
 					$datos['data_value'] = $r_file->data["file"]["full_path"];
-					$r2 = $this->modeloProject->updateDataInTable($datos);
-					$this->response['data']['project']['id'] = $datos['id'];
+					$this->response['data']['project']['id'] = $datos['id_project'];
+					$this->response['data']['project']['id_type'] = $datos['id_type'];
 					$this->response['data']['file']['name'] = $r_file->data["file"]['name'];
 					$this->response['data']['file']['path'] = $r_file->data["file"]['path'];
-					$this->response['success'] = $r2->success;
-				} else {
-					$this->response['error']['message'] = "Oops, hubo un error al guardar el archivo";
+					$saved = true;
 				}
-
 			}
+
+			// Guardar datos en la tabla seleccionada
+			if ($saved) {
+				$r_db = $this->modeloProject->updateDataInTable($datos);
+				$this->response['success'] = $r_db->success;
+				if (isset($r_db->error)) {$this->response['error'] = $r_db->error; }
+			}
+			
+			// Responder
+			$this->response['table'] = $datos['table'];
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function updateStageData_check() {
+			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : NULL;
+			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : NULL;
+			$datos['table']  = "p_ante_stage{$datos['stage']}";
+			$datos['data_key'] =  NULL;
+			$datos['data_value'] =  NULL;
+			$datos['where'] = "WHERE id_project = {$datos['id_project']}";
+			$r = ['success' => false];
+
+			// Buscamos la clave
+			if (array_key_exists("visto_dg", $_POST)) {
+				$datos['data_key'] = "visto_dg";
+			} elseif (array_key_exists("file_segui", $_POST)) {
+				$datos['data_key'] = "file_segui";
+			} elseif (array_key_exists("file_acep", $_POST)) {
+				$datos['data_key'] = "file_acep";
+			}
+
+			// Asignamos valor
+			$datos['data_value'] = $datos['data_key'] != NULL ? $_POST[$datos['data_key']] :  'Naiugdfwds';
+
+			// Ejecutamos consulta
+			if ($datos['data_key'] != "file_acep") {
+				$datos['data_value'] = $datos['data_value'] == 0 ? NULL : $datos['data_value'];
+				$r = $this->modeloProject->updateDataInTable($datos);
+			} elseif ($datos['data_key'] == "file_acep") {
+				$r = $this->modeloProject->updateDataInTable($datos);
+				// cambiamos el porcentaje
+				$datos['table'] = 'project';
+				$datos['data_key'] = 'percentage';
+				$datos['data_value'] = 100;
+				$datos['where'] = "WHERE id = {$datos['id_project']}";
+				$r = $this->modeloProject->updateDataInTable($datos);
+			}
+
+			$this->response['success'] = $r->success;
+			if (isset($r->error)) {$this->response['error'] = $r->error; }
+
 			// Responder
 			$this->response['table'] = $datos['table'];
 			header('Content-Type: application/json');
@@ -613,7 +826,7 @@
 			$datos['id_user']  = $this->datos['user']['id'];
 			$datos['id_project']  = isset($_POST['id_project']) ? $_POST['id_project'] : NULL;
 			$datos['stage']  = isset($_POST['stage']) ? $_POST['stage'] : NULL;
-			$datos['comentario']  = isset($_POST['comentario']) ? $_POST['comentario'] : NULL;
+			$datos['message']  = isset($_POST['message']) ? $_POST['message'] : NULL;
 
 			$r = $this->modeloProject->addComments( $datos );
 
@@ -629,7 +842,9 @@
 
 		function getComments() {
 			$my_id_user = $this->datos['user']['id'];
-			$r = $this->modeloProject->getComments();
+			$datos['id_project']  = isset($_GET['id_project']) ? $_GET['id_project'] : NULL;
+			$datos['stage']  = isset($_GET['stage']) ? $_GET['stage'] : NULL;
+			$r = $this->modeloProject->getComments( $datos );
 			$this->response['success'] = TRUE;
 			$this->response['data'] = $r->data;
 

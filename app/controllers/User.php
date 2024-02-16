@@ -55,7 +55,7 @@
 					exit;
 				} else {
 					$datos['alert'] = $response->error['message'];
-					$datos['alert'] = 'Error en las credenciales';
+					// $datos['alert'] = 'Error en las credenciales';
 				}
 			}
 			// ? Carga la vista

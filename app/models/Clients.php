@@ -53,14 +53,36 @@
 			}
 		}
 
-		
 		function getClient($id = 0) {
-			$this->db->query("SELECT c.*,
-				tc.description AS str_type_of_client
+			$this->db->query("SELECT clients WHERE c.id = :id");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+
+		function getClient_user($id = 0) {
+			$this->db->query("SELECT u.*,
+				c.type_of_client,
+				c.municipality,
+				c.phone,
+				c.rfc
 				FROM clients c
-				LEFT JOIN type_of_client tc
-				ON c.type_of_client = tc.id
+				LEFT JOIN users u ON u.id_client = c.id;
 				WHERE c.id = :id
+			");
+			$this->db->bind(':id', $id);
+			return $this->db->registro();
+		}
+		
+		function getUser_client($id = 0) {
+			$resultado = (object) ["success" => false];
+			$this->db->query("SELECT u.*,
+				c.type_of_client,
+				c.municipality,
+				c.phone,
+				c.rfc
+				FROM clients c
+				LEFT JOIN users u ON u.id_client = c.id
+				WHERE u.id = :id
 			");
 			$this->db->bind(':id', $id);
 			return $this->db->registro();
@@ -69,6 +91,28 @@
 		function getClients() {
 			$this->db->query("SELECT * FROM clients u");
 			return $this->db->registros();
+		}
+
+		function getClient_users() {
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->query("SELECT u.*,
+					c.type_of_client,
+					c.municipality,
+					c.phone,
+					c.rfc
+					FROM clients c
+					LEFT JOIN users u ON u.id_client = c.id;
+				");
+				$r = $this->db->registros();
+				$resultado->data = $r;
+			} catch (Exception $e) {
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
+			}
+			return $resultado;
 		}
 	}
 ?>

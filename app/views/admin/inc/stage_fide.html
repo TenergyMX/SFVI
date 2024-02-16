@@ -1,7 +1,7 @@
-<div class="card">
+<input type="hidden" name="id_type" value="2" />
+<div class="card mb-3">
     <div class="card-body">
         <div class="table-responsive">
-            <!-- x -->
             <ul class="nav nav-pills flex-nowrap step-wizard-list">
                 <li class="nav-item step-wizard-item current-item">
                     <button
@@ -145,11 +145,13 @@
                     <span class="progress-label"> Entrega de Proyecto </span>
                 </li>
             </ul>
-            <!-- x -->
         </div>
+    </div>
+</div>
 
-        <!-- contenido -->
-        <div class="tab-content pt-4">
+<div class="card">
+    <div class="card-body">
+        <div class="tab-content p-0">
             <!-- etapa 1 -->
             <div
                 class="tab-pane fade position-relative tab-stage active show"
@@ -211,6 +213,12 @@
                                             name="form_etapa_1__recibo_cfe"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -308,6 +316,12 @@
                                             name="form_etapa_1__cotizacion"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -445,6 +459,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="2"
@@ -541,6 +561,12 @@
                                             name="form_etapa_2__acta_constitutiva_pm"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -640,6 +666,12 @@
                                             name="form_etapa_2__poder_notarial_pm"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -742,6 +774,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="2"
@@ -837,6 +875,12 @@
                                             name="form_etapa_2__buro_de_credito"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -936,6 +980,12 @@
                                             name="form_etapa_2__recibo_CFE"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1076,6 +1126,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1172,6 +1228,12 @@
                                             name="form_etapa_3__CSF_solidario"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1273,6 +1335,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1368,6 +1436,12 @@
                                             name="form_etapa_3__recibo_CFE_aval"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1467,6 +1541,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1564,6 +1644,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1659,6 +1745,12 @@
                                             name="form_etapa_3__com_dom_negocio"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1763,6 +1855,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -1858,6 +1956,12 @@
                                             name="form_etapa_2__predial_negocio"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -1957,6 +2061,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -2052,6 +2162,12 @@
                                             name="form_etapa_3__img_fachada"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2151,6 +2267,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -2248,6 +2370,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="3"
@@ -2343,6 +2471,12 @@
                                             name="form_etapa_3__anexo_tecnico"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2482,6 +2616,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="4"
@@ -2575,6 +2715,12 @@
                                             name="form_etapa_4__pagare"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2673,6 +2819,12 @@
                                             name="form_etapa_4__sol_credito"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -2779,6 +2931,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="4"
@@ -2876,6 +3034,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="4"
@@ -2971,6 +3135,12 @@
                                             name="form_etapa_4__card_reconocimiento"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -3107,6 +3277,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -3203,6 +3379,12 @@
                                             name="form_etapa_5__f_registro"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -3303,6 +3485,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -3401,6 +3589,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -3497,6 +3691,12 @@
                                             name="form_etapa_5__checkList"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -3602,6 +3802,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -3695,6 +3901,12 @@
                                             name="form_etapa_5__EPP"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -3794,6 +4006,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="5"
@@ -3890,6 +4108,12 @@
                                             name="form_etapa_5__valid_compras"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -4030,6 +4254,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="6"
@@ -4125,6 +4355,12 @@
                                             name="form_etapa_6__p_funcionamiento"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -4265,6 +4501,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="7"
@@ -4364,6 +4606,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="7"
@@ -4457,6 +4705,12 @@
                                             name="form_etapa_7__anexo_2"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -4555,6 +4809,12 @@
                                             name="form_etapa_7__img_medidor_b"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -4687,6 +4947,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="8"
@@ -4782,6 +5048,12 @@
                                             name="form_etapa_8__operacion_mante"
                                             class="form-project-stages"
                                         >
+                                            <input
+                                                type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
                                             <input
                                                 type="hidden"
                                                 name="stage"
@@ -4882,6 +5154,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="8"
@@ -4979,6 +5257,12 @@
                                         >
                                             <input
                                                 type="hidden"
+                                                name="id_project"
+                                                value="<?= $datos['proyecto']->id ?>"
+                                            />
+                                            <input type="hidden" name="category" value="fide" />
+                                            <input
+                                                type="hidden"
                                                 name="stage"
                                                 class="form-control"
                                                 value="8"
@@ -5048,6 +5332,5 @@
             </div>
             <!-- end -->
         </div>
-        <!-- end contenido -->
     </div>
 </div>

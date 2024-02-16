@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
-    <title>VISITAS</title>
-</head>
-    <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
-        <div class="wrapper">
-            <?php require_once(RUTA_APP.'/views/admin/templates/sidebar.html'); ?>
-            <div class="main">
-                <?php require_once(RUTA_APP.'/views/admin/templates/navbar.html'); ?>
-                <main class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div id="calendar" class="calendar"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                   <div class="card-header text-center" style="background-color: #012130;">
-                                        <span class="text-white h4  font-weight-bold">AGREGAR ACTIVIDAD</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <form name="form-calendar">
+<form name="form-calendar">
                                             <div class="mb-2">
                                                 <label for="">Titulo</label>
                                                 <input type="text" name="title" class="form-control">
@@ -42,11 +14,7 @@
                                                 </label>
                                                 <select name="id_project" class="form-control" required>
                                                     <option selected>Seleccione un proyecto...</option>
-                                                    <?php foreach($datos['proyectos'] as $dato) : ?>
-                                                        <option value="<?= $dato->id; ?>">
-                                                            <?= $dato->name; ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
+                                                    
                                                 </select>
                                             </div>
                                             <div class="mb-2">
@@ -56,11 +24,7 @@
                                                 </label>
                                                 <select name="id_user" class="form-control" required>
                                                     <option selected>Seleccione un usuario...</option>
-                                                    <?php foreach($datos['usuarios'] as $dato) : ?>
-                                                        <option value="<?= $dato->id; ?>">
-                                                            <?= $dato->name; ?>
-                                                        </option>
-                                                    <?php endforeach; ?>
+                                                    
                                                 </select>
                                             </div>
                                             <div class="">
@@ -117,44 +81,5 @@
                                                     >
                                                 </div>
                                             </div>
-                                            <div class="row g-3 text-center">
-                                                <div class="col-md-6">
-                                                    <button
-                                                        type="submit"
-                                                        name="submit"
-                                                        class="btn btn-primary w-100"
-                                                   >
-                                                            Enviar
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <button
-                                                            type="reset"
-                                                            class="btn btn-danger w-100"
-                                                        >
-                                                    Cancelar
-                                                    </button>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                            
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
-            </div>
-        </div>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_calendar.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-        <!-- Modal para agregar evento -->
-        <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/locale/es.js'></script>
-        <script>
-            $( document ).ready(function() {
-                calendar();
-            });
-        </script>
-    </body>
-</html>

@@ -1,4 +1,5 @@
 app/config/configurar.php
-app/db
-docs/
+app/db/
 app/vendor/
+app/composer.lock
+docs/

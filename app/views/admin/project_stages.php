@@ -87,7 +87,7 @@
                 var opcionesMap = {
                     center: {
                         lat: parseFloat(<?= $datos['proyecto']->lat; ?>),
-                        lng: parseFloat(<?= $datos['proyecto']->lon; ?>),
+                        lng: parseFloat(<?= $datos['proyecto']->lng; ?>),
                     },
                     zoom: 13,
                 };
@@ -97,7 +97,25 @@
                 } catch (error) {
                     console.log("hubo un problema al cargar el mapa");
                 }            
-                calcularProgresoEtapa();
+                calcularProgresoEtapa(2);
+
+                <?php if ($datos['user']['int_role'] <= 2) : ?>
+                <?php elseif ($datos['user']['int_role'] == 3) : ?>
+                    var hijos = $("[type='file']");
+                    var padre;
+                    var objetivo;
+
+                    $.each(hijos, function (index, value) {
+                        padre = $(value).closest(".accordion-item");
+                        objetivo = padre.find(".icon-checkbox");
+                        
+                        if (objetivo.hasClass("checked")) {
+                            $(value).prop("disabled", true);
+                        }
+                    });
+                <?php else: ?>
+                    $("[type='file']").prop("disabled", true);
+                <?php endif; ?>
             });
         </script>
     </body>
