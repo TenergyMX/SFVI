@@ -89,7 +89,7 @@ function ftable_users() {
             success: function (response) {
                 $.each(response.data, function (key, value) {
                     select_clients.append(
-                        `<option value="${key}">${value.name} ${value.surnames}</option>`
+                        `<option value="${value.id}">${value.name} ${value.surnames}</option>`
                     );
                 });
 
@@ -763,8 +763,10 @@ function calc_panels() {
     var num_panels = carga_diaria / (hsp * eficiencia_panel * capacidad_panel);
     if (Number.isFinite(num_panels)) {
         num_panels = Math.ceil(num_panels);
+        console.log("number");
     } else {
         num_panels = 0;
+        console.log("infinito");
     }
     form.find("[name='panels']").val(num_panels);
     return num_panels;

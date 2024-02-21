@@ -61,10 +61,11 @@
 		}
 
 		function addUser() {
-			$datos['email'] = isset($_POST['email']) ? $_POST['email'] : '';
-			$datos['role'] = isset($_POST['role']) ? $_POST['role'] : '';
-			$datos['name'] = isset($_POST['name']) ? $_POST['name'] : '';
-			$datos['surnames'] = isset($_POST['surnames']) ? $_POST['surnames'] : ''; 
+			$datos['id_client'] = isset($_POST['name-clients']) ? $_POST['name-clients'] : NULL;
+			$datos['email'] = isset($_POST['email']) ? $_POST['email'] : NULL;
+			$datos['role'] = isset($_POST['role']) ? $_POST['role'] : NULL;
+			$datos['name'] = isset($_POST['name']) ? $_POST['name'] : NULL;
+			$datos['surnames'] = isset($_POST['surnames']) ? $_POST['surnames'] : NULL; 
 			$datos['password'] = isset($_POST['password']) ? $_POST['password'] : '1234';
 			$datos['password'] = password_hash($datos['password'], PASSWORD_BCRYPT);
 
@@ -124,6 +125,7 @@
 
 		function updateUser(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
+			$datos['id_client'] = isset($_POST['name-clients']) ? $_POST['name-clients'] : NULL;
 			$datos['email']  = isset($_POST['email']) ? $_POST['email'] : '';
 			$datos['role']  = isset($_POST['role']) ? $_POST['role'] : NULL;
 			$datos['name']  = isset($_POST['name']) ? $_POST['name'] : NULL;

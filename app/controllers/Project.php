@@ -21,6 +21,7 @@
 			$this->datos['nombre_clientes'] = $clientes->data;
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
 			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();
+			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
 			$this->vista("admin/table_projects", $this->datos);	
 		}
 

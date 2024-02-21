@@ -44,7 +44,8 @@
 		function addUser($datos = []) {
 			try {
 				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("INSERT INTO users(role, email, password, name, surnames) VALUES(:role, :email, :password, :name, :surnames)");
+				$this->db->query("INSERT INTO users(id_client ,role, email, password, name, surnames) VALUES(:id_client, :role, :email, :password, :name, :surnames)");
+				$this->db->bind(':id_client', $datos["id_client"]); 
 				$this->db->bind(':role', $datos["role"]);
 				$this->db->bind(':email', $datos["email"]);
 				$this->db->bind(':password', $datos["password"]);
@@ -65,7 +66,8 @@
 		function updateUser($datos = []) {
 			$resultado = (object) ["success" => false];
 			try {				
-				$this->db->query("UPDATE users SET email = :email, role = :role, name = :name, surnames = :surnames WHERE id = :id");
+				$this->db->query("UPDATE users SET id_client = :id_client, email = :email, role = :role, name = :name, surnames = :surnames WHERE id = :id");
+				$this->db->bind(':id_client', $datos["id_client"]); 
 				$this->db->bind(':id', $datos["id"]);
 				$this->db->bind(':email', $datos["email"]);
 				$this->db->bind(':role', $datos["role"]);
