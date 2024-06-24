@@ -58,8 +58,9 @@
         </div>    
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_client.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
+        <script src="<?= RUTA_URL ?>js/sfvi__customers.js"></script>
         <script>
-             ftable_clients();
+             //ftable_clients();
         </script>
     </body>
 </html>

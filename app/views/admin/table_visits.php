@@ -67,9 +67,10 @@
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_visit.html'); ?>  
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
+         <script src="<?= RUTA_URL ?>js/sfvi__visits.js"></script>
         <script>
             $( document ).ready(function() {
-                ftable_visits();
+               // ftable_visits();
             });
         </script>
     </body>

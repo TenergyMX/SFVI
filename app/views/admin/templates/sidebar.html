@@ -97,7 +97,7 @@
                 </ul>
             </li>
             <?php endif; ?>
-            <?php if ($datos['user']['int_role'] == 2 || $datos['user']['int_role'] == 5 || $datos['user']['int_role'] == 6) : ?>
+            <?php if ($datos['user']['int_role'] == 2 || $datos['user']['int_role'] == 3 || $datos['user']['int_role'] == 5 || $datos['user']['int_role'] == 6) : ?>
             <li
                 class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'documentos') ? 'active' : ''; ?>"
             >
@@ -107,7 +107,23 @@
                     Documentos
                 </a>
             </li>
+            <li
+                class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'cotizador') ? 'active' : ''; ?>"
+            >
+                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Quote/">
+                    <i class="fa-solid fa-table"></i>
+                    Cotización
+                </a>
+            </li>
             <?php endif; ?>
+            <li
+                class="sidebar-item sidebar-item-toggle <?= ($datos['sidebar-item'] == 'Equipment') ? 'active' : ''; ?>"
+            >
+                <a class="sidebar-link" href="<?php echo RUTA_URL; ?>Equipment/">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    Equipo
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

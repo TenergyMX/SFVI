@@ -1,0 +1,57 @@
+<div class="modal fade" id="mdl_crud_file" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">SUBIR ARCHIVO</h1>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input name="id" class="form-control" hidden />
+                    <div class="row g-3">
+                        <div class="col-sm col-md-6 col-etapa">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="stage_id"
+                                placeholder="Etapa"
+                                readonly
+                            />
+                        </div>
+                        <div class="col-sm col-md-6 col-paso">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="paso_id"
+                                placeholder="Paso de la etapa"
+                                readonly
+                                hidden
+                            />
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="paso_name"
+                                placeholder="Paso"
+                                readonly
+                            />
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="paso_name_db"
+                                placeholder="Paso"
+                                readonly
+                                hidden
+                            />
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="file" name="file" class="filepond" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </form>
+    </div>
+</div>

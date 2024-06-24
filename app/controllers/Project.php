@@ -3,12 +3,14 @@
 		private $modeloProject;
 		private $modeloClient;
 		private $modeloVisit;
+		private $userModel;
 		private $datos = [];
 
 		// Constructor
 		function __construct() {
 			session_start();
 			$this->modeloProject = $this->modelo('Projects');
+			$this->userModel = $this->modelo('Users');
 			$this->modeloClient = $this->modelo('Clients');
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->datos['user'] = datos_session_usuario();
@@ -17,7 +19,8 @@
 
 		function index() {
 			isUserLoggedIn();
-			$clientes = $this->modeloClient->getClient_users();
+			$clientes = $this->userModel->get_customer_users();
+			$this->datos['nombre_clientes'] = $clientes->data;
 			$this->datos['nombre_clientes'] = $clientes->data;
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
 			$this->datos['nombre_proyectos'] = $this->modeloVisit->getProyectos();

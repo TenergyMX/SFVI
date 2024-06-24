@@ -8,7 +8,8 @@
 			$modeloVisit,
 			$modeloProject,
 			$modeloFile,
-			$modeloCalendar;
+			$modeloCalendar,
+			$modeloQuote;
 		
 		// Constructor
 		function __construct() {
@@ -19,6 +20,7 @@
 			$this->modeloProject = $this->modelo('Projects');
 			$this->modeloFile = $this->modelo('Files');
 			$this->modeloCalendar = $this->modelo('Calendars');
+			$this->modeloQuote = $this->modelo('Quotes');
 			$this->datos['user'] = datos_session_usuario();
 			$this->response = array('success' => false);
 		}
@@ -37,7 +39,16 @@
 
 			$this->modeloUser->addtokenUser_email( $datos['email'] );
 			$user = $this->modeloUser->getUser_email( $datos['email'] );
-			$datos['{link_to_change_password}'] = RUTA_URL."User/resetPassword/{$user->email}/{$user->token}";
+
+			if (!$user) {
+				$this->response['warning']['message'] = "Este correo no existe";
+				$this->response['error']['message'] = "Este correo no existe";
+				header('Content-Type: application/json');
+				echo json_encode($this->response);
+				exit;
+			}
+
+			$datos['{{ link_to_change_password }}'] = RUTA_URL."User/resetPassword/{$user->email}/{$user->token}";
 			// *Creamos el correo
 			try {
 				$correo = new Correo();
@@ -217,7 +228,7 @@
 		// TODO ------------------------- [ VISITAS ] ------------------------- 
 
 		function addVisit(){
-			$datos['id_project']  = isset($_POST['project']) ? $_POST['project'] : NULL;
+			$datos['id_project']  = isset($_POST['select_project']) ? $_POST['select_project'] : NULL;
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : NULL;
 			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : NULL;
 			$datos['description']  = isset($_POST['description']) ? $_POST['description'] : NULL;
@@ -234,6 +245,7 @@
 		}
 
 		function getVisits() {
+			$this->modeloVisit->update_visits_status();
 			$this->response['data'] = $this->modeloVisit->getVisits();
 			foreach ($this->response['data'] as &$value) {
 				$value->btn_pdf = '';
@@ -249,7 +261,7 @@
 
 		function updateVisit(){
 			$datos['id']  = isset($_POST['id']) ? $_POST['id'] : 0;
-			$datos['id_project']  = isset($_POST['project']) ? $_POST['project'] : '';
+			$datos['id_project']  = isset($_POST['select_project']) ? $_POST['select_project'] : '';
 			$datos['id_user']  = isset($_POST['id_user']) ? $_POST['id_user'] : '';
 			// $datos['id_client']  = isset($_POST['id_client']) ? $_POST['id_client'] : '';
 			$datos['id_type']  = isset($_POST['id_type']) ? $_POST['id_type'] : '';
@@ -258,6 +270,7 @@
 			$datos['start_date']  = isset($_POST['start_date']) ? $_POST['start_date'] : NULL;
 			$datos['start_date_old']  = isset($_POST['start_date_old']) ? $_POST['start_date_old'] : NULL;
 			$datos['note']  = isset($_POST['note']) ? $_POST['note'] : NULL;
+			$this->response["POST"] = $datos;
 			
 			// le damos valos a la fecha vieja si no tiene
 			if ($datos['start_date_old'] == NULL || $datos['start_date_old'] == '') {
@@ -276,6 +289,14 @@
 			header('Content-Type: application/json');
 			echo json_encode($this->response);
 			exit;
+		}
+
+		function update_visits_status() {
+			$this->modeloVisit->update_visits_status();
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;	
 		}
 
 		function updateStatusVisit(){
@@ -728,6 +749,46 @@
 			echo json_encode($this->response);
 			exit;
 		}
+
+		function getStages_of_project() {
+			$response = (object) ["success" => false];
+			$datos['project_id']  = isset($_GET['project_id']) ? $_GET['project_id'] : NULL;
+
+			if ($datos['project_id'] == NULL) {
+				$response->error["message"] = "Sin id del proyecto";
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+			
+			$project = $this->modeloProject->getProject( $datos['project_id']  );
+
+			// trabajar aqui
+			if ($project->id_category == 1) {
+				// ! FIDE
+				$response->data['stage']["1"] = $this->modeloProject->getFideEtapa1($project->id);
+				$response->data['stage']["2"] = $this->modeloProject->getFideEtapa2($project->id);
+				$response->data['stage']["3"] = $this->modeloProject->getFideEtapa3($project->id);
+				$response->data['stage']["4"] = $this->modeloProject->getFideEtapa4($project->id);
+				$response->data['stage']["5"] = $this->modeloProject->getFideEtapa5($project->id);
+				$response->data['stage']["6"] = $this->modeloProject->getFideEtapa6($project->id);
+				$response->data['stage']["7"] = $this->modeloProject->getFideEtapa7($project->id);
+				$response->data['stage']["8"] = $this->modeloProject->getFideEtapa8($project->id);
+			} else {
+				// ! CONTADO
+				$response->data["stage"]["1"] = $this->modeloProject->getContadoEtapa1($project->id);
+				$response->data["stage"]["2"] = $this->modeloProject->getContadoEtapa2($project->id);
+				$response->data["stage"]["3"] = $this->modeloProject->getContadoEtapa3($project->id);
+				$response->data["stage"]["4"] = $this->modeloProject->getContadoEtapa4($project->id);
+				$response->data["stage"]["5"] = $this->modeloProject->getContadoEtapa5($project->id);
+				$response->data["stage"]["6"] = $this->modeloProject->getContadoEtapa6($project->id);
+			}
+
+			$response->success = true;
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+		}
 		
 		// TODO ------------------------- [ DOCUMENTOS ] -------------------------
 		function getDocs() {
@@ -860,5 +921,312 @@
 			exit;
 		}
 
-	} # fin de las vistas
+		// TODO ------------------------- [ COTIZADOR ] -------------------------
+
+		function getQuotes() {
+			$datos['type']  = isset($_GET['type']) ? $_GET['type'] : NULL;
+
+			
+			if ( $datos['type'] == "anteproject") {
+				$this->response['data'] = $this->modeloProject->getAnteProjects();
+			} else {
+				$this->response['data'] = $this->modeloProject->getProjects();
+			}
+
+			foreach ($this->response['data'] as &$value) {
+				$value->btn_project = "<button type=\"button\" class=\"btn btn-sfvi-1\" data-id=\"{$value->id}\" data-quote>{$value->name}</button>";
+			}
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function addEquipment() {
+			$response = (object) ["success" => false];
+            $datos['tab'] = isset($_POST['txtTab']) ? $_POST['txtTab'] : NULL;
+            $datos['description'] = isset($_POST['txtDescripcion']) ? $_POST['txtDescripcion'] : NULL;
+            $datos['category'] = isset($_POST['listCategory']) ? $_POST['listCategory'] : NULL;
+            $datos['price'] = isset($_POST['txtPrecio']) ? $_POST['txtPrecio'] : NULL;
+            $datos['coin'] = isset($_POST['listMoneda']) ? $_POST['listMoneda'] : NULL;
+
+            $equipos = $this->modeloQuote->addEquipment( $datos );
+            
+            if ($equipos->success) {
+                $response["success"] = true;
+            } else {
+                $sresponse["error"] = $equipos->error;
+            }
+            header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+        }
+
+		function addEquipment_to_supplier() {
+			$response = (object) ["success" => false];
+            $datos['tab'] = isset($_POST['txtTab']) ? trim($_POST['txtTab']) : NULL;
+            $datos['supplier'] = isset($_POST['listSupplier']) ? $_POST['listSupplier'] : NULL;
+            $datos['supplier_name'] = isset($_POST['listSupplier_str']) ? trim($_POST['listSupplier_str']) : NULL;
+            $datos['price'] = isset($_POST['txtPrecio']) ? $_POST['txtPrecio'] : NULL;
+            $datos['coin'] = isset($_POST['listCoin']) ? $_POST['listCoin'] : NULL;
+            $datos['pdf'] = isset($_FILES['doc_equippment']) ? $_FILES['doc_equippment'] : NULL;
+			$datos['pdf_path'] = NULL; // Ruta de donde se guarda el pdf
+
+			$response->info = $datos;
+			
+			if (!$datos['supplier'] || !$datos['coin']) {
+				$response->success = false;
+				$response->warning = ["message" => "¡Rellena los campos faltantes!"];
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+			
+			$r = $this->modeloQuote->getEquipments();
+
+			foreach($r->data as $value) {
+				if ($value->equipment_tab == $datos['tab'] && $value->supplier_id == $datos['supplier']) {
+					$response->success = false;
+					$response->warning = ["message" => "El tab  \"{$datos['tab']}\" del proveedor \"{$datos['supplier_name']}\" ya existe en la lista"];
+					header('Content-Type: application/json');
+					echo json_encode($response);
+					exit;
+				}
+			}
+
+				
+			if ($datos['pdf']) {
+				$targetDirectory = RUTA_PUBLIC . 'pdf/equipments/' . $datos['supplier_name'] . "/";
+				$this->modeloFile->makeDirectory($targetDirectory); // Crear directorios
+				// Proceder a aguardar
+				$r_file = $this->modeloFile->saveFile($datos['pdf'], $targetDirectory, $datos['tab']);
+				if ($r_file->success) {
+					$datos['pdf_path'] = $r_file->data["file"]["full_path"];
+					$datos['pdf_path'] = str_replace(RUTA_PUBLIC, RUTA_URL, $datos['pdf_path']);
+				}
+				$response->infoFIle = $r_file;
+			}
+
+			$r = $this->modeloQuote->addEquipment_to_supplier($datos);
+
+			if ($r->success) {
+				$response->success = true;
+			} else {
+				$response->success = false;
+				$response->error = $r->error;
+			}
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+		}
+
+		function addTabs() {
+            $response = (object) ["success" => false];
+            $datos['tab'] = isset($_POST['txtTab']) ? trim($_POST['txtTab']) : NULL;
+            $datos['description'] = isset($_POST['txtDescripcion']) ? $_POST['txtDescripcion'] : NULL;
+            $datos['category'] = isset($_POST['listCategory']) ? $_POST['listCategory'] : NULL;
+            
+            
+            $tabs = $this->modeloQuote->addTabs( $datos );
+            if ($tabs->success) {
+                $response->success = true;
+            } else {
+                $response->error = $tabs->error;
+            }
+            header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+        }
+
+		function updateEquipment_to_supplier() {
+			$response = (object) ["success" => false];
+			$datos["id"] = isset($_POST["proveedor__tab_id"]) ? $_POST["proveedor__tab_id"] : 0;
+            $datos['tab'] = isset($_POST['txtTab']) ? trim($_POST['txtTab']) : NULL;
+            $datos['supplier'] = isset($_POST['listSupplier']) ? $_POST['listSupplier'] : NULL;
+            $datos['supplier_name'] = isset($_POST['listSupplier_str']) ? trim($_POST['listSupplier_str']) : NULL;
+            $datos['price'] = isset($_POST['txtPrecio']) ? $_POST['txtPrecio'] : NULL;
+            $datos['coin'] = isset($_POST['listCoin']) ? $_POST['listCoin'] : NULL;
+            $datos['pdf'] = isset($_FILES['doc_equippment']) ? $_FILES['doc_equippment'] : NULL;
+			$datos['pdf_path'] = isset($_POST['pdf_path']) ? $_POST['pdf_path'] : NULL;
+
+			$response->POST = $datos;
+
+			if ($datos['pdf']) {
+				$targetDirectory = RUTA_PUBLIC . 'pdf/equipments/' . $datos['supplier_name'] . "/";
+				$this->modeloFile->makeDirectory($targetDirectory); // Crear directorios
+				// Proceder a aguardar
+				$r_file = $this->modeloFile->saveFile($datos['pdf'], $targetDirectory, $datos['tab']);
+				if ($r_file->success) {
+					$datos['pdf_path'] = $r_file->data["file"]["full_path"];
+					$datos['pdf_path'] = str_replace(RUTA_PUBLIC, RUTA_URL, $datos['pdf_path']);
+				}
+				$response->infoFIle = $r_file;
+			}
+
+			$r = $this->modeloQuote->updateEquipment_to_supplier($datos);
+
+			if ($r->success) {
+				$response->success = true;
+			} else {
+				$response->success = false;
+				$response->error = $r->error;
+			}
+
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+		}
+
+		function getEquipment() {
+			$response = (object) ["success" => true];
+			$datos['tab']  = isset($_GET['tab']) ? $_GET['tab'] : NULL;
+			$r = $this->modeloQuote->getEquipment( $datos['tab'] );
+
+			if ($r->success) {
+				$response->success = true;
+				$response->data = $r->data;
+			}
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+		}
+
+		function getEquipments() {
+			$r = $this->modeloQuote->getEquipments();
+			if (!$r->success) {
+				$this->response["success"] = FALSE;
+				$this->response["error"] = $r->error;	
+			}
+			$this->response["success"] = TRUE;
+			$this->response["data"] = $r->data;
+
+			foreach ($this->response['data'] as &$value) {
+				if (strlen($value->equipment_description) > 20) {
+					$value->sort_equipment_description = substr($value->equipment_description, 0, 20) . "...";
+				}
+				$value->btn_action = "<div class=\"d-flex justify-content-center\">";
+				if ($value->pdf != Null || $value->pdf != "") {
+					$value->btn_action .= "<a \"
+						href=\"{$value->pdf}\".
+						download
+						class=\"btn btn-sfvi-1\"
+					>".
+					"<i class=\"fa-regular fa-file-pdf\"></i>".
+					"</a>";
+				} else {
+					$value->btn_action .= "<button type=\"button\" class=\"btn btn-secondary\">".
+					"<i class=\"fa-solid fa-file-slash\"></i>".
+					"</button>";
+				}
+
+				$value->btn_action .= "<button type=\"button\" name=\"update\" data-option=\"updateEquipment_to_supplier\" class=\"btn btn-primary ms-1\">
+					<i class=\"fa-solid fa-pen\"></i>
+				</button>";
+				$value->btn_action .= "</div>";
+			}
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function getCategory() {
+			$r = $this->modeloQuote->getCategory();
+			if (!$r->success) {
+				$this->response["success"] = FALSE;
+				$this->response["error"] = $r->error;	
+			}
+			$this->response["success"] = TRUE;
+			$this->response["data"] = $r->data;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function getSupplier() {
+			$r = $this->modeloQuote->getSupplier();
+			if (!$r->success) {
+				$this->response["success"] = FALSE;
+				$this->response["error"] = $r->error;	
+			}
+			$this->response["success"] = TRUE;
+			$this->response["data"] = $r->data;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+		function getCoin() {
+			$r = $this->modeloQuote->getCoin();
+			if (!$r->success) {
+				$this->response["success"] = FALSE;
+				$this->response["error"] = $r->error;	
+			}
+			$this->response["success"] = TRUE;
+			$this->response["data"] = $r->data;
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+		
+
+		function getQuotes_of_project() {
+			$datos['id_project']  = isset($_GET['id_project']) ? $_GET['id_project'] : NULL;
+
+			header('Content-Type: application/json');
+			echo json_encode($this->response);
+			exit;
+		}
+
+
+
+		// TODO ------------------------- [ ARCHIVOS ] -------------------------
+
+		function view_doc_file() {
+			$response = (object) ["success" => false];
+			$datos['short_url']  = isset($_GET['short_url']) ? $_GET['short_url'] : NULL;
+			$archivo = RUTA_DOCS . $datos['short_url'];
+			// ?short_url=VISTAMAR/COTIZACION/quotation.pdf
+
+			if ($datos['short_url'] == null || $datos['short_url'] == '') {
+				$response->error["message"] = "Sin ruta corta del archivo";
+				header('Content-Type: application/json');
+				echo json_encode($response);
+				exit;
+			}
+
+			// Comprobamos si el archivo existe
+			if (file_exists($archivo)) {
+				// Establecemos las cabeceras para indicar al navegador que es un archivo PDF
+				header('Content-Type: application/pdf');
+				header('Content-Disposition: inline; filename="' . basename($archivo) . '"');
+				header('Content-Length: ' . filesize($archivo));
+
+				// Leemos y mostramos el contenido del archivo
+				readfile($archivo);
+			} else {
+				// Manejo de error si el archivo no existe
+				echo "El archivo no existe.";
+			}
+		}
+
+		function update_file_of_stage_of_project() {
+			$response = (object) ["success" => true]; 
+			$datos['stage']  = isset($_POST['stage_id']) ? $_POST['stage_id'] : NULL;
+			$datos['name_db']  = isset($_POST['paso_name_db']) ? $_POST['paso_name_db'] : NULL;
+			$datos['file']  = isset($_FILES['file']) ? $_FILES['file'] : NULL;
+			$info = getDatosDeGuardadoDelArchivoDeProyecto( $datos['name_db'] );
+			$targetDirectory = RUTA_DOCS . $targetDirectory . '/';
+
+			$targetDirectory .= $info['dirs_to_save'][0] . '/';
+
+
+			header('Content-Type: application/json');
+			echo json_encode($response);
+			exit;
+		}
+		
+	}
 ?>
+
+

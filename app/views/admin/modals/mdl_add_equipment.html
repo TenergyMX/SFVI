@@ -1,0 +1,98 @@
+<div
+    class="modal fade"
+    id="mdl_add_equipment"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+        <form class="modal-content" name="form" enctype="multipart/form-data">
+            <div class="modal-header bg-sfvi text-white">
+                <h1 class="modal-title fs-5">Nuevo equipo.</h1>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <!-- <input type="hidden" name="idEquipo" /> -->
+                <p class="text-primary">
+                    Los campos con asterisco (<span class="required text-danger">*</span>) son
+                    obligatorios.
+                </p>
+                <input type="hidden" name="proveedor__tab_id" hidden />
+                <input type="hidden" name="pdf_path" hidden />
+                <div class="row g-3">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">TAB <span class="text-danger">*</span></label>
+                        <input type="text" name="txtTab" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">
+                            Descripción <span class="text-danger">*</span>
+                        </label>
+                        <textarea
+                            class="form-control"
+                            name="txtDescripcion"
+                            rows="1"
+                            readonly
+                        ></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">
+                            Clasificación <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="category_id" class="form-control" readonly hidden />
+                        <input type="text" name="category_description" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Proveedor <span class="text-danger">*</span></label>
+                        <select
+                            class="form-control selectpicker"
+                            data-live-search="true"
+                            name="listSupplier"
+                        ></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="">Precio <span class="required">*</span></label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="txtPrecio"
+                            name="txtPrecio"
+                            step="0.01"
+                        />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Moneda<span class="text-danger">*</span></label>
+                        <select
+                            class="form-control selectpicker"
+                            data-live-search="true"
+                            name="listCoin"
+                        ></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">PDF <span class="required">*</span></label>
+                        <div class="input-group">
+                            <input
+                                type="file"
+                                name="doc_equippment"
+                                class="form-control"
+                                accept="application/pdf"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" name="close" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+                <button type="submit" name="add" class="btn btn-primary">Agregar</button>
+                <button type="submit" name="update" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -22,12 +22,12 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <?php if ($datos['user']['int_role'] <= 2) : ?>
+                                      <?php if ($datos['user']['int_role'] <= 2 || $datos['user']['int_role'] == 5) : ?>
                                         <button
                                             type="button"
                                             class="btn btn-sfvi-1 me-1"
                                             title="Agregar Anteproyecto"
-                                            data-option="draft"
+                                            data-option="add-ante-project"
                                         >
                                             <i class="fa-regular fa-plus me-1"></i>
                                             Agregar Anteproyecto
@@ -37,7 +37,7 @@
                                             type="button"
                                             class="btn btn-sfvi-1"
                                             title="Refrescar tabla"
-                                            data-option="refresh_table-anteproject"
+                                            data-refresh-table
                                         >
                                             <i class="fa-regular fa-arrows-rotate"></i>
                                         </button>
@@ -74,14 +74,10 @@
             </div>
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_project.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-        <script>
-            $( document ).ready(function() {
-                ftable_projects();
-            });
-        </script>
+        <script src="<?= RUTA_URL ?>js/sfvi__ante_project.js"></script>
     </body>
 </html>

@@ -24,7 +24,8 @@
 			
 			$this->datos['sidebar-item'] = 'documentos';
 			$this->datos['project']['id'] = $id_project;
-			$this->vista("admin/table_documents", $this->datos); 
+			$this->vista("admin/table_documents", $this->datos);
+			// print_r($this->datos['proyectos']);
 		}
 	}
 ?>

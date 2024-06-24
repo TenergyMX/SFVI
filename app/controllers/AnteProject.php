@@ -9,6 +9,7 @@
 		function __construct() {
 			session_start();
 			$this->modeloProject = $this->modelo('Projects');
+			$this->userModel = $this->modelo('Users');
 			$this->modeloClient = $this->modelo('Clients');
 			$this->modeloVisit = $this->modelo('Visits');
 			$this->datos['user'] = datos_session_usuario();
@@ -17,12 +18,13 @@
 
 		function index() {
 			isUserLoggedIn();
-			$clientes = $this->modeloClient->getClient_users();
+			$clientes = $this->userModel->get_customer_users();
 			$this->datos['nombre_clientes'] = $clientes->data;
 			$this->datos['nombre_estados'] = $this->modeloProject->getStates();
 			$this->datos['nombre_proyectos'] = $this->modeloProject->getProjects();
 			$this->datos['nombres_visitantes'] = $this->modeloVisit->getVisitantes();
 			$this->vista("admin/table_ante_projects", $this->datos);
+			print_r($this->datos['nombre_clientes']);
 		}
 
 		function stages($id = 0) {
@@ -42,6 +44,7 @@
 
 			generate_project_file_path( $this->datos );
             $this->vista("admin/ante_project_stages", $this->datos);
+
 		}
 
 	}

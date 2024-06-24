@@ -24,10 +24,7 @@
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-        <script>
-            check_stage(1);
-            calcularProgresoEtapa(1);
-        </script>
+        <script src="<?= RUTA_URL ?>js/sfvi__ante_project_stages.js"></script>
         <script>
             var tiempo_de_mensajes = 4000; // por cada mil es un segundo
             $( document ).ready(function() {
@@ -41,8 +38,7 @@
                     // state_chat(<?= $datos['proyecto']->id ?>, 2);
                 }, tiempo_de_mensajes);
 
-                <?php if ($datos['user']['int_role'] <= 2) : ?>
-                <?php elseif ($datos['user']['int_role'] == 3) : ?>
+              <?php if ($datos['user']['int_role'] == 2 || $datos['user']['int_role'] == 5) : ?>
                     var hijos = $("[type='file']");
                     var padre;
                     var objetivo;

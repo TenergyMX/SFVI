@@ -21,7 +21,7 @@
                                     <option value="">
                                         Selecione
                                     </option>
-                                    <?php foreach($datos['proyectos'] as $dato) : ?>
+                                    <?php foreach($datos['proyectos']->data as $dato) : ?>
                                     <option
                                         value="<?= $dato->id; ?>"
                                     >
@@ -135,6 +135,7 @@
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_project_documents.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
+         <script src="<?= RUTA_URL ?>js/sfvi__documents.js"></script>
         <script>
             <?php if ($datos['project']['id'] != NULL) : ?>
                 const miSelect = $("[name='project-documents']");

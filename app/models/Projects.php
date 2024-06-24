@@ -96,6 +96,96 @@
 			return $resultado;
 		}
 
+		function addProject($datos = []) {
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->query("INSERT INTO
+					project(
+						tb,
+						name,
+						id_type,
+						id_client,
+						id_category,
+						id_subcategory,
+						id_user,
+						quotation_num,
+						id_fide,
+						charge,
+						street,
+						colony,
+						municipality,
+						state,
+						start_date,
+						percentage,
+						lat,
+						lng,
+						period,
+						panels,
+						module_capacity,
+						efficiency
+					) VALUES(
+						:tb,
+						:name,
+						2,
+						:id_client,
+						:id_category,
+						:id_subcategory,
+						:id_user,
+						:quotation_num,
+						:id_fide,
+						:charge,
+						:street,
+						:colony,
+						:municipality,
+						:state,
+						:start_date,
+						:percentage,
+						:lat,
+						:lng,
+						:period,
+						:panels,
+						:module_capacity,
+						:efficiency
+					)
+				");
+				$this->db->bind(':tb', $datos["tb"]);
+				$this->db->bind(':name', $datos["name"]);
+				// $this->db->bind(':id_type', $datos["id_type"]);
+				$this->db->bind(':id_client', $datos["id_client"]);
+				$this->db->bind(':id_category', $datos["id_category"]);
+				$this->db->bind(':id_subcategory', $datos["id_subcategory"]);
+				$this->db->bind(':id_user', $datos["id_user"]);
+				$this->db->bind(':quotation_num', $datos["quotation_num"]);
+				$this->db->bind(':id_fide', $datos["id_fide"]);
+				$this->db->bind(':charge', $datos["charge"]);
+				$this->db->bind(':street', $datos["street"]);
+				$this->db->bind(':colony', $datos["colony"]);
+				$this->db->bind(':municipality', $datos["municipality"]);
+				$this->db->bind(':state', $datos["state"]);
+				$this->db->bind(':start_date', $datos["start_date"]);
+				$this->db->bind(':percentage', $datos["percentage"]);
+				$this->db->bind(':lat', $datos["lat"]);
+				$this->db->bind(':lng', $datos["lng"]);
+				$this->db->bind(':period', $datos["period"]);
+				$this->db->bind(':panels', $datos["panels"]);
+				$this->db->bind(':module_capacity', $datos["module_capacity"]);
+				$this->db->bind(':efficiency', $datos["efficiency"]);
+
+				// Ejecutamos y retornamos el id
+				$id = $this->db->execute2();
+				if ($id) {
+					$resultado->success = true;
+					$resultado->id = $id;
+				} else {
+					$resultado->error['message'] = 'No se pudo insertar los datos en la tabla (project)';
+				}
+			} catch (Exception $e) {
+				$resultado->error['message'] = $e->getMessage();
+				$resultado->error['code'] = $e->getCode();
+			}
+			return $resultado;
+		}
+
 		function getProject($id) {
 			$this->db->query("SELECT p.*,
 				c.description as str_category,
@@ -174,14 +264,22 @@
 			return $this->db->registros();
 		}
 
+		# sf: sin filtro
 		function getProjects_sf() {
-			$this->db->query("SELECT p.*,
-				CONCAT(u.name, ' ', u.surnames) AS customer_fullName
-				FROM project p
-				LEFT JOIN users u
-				ON p.id_client = u.id;
-			");
-			return $this->db->registros();
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->query("SELECT p.*,
+					CONCAT(u.name, ' ', u.surnames) AS customer_fullName
+					FROM project p
+					LEFT JOIN users u
+					ON p.id_client = u.id;
+				");
+				$datos = $this->db->registros();
+				$resultado->success = true;
+				$resultado->data = $datos;
+			} catch (\Throwable $th) {}
+			
+			return $resultado;
 		}
 
 		function getMyProjects($id_user = 1) {
@@ -198,6 +296,7 @@
 		}
 
 		function getMyProjects_sf($id_user = 1) {
+			$resultado = (object) ["success" => false];
 			$this->db->query("SELECT p.*,
 				CONCAT(c.name, ' ', c.surnames) AS customer_fullName
 				FROM project p
@@ -206,7 +305,8 @@
 				WHERE (p.id_client = :id_user OR p.id_user = :id_user);
 			");
 			$this->db->bind(':id_user', $id_user);
-			return $this->db->registros();
+			$resultado->data = $this->db->registros();
+			return $resultado;
 		}
 
 		function updateAnteProject($datos = []) {

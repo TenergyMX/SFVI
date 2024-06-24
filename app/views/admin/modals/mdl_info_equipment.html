@@ -1,0 +1,41 @@
+<!-- modal -->
+<div class="modal fade" id="mdl_info_equipment" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">INFORMACIÓN</h1>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="row g-3">
+                        <input name="id" class="form-control" hidden />
+                        <div class="col-md-12">
+                            <label for="">TAB</label>
+                            <input type="text" name="tab" class="form-control" readonly />
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Descripción</label>
+                            <textarea
+                                name="description"
+                                rows="2"
+                                class="form-control"
+                                placeholder="Descripción"
+                                readonly
+                            ></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sfvi-1" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal -->

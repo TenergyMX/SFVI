@@ -25,6 +25,15 @@
                                         <button
                                             type="button"
                                             class="btn btn-sfvi-1"
+                                            title="Crear proyecto"
+                                            data-option="add-project"
+                                        >
+                                         <i class="fa-regular fa-plus me-1"></i>
+                                            Crear proyecto
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-sfvi-1"
                                             title="Refrescar tabla"
                                             data-option="refresh_table"
                                         >
@@ -63,12 +72,10 @@
                 <?php require_once(RUTA_APP.'/views/admin/templates/footer.html'); ?>
             </div>
         </div>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_proyect.html'); ?>
-        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_update_proyect.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_project.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_visit.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-
+        <script src="<?= RUTA_URL ?>js/sfvi__project.js"></script>
         <style>
             <?php if ($datos['user']['int_role'] >= 6) : ?>
             table thead th:nth-last-child(-n+2),
@@ -77,10 +84,5 @@
             }
             <?php endif; ?>
         </style>
-        <script>
-            $( document ).ready(function() {
-                ftable_projects();
-            });
-        </script>
     </body>
 </html>

@@ -1,85 +1,53 @@
-<form name="form-calendar">
-                                            <div class="mb-2">
-                                                <label for="">Titulo</label>
-                                                <input type="text" name="title" class="form-control">
-                                            </div>
-                                             <div class="mb-2">
-                                                <label for="">Descripcion</label>
-                                                <textarea type="text" name="description" class="form-control" aria-label="With textarea"></textarea>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="project">
-                                                    Proyecto
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <select name="id_project" class="form-control" required>
-                                                    <option selected>Seleccione un proyecto...</option>
-                                                    
-                                                </select>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="project">
-                                                    Usuario:
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <select name="id_user" class="form-control" required>
-                                                    <option selected>Seleccione un usuario...</option>
-                                                    
-                                                </select>
-                                            </div>
-                                            <div class="">
-                                            </div>
-                                            <div class="">
-                                            <label for="colorPicker">Color:</label>
-                                            
-                                            <div class="row gx-3">
-                                            <div class="col">
-                                                <select name="color" class="form-control"id="colorSelect">
-                                                    <option value="#ffffff" selected>Seleccione un color...</option>
-                                                    <option value="#ff0000">Rojo</option> 
-                                                    <option value="#00ff00">Verde</option>
-                                                    <option value="#0000ff">Azul</option>
-                                                    <option value="#800000">Maroon</option>
-                                                    <option value="#ff00ff">Magenta</option>
-                                                    <option value="#00ffff">Cian</option>
-                                                    <option value="#ffa500">Naranja</option>
-                                                    <option value="#800080">Púrpura</option>
-                                                    <option value="#008000">Verde oscuro</option>
-                                                    <option value="#708090">Gris</option> 
-                                                </select>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="color" name="bg" class="form-control" disabled>
-                                                 </div>
-                                            </div>
- 
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <ul>   
-                                            </ul>
-                                            <div class="row g-3 mb-3">
-                                                <div class="col-md-6">
-                                                    <label for="">Fecha de inicio</label>
-                                                    <input
-                                                        type="date"
-                                                        name="start_date"
-                                                        class="form-control form-control-sm fecha"
-                                                        id="fecha"
-                                                        required 
-                                                    >
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="">Fecha Fin</label>
-                                                    <input
-                                                        type="date"
-                                                        name="end_date"
-                                                        class="form-control form-control-sm fecha"
-                                                        id="fecha"
-                                                        required
-                                                    >
-                                                </div>
-                                            </div>
-                                            
-                                        </form>
+<!-- Etapa 1 : Recibo CFE -->
+<div class="accordion-item">
+    <h2 class="accordion-header position-relative">
+        <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse-Etapa_1__recibo_cfe"
+            aria-expanded="false"
+            aria-controls="collapse-Etapa_1__recibo_cfe"
+        >
+            1. Recibo CFE
+        </button>
+        <div class="icon-checkbox">
+            <i class="fa-solid fa-file-circle-check"></i>
+        </div>
+    </h2>
+    <div id="collapse-Etapa_1__recibo_cfe" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <!-- remplazar por form -->
+            <div class="row">
+                <div class="col-md">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <i class="fa-solid fa-file"></i>
+                        </span>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Sin archivo"
+                            readonly
+                            disabled
+                        />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button
+                        type="button"
+                        class="btn btn-primary w-100"
+                        data-option="update-file"
+                        data-stage-id="1"
+                        data-paso-id="1"
+                        data-paso-name="Recibo CFE"
+                        data-file-name="recibo_CFE"
+                    >
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- end form -->
+        </div>
+    </div>
+</div>

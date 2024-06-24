@@ -19,10 +19,10 @@
                             <option value="5">Cierre de proyecto</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 select_project">
                         <label for="" class="form-label"> Proyecto: </label>
                         <select
-                            name="project"
+                            name="select_project"
                             id=""
                             class="form-select"
                             aria-describedby="project"
@@ -37,6 +37,13 @@
                             <option value="<?php echo $data->id; ?>"><?php echo $data->name; ?></option>
                             <?php endforeach; ?>
                         </select>
+                        <input type="number" name="project_id" hidden />
+                        <input
+                            type="text"
+                            name="project_name"
+                            class="form-control"
+                            style="display: none"
+                        />
                     </div>
 
                     <div class="mb-3">

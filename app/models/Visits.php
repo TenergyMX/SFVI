@@ -191,6 +191,26 @@
 				$resultado->error["message"] = $e->getMessage();
 				return $resultado;
 			}
+		}
 
+		function update_visits_status() {
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->query("UPDATE visit
+					SET id_status = 
+						CASE 
+							WHEN NOW() >= start_date AND id_status != 3 THEN 4
+							WHEN created_at <= DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 24 HOUR) THEN 2
+							ELSE id_status
+						END;
+				");
+				if ($this->db->execute()) {
+					$resultado->success = true;
+				}
+			} catch (Exception $e) {
+				$resultado->success = true;
+				$resultado->error["message"] = $e->getMessage();
+			}
+			return $resultado;
 		}
 	}

@@ -2,6 +2,9 @@
 <html lang="es">
     <head>
         <?php require_once(RUTA_APP.'/views/admin/templates/head.html'); ?>
+        <script>
+            const project_id = "<?= $datos['proyecto']->id;  ?>";
+        </script>
         <title>ETAPAS</title>
     </head>
 
@@ -34,6 +37,7 @@
                                 class="btn btn-sm btn-info p-0 rounded-circle ms-2 btn-info-project"
                                 style="width: 20px; height: 20px"
                                 title="Información del proyecto"
+                                data-option="info-stages"
                             >
                                 <i class="fa-solid fa-info"></i>
                             </button>
@@ -82,41 +86,73 @@
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_stages.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
+        <?php require_once(RUTA_APP.'/views/admin/modals/mdl_crud_file.html'); ?>
+        <script src="<?= RUTA_URL ?>js/sfvi__project_stages.js"></script>
         <script>
-            $( document ).ready(function() {
-                var opcionesMap = {
-                    center: {
-                        lat: parseFloat(<?= $datos['proyecto']->lat; ?>),
-                        lng: parseFloat(<?= $datos['proyecto']->lng; ?>),
-                    },
-                    zoom: 13,
-                };
-                try {
-                    var obj_map = createMap_id("#mdl_info_stages .container-map .map", opcionesMap);
-                    obj_map.marcador.draggable = false;
-                } catch (error) {
-                    console.log("hubo un problema al cargar el mapa");
-                }            
-                calcularProgresoEtapa(2);
+            // $( document ).ready(function() {
+            //     var opcionesMap = {
+            //         center: {
+            //             lat: parseFloat(<?= $datos['proyecto']->lat; ?>),
+            //             lng: parseFloat(<?= $datos['proyecto']->lng; ?>),
+            //         },
+            //         zoom: 13,
+            //     };
+            //     try {
+            //         var obj_map = createMap_id("#mdl_info_stages .container-map .map", opcionesMap);
+            //         obj_map.marcador.draggable = false;
+            //     } catch (error) {
+            //         console.log("hubo un problema al cargar el mapa");
+            //     }            
+            //     calcularProgresoEtapa(2);
 
-                <?php if ($datos['user']['int_role'] <= 2) : ?>
-                <?php elseif ($datos['user']['int_role'] == 3) : ?>
-                    var hijos = $("[type='file']");
-                    var padre;
-                    var objetivo;
+            //     <?php if ($datos['user']['int_role'] <= 2) : ?>
+            //     <?php elseif ($datos['user']['int_role'] == 3) : ?>
+            //         var hijos = $("[type='file']");
+            //         var padre;
+            //         var objetivo;
 
-                    $.each(hijos, function (index, value) {
-                        padre = $(value).closest(".accordion-item");
-                        objetivo = padre.find(".icon-checkbox");
+            //         $.each(hijos, function (index, value) {
+            //             padre = $(value).closest(".accordion-item");
+            //             objetivo = padre.find(".icon-checkbox");
                         
-                        if (objetivo.hasClass("checked")) {
-                            $(value).prop("disabled", true);
-                        }
-                    });
-                <?php else: ?>
-                    $("[type='file']").prop("disabled", true);
-                <?php endif; ?>
+            //             if (objetivo.hasClass("checked")) {
+            //                 $(value).prop("disabled", true);
+            //             }
+            //         });
+            //     <?php else: ?>
+            //         $("[type='file']").prop("disabled", true);
+            //     <?php endif; ?>
+            // });
+        </script>
+        <script>
+            $(document).ready(function() {
+                         
             });
         </script>
+        <style>
+            .cke_chrome {
+                box-shadow: none;
+                /* border-color: #ebedf2; */
+            }
+
+            .filepond--credits {
+                display: none;
+                height: 0px;
+            }
+
+            .filepond-container {
+                width: 100%;
+            }
+
+            .filepond--root {
+                margin-bottom: 0;
+                height: 100%;
+            }
+
+            .filepond--panel-root {
+                background-color: transparent;
+                border: 1px solid #ced4da;
+            }
+        </style>
     </body>
 </html>

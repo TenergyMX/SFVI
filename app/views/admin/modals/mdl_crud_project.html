@@ -1,0 +1,860 @@
+<div class="modal fade" id="mdl_crud_project" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PROYECTO</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <!-- nav -->
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link active"
+                                id="pills-address-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-address"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-address"
+                                aria-selected="false"
+                            >
+                                Dirección
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="pills-project-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-project"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-project"
+                                aria-selected="true"
+                            >
+                                Proyecto
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link"
+                                id="pills-quote-tab"
+                                data-bs-toggle="pill"
+                                data-bs-target="#pills-quote"
+                                type="button"
+                                role="tab"
+                                aria-controls="pills-quote"
+                                aria-selected="true"
+                            >
+                                Cotizador
+                            </button>
+                        </li>
+                    </ul>
+                    <!-- end nav -->
+                    <!-- contenido -->
+                    <div class="tab-content">
+                        <!-- contenido tipo dirección -->
+                        <div
+                            class="tab-pane fade show active"
+                            id="pills-address"
+                            role="tabpanel"
+                            aria-labelledby="pills-address-tab"
+                            tabindex="0"
+                        >
+                            <!-- input's -->
+                            <div class="row gx-3 gy-2 mb-3">
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Calle
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="street"
+                                        class="form-control"
+                                        aria-describedby="street"
+                                        placeholder="Calle"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Colonia
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="colony"
+                                        class="form-control"
+                                        aria-describedby="colony"
+                                        placeholder="Colonia"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Municipio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="municipality"
+                                        class="form-control"
+                                        aria-describedby="municipality"
+                                        placeholder="Municipio"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <label for="" class="form-label">
+                                        Estado
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="state" id="" class="form-select">
+                                        <option value="" data-state="" selected disabled>
+                                            Seleccione el estado
+                                        </option>
+                                        <?php foreach($datos['nombre_estados'] as $key =>$data) : ?>
+                                        <option
+                                            value="<?= $data->estado; ?>"
+                                            data-state="<?= $data->estado; ?>"
+                                            data-hsp="<?= $data->promedio; ?>"
+                                        >
+                                            <?= $data->estado; ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <small class="d-block text-center address"></small>
+                                </div>
+                            </div>
+                            <!-- lat y lng -->
+                            <div class="row gx-3qk">
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lat"
+                                        class="form-control"
+                                        placeholder="Latitud"
+                                        hidden
+                                    />
+                                </div>
+                                <div class="col">
+                                    <input
+                                        type="text"
+                                        name="lng"
+                                        class="form-control"
+                                        placeholder="Longitud"
+                                        hidden
+                                    />
+                                </div>
+                            </div>
+                            <!-- map -->
+                            <div class="container-map">
+                                <div class="map"></div>
+                                <small class="text-danger text-center d-block mt-2">
+                                    Mueva el marcador en la ubicación del proyecto
+                                </small>
+                            </div>
+                            <div class="row justify-content-center gx-3 gy-3 gy-md-0 mt-3">
+                                <div class="col-md-4 col-lg-3">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sfvi-1 w-100"
+                                        onclick="$('#pills-project-tab').tab('show');"
+                                    >
+                                        Siguiente
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- end map -->
+                        </div>
+                        <!-- contenido del tipo del proyecto -->
+                        <div
+                            class="tab-pane fade"
+                            id="pills-project"
+                            role="tabpanel"
+                            aria-labelledby="pills-project-tab"
+                            tabindex="0"
+                        >
+                            <!-- input info -->
+                            <div class="row gx-3 gy-2">
+                                <div class="col-md-6 col-xd-4 d-none">
+                                    <input
+                                        type="text"
+                                        name="project_id"
+                                        class="form-control"
+                                        value="0"
+                                        readonly
+                                    />
+                                    <input
+                                        type="number"
+                                        name="type_id"
+                                        class="form-control"
+                                        value="0"
+                                        readonly
+                                    />
+                                    <input
+                                        type="text"
+                                        name="type_name"
+                                        class="form-control"
+                                        value="project"
+                                        readonly
+                                    />
+                                    <input
+                                        type="number"
+                                        name="id"
+                                        class="form-control"
+                                        value="0"
+                                        readonly
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Tipo de venta
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="id_category" id="" class="form-select">
+                                        <option value="" selected disabled>
+                                            Seleccione el tipo de venta
+                                        </option>
+                                        <option value="1">FIDE</option>
+                                        <option value="2">CONTADO</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Tipo de proyecto
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="id_subcategory" id="" class="form-select">
+                                        <option value="" selected disabled>
+                                            Seleccione el tipo de proyecto
+                                        </option>
+                                        <option value="1">Domestico</option>
+                                        <option value="2">Comercial</option>
+                                        <option value="3">Indutrial</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Cliente
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select
+                                        name="id_client"
+                                        class="form-select"
+                                        placeholder="Nombre de visitante"
+                                    >
+                                        <option value="" selected disabled>Seleccione el cliente</option>
+                                        <?php foreach($datos['nombre_clientes'] as $key =>
+                                        $data) : ?>
+                                        <option value="<?php echo $data->user_id; ?>">
+                                            <?php echo "{$data->name} {$data->surnames}" ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 col-xl-4 col-project">
+                                    <label for="" class="form-label"> Cotización </label>
+                                    <div class="row gx-2">
+                                        <div class="col">
+                                            <input
+                                                type="file"
+                                                name="quotation"
+                                                class="form-control"
+                                                aria-describedby="quotation"
+                                                placeholder="Cotización"
+                                                disabled
+                                            />
+                                        </div>
+                                        <div class="col-2 col-existing-file d-none">
+                                            <button
+                                                type="button"
+                                                name="existing_file"
+                                                class="btn btn-primary w-100"
+                                                onclick="open_window();"
+                                            >
+                                                <i class="fa-solid fa-file"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4 col-project">
+                                    <label for="" class="form-label">
+                                        No. de cotización de proyecto
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        name="quotation_num"
+                                        type="number"
+                                        class="form-control"
+                                        aria-describedby="quotation_num"
+                                        placeholder="No. de cotización de proyecto (Opcional)"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4 col-project">
+                                    <label for="" class="form-label"> ID de FIDE </label>
+                                    <input
+                                        name="id_fide"
+                                        type="number"
+                                        class="form-control"
+                                        aria-describedby="id_fide"
+                                        placeholder="Id de FIDE (Opcional)"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="row gx-2">
+                                        <div class="col-md-4 col-project">
+                                            <label for="" class="form-label"> TB </label>
+                                            <input
+                                                type="text"
+                                                name="tb"
+                                                class="form-control"
+                                                aria-describedby="tb"
+                                                placeholder="TB de proyecto (Opcional)"
+                                                disabled
+                                            />
+                                        </div>
+                                        <div class="col-md">
+                                            <label for="" class="form-label">
+                                                Nombre
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                class="form-control"
+                                                aria-describedby="name"
+                                                placeholder="Nombre del proyecto"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Carga (KWh)
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="charge"
+                                        class="form-control calc-panels"
+                                        aria-describedby="charge"
+                                        placeholder="Carga promedio"
+                                        step="any"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form">
+                                        Capacidad del modulo
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="module_capacity"
+                                        class="form-control calc-panels"
+                                        aria-describedby="module_capacity"
+                                        placeholder="Potencia del panel"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Eficiencia del panel
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="efficiency"
+                                        class="form-control calc-panels"
+                                        aria-describedby="efficiency"
+                                        placeholder="Porcentaje de eficiencia"
+                                        min="0"
+                                        max="100"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Num. Paneles
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="panels"
+                                        class="form-control"
+                                        aria-describedby="panels"
+                                        placeholder="Num. Paneles"
+                                        readonly
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4 col-project">
+                                    <label for="" class="form-label">
+                                        Fecha de inicio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="start_date"
+                                        class="form-control"
+                                        aria-describedby="start_date"
+                                        placeholder="Num. Paneles"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Periodo
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="period" class="form-control calc-panels" disabled>
+                                        <option value="30" data-days="30">Mensual</option>
+                                        <option value="59" data-days="59" selected>Bimestral</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end input's -->
+                            <div class="row justify-content-center gx-3 mt-3">
+                                <div class="col-md-6 col-lg-3">
+                                    <button
+                                        type="button"
+                                        class="btn btn-sfvi-1 w-100"
+                                        onclick="$('#pills-address-tab').tab('show');"
+                                    >
+                                        Anterior
+                                    </button>
+                                </div>
+                                <div class="col-md-4 col-lg-3">
+                                    <button
+                                        type="submit"
+                                        name="addAnteProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Añadir Anteproyecto
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="updateAnteProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Actualizar Anteproyecto
+                                    </button>
+                                    <button type="submit" name="addProject" class="btn btn-sfvi-1 w-100">
+                                        Añadir Proyecto
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="createProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Crear Proyecto
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        name="updateProject"
+                                        class="btn btn-sfvi-1 w-100"
+                                    >
+                                        Actualizar Proyecto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- contenido de cotizador -->
+                        <div
+                            class="tab-pane fade show"
+                            id="pills-quote"
+                            role="tabpanel"
+                            aria-labelledby="pills-quote-tab"
+                            tabindex="0"
+                        >
+                            <!-- input's -->
+                            <label for="" class="mb-2">
+                                Selecione los meses a rellenar para calcular su promedio:
+                            </label>
+                            <div class="row g-2 mb-3 justify-content-center select-months">
+                                <div class="col-sm-3">
+                                    <select name="month-1" class="form-control" disabled>
+                                        <option value="0" disabled selected>Mes de inicio</option>
+                                        <option value="0">Enero</option>
+                                        <option value="1">Febrero</option>
+                                        <option value="2">Marzo</option>
+                                        <option value="3">Abril</option>
+                                        <option value="4">Mayo</option>
+                                        <option value="5">Junio</option>
+                                        <option value="6">Julio</option>
+                                        <option value="7">Agosto</option>
+                                        <option value="8">Septiembre</option>
+                                        <option value="9">Octubre</option>
+                                        <option value="10">Noviembre</option>
+                                        <option value="11">Diciembre</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-auto">
+                                    <label for="" class="col-form-label"> A </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select name="month-2" class="form-control" disabled>
+                                        <option value="0" disabled selected>Mes final</option>
+                                        <option value="0">Enero</option>
+                                        <option value="1">Febrero</option>
+                                        <option value="2">Marzo</option>
+                                        <option value="3">Abril</option>
+                                        <option value="4">Mayo</option>
+                                        <option value="5">Junio</option>
+                                        <option value="6">Julio</option>
+                                        <option value="7">Agosto</option>
+                                        <option value="8">Septiembre</option>
+                                        <option value="9">Octubre</option>
+                                        <option value="10">Noviembre</option>
+                                        <option value="11">Diciembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <!-- Meses 1 -->
+                                <div class="col-sm-2" data-month data-month-1="0" style="display: none">
+                                    <label for="" class="form-label"> Enero (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="january"
+                                        class="form-control"
+                                        placeholder="Enero"
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="1" style="display: none">
+                                    <label for="" class="form-label"> Febrero (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="february"
+                                        class="form-control"
+                                        placeholder="Diciembre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="2" style="display: none">
+                                    <label for="" class="form-label"> Marzo (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="march"
+                                        class="form-control"
+                                        placeholder="Marzo"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="3" style="display: none">
+                                    <label for="" class="form-label"> Abril (KWh) </label>
+                                    <input
+                                        type="number"
+                                        name="april"
+                                        class="form-control"
+                                        placeholder="Abril"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="4" style="display: none">
+                                    <label for="" class="form-label"> Mayo (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="may"
+                                        class="form-control"
+                                        placeholder="Mayo"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="5" style="display: none">
+                                    <label for="" class="form-label"> Junio (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="junnio"
+                                        class="form-control"
+                                        placeholder="Junio"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="6" style="display: none">
+                                    <label for="" class="form-label"> Julio (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="june"
+                                        class="form-control"
+                                        placeholder="Julio"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="7" style="display: none">
+                                    <label for="" class="form-label"> Agosto (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="august"
+                                        class="form-control"
+                                        placeholder="Agosto"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="8" style="display: none">
+                                    <label for="" class="form-label"> Septiembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="september"
+                                        class="form-control"
+                                        placeholder="Semtiembre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="9" style="display: none">
+                                    <label for="" class="form-label"> Octubre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="october"
+                                        class="form-control"
+                                        placeholder="Octubre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="10" style="display: none">
+                                    <label for="" class="form-label"> Noviembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="november"
+                                        class="form-control"
+                                        placeholder="Noviembre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-1="11" style="display: none">
+                                    <label for="" class="form-label"> Diciembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="december"
+                                        class="form-control"
+                                        placeholder="Diciembre"
+                                        disabled
+                                    />
+                                </div>
+                                <!-- Meses 2 -->
+                                <div class="col-sm-2" data-month data-month-2="0" style="display: none">
+                                    <label for="" class="form-label"> Enero (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="january"
+                                        class="form-control"
+                                        placeholder="Enero"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="1" style="display: none">
+                                    <label for="" class="form-label"> Febrero (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="february"
+                                        class="form-control"
+                                        placeholder="Febrero"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="2" style="display: none">
+                                    <label for="" class="form-label"> Marzo (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="march"
+                                        class="form-control"
+                                        placeholder="Marzo"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="3" style="display: none">
+                                    <label for="" class="form-label"> Abril (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="april"
+                                        class="form-control"
+                                        placeholder="Abril"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="4" style="display: none">
+                                    <label for="" class="form-label"> Mayo (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="may"
+                                        class="form-control"
+                                        placeholder="Mayo"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="5" style="display: none">
+                                    <label for="" class="form-label"> Junio (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="april"
+                                        class="form-control"
+                                        placeholder="Junio"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="6" style="display: none">
+                                    <label for="" class="form-label"> Julio (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="junnio"
+                                        class="form-control"
+                                        placeholder="Julio"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="7" style="display: none">
+                                    <label for="" class="form-label"> Agosto (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="june"
+                                        class="form-control"
+                                        placeholder="Agosto"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="8" style="display: none">
+                                    <label for="" class="form-label"> Septiembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="september"
+                                        class="form-control"
+                                        placeholder="Septiembre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="9" style="display: none">
+                                    <label for="" class="form-label"> Octubre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="october"
+                                        class="form-control"
+                                        placeholder="Octubre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="10" style="display: none">
+                                    <label for="" class="form-label"> Noviembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="november"
+                                        class="form-control"
+                                        placeholder="Noviembre"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-sm-2" data-month data-month-2="11" style="display: none">
+                                    <label for="" class="form-label"> Diciembre (KWh)</label>
+                                    <input
+                                        type="number"
+                                        name="december"
+                                        class="form-control"
+                                        placeholder="Diciembre"
+                                        disabled
+                                    />
+                                </div>
+                                <!-- end meses -->
+                            </div>
+                            <hr />
+                            <!-- KWh -->
+                            <div class="row g-3">
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Carga (KWh)
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="charge"
+                                        class="form-control copy-value-to"
+                                        aria-describedby="charge"
+                                        placeholder="Carga promedio"
+                                        step="any"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Capacidad del modulo
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="module_capacity"
+                                        class="form-control calc-panels copy-value-to"
+                                        aria-describedby="module_capacity"
+                                        placeholder="Potencia del panel"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Eficiencia del panel
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="efficiency"
+                                        class="form-control calc-panels copy-value-to"
+                                        aria-describedby="efficiency"
+                                        placeholder="Porcentaje de eficiencia"
+                                        min="0"
+                                        max="100"
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Num. Paneles
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="panels"
+                                        class="form-control copy-value-to"
+                                        aria-describedby="panels"
+                                        placeholder="Num. Paneles"
+                                        readonly
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4 col-project">
+                                    <label for="" class="form-label">
+                                        Fecha de inicio
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="date"
+                                        name="start_date"
+                                        class="form-control"
+                                        aria-describedby="start_date"
+                                        placeholder="Num. Paneles"
+                                        disabled
+                                    />
+                                </div>
+                                <div class="col-md-6 col-xl-4">
+                                    <label for="" class="form-label">
+                                        Periodo
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select name="period" class="form-control calc-panels copy-value-to">
+                                        <option value="30" data-days="30">Mensual</option>
+                                        <option value="59" data-days="59" selected>Bimestral</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- x -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

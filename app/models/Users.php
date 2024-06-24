@@ -44,7 +44,7 @@
 		function addUser($datos = []) {
 			try {
 				$resultado = (object) ["success" => false, "error" => ''];
-				$this->db->query("INSERT INTO users(id_client ,role, email, password, name, surnames) VALUES(:id_client, :role, :email, :password, :name, :surnames)");
+				$this->db->query("INSERT INTO users(id_client,  role, email, password, name, surnames) VALUES(:id_client, :role, :email, :password, :name, :surnames)");
 				$this->db->bind(':id_client', $datos["id_client"]); 
 				$this->db->bind(':role', $datos["role"]);
 				$this->db->bind(':email', $datos["email"]);
@@ -127,6 +127,32 @@
 		function getUsers() {
 			$this->db->query("SELECT u.*, r.description str_role FROM users u LEFT JOIN role r on u.role = r.id;");
 			return $this->db->registros();
+		}
+
+		function get_customer_users() {
+			$resultado = (object) ["success" => false];
+			try {
+				$this->db->query("SELECT u.id AS user_id,
+					c.id client_id,
+					u.email,
+					u.name,
+					u.surnames,
+					c.state,
+					c.municipality,
+					c.phone,
+					c.rfc
+					FROM users u
+					INNER JOIN clients c ON u.id_client = c.id;
+				");
+				$resultado->data = $this->db->registros();
+				$resultado->success = true;
+			} catch (Exception $e) {
+				$resultado->error = [
+					'message' => $e->getMessage(),
+					'code' => $e->getCode()
+				];
+			}
+			return $resultado;
 		}
 
 		function deleteUser($datos = []) {}

@@ -149,13 +149,9 @@
         </div>
         <?php require_once(RUTA_APP.'/views/admin/modals/mdl_info_calendar.html'); ?>
         <?php require_once(RUTA_APP.'/views/admin/templates/scripts.html'); ?>
-        <!-- Modal para agregar evento -->
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/locale/es.js'></script>
-        <script>
-            $( document ).ready(function() {
-                calendar();
-            });
-            
+        <script src="<?= RUTA_URL ?>js/sfvi__calendar.js"></script>
+        <script>            
             document.addEventListener("DOMContentLoaded", (event) => {
                 const fechaInicio = document.getElementById("fecha_inicio");
                 const fechaFin = document.getElementById("fecha_fin");

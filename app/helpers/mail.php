@@ -47,7 +47,27 @@
                     $template = file_get_contents(RUTA_APP.'/views/mail/reset-password.html');
                     $template = str_replace(array_keys($datos), array_values($datos), $template);
                     $this->mail->Body = $template;
-                    $this->mail->AddEmbeddedImage($this->imagen_path['logo'], 'logo', 'imagen.jpg', 'base64', 'image/jpg');
+                    $this->mail->AddEmbeddedImage(
+                        RUTA_PUBLIC. "img/resources/encabezado_1.png",
+                        'encabezado_1',
+                        'imagen.png',
+                        'base64',
+                        'image/png'
+                    );
+                    $this->mail->AddEmbeddedImage(
+                        RUTA_PUBLIC. "img/resources/btn-restablecer_contrasenia.png",
+                        'btn-restablecer_contrasenia',
+                        'imagen.png',
+                        'base64',
+                        'image/png'
+                    );
+                    $this->mail->AddEmbeddedImage(
+                        RUTA_PUBLIC. "img/icons/logo-tenergy.png",
+                        'logo_tenergy',
+                        'imagen.png',
+                        'base64',
+                        'image/png'
+                    );
                     break;
                 default:
                     $this->mail->Body = "nada";

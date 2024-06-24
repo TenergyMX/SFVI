@@ -19,7 +19,7 @@
             }
 
 
-            $this->db->query("SELECT * FROM project p");
+            $this->db->query("SELECT * FROM project p WHERE id_type = 2");
             $datos_project =  $this->db->registros();
             $hps_promedio = 0;
             $generacion_t = 0;
