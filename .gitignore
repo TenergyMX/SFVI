@@ -3,3 +3,4 @@ app/db/
 app/vendor/
 app/composer.lock
 docs/
+public/pdf/
